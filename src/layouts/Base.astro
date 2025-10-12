@@ -1,0 +1,19 @@
+---
+const { title = "Brandon — Portfolio" } = Astro.props;
+const lang = Astro.currentLocale; // "es" o "en"
+import "@components/GlobalStyles.astro";
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

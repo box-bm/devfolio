@@ -1,0 +1,89 @@
+---
+import type { ComponentSlots } from "astro/runtime/server/index.js";
+
+interface Props {
+  type?: "Outlined" | "Default" | "Text";
+  leftIcon?: ComponentSlots;
+  rightIcon?: ComponentSlots;
+  disabled?: boolean;
+  text: string;
+}
+
+const {
+  text,
+  disabled = false,
+  leftIcon,
+  rightIcon,
+  type = "Default",
+} = Astro.props;
+---
+
+<button
+  aria-disabled={disabled}
+  class:list={[
+    "btn",
+    type === "Default" && "btn-default",
+    type === "Outlined" && "btn-outlined",
+    type === "Text" && "btn-text",
+  ]}
+>
+  {leftIcon}
+  {text}
+  {rightIcon}
+</button>
+
+<style>
+  button {
+    border: 0;
+    padding: 8px 20px;
+    border-radius: 8px;
+    gap: 8;
+    transition: 100ms ease-in;
+  }
+
+  .btn-default {
+    background-color: var(--accent-primary);
+    color: white;
+  }
+
+  .btn-default:hover {
+    background-color: var(--accent-dark);
+  }
+
+  .btn-default:active {
+    background-color: var(--accent-darkest);
+  }
+
+  .btn-outlined {
+    border-width: 1px;
+    border-style: solid;
+    background-color: transparent;
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .btn-outlined:hover {
+    border-color: var(--accent-dark);
+    color: var(--accent-dark);
+  }
+
+  .btn-outlined:active {
+    border-color: var(--accent-darkest);
+    color: var(--accent-darkest);
+  }
+
+  .btn-text {
+    background-color: transparent;
+    color: var(--accent-primary);
+  }
+
+  .btn-text:hover {
+    border-color: var(--accent-dark);
+    color: var(--accent-dark);
+  }
+
+  .btn-text:active {
+    border-color: var(--accent-darkest);
+    color: var(--accent-darkest);
+  }
+</style>
