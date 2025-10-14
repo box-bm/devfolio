@@ -1,22 +1,186 @@
 ---
 import Base from "../layouts/Base.astro";
-import Button from "@components/Button.astro";
+import Button from "../components/Button.astro";
+import Chip from "../components/Chip.astro";
+
+// icons
+import { Linkedin, Github, Mail } from "@lucide/astro";
 ---
 
 <Base title="Brandon — Portfolio">
   <!-- HERO -->
   <section id="hero">
-    <Button text="Hello" />
-    <Button text="Hello" type="Outlined" />
-    <Button text="Hello" type="Text" />
+    <div class="container">
+      <img class="profile-picture" src="/profile-picture.svg" />
+      <div>
+        <h1>Hi 👋🏼, I’m <span class="h1 primary-text">Brandon</span></h1>
+        <p class="caption">
+          Frontend Developer passionate about minimal design & web performance
+        </p>
+      </div>
+      <div>
+        <div class="principal-links">
+          <Button>Projects</Button>
+          <Button type="Text">Contact Me</Button>
+        </div>
+        <div class="contact-links">
+          <Button type="Text" color="black"><Linkedin /></Button>
+          <Button type="Text" color="black"><Github /></Button>
+          <Button type="Text" color="black"><Mail /></Button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about"></section>
+  <section id="about">
+    <div class="container">
+      <div>
+        <h2>About Me 👨🏻‍💻</h2>
+        <p>
+          I’m Brandon, a Full Stack Developer with 7 years of experience
+          building efficient, user-focused solutions. Passionate about merging
+          design and development to create clean, impactful digital products.
+        </p>
+      </div>
+
+      <div>
+        <h3>Hightlights</h3>
+        <ul>
+          <li>7+ years coding and solving complex problems.</li>
+          <li>Strong background in JavaScript, TypeScript, Node.js, Astro.</li>
+          <li>Always learning</li>
+          <li>Combine art and development, it make sense like im frontend</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Skills & Tech</h3>
+        <div class="skills-chips-container">
+          <Chip text="React" />
+          <Chip text="Astro" />
+          <Chip text="React Native" />
+          <Chip text="Next.JS" />
+          <Chip text="CSS/HTML" />
+          <Chip text="Typescript" />
+          <Chip text="Javascript" />
+          <Chip text="Dart" />
+          <Chip text="Flutter" />
+          <Chip text="Node" />
+          <Chip text="Git" />
+          <Chip text="Figma" />
+          <Chip text="Kotlin" />
+        </div>
+      </div>
+
+      <div>
+        <h3>Fun fact</h3>
+        <p class="caption">
+          In my free time, I love drawing 🎨, gaming 👾, and exploring how
+          creativity connects with software development.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- PROJECTS -->
-  <section id="projects"></section>
+  <section id="projects">
+    <div class="container">
+      <h2>Projects 🚀</h2>
+      <p>Some of my work, directly from my GitHub repositories</p>
+    </div>
+  </section>
 
   <!-- CONTACT -->
-  <section id="contact"></section>
+  <section id="contact">
+    <div class="container">
+      <div>
+        <h2>Get in touch ☎️</h2>
+        <p>Let’s collaborate or just say hi.</p>
+      </div>
+      <div>
+        <Button>
+          <Mail size={20} />
+          Send me an email
+        </Button>
+        <Button type="Outlined">
+          <Linkedin size={20} />
+          Conect on LinkedIn
+        </Button>
+        <div></div>
+      </div>
+      <p class="caption">
+        I’m always open to new projects, collaborations, or just a friendly
+        hello 👋.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    section {
+      display: flex;
+      flex-direction: column;
+      padding: 44px 16px;
+    }
+
+    #hero {
+      height: 80vh;
+    }
+
+    #hero > div {
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .principal-links,
+    .contact-links {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+    }
+
+    .principal-links {
+      margin-bottom: 8px;
+    }
+
+    #about {
+      background-color: var(--neutral-light);
+    }
+
+    #about > div {
+      gap: 32px;
+    }
+
+    #contact {
+      background-color: var(--neutral-light);
+      gap: 16;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .primary-text {
+      color: var(--accent-primary);
+    }
+
+    .profile-picture {
+      width: 100%;
+      height: 100%;
+      max-width: 179px;
+      max-height: 179px;
+    }
+
+    .skills-chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+  </style>
 </Base>

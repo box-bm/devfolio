@@ -2,6 +2,9 @@
 const { title = "Brandon — Portfolio" } = Astro.props;
 const lang = Astro.currentLocale; // "es" o "en"
 import "@components/GlobalStyles.astro";
+import "normalize.css";
+
+import Header from "@components/Header.astro";
 ---
 
 <html lang={lang}>
@@ -9,11 +12,30 @@ import "@components/GlobalStyles.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header></header>
+    <Header />
     <main>
       <slot />
     </main>
+    <footer>
+      <p class="caption">© 2025 Brandon - Built with Astro ⚡</p>
+    </footer>
   </body>
 </html>
+
+<style>
+  footer {
+    background-color: var(--neutral-light);
+    padding: 44px 0;
+    text-align: center;
+  }
+</style>

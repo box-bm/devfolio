@@ -1,0 +1,154 @@
+---
+import Divider from "./Divider.astro";
+import Button from "./Button.astro";
+import { Menu } from "@lucide/astro";
+---
+
+<header class="container">
+  <div class="content">
+    <a class="brand" href="/">BoxDev</a>
+
+    <!-- Botón para móviles -->
+    <Button id="menuButton" type="Outlined">
+      <Menu />
+    </Button>
+
+    <!-- Navegación de escritorio -->
+    <nav class="nav-desktop" aria-label="Principal">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/#about">Sobre mí</a></li>
+        <li><a href="/#projects">Proyectos</a></li>
+        <li><a href="/#contact">Contacto</a></li>
+      </ul>
+
+      <a>guides</a>
+    </nav>
+  </div>
+  <!-- Menú móvil -->
+  <div id="mobileMenu" class="mobile-panel" hidden>
+    <nav aria-label="Menú móvil" class="mobile-menu">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/#about">Sobre mí</a></li>
+        <li><a href="/#projects">Proyectos</a></li>
+        <li><a href="/#contact">Contacto</a></li>
+        <Divider />
+        <li><a href="/guides">Guias</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  a {
+    text-decoration: none;
+    color: var(--neutral-black);
+    padding: 4px 8px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .container {
+    z-index: 50;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .menu-btn {
+    display: none;
+    background-color: transparent;
+    border: 0;
+    border-radius: 12px;
+  }
+
+  .nav-desktop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+  }
+
+  .nav-desktop ul {
+    gap: 16px;
+  }
+
+  .mobile-panel {
+    height: 100vh;
+  }
+
+  .mobile-menu {
+    text-align: right;
+    padding: 24px 0px;
+    width: 100%;
+  }
+
+  .mobile-menu ul {
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    .menu-btn {
+      display: block;
+    }
+
+    .nav-desktop {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("menuButton");
+  const panel = document.getElementById("mobileMenu");
+  const query = window.matchMedia("(max-width: 768px)");
+
+  const closePanel = () => {
+    panel.setAttribute("hidden", "");
+    btn.setAttribute("aria-expanded", "false");
+  };
+
+  query.addEventListener("change", () => {
+    closePanel();
+  });
+
+  btn?.addEventListener("click", () => {
+    const open = panel.hasAttribute("hidden");
+    if (open) {
+      panel.removeAttribute("hidden");
+      btn.setAttribute("aria-expanded", "true");
+    } else {
+      closePanel();
+    }
+  });
+
+  panel?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      closePanel();
+    }
+  });
+</script>

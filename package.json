@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
-    "astro": "^5.14.1"
+    "@lucide/astro": "^0.545.0",
+    "astro": "^5.14.1",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "prettier": "3.6.2",
