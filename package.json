@@ -9,9 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/ts-plugin": "^1.10.4",
+    "@astrojs/ts-plugin": "^1.10.6",
     "@lucide/astro": "^0.545.0",
-    "astro": "^5.14.1",
+    "astro": "^5.16.6",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
