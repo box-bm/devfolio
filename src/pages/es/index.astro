@@ -1,0 +1,185 @@
+---
+import Base from "@layouts/Base.astro";
+import Button from "@components/Button.astro";
+import Chip from "@components/Chip.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import { Image } from "astro:assets";
+import MeImage from "@images/me.jpeg";
+import "@styles/main.css";
+
+// icons
+import { Linkedin, Mail } from "@lucide/astro";
+import {
+  React,
+  Github,
+  Nextdotjs,
+  Astro as AstroAsset,
+  Nodedotjs,
+} from "simple-icons-astro";
+
+const startDate = new Date("2018-09-01");
+const today = new Date();
+
+let years = today.getFullYear() - startDate.getFullYear();
+
+if (
+  today.getMonth() < startDate.getMonth() ||
+  (today.getMonth() === startDate.getMonth() &&
+    today.getDate() < startDate.getDate())
+) {
+  years--;
+}
+---
+
+<Base title="BoxDev — Portafolio">
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <Image
+        src={MeImage}
+        alt="Brandon Manzo profile"
+        class="profile-picture"
+        loading="eager"
+      />
+      <div>
+        <h1>Hola 👋🏼, Soy <span class="h1 primary-text">Brandon</span></h1>
+        <p class="caption">
+          Frontend Developer passionate about minimal design & web performance
+        </p>
+      </div>
+      <div>
+        <div class="principal-links">
+          <Button>Projects</Button>
+          <Button type="Text">Contact Me</Button>
+        </div>
+        <div class="contact-links">
+          <Button type="Text" color="black"><Linkedin /></Button>
+          <Button type="Text" color="black"><Github /></Button>
+          <Button type="Text" color="black"><Mail /></Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div>
+        <h2>About Me 👨🏻‍💻</h2>
+        <p>
+          I’m Brandon, a Full Stack Developer with 7 years of experience
+          building efficient, user-focused solutions. Passionate about merging
+          design and development to create clean, impactful digital products.
+        </p>
+      </div>
+
+      <div>
+        <h3>Hightlights</h3>
+        <ul>
+          <li>{years}+ years coding and solving complex problems.</li>
+          <li>Strong background in JavaScript, TypeScript, Node.js, Astro.</li>
+          <li>Always learning</li>
+          <li>Combine art and development, it make sense like im frontend</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Skills & Tech</h3>
+        <div class="skills-chips-container">
+          <Chip text="React">
+            <React slot="icon" />
+          </Chip>
+          <Chip text="Astro">
+            <AstroAsset slot="icon" />
+          </Chip>
+          <Chip text="React Native">
+            <React slot="icon" />
+          </Chip>
+          <Chip text="Next.JS">
+            <Nextdotjs slot="icon" />
+          </Chip>
+          <Chip text="CSS/HTML" />
+          <Chip text="Typescript" />
+          <Chip text="Javascript" />
+          <Chip text="Dart" />
+          <Chip text="Flutter" />
+          <Chip text="Node">
+            <Nodedotjs slot="icon" />
+          </Chip>
+          <Chip text="Git" />
+          <Chip text="Figma" />
+          <Chip text="Kotlin" />
+        </div>
+      </div>
+
+      <div>
+        <h3>Fun fact</h3>
+        <p class="caption">
+          In my free time, I love drawing 🎨, gaming 👾, and exploring how
+          creativity connects with software development.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects 🚀</h2>
+      <p>Some of my work, directly from my GitHub repositories</p>
+      <div class="projects">
+        <ProjectCard
+          title="Tik tak toe"
+          description="A tic tac toe game, for one or two players with a great IA and 4 different levels to play"
+          viewLink="google.com"
+          codeLink="google.com"
+        >
+          <Chip slot="tech" text="Flutter" />
+          <Chip slot="tech" text="Dart" />
+        </ProjectCard>
+
+        <ProjectCard
+          title="DPI_Validator"
+          description="A DPI validator. This validate and return values of departmen"
+          codeLink="google.com"
+          viewLink="google.com"
+        >
+          <Chip slot="tech" text="Dart" />
+        </ProjectCard>
+
+        <ProjectCard
+          title="NIT_Validator"
+          description="Simple tool to check a valid nit with dart"
+          codeLink="google.com"
+          viewLink="google.com"
+        >
+          <Chip slot="tech" text="Dart" />
+        </ProjectCard>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div>
+        <h2>Get in touch ☎️</h2>
+        <p>Let’s collaborate or just say hi.</p>
+      </div>
+      <div>
+        <Button href="mailto">
+          <Mail size={20} />
+          Send me an email
+        </Button>
+        <Button type="Outlined">
+          <Linkedin size={20} />
+          Conect on LinkedIn
+        </Button>
+      </div>
+      <p class="caption">
+        I’m always open to new projects, collaborations, or just a friendly
+        hello 👋.
+      </p>
+    </div>
+  </section>
+</Base>
