@@ -1,10 +1,12 @@
 ---
 const { title = "Brandon — Portfolio" } = Astro.props;
-const lang = Astro.currentLocale; // "es" o "en"
-import "@components/GlobalStyles.astro";
+import { getLangFromUrl } from "../i18n/utils";
+import "@styles/GlobalStyles.astro";
 import "normalize.css";
 
 import Header from "@components/Header.astro";
+import { Astro as AstroIcon } from "simple-icons-astro";
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <html lang={lang}>
@@ -27,7 +29,9 @@ import Header from "@components/Header.astro";
       <slot />
     </main>
     <footer>
-      <p class="caption">© 2025 Brandon - Built with Astro ⚡</p>
+      <p class="caption">
+        © 2025 Brandon - Built with Astro <AstroIcon size={12} />
+      </p>
     </footer>
   </body>
 </html>
@@ -36,6 +40,13 @@ import Header from "@components/Header.astro";
   footer {
     background-color: var(--neutral-light);
     padding: 44px 0;
+    text-align: center;
+  }
+
+  footer > .caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
 </style>
