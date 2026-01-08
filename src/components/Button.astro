@@ -1,12 +1,13 @@
 ---
-interface Props extends HTMLHyperlinkElementUtils {
+interface Props {
   type?: "Outlined" | "Default" | "Text";
   target?: "_self" | "_blank" | "_parent" | "_top";
   color?: string;
   id?: string;
+  href?: string;
 }
 
-const { type = "Default", href, target, color, id } = Astro.props;
+const { type = "Default", href, target = "_blank", color, id } = Astro.props;
 ---
 
 <a

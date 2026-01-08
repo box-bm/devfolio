@@ -1,0 +1,66 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  viewLink: string;
+  codeLink: string;
+}
+
+const { title, description, viewLink, codeLink } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="project-card-content">
+    <h4>{title}</h4>
+    <p>
+      {description}
+    </p>
+  </div>
+  <div class="project-card-tech">
+    <slot name="tech" />
+  </div>
+  <div class="project-card-actions">
+    <Button type="Outlined" href={codeLink}>Code</Button>
+    <Button href={viewLink}>View</Button>
+  </div>
+</div>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 310px;
+    min-height: 300px;
+    border-radius: 12px;
+    border-style: solid;
+    border-color: var(--neutral-medium);
+    border-width: 1px;
+    padding: 20px;
+    gap: 8px;
+  }
+
+  .project-card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 4px;
+  }
+
+  .project-card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .project-card-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .project-card-actions a {
+    width: 100%;
+  }
+</style>

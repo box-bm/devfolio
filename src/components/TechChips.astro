@@ -1,0 +1,73 @@
+---
+import Chip from "@components/Chip.astro";
+import {
+  React,
+  Nextdotjs,
+  Astro as AstroAsset,
+  Nodedotjs,
+  Flutter,
+  Dart,
+  Git,
+  Figma,
+  Kotlin,
+  Html5,
+  Css,
+  Javascript,
+  Typescript,
+} from "simple-icons-astro";
+
+const iconSize = 16;
+---
+
+<div class="skills-chips-container">
+  <Chip text="React">
+    <React slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Astro">
+    <AstroAsset slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="React Native">
+    <React slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Next.JS">
+    <Nextdotjs slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="HTML">
+    <Html5 slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="CSS">
+    <Css slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Typescript">
+    <Typescript slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Javascript">
+    <Javascript slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Dart">
+    <Dart slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Flutter">
+    <Flutter slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Node">
+    <Nodedotjs slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Git">
+    <Git slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Figma">
+    <Figma slot="icon" size={iconSize} />
+  </Chip>
+  <Chip text="Kotlin">
+    <Kotlin slot="icon" size={iconSize} />
+  </Chip>
+</div>
+
+<style>
+  .skills-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+</style>

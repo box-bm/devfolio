@@ -1,0 +1,19 @@
+---
+import Button from "@components/Button.astro";
+import { Linkedin } from "@lucide/astro";
+import { Github, Maildotru } from "simple-icons-astro";
+---
+
+<div class="contact-links">
+  <Button type="Text" color="black"><Github /></Button>
+  <Button type="Text" color="black"><Linkedin /></Button>
+  <Button type="Text" color="black"><Maildotru /></Button>
+</div>
+
+<style>
+  .contact-links {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+</style>

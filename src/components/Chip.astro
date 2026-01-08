@@ -7,15 +7,25 @@ const { text } = Astro.props;
 ---
 
 <span class="chip body-small">
+  <slot name="icon" />
   {text}
 </span>
 
 <style>
+  .chip-icon {
+    display: flex;
+    align-items: center;
+  }
+
   .chip {
     padding: 4px 12px;
     color: var(--neutral-black);
     background-color: var(--neutral-medium);
     gap: 8;
     border-radius: 16px;
+    gap: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 </style>
