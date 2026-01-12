@@ -1,21 +1,17 @@
 ---
 import Base from "@layouts/Base.astro";
 import Button from "@components/Button.astro";
-import Chip from "@components/Chip.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+
+// generic layout components
+import ContactLinks from "@components/ContactLinks.astro";
 import { Image } from "astro:assets";
 import MeImage from "@images/me.jpeg";
 import "@styles/main.css";
 
 // icons
-import { Linkedin, Mail } from "@lucide/astro";
-import {
-  React,
-  Github,
-  Nextdotjs,
-  Astro as AstroAsset,
-  Nodedotjs,
-} from "simple-icons-astro";
+import { Linkedin, Mail, Code } from "@lucide/astro";
+import TechChip from "@components/TechChip.astro";
 
 const startDate = new Date("2018-09-01");
 const today = new Date();
@@ -31,32 +27,29 @@ if (
 }
 ---
 
-<Base title="BoxDev — Portafolio">
+<Base title="Brandon — Portafolio">
   <!-- HERO -->
   <section id="hero">
     <div class="container">
       <Image
         src={MeImage}
-        alt="Brandon Manzo profile"
+        alt="Perfil de Brandon Manzo"
         class="profile-picture"
         loading="eager"
       />
       <div>
-        <h1>Hola 👋🏼, Soy <span class="h1 primary-text">Brandon</span></h1>
+        <h1>Hola 👋🏼, soy <span class="h1 primary-text">Brandon</span></h1>
         <p class="caption">
-          Frontend Developer passionate about minimal design & web performance
+          Desarrollador Frontend apasionado por el diseño minimalista y el
+          rendimiento web
         </p>
       </div>
       <div>
         <div class="principal-links">
-          <Button>Projects</Button>
-          <Button type="Text">Contact Me</Button>
+          <Button>Proyectos</Button>
+          <Button type="Text">Contáctame</Button>
         </div>
-        <div class="contact-links">
-          <Button type="Text" color="black"><Linkedin /></Button>
-          <Button type="Text" color="black"><Github /></Button>
-          <Button type="Text" color="black"><Mail /></Button>
-        </div>
+        <ContactLinks />
       </div>
     </div>
   </section>
@@ -65,58 +58,92 @@ if (
   <section id="about">
     <div class="container">
       <div>
-        <h2>About Me 👨🏻‍💻</h2>
-        <p>
-          I’m Brandon, a Full Stack Developer with 7 years of experience
-          building efficient, user-focused solutions. Passionate about merging
-          design and development to create clean, impactful digital products.
+        <h2>Sobre mí 👨🏻‍💻</h2>
+        <p class="body-large">
+          Soy Brandon, un Desarrollador Full Stack con {years} años de experiencia
+          construyendo soluciones eficientes y centradas en el usuario. Apasionado
+          por unir diseño y desarrollo para crear productos digitales limpios e impactantes.
         </p>
       </div>
 
-      <div>
-        <h3>Hightlights</h3>
-        <ul>
-          <li>{years}+ years coding and solving complex problems.</li>
-          <li>Strong background in JavaScript, TypeScript, Node.js, Astro.</li>
-          <li>Always learning</li>
-          <li>Combine art and development, it make sense like im frontend</li>
-        </ul>
-      </div>
+      <div class="card">
+        <h3>¿Por qué trabajar conmigo? 🤔</h3>
 
-      <div>
-        <h3>Skills & Tech</h3>
-        <div class="skills-chips-container">
-          <Chip text="React">
-            <React slot="icon" />
-          </Chip>
-          <Chip text="Astro">
-            <AstroAsset slot="icon" />
-          </Chip>
-          <Chip text="React Native">
-            <React slot="icon" />
-          </Chip>
-          <Chip text="Next.JS">
-            <Nextdotjs slot="icon" />
-          </Chip>
-          <Chip text="CSS/HTML" />
-          <Chip text="Typescript" />
-          <Chip text="Javascript" />
-          <Chip text="Dart" />
-          <Chip text="Flutter" />
-          <Chip text="Node">
-            <Nodedotjs slot="icon" />
-          </Chip>
-          <Chip text="Git" />
-          <Chip text="Figma" />
-          <Chip text="Kotlin" />
+        <p>
+          Aporto una combinación única de habilidades y experiencia que me
+          convierten en un colaborador ideal para tu próximo proyecto:
+        </p>
+
+        <div class="grid grid-container">
+          <div>
+            <h4>🎨 Diseño + 🧑🏻‍💻 Desarrollo</h4>
+            <p>
+              Mi doble experiencia en diseño y desarrollo me permite cerrar la
+              brecha entre estética y funcionalidad, asegurando que cada
+              proyecto sea visualmente atractivo y técnicamente sólido.
+            </p>
+          </div>
+          <div>
+            <h4>🤳🏼 Enfoque centrado en el usuario</h4>
+            <p>
+              Prioritizo las necesidades y preferencias de los usuarios,
+              realizando investigación y pruebas de usabilidad para crear
+              interfaces intuitivas, atractivas y adaptadas al público objetivo.
+            </p>
+          </div>
+          <div>
+            <h4>🚀 Optimización del rendimiento</h4>
+            <p>
+              Estoy comprometido con entregar aplicaciones de alto rendimiento
+              que carguen rápido y funcionen de forma fluida, aplicando buenas
+              prácticas de código, optimización y pruebas para mejorar la
+              experiencia del usuario.
+            </p>
+          </div>
         </div>
       </div>
 
       <div>
-        <h3>Fun fact</h3>
+        <h3>Destacados</h3>
+        <ul>
+          <li>{years}+ años programando y resolviendo problemas complejos.</li>
+          <li>Base sólida en JavaScript, TypeScript, Node.js y Astro.</li>
+          <li>Siempre aprendiendo</li>
+          <li>Combino arte y desarrollo; tiene sentido siendo frontend</li>
+        </ul>
+      </div>
+
+      <div id="skills-and-tech-section">
+        <h3>Habilidades y tecnologías</h3>
         <p class="caption">
-          In my free time, I love drawing 🎨, gaming 👾, and exploring how
-          creativity connects with software development.
+          Estas son algunas de las tecnologías y herramientas con las que
+          trabajo regularmente para crear aplicaciones eficientes y fáciles de
+          usar.
+        </p>
+        <div class="skills-chips-container">
+          <TechChip tech="React" />
+          <TechChip tech="Astro" />
+          <TechChip tech="React Native" />
+          <TechChip tech="Next.JS" />
+          <TechChip tech="HTML" />
+          <TechChip tech="CSS" />
+          <TechChip tech="Typescript" />
+          <TechChip tech="Javascript" />
+          <TechChip tech="Dart" />
+          <TechChip tech="Flutter" />
+          <TechChip tech="Node" />
+          <TechChip tech="Git" />
+          <TechChip tech="Figma" />
+          <TechChip tech="Kotlin" />
+        </div>
+        <div></div>
+      </div>
+
+      <div>
+        <h3>Dato curioso</h3>
+        <p class="caption">
+          En mi tiempo libre me encanta dibujar 🎨, jugar videojuegos 👾 y
+          explorar cómo la creatividad se conecta con el desarrollo de software.
         </p>
       </div>
     </div>
@@ -125,36 +152,65 @@ if (
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <h2>Projects 🚀</h2>
-      <p>Some of my work, directly from my GitHub repositories</p>
-      <div class="projects">
+      <h2>Proyectos 🖥️</h2>
+      <p class="body-large">
+        Algunos de mis trabajos, directamente desde mis repositorios de GitHub
+      </p>
+      <div class="projects grid grid-container">
         <ProjectCard
           title="Tik tak toe"
-          description="A tic tac toe game, for one or two players with a great IA and 4 different levels to play"
-          viewLink="google.com"
+          description="Un juego de tic tac toe para Android, creado con el propósito de iniciarme en el desarrollo móvil usando Flutter y creando aplicaciones."
+          viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
           codeLink="google.com"
         >
-          <Chip slot="tech" text="Flutter" />
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Modos de un jugador y dos jugadores</li>
+              <li>4 niveles de dificultad con IA avanzada</li>
+              <li>Diseño limpio y minimalista</li>
+              <li>Interfaz responsiva e intuitiva</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
+          <TechChip tech="Flutter" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="DPI_Validator"
-          description="A DPI validator. This validate and return values of departmen"
+          description="Herramienta simple para validar un DPI con Dart"
           codeLink="google.com"
           viewLink="google.com"
         >
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Valida números de DPI de Guatemala</li>
+              <li>Fácil de usar</li>
+              <li>Proceso de validación offline rápido y eficiente</li>
+              <li>Código abierto y personalizable</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="NIT_Validator"
-          description="Simple tool to check a valid nit with dart"
+          description="Herramienta simple para validar un NIT con Dart"
           codeLink="google.com"
           viewLink="google.com"
         >
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Valida números de NIT de Guatemala</li>
+              <li>Ligero y fácil de integrar</li>
+              <li>Resultados de validación instantáneos</li>
+              <li>Código abierto y personalizable</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
+      </div>
+      <div>
+        <Button>Ver todos los proyectos</Button>
       </div>
     </div>
   </section>
@@ -163,22 +219,23 @@ if (
   <section id="contact">
     <div class="container">
       <div>
-        <h2>Get in touch ☎️</h2>
-        <p>Let’s collaborate or just say hi.</p>
+        <h2>Ponte en contacto ☎️</h2>
+        <p class="body-large">Colaboremos o simplemente saluda.</p>
       </div>
-      <div>
+      <div class="contact-buttons-container">
         <Button href="mailto">
           <Mail size={20} />
-          Send me an email
+          Envíame un correo
         </Button>
         <Button type="Outlined">
           <Linkedin size={20} />
-          Conect on LinkedIn
+          Conecta en LinkedIn
         </Button>
       </div>
+      <ContactLinks />
       <p class="caption">
-        I’m always open to new projects, collaborations, or just a friendly
-        hello 👋.
+        Siempre estoy abierto a nuevos proyectos, colaboraciones o simplemente
+        un saludo 👋.
       </p>
     </div>
   </section>
