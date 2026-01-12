@@ -1,0 +1,68 @@
+---
+import Chip from "@components/Chip.astro";
+import {
+  React,
+  Nextdotjs,
+  Astro as AstroAsset,
+  Nodedotjs,
+  Flutter,
+  Dart,
+  Git,
+  Figma,
+  Kotlin,
+  Html5,
+  Css,
+  Javascript,
+  Typescript,
+} from "simple-icons-astro";
+
+type Tech =
+  | "React"
+  | "Astro"
+  | "React Native"
+  | "Next.JS"
+  | "HTML"
+  | "CSS"
+  | "Typescript"
+  | "Javascript"
+  | "Dart"
+  | "Flutter"
+  | "Node"
+  | "Git"
+  | "Figma"
+  | "Kotlin";
+
+interface TechConfig {
+  icon: any;
+  text: string;
+}
+
+const TechSettings: Record<Tech, TechConfig> = {
+  React: { icon: React, text: "React" },
+  Astro: { icon: AstroAsset, text: "Astro" },
+  "React Native": { icon: React, text: "React Native" },
+  "Next.JS": { icon: Nextdotjs, text: "Next.JS" },
+  HTML: { icon: Html5, text: "HTML" },
+  CSS: { icon: Css, text: "CSS" },
+  Typescript: { icon: Typescript, text: "Typescript" },
+  Javascript: { icon: Javascript, text: "Javascript" },
+  Dart: { icon: Dart, text: "Dart" },
+  Flutter: { icon: Flutter, text: "Flutter" },
+  Node: { icon: Nodedotjs, text: "Node" },
+  Git: { icon: Git, text: "Git" },
+  Figma: { icon: Figma, text: "Figma" },
+  Kotlin: { icon: Kotlin, text: "Kotlin" },
+};
+
+interface Props {
+  iconSize?: number;
+  tech: Tech;
+}
+
+const { iconSize = 16, tech } = Astro.props;
+const { text, icon: Icon } = TechSettings[tech];
+---
+
+<Chip text={text}>
+  <Icon slot="icon" size={iconSize} />
+</Chip>

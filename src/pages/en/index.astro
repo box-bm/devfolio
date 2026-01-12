@@ -1,19 +1,17 @@
 ---
 import Base from "@layouts/Base.astro";
 import Button from "@components/Button.astro";
-import Chip from "@components/Chip.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 
 // generic layout components
 import ContactLinks from "@components/ContactLinks.astro";
-import TechChips from "@components/TechChips.astro";
 import { Image } from "astro:assets";
 import MeImage from "@images/me.jpeg";
 import "@styles/main.css";
 
 // icons
-import { Linkedin } from "@lucide/astro";
-import { Maildotru } from "simple-icons-astro";
+import { Linkedin, Mail, Code } from "@lucide/astro";
+import TechChip from "@components/TechChip.astro";
 
 const startDate = new Date("2018-09-01");
 const today = new Date();
@@ -60,11 +58,49 @@ if (
     <div class="container">
       <div>
         <h2>About Me 👨🏻‍💻</h2>
-        <p>
-          I’m Brandon, a Full Stack Developer with 7 years of experience
-          building efficient, user-focused solutions. Passionate about merging
-          design and development to create clean, impactful digital products.
+        <p class="body-large">
+          I’m Brandon, a Full Stack Developer with {years} years of experience building
+          efficient, user-focused solutions. Passionate about merging design and
+          development to create clean, impactful digital products.
         </p>
+      </div>
+
+      <div class="card">
+        <h3>Why work with me? 🤔</h3>
+
+        <p>
+          I bring a unique blend of skills and experience that make me an ideal
+          collaborator for your next project:
+        </p>
+
+        <div class="grid grid-container">
+          <div>
+            <h4>🎨 Design + 🧑🏻‍💻 Development</h4>
+            <p>
+              My dual expertise in design and development allows me to bridge
+              the gap between aesthetics and functionality, ensuring that every
+              project I work on is both visually stunning and technically sound.
+            </p>
+          </div>
+          <div>
+            <h4>🤳🏼 User-Centered Approach</h4>
+            <p>
+              I prioritize the needs and preferences of users in my work,
+              conducting thorough research and usability testing to create
+              interfaces that are intuitive, engaging, and tailored to the
+              target audience.
+            </p>
+          </div>
+          <div>
+            <h4>🚀 Performance Optimization</h4>
+            <p>
+              I am committed to delivering high-performance applications that
+              load quickly and run smoothly, utilizing best practices in coding,
+              optimization, and testing to enhance user experience and
+              satisfaction.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -77,9 +113,29 @@ if (
         </ul>
       </div>
 
-      <div>
+      <div id="skills-and-tech-section">
         <h3>Skills & Tech</h3>
-        <TechChips />
+        <p class="caption">
+          These are some of the technologies and tools I work with regularly to
+          build efficient and user-friendly applications.
+        </p>
+        <div class="skills-chips-container">
+          <TechChip tech="React" />
+          <TechChip tech="Astro" />
+          <TechChip tech="React Native" />
+          <TechChip tech="Next.JS" />
+          <TechChip tech="HTML" />
+          <TechChip tech="CSS" />
+          <TechChip tech="Typescript" />
+          <TechChip tech="Javascript" />
+          <TechChip tech="Dart" />
+          <TechChip tech="Flutter" />
+          <TechChip tech="Node" />
+          <TechChip tech="Git" />
+          <TechChip tech="Figma" />
+          <TechChip tech="Kotlin" />
+        </div>
+        <div></div>
       </div>
 
       <div>
@@ -95,36 +151,65 @@ if (
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <h2>Projects 🚀</h2>
-      <p>Some of my work, directly from my GitHub repositories</p>
-      <div class="projects">
+      <h2>Projects 🖥️</h2>
+      <p class="body-large">
+        Some of my work, directly from my GitHub repositories
+      </p>
+      <div class="projects grid grid-container">
         <ProjectCard
           title="Tik tak toe"
-          description="A tic tac toe game, for one or two players with a great IA and 4 different levels to play"
-          viewLink="google.com"
+          description="A tic tac toe game app for android, built with pruporse of gettting started with mobile development using flutter and making apps."
+          viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
           codeLink="google.com"
         >
-          <Chip slot="tech" text="Flutter" />
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Single and two-player modes</li>
+              <li>4 difficulty levels with advanced AI</li>
+              <li>Clean, minimalistic design</li>
+              <li>Responsive and intuitive UI</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
+          <TechChip tech="Flutter" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="DPI_Validator"
-          description="A DPI validator. This validate and return values of departmen"
+          description="Simple tool to check a valid dpi with dart"
           codeLink="google.com"
           viewLink="google.com"
         >
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Validates Guatemalan DPI numbers</li>
+              <li>Easy-to-use</li>
+              <li>Fast and efficient offline validation process</li>
+              <li>Open-source and customizable</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="NIT_Validator"
-          description="Simple tool to check a valid nit with dart"
+          description="Simple tool to check a valid NIT with dart"
           codeLink="google.com"
           viewLink="google.com"
         >
-          <Chip slot="tech" text="Dart" />
+          <div slot="content">
+            <ul>
+              <li>Validates Guatemalan NIT numbers</li>
+              <li>Lightweight and easy to integrate</li>
+              <li>Provides instant validation results</li>
+              <li>Open-source and customizable</li>
+            </ul>
+          </div>
+          <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
+      </div>
+      <div>
+        <Button>View All Projects</Button>
       </div>
     </div>
   </section>
@@ -134,11 +219,11 @@ if (
     <div class="container">
       <div>
         <h2>Get in touch ☎️</h2>
-        <p>Let’s collaborate or just say hi.</p>
+        <p class="body-large">Let’s collaborate or just say hi.</p>
       </div>
-      <div>
+      <div class="contact-buttons-container">
         <Button href="mailto">
-          <Maildotru size={20} />
+          <Mail size={20} />
           Send me an email
         </Button>
         <Button type="Outlined">

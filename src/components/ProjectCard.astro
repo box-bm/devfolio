@@ -1,5 +1,6 @@
 ---
 import Button from "./Button.astro";
+import { Link, Github } from "@lucide/astro";
 
 interface Props {
   title: string;
@@ -17,13 +18,14 @@ const { title, description, viewLink, codeLink } = Astro.props;
     <p>
       {description}
     </p>
+    <slot name="content" />
   </div>
   <div class="project-card-tech">
     <slot name="tech" />
   </div>
   <div class="project-card-actions">
-    <Button type="Outlined" href={codeLink}>Code</Button>
-    <Button href={viewLink}>View</Button>
+    <Button type="Outlined" href={codeLink}><Github />Code</Button>
+    <Button href={viewLink}><Link />View</Button>
   </div>
 </div>
 
@@ -31,9 +33,6 @@ const { title, description, viewLink, codeLink } = Astro.props;
   .project-card {
     display: flex;
     flex-direction: column;
-    min-width: 200px;
-    max-width: 310px;
-    min-height: 300px;
     border-radius: 12px;
     border-style: solid;
     border-color: var(--neutral-medium);
