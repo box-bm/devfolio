@@ -7,7 +7,7 @@ const t = useTranslations(lang);
 ---
 
 <header class="header-container">
-  <a class="link--brand" href="/">BoxDev</a>
+  <a class="header-link--brand" href="/">BoxDev</a>
   <div class="header-links">
     <a class="header-link" href="#about">{t("nav.about")}</a>
     <a class="header-link" href="#projects">{t("nav.project")}</a>
@@ -41,8 +41,12 @@ const t = useTranslations(lang);
   }
 
   .header-link {
-    text-decoration: none;
     color: var(--neutral-black);
+  }
+
+  .header-link--brand {
+    text-decoration: none;
+    color: var(--accent-primary);
   }
 </style>
 
