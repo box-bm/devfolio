@@ -8,7 +8,7 @@ const t = useTranslations(lang);
 ---
 
 <header class="header-container">
-  <a class="header-link--brand" href="/">BoxDev</a>
+  <a class="header-link--brand" href={`/${lang}`}>BoxDev</a>
   <div class="header-links">
     <a class="header-link" href="#about">{t("nav.about")}</a>
     <a class="header-link" href="#projects">{t("nav.project")}</a>
@@ -22,6 +22,7 @@ const t = useTranslations(lang);
   </div>
   <div class="mobile-menu">
     <ul class="mobile-menu-links">
+      <a class="header-link--brand" href="/" target="_top">BoxDev</a>
       <li><a class="header-link" href="#about">{t("nav.about")}</a></li>
       <li><a class="header-link" href="#projects">{t("nav.project")}</a></li>
       <li><a class="header-link" href="#contact">{t("nav.contact")}</a></li>

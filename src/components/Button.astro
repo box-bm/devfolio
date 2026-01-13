@@ -5,9 +5,17 @@ interface Props {
   color?: string;
   id?: string;
   href?: string;
+  ariaLabel?: string;
 }
 
-const { type = "Default", href, target = "_blank", color, id } = Astro.props;
+const {
+  type = "Default",
+  href,
+  target = "_blank",
+  color,
+  id,
+  ariaLabel,
+} = Astro.props;
 ---
 
 <a
@@ -15,6 +23,7 @@ const { type = "Default", href, target = "_blank", color, id } = Astro.props;
   target={target}
   href={href}
   style={`color: ${color}`}
+  aria-label={ariaLabel}
   class:list={[
     "btn",
     type === "Default" && "btn-default",
