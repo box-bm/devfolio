@@ -1,0 +1,108 @@
+---
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  items: Item[];
+  align?: "left" | "right";
+}
+
+const { items, align } = Astro.props;
+---
+
+<div class="dropdown">
+  <div class="dropdown__trigger">
+    <slot name="trigger" />
+  </div>
+
+  <div class="dropdown__menu">
+    <ul class="list">
+      {
+        items.map((item) => (
+          <li class="list-item" key={item.href}>
+            <a class="dropdown__item" href={item.href}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style
+  define:vars={{
+    align,
+  }}
+>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 120px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    pointer-events: none;
+    padding: 16px 12px;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .dropdown__trigger {
+    cursor: pointer;
+  }
+
+  .dropdown--open .dropdown__menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .dropdown__item {
+    width: 100%;
+    display: block;
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .list-item {
+    margin: 0;
+    padding: 0;
+    text-align: var(--align, right);
+  }
+</style>
+
+<script>
+  const dropdown = document.querySelector(".dropdown");
+  const trigger = dropdown.querySelector(".dropdown__trigger");
+
+  trigger.addEventListener("click", () => {
+    dropdown.classList.toggle("dropdown--open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove("dropdown--open");
+    }
+  });
+</script>
