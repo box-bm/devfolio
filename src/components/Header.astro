@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import LanguagePicker from "@components/LanguagePicker.astro";
+import { MenuIcon } from "@lucide/astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,8 +14,18 @@ const t = useTranslations(lang);
     <a class="header-link" href="#projects">{t("nav.project")}</a>
     <a class="header-link" href="#contact">{t("nav.contact")}</a>
   </div>
-  <div class="links">
+  <div class="header-right">
     <LanguagePicker />
+    <div class="menu-icon">
+      <MenuIcon />
+    </div>
+  </div>
+  <div class="mobile-menu">
+    <ul class="mobile-menu-links">
+      <li><a class="header-link" href="#about">{t("nav.about")}</a></li>
+      <li><a class="header-link" href="#projects">{t("nav.project")}</a></li>
+      <li><a class="header-link" href="#contact">{t("nav.contact")}</a></li>
+    </ul>
   </div>
 </header>
 
@@ -29,15 +40,22 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     background-color: var(--neutral-white);
-    border-bottom-style: solid;
-    border-bottom-color: var(--neutral-medium);
-    border-bottom-width: 1px;
+    height: 60px;
+    align-items: center;
+    border-bottom: 1px solid var(--neutral-light);
   }
 
   .header-links {
     display: flex;
     flex-direction: row;
     gap: 16px;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
   }
 
   .header-link {
@@ -48,6 +66,89 @@ const t = useTranslations(lang);
     text-decoration: none;
     color: var(--accent-primary);
   }
+
+  .menu-icon {
+    display: none;
+    padding: 4px 8px;
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 59px;
+    right: 0;
+    left: 0;
+    background-color: var(--neutral-white);
+    padding: 20px 16px;
+    z-index: 1000;
+    border-bottom: 1px solid var(--neutral-light);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  @media (max-width: 600px) {
+    .header-links {
+      display: none;
+    }
+
+    .menu-icon {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 </style>
 
-<script></script>
+<script>
+  const menuIcon = document.querySelector(".menu-icon");
+  const mobileMenu = document.querySelector(".mobile-menu");
+
+  const closeMenu = () => {
+    mobileMenu.classList.remove("open");
+  };
+
+  menuIcon.addEventListener("click", (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      !menuIcon.contains(event.target) &&
+      !mobileMenu.contains(event.target)
+    ) {
+      closeMenu();
+    }
+  });
+
+  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-links a");
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  window.addEventListener("resize", closeMenu);
+  window.addEventListener("scroll", closeMenu);
+</script>

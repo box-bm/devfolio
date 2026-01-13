@@ -1,7 +1,7 @@
 section {
   display: flex;
   flex-direction: column;
-  padding: 60px 20px;
+  padding: 64px 20px;
 }
 
 section .container {
