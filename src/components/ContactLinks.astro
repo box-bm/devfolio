@@ -1,12 +1,13 @@
 ---
 import Button from "@components/Button.astro";
 import { Linkedin, Mail, Github } from "@lucide/astro";
+import { email, githubProfile, linkedIn } from "@constants";
 ---
 
 <div class="contact-links">
-  <Button type="Text" color="black"><Github /></Button>
-  <Button type="Text" color="black"><Linkedin /></Button>
-  <Button type="Text" color="black"><Mail /></Button>
+  <Button type="Text" color="black" href={githubProfile}><Github /></Button>
+  <Button type="Text" color="black" href={linkedIn}><Linkedin /></Button>
+  <Button type="Text" color="black" href={`mailto:${email}`}><Mail /></Button>
 </div>
 
 <style>

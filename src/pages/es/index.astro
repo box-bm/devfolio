@@ -10,9 +10,13 @@ import MeImage from "@images/me.jpeg";
 import "@styles/main.css";
 
 // icons
-import { Linkedin, Mail, Code } from "@lucide/astro";
+import { Linkedin, Mail } from "@lucide/astro";
 import TechChip from "@components/TechChip.astro";
 
+// constants
+import { email, linkedIn, githubRepos } from "@constants";
+
+// years of experiencie
 const startDate = new Date("2018-09-01");
 const today = new Date();
 
@@ -46,8 +50,8 @@ if (
       </div>
       <div>
         <div class="principal-links">
-          <Button>Proyectos</Button>
-          <Button type="Text">Contáctame</Button>
+          <Button href="#projects">Proyectos</Button>
+          <Button type="Text" href="contact">Contáctame</Button>
         </div>
         <ContactLinks />
       </div>
@@ -136,7 +140,6 @@ if (
           <TechChip tech="Figma" />
           <TechChip tech="Kotlin" />
         </div>
-        <div></div>
       </div>
 
       <div>
@@ -161,7 +164,7 @@ if (
           title="Tik tak toe"
           description="Un juego de tic tac toe para Android, creado con el propósito de iniciarme en el desarrollo móvil usando Flutter y creando aplicaciones."
           viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
-          codeLink="google.com"
+          codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
         >
           <div slot="content">
             <ul>
@@ -178,8 +181,8 @@ if (
         <ProjectCard
           title="DPI_Validator"
           description="Herramienta simple para validar un DPI con Dart"
-          codeLink="google.com"
-          viewLink="google.com"
+          codeLink="https://github.com/box-bm/dpi_validator"
+          viewLink="https://pub.dev/packages/dpi_validator"
         >
           <div slot="content">
             <ul>
@@ -195,8 +198,8 @@ if (
         <ProjectCard
           title="NIT_Validator"
           description="Herramienta simple para validar un NIT con Dart"
-          codeLink="google.com"
-          viewLink="google.com"
+          codeLink="https://github.com/box-bm/nit_validator"
+          viewLink="https://pub.dev/packages/nit_validator"
         >
           <div slot="content">
             <ul>
@@ -210,7 +213,7 @@ if (
         </ProjectCard>
       </div>
       <div>
-        <Button>Ver todos los proyectos</Button>
+        <Button href={githubRepos}>Ver todos los proyectos</Button>
       </div>
     </div>
   </section>
@@ -223,11 +226,11 @@ if (
         <p class="body-large">Colaboremos o simplemente saluda.</p>
       </div>
       <div class="contact-buttons-container">
-        <Button href="mailto">
+        <Button href={`mailto:${email}`}>
           <Mail size={20} />
           Envíame un correo
         </Button>
-        <Button type="Outlined">
+        <Button type="Outlined" href={linkedIn}>
           <Linkedin size={20} />
           Conecta en LinkedIn
         </Button>

@@ -32,6 +32,10 @@
       ],
       "@i18n/*": [
         "./src/i18n/*"
+      ],
+      "@constants": [
+        "./src/constants/index.ts",
+        "./src/constants/*"
       ]
     }
   }
