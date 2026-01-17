@@ -12,7 +12,7 @@ interface Props {
 const { title, description, viewLink, codeLink } = Astro.props;
 ---
 
-<div class="project-card">
+<div class="project-card" data-card>
   <div class="project-card-content">
     <h4>{title}</h4>
     <p>
@@ -34,11 +34,18 @@ const { title, description, viewLink, codeLink } = Astro.props;
     display: flex;
     flex-direction: column;
     border-radius: 12px;
+    border: 1px solid var(--neutral-medium);
     border-style: solid;
-    border-color: var(--neutral-medium);
     border-width: 1px;
     padding: 20px;
     gap: 8px;
+    transition: all ease 250ms;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    border-color: var(--neutral-dark);
+    background-color: var(--neutral-light);
   }
 
   .project-card-content {
@@ -46,6 +53,7 @@ const { title, description, viewLink, codeLink } = Astro.props;
     flex-direction: column;
     height: 100%;
     gap: 4px;
+    margin-bottom: 8px;
   }
 
   .project-card-tech {
@@ -57,9 +65,28 @@ const { title, description, viewLink, codeLink } = Astro.props;
   .project-card-actions {
     display: flex;
     gap: 8px;
+    flex-direction: row;
   }
 
   .project-card-actions a {
     width: 100%;
   }
 </style>
+
+<script define:vars={{ viewLink }}>
+  const cards = document.querySelectorAll("[data-card]");
+
+  cards.forEach((card) => {
+    const buttons = card.querySelectorAll("a, button");
+
+    card.addEventListener("click", () => {
+      window.open(viewLink, "_blank");
+    });
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    });
+  });
+</script>

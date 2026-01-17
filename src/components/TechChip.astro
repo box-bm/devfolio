@@ -14,6 +14,21 @@ import {
   Css,
   Javascript,
   Typescript,
+  Cplusplus,
+  Rust,
+  Python,
+  Nestjs,
+  Github,
+  Githubpages,
+  Vercel,
+  Neovim,
+  Dotnet,
+  Xcode,
+  Swift,
+  Androidstudio,
+  Eslint,
+  Prettier,
+  Jest,
 } from "simple-icons-astro";
 
 type Tech =
@@ -30,7 +45,22 @@ type Tech =
   | "Node"
   | "Git"
   | "Figma"
-  | "Kotlin";
+  | "Kotlin"
+  | "CPlusplus"
+  | "Rust"
+  | "Python"
+  | "Nestjs"
+  | "Github"
+  | "GithubPages"
+  | "Vercel"
+  | "NeoVim"
+  | "Dotnet"
+  | "Xcode"
+  | "Swift"
+  | "Eslint"
+  | "Prettier"
+  | "Jest"
+  | "Androidstudio";
 
 interface TechConfig {
   icon: any;
@@ -52,6 +82,21 @@ const TechSettings: Record<Tech, TechConfig> = {
   Git: { icon: Git, text: "Git" },
   Figma: { icon: Figma, text: "Figma" },
   Kotlin: { icon: Kotlin, text: "Kotlin" },
+  CPlusplus: { icon: Cplusplus, text: "C++" },
+  Rust: { icon: Rust, text: "Rust" },
+  Python: { icon: Python, text: "Python" },
+  Nestjs: { icon: Nestjs, text: "Nest.JS" },
+  Vercel: { icon: Vercel, text: "Vercel" },
+  Github: { icon: Github, text: "Github" },
+  GithubPages: { icon: Githubpages, text: "Github Pages" },
+  Dotnet: { icon: Dotnet, text: ".NET" },
+  NeoVim: { icon: Neovim, text: "NeoVim" },
+  Xcode: { icon: Xcode, text: "Xcode" },
+  Eslint: { icon: Eslint, text: "ESLint" },
+  Prettier: { icon: Prettier, text: "Prettier" },
+  Jest: { icon: Jest, text: "Jest" },
+  Swift: { icon: Swift, text: "Swift" },
+  Androidstudio: { icon: Androidstudio, text: "Android Studio" },
 };
 
 interface Props {

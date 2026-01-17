@@ -45,17 +45,16 @@ const { items, align } = Astro.props;
 
   .dropdown__menu {
     position: absolute;
-    top: 100%;
+    top: 52px;
     right: 0;
     min-width: 120px;
-    background: white;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--neutral-medium);
+    background-color: var(--neutral-white);
 
     opacity: 0;
     pointer-events: none;
     padding: 16px 12px;
-    transform: translateY(-4px);
     transition:
       opacity 0.15s ease,
       transform 0.15s ease;

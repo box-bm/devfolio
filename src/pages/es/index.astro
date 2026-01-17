@@ -11,6 +11,7 @@ import MeImage from "@images/me.jpeg";
 // icons
 import { Linkedin, Mail } from "@lucide/astro";
 import TechChip from "@components/TechChip.astro";
+import Divider from "@components/Divider.astro";
 
 // constants
 import { email, linkedIn, githubRepos } from "@constants";
@@ -58,6 +59,8 @@ if (
     </div>
   </section>
 
+  <Divider />
+
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
@@ -69,88 +72,98 @@ if (
           por unir diseño y desarrollo para crear productos digitales limpios e impactantes.
         </p>
       </div>
-
-      <div class="card">
-        <h3>¿Por qué trabajar conmigo? 🤔</h3>
-
-        <p>
-          Aporto una combinación única de habilidades y experiencia que me
-          convierten en un colaborador ideal para tu próximo proyecto:
-        </p>
-
-        <div class="grid grid-container">
-          <div>
-            <h4>🎨 Diseño + 🧑🏻‍💻 Desarrollo</h4>
-            <p>
-              Mi doble experiencia en diseño y desarrollo me permite cerrar la
-              brecha entre estética y funcionalidad, asegurando que cada
-              proyecto sea visualmente atractivo y técnicamente sólido.
-            </p>
-          </div>
-          <div>
-            <h4>🤳🏼 Enfoque centrado en el usuario</h4>
-            <p>
-              Prioritizo las necesidades y preferencias de los usuarios,
-              realizando investigación y pruebas de usabilidad para crear
-              interfaces intuitivas, atractivas y adaptadas al público objetivo.
-            </p>
-          </div>
-          <div>
-            <h4>🚀 Optimización del rendimiento</h4>
-            <p>
-              Estoy comprometido con entregar aplicaciones de alto rendimiento
-              que carguen rápido y funcionen de forma fluida, aplicando buenas
-              prácticas de código, optimización y pruebas para mejorar la
-              experiencia del usuario.
-            </p>
-          </div>
+      <div class="grid small-grid">
+        <div class="card">
+          <h1>{years}+ años</h1>
+          <p>Transformando problemas en soluciones.</p>
         </div>
-      </div>
-
-      <div>
-        <h3>Destacados</h3>
-        <ul>
-          <li>{years}+ años programando y resolviendo problemas complejos.</li>
-          <li>Base sólida en JavaScript, TypeScript, Node.js y Astro.</li>
-          <li>Siempre aprendiendo</li>
-          <li>Combino arte y desarrollo; tiene sentido siendo frontend</li>
-        </ul>
+        <div class="card">
+          <h1>7+ Proyectos</h1>
+          <p>Publicados en web y mobile.</p>
+        </div>
+        <div class="card">
+          <h1>10+ Tecnologias y Herramientas</h1>
+          <p>Utilizadas para crear grandes soluciones.</p>
+        </div>
       </div>
 
       <div id="skills-and-tech-section">
         <h3>Habilidades y tecnologías</h3>
-        <p class="caption">
-          Estas son algunas de las tecnologías y herramientas con las que
-          trabajo regularmente para crear aplicaciones eficientes y fáciles de
-          usar.
-        </p>
+        <p class="caption">Frameworks & Bibliotecas</p>
         <div class="skills-chips-container">
           <TechChip tech="React" />
-          <TechChip tech="Astro" />
           <TechChip tech="React Native" />
+          <TechChip tech="Astro" />
+          <TechChip tech="Flutter" />
           <TechChip tech="Next.JS" />
+          <TechChip tech="Nestjs" />
+          <TechChip tech="Jest" />
+        </div>
+        <p class="caption">Lenguajes</p>
+        <div class="skills-chips-container">
           <TechChip tech="HTML" />
           <TechChip tech="CSS" />
           <TechChip tech="Typescript" />
           <TechChip tech="Javascript" />
           <TechChip tech="Dart" />
-          <TechChip tech="Flutter" />
-          <TechChip tech="Node" />
-          <TechChip tech="Git" />
-          <TechChip tech="Figma" />
           <TechChip tech="Kotlin" />
+          <TechChip tech="Swift" />
+          <TechChip tech="Rust" />
+          <TechChip tech="CPlusplus" />
+          <TechChip tech="Dotnet" />
+        </div>
+        <p class="caption">Herramientas</p>
+        <div class="skills-chips-container">
+          <TechChip tech="NeoVim" />
+          <TechChip tech="Xcode" />
+          <TechChip tech="Androidstudio" />
+          <TechChip tech="Node" />
+          <TechChip tech="Vercel" />
+          <TechChip tech="Git" />
+          <TechChip tech="Github" />
+          <TechChip tech="Prettier" />
+          <TechChip tech="Eslint" />
+          <TechChip tech="Figma" />
+        </div>
+      </div>
+      <div>
+        <h3>¿Por qué trabajar conmigo?</h3>
+        <div class="why-work-reasons">
+          <div>
+            <h4>🎨 Diseño + 🧑🏻‍💻 Desarrollo</h4>
+            <p>
+              Combino diseño y desarrollo para crear productos visualmente
+              cuidados y técnicamente sólidos.
+            </p>
+          </div>
+          <div>
+            <h4>🤳🏼 Enfoque centrado en el usuario</h4>
+            <p>
+              Diseño interfaces intuitivas y atractivas, enfocadas en
+              necesidades reales de los usuarios.
+            </p>
+          </div>
+          <div>
+            <h4>🚀 Optimización del rendimiento</h4>
+            <p>
+              Desarrollo aplicaciones rápidas y confiables usando buenas
+              prácticas de rendimiento.
+            </p>
+          </div>
         </div>
       </div>
 
       <div>
         <h3>Dato curioso</h3>
-        <p class="caption">
+        <p class="fun-fact">
           En mi tiempo libre me encanta dibujar 🎨, jugar videojuegos 👾 y
           explorar cómo la creatividad se conecta con el desarrollo de software.
         </p>
       </div>
     </div>
   </section>
+
+  <Divider />
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -159,21 +172,13 @@ if (
       <p class="body-large">
         Algunos de mis trabajos, directamente desde mis repositorios de GitHub
       </p>
-      <div class="projects grid grid-container">
+      <div class="projects grid">
         <ProjectCard
           title="Tik tak toe"
           description="Un juego de tic tac toe para Android, creado con el propósito de iniciarme en el desarrollo móvil usando Flutter y creando aplicaciones."
           viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
           codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
         >
-          <div slot="content">
-            <ul>
-              <li>Modos de un jugador y dos jugadores</li>
-              <li>4 niveles de dificultad con IA avanzada</li>
-              <li>Diseño limpio y minimalista</li>
-              <li>Interfaz responsiva e intuitiva</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
           <TechChip tech="Flutter" slot="tech" />
         </ProjectCard>
@@ -184,14 +189,6 @@ if (
           codeLink="https://github.com/box-bm/dpi_validator"
           viewLink="https://pub.dev/packages/dpi_validator"
         >
-          <div slot="content">
-            <ul>
-              <li>Valida números de DPI de Guatemala</li>
-              <li>Fácil de usar</li>
-              <li>Proceso de validación offline rápido y eficiente</li>
-              <li>Código abierto y personalizable</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
 
@@ -201,14 +198,6 @@ if (
           codeLink="https://github.com/box-bm/nit_validator"
           viewLink="https://pub.dev/packages/nit_validator"
         >
-          <div slot="content">
-            <ul>
-              <li>Valida números de NIT de Guatemala</li>
-              <li>Ligero y fácil de integrar</li>
-              <li>Resultados de validación instantáneos</li>
-              <li>Código abierto y personalizable</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
       </div>
@@ -217,6 +206,8 @@ if (
       </div>
     </div>
   </section>
+
+  <Divider />
 
   <!-- CONTACT -->
   <section id="contact">

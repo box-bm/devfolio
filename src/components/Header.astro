@@ -37,19 +37,16 @@ const t = useTranslations(lang);
     padding: 16px;
     flex-direction: row;
     justify-content: space-between;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--neutral-white);
+    background-color: #ffffffd9;
     height: 60px;
     align-items: center;
-    border-bottom: 1px solid var(--neutral-light);
+    border-bottom: 1px solid var(--neutral-medium);
     transition: transform 0.3s ease;
-  }
-
-  .header-container.hide {
-    transform: translateY(-100%);
+    backdrop-filter: blur(8px);
   }
 
   .header-links {
@@ -88,7 +85,6 @@ const t = useTranslations(lang);
     padding: 20px 16px;
     z-index: 1000;
     border-bottom: 1px solid var(--neutral-light);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     opacity: 0;
     transform: translateY(-8px);
@@ -137,11 +133,13 @@ const t = useTranslations(lang);
     mobileMenu.classList.remove("open");
   };
 
+  // handle open menu with menu button
   menuIcon.addEventListener("click", (e) => {
     e.stopPropagation();
     mobileMenu.classList.toggle("open");
   });
 
+  // handle user press on any part of the website
   document.addEventListener("click", (event) => {
     if (
       !menuIcon.contains(event.target) &&
@@ -151,6 +149,7 @@ const t = useTranslations(lang);
     }
   });
 
+  // handle on press links
   const mobileMenuLinks = document.querySelectorAll(".mobile-menu-links a");
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", closeMenu);
@@ -158,32 +157,4 @@ const t = useTranslations(lang);
 
   window.addEventListener("resize", closeMenu);
   window.addEventListener("scroll", closeMenu);
-
-  let lastScrollY = window.scrollY;
-  const header = document.querySelector(".header-container");
-
-  window.addEventListener("scroll", () => {
-    const SCROLL_THRESHOLD = 10;
-    const currentScrollY = window.scrollY;
-    if (Math.abs(currentScrollY - lastScrollY) < SCROLL_THRESHOLD) return;
-
-    // Siempre visible en el top
-    if (currentScrollY <= 0) {
-      header.classList.remove("hide");
-      lastScrollY = currentScrollY;
-      return;
-    }
-
-    // Scroll hacia abajo → ocultar
-    if (currentScrollY > lastScrollY) {
-      header.classList.add("hide");
-    }
-
-    // Scroll hacia arriba → mostrar
-    if (currentScrollY < lastScrollY) {
-      header.classList.remove("hide");
-    }
-
-    lastScrollY = currentScrollY;
-  });
 </script>

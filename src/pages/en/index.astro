@@ -9,13 +9,14 @@ import { Image } from "astro:assets";
 import MeImage from "@images/me.jpeg";
 
 // icons
-import { Linkedin, Mail, Code } from "@lucide/astro";
+import { Linkedin, Mail } from "@lucide/astro";
 import TechChip from "@components/TechChip.astro";
+import Divider from "@components/Divider.astro";
 
 // constants
 import { email, linkedIn, githubRepos } from "@constants";
 
-// years of experiencie
+// years of experience
 const startDate = new Date("2018-09-01");
 const today = new Date();
 
@@ -41,16 +42,16 @@ if (
         loading="eager"
       />
       <div>
-        <h1>Hi 👋🏼, I’m <span class="h1 primary-text">Brandon</span></h1>
+        <h1>Hello 👋🏼, I’m <span class="h1 primary-text">Brandon</span></h1>
         <p class="caption">
-          Frontend Developer passionate about minimal design & web performance
+          Frontend Developer passionate about minimalist design and web
+          performance
         </p>
       </div>
       <div>
         <div class="principal-links">
-          <Button href="projects" target="_parent">Projects</Button>
-          <Button type="Text" href="#contact" target="_parent"
-            >Contact Me</Button
+          <Button href="#projects" target="_parent">Projects</Button>
+          <Button type="Text" href="contact" target="_parent">Contact me</Button
           >
         </div>
         <ContactLinks />
@@ -58,100 +59,111 @@ if (
     </div>
   </section>
 
+  <Divider />
+
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <div>
-        <h2>About Me 👨🏻‍💻</h2>
+        <h2>About me 👨🏻‍💻</h2>
         <p class="body-large">
           I’m Brandon, a Full Stack Developer with {years} years of experience building
-          efficient, user-focused solutions. Passionate about merging design and
-          development to create clean, impactful digital products.
+          efficient, user-centered solutions. Passionate about bringing design and
+          development together to create clean and impactful digital products.
         </p>
       </div>
-
-      <div class="card">
-        <h3>Why work with me? 🤔</h3>
-
-        <p>
-          I bring a unique blend of skills and experience that make me an ideal
-          collaborator for your next project:
-        </p>
-
-        <div class="grid grid-container">
-          <div>
-            <h4>🎨 Design + 🧑🏻‍💻 Development</h4>
-            <p>
-              My dual expertise in design and development allows me to bridge
-              the gap between aesthetics and functionality, ensuring that every
-              project I work on is both visually stunning and technically sound.
-            </p>
-          </div>
-          <div>
-            <h4>🤳🏼 User-Centered Approach</h4>
-            <p>
-              I prioritize the needs and preferences of users in my work,
-              conducting thorough research and usability testing to create
-              interfaces that are intuitive, engaging, and tailored to the
-              target audience.
-            </p>
-          </div>
-          <div>
-            <h4>🚀 Performance Optimization</h4>
-            <p>
-              I am committed to delivering high-performance applications that
-              load quickly and run smoothly, utilizing best practices in coding,
-              optimization, and testing to enhance user experience and
-              satisfaction.
-            </p>
-          </div>
+      <div class="grid small-grid">
+        <div class="card">
+          <h1>{years}+ years</h1>
+          <p>Turning problems into solutions.</p>
+        </div>
+        <div class="card">
+          <h1>7+ Projects</h1>
+          <p>Published on web and mobile.</p>
+        </div>
+        <div class="card">
+          <h1>10+ Techs & Tools</h1>
+          <p>Used to create great solutions.</p>
         </div>
       </div>
 
-      <div>
-        <h3>Hightlights</h3>
-        <ul>
-          <li>{years}+ years coding and solving complex problems.</li>
-          <li>Strong background in JavaScript, TypeScript, Node.js, Astro.</li>
-          <li>Always learning</li>
-          <li>Combine art and development, it make sense like im frontend</li>
-        </ul>
-      </div>
-
       <div id="skills-and-tech-section">
-        <h3>Skills & Tech</h3>
-        <p class="caption">
-          These are some of the technologies and tools I work with regularly to
-          build efficient and user-friendly applications.
-        </p>
+        <h3>Skills and technologies</h3>
+        <p class="caption">Frameworks & Libraries</p>
         <div class="skills-chips-container">
           <TechChip tech="React" />
-          <TechChip tech="Astro" />
           <TechChip tech="React Native" />
+          <TechChip tech="Astro" />
+          <TechChip tech="Flutter" />
           <TechChip tech="Next.JS" />
+          <TechChip tech="Nestjs" />
+          <TechChip tech="Jest" />
+        </div>
+        <p class="caption">Languages</p>
+        <div class="skills-chips-container">
           <TechChip tech="HTML" />
           <TechChip tech="CSS" />
           <TechChip tech="Typescript" />
           <TechChip tech="Javascript" />
           <TechChip tech="Dart" />
-          <TechChip tech="Flutter" />
-          <TechChip tech="Node" />
-          <TechChip tech="Git" />
-          <TechChip tech="Figma" />
           <TechChip tech="Kotlin" />
+          <TechChip tech="Swift" />
+          <TechChip tech="Rust" />
+          <TechChip tech="CPlusplus" />
+          <TechChip tech="Dotnet" />
         </div>
-        <div></div>
+        <p class="caption">Tools</p>
+        <div class="skills-chips-container">
+          <TechChip tech="NeoVim" />
+          <TechChip tech="Xcode" />
+          <TechChip tech="Androidstudio" />
+          <TechChip tech="Node" />
+          <TechChip tech="Vercel" />
+          <TechChip tech="Git" />
+          <TechChip tech="Github" />
+          <TechChip tech="Prettier" />
+          <TechChip tech="Eslint" />
+          <TechChip tech="Figma" />
+        </div>
+      </div>
+      <div>
+        <h3>Why work with me?</h3>
+        <div class="why-work-reasons">
+          <div>
+            <h4>🎨 Design + 🧑🏻‍💻 Development</h4>
+            <p>
+              I combine design and development to create visually polished and
+              technically solid products.
+            </p>
+          </div>
+          <div>
+            <h4>🤳🏼 User-centered approach</h4>
+            <p>
+              I design intuitive and engaging interfaces focused on real user
+              needs.
+            </p>
+          </div>
+          <div>
+            <h4>🚀 Performance optimization</h4>
+            <p>
+              I build fast and reliable applications using performance best
+              practices.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div>
         <h3>Fun fact</h3>
-        <p class="caption">
-          In my free time, I love drawing 🎨, gaming 👾, and exploring how
-          creativity connects with software development.
+        <p class="fun-fact">
+          In my free time I love drawing 🎨, playing video games 👾, and
+          exploring how creativity connects with software development.
         </p>
       </div>
     </div>
   </section>
+
+  <Divider />
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -160,71 +172,49 @@ if (
       <p class="body-large">
         Some of my work, directly from my GitHub repositories
       </p>
-      <div class="projects grid grid-container">
+      <div class="projects grid">
         <ProjectCard
-          title="Tik tak toe"
-          description="A tic tac toe game app for android, built with pruporse of gettting started with mobile development using flutter and making apps."
+          title="Tic tac toe"
+          description="A tic tac toe game for Android, created as an introduction to mobile development using Flutter and building applications."
           viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
           codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
         >
-          <div slot="content">
-            <ul>
-              <li>Single and two-player modes</li>
-              <li>4 difficulty levels with advanced AI</li>
-              <li>Clean, minimalistic design</li>
-              <li>Responsive and intuitive UI</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
           <TechChip tech="Flutter" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="DPI_Validator"
-          description="Simple tool to check a valid dpi with dart"
+          description="Simple tool to validate a DPI using Dart"
           codeLink="https://github.com/box-bm/dpi_validator"
           viewLink="https://pub.dev/packages/dpi_validator"
         >
-          <div slot="content">
-            <ul>
-              <li>Validates Guatemalan DPI numbers</li>
-              <li>Easy-to-use</li>
-              <li>Fast and efficient offline validation process</li>
-              <li>Open-source and customizable</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
 
         <ProjectCard
           title="NIT_Validator"
-          description="Simple tool to check a valid NIT with dart"
+          description="Simple tool to validate a NIT using Dart"
           codeLink="https://github.com/box-bm/nit_validator"
           viewLink="https://pub.dev/packages/nit_validator"
         >
-          <div slot="content">
-            <ul>
-              <li>Validates Guatemalan NIT numbers</li>
-              <li>Lightweight and easy to integrate</li>
-              <li>Provides instant validation results</li>
-              <li>Open-source and customizable</li>
-            </ul>
-          </div>
           <TechChip tech="Dart" slot="tech" />
         </ProjectCard>
       </div>
       <div>
-        <Button href={githubRepos}>View All Projects</Button>
+        <Button href={githubRepos}>View all projects</Button>
       </div>
     </div>
   </section>
+
+  <Divider />
 
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div>
         <h2>Get in touch ☎️</h2>
-        <p class="body-large">Let’s collaborate or just say hi.</p>
+        <p class="body-large">Let’s collaborate or just say hello.</p>
       </div>
       <div class="contact-buttons-container">
         <Button href={`mailto:${email}`}>
@@ -233,13 +223,13 @@ if (
         </Button>
         <Button type="Outlined" href={linkedIn}>
           <Linkedin size={20} />
-          Conect on LinkedIn
+          Connect on LinkedIn
         </Button>
       </div>
       <ContactLinks />
       <p class="caption">
-        I’m always open to new projects, collaborations, or just a friendly
-        hello 👋.
+        I’m always open to new projects, collaborations, or simply saying hello
+        👋.
       </p>
     </div>
   </section>

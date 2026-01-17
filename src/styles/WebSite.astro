@@ -1,7 +1,7 @@
 <style is:global>
   #hero {
-    min-height: 80vh;
-    min-height: 80dvh;
+    height: 90vh;
+    max-height: 1000px;
     justify-content: center;
   }
 
@@ -22,17 +22,12 @@
     margin-bottom: 8px;
   }
 
-  #about {
-    background-color: var(--neutral-light);
-  }
-
   #about > div {
     gap: 32px;
   }
 
   #contact {
-    background-color: var(--neutral-light);
-    gap: 16;
+    gap: 16px;
   }
 
   #contact > div {
@@ -66,6 +61,7 @@
     justify-content: center;
     gap: 8px;
     flex-wrap: wrap;
+    margin: 12px 0px;
   }
 
   #skills-and-tech-section {
@@ -81,6 +77,20 @@
     row-gap: 8px;
   }
 
+  .why-work-reasons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    gap: 12px;
+  }
+
+  .fun-fact-container {
+    max-width: 250px;
+    background-color: var(--accent-primary);
+    padding: 16px;
+    border-radius: 20px;
+  }
+
   .card {
     border-radius: 12px;
     border-style: solid;
@@ -92,12 +102,12 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     width: 100%;
   }
 
-  .grid-container {
-    margin: 16px 0;
+  .small-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 </style>
