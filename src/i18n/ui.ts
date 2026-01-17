@@ -18,6 +18,8 @@ export const ui = {
     "legal.app": "App",
     "legal.version": "Version",
     "legal.effectiveDate": "Effective Date",
+    // footer
+    "footer.label": "Build with Astro",
   },
   es: {
     // header
@@ -31,5 +33,7 @@ export const ui = {
     "legal.app": "Aplicación",
     "legal.version": "Versión",
     "legal.effectiveDate": "Fecha de Vigencia",
+    // footer
+    "footer.label": "Construido con Astro",
   },
 };

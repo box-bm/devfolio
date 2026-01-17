@@ -1,9 +1,19 @@
 ---
+import type { ui } from "@i18n/ui";
+import { useTranslations } from "@i18n/utils";
+import { Astro as AstroIcon } from "simple-icons-astro";
 
+interface Props {
+  lang: keyof typeof ui;
+}
+
+const { lang = "en" } = Astro.props;
+
+const t = useTranslations(lang);
 ---
 
-<footer class"caption">
-  <p>© 2025 Brandon - Built with Astro</p>
+<footer>
+  <p class="caption">© 2025 Brandon - {t("footer.label")} <AstroIcon /></p>
 </footer>
 
 <style>

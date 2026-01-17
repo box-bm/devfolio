@@ -32,6 +32,7 @@ const t = useTranslations(lang);
 
 <style>
   .header-container {
+    z-index: 2000;
     display: flex;
     padding: 16px;
     flex-direction: row;
@@ -44,6 +45,11 @@ const t = useTranslations(lang);
     height: 60px;
     align-items: center;
     border-bottom: 1px solid var(--neutral-light);
+    transition: transform 0.3s ease;
+  }
+
+  .header-container.hide {
+    transform: translateY(-100%);
   }
 
   .header-links {
@@ -152,4 +158,32 @@ const t = useTranslations(lang);
 
   window.addEventListener("resize", closeMenu);
   window.addEventListener("scroll", closeMenu);
+
+  let lastScrollY = window.scrollY;
+  const header = document.querySelector(".header-container");
+
+  window.addEventListener("scroll", () => {
+    const SCROLL_THRESHOLD = 10;
+    const currentScrollY = window.scrollY;
+    if (Math.abs(currentScrollY - lastScrollY) < SCROLL_THRESHOLD) return;
+
+    // Siempre visible en el top
+    if (currentScrollY <= 0) {
+      header.classList.remove("hide");
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    // Scroll hacia abajo → ocultar
+    if (currentScrollY > lastScrollY) {
+      header.classList.add("hide");
+    }
+
+    // Scroll hacia arriba → mostrar
+    if (currentScrollY < lastScrollY) {
+      header.classList.remove("hide");
+    }
+
+    lastScrollY = currentScrollY;
+  });
 </script>
