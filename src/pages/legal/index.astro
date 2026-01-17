@@ -1,0 +1,35 @@
+---
+import LegalLayout from "@layouts/Legal.astro";
+import { getCollection } from "astro:content";
+
+const policies = await getCollection("legal");
+
+const policyApps = policies.map((policy) => ({
+  appName: policy.data.app,
+  normalizedAppName: policy.slug.split("/")[0],
+}));
+
+const apps = policyApps.filter(
+  (policy, index, self) =>
+    index ===
+    self.findIndex(
+      (p) =>
+        p.appName === policy.appName &&
+        p.normalizedAppName === policy.normalizedAppName,
+    ),
+);
+---
+
+<LegalLayout>
+  <h1>Legal app docs</h1>
+  <p>Chose an app</p>
+  <ul>
+    {
+      apps.map((app) => (
+        <li key={app.normalizedAppName}>
+          <a href={`legal/${app.normalizedAppName}`}>{app.appName}</a>
+        </li>
+      ))
+    }
+  </ul>
+</LegalLayout>

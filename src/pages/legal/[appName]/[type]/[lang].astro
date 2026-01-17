@@ -1,6 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import LegalBase from "@layouts/Legal.astro";
+import Divider from "@components/Divider.astro";
+import { getLangFromLegalUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromLegalUrl(Astro.url);
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   const policies = await getCollection("legal");
@@ -29,13 +34,17 @@ const { Content } = await policy.render();
 
 <LegalBase title={policy.data.title}>
   <main class="legal-container">
-    <h1>{policy.data.title}</h1>
+    <h1>{t("legal.privacy")}</h1>
 
     <p>
-      App: <strong>{policy.data.app}</strong><br />
-      Versión: {policy.data.version}<br />
-      Vigente desde: {policy.data.effectiveDate.toLocaleDateString()}
+      {t("legal.app")}: <strong>{policy.data.app}</strong><br />
+      {t("legal.version")}: {policy.data.version}<br />
+      {t("legal.effectiveDate")}: {
+        policy.data.effectiveDate.toLocaleDateString()
+      }
     </p>
+
+    <Divider />
 
     <article>
       <Content />
@@ -50,18 +59,5 @@ const { Content } = await policy.render();
     padding: 24px;
     font-size: 1rem;
     line-height: 1.6;
-  }
-
-  .legal-container h1 {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-
-  .legal-container article {
-    margin-top: 24px;
-  }
-
-  .legal-container p {
-    margin-bottom: 16px;
   }
 </style>

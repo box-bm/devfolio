@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import LegalLayout from "@layouts/Legal.astro";
+
+type DocumentType = "privacy-policy" | "terms-of-service";
+
+interface Props {
+  types: DocumentType[];
+  appName: string;
+  normalizedAppName: string;
+}
+
+const typeLabels: Record<DocumentType, string> = {
+  "privacy-policy": "Privacy Policy",
+  "terms-of-service": "Terms of Service",
+};
+
+export async function getStaticPaths() {
+  const policies = await getCollection("legal");
+  return policies.map((policy) => {
+    const [appName] = policy.slug.split("/");
+    const normalizedAppName = appName.toLowerCase();
+    return {
+      params: {
+        appName: normalizedAppName,
+      },
+      props: {
+        appName: policy.data.app,
+        normalizedAppName,
+        types: Array.from(
+          new Set(
+            policies
+              .filter((p) => p.slug.startsWith(appName))
+              .map((p) => p.data.type),
+          ),
+        ) as "privacy-policy" | "terms-of-service"[],
+      },
+    };
+  });
+}
+const { appName, types, normalizedAppName } = Astro.props;
+---
+
+<LegalLayout title={`Legal Documents - ${appName}`}>
+  <h1>Legal documents</h1>
+  <p>Select a document to view for <strong>{appName}</strong>:</p>
+  <ul>
+    {
+      types.map((type) => (
+        <li key={type}>
+          <a href={`${normalizedAppName}/${type}`}>{typeLabels[type]}</a>
+        </li>
+      ))
+    }
+  </ul>
+</LegalLayout>

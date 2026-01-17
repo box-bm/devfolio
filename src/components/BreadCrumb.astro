@@ -42,7 +42,7 @@ const { items } = Astro.props;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 8px;
     padding: 0;
     margin: 0;
   }
@@ -67,6 +67,7 @@ const { items } = Astro.props;
     color: var(--color-link);
     text-align: center;
     padding: 8px 12px;
+    text-transform: capitalize;
   }
 
   .breadcrumb-link--home-icon {
@@ -85,5 +86,11 @@ const { items } = Astro.props;
   .breadcrumb-current {
     font-weight: bold;
     color: var(--color-text-primary);
+  }
+
+  @media (max-width: 600px) {
+    .breadcrumb-list {
+      gap: 4px;
+    }
   }
 </style>

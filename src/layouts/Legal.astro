@@ -3,6 +3,7 @@ import { getLangFromLegalUrl } from "@i18n/utils";
 import Base from "@layouts/Base.astro";
 import Footer from "@components/Footer.astro";
 import BreadCrumb from "@components/BreadCrumb.astro";
+import "@styles/LegalStyles.astro";
 
 const lang = getLangFromLegalUrl(Astro.url);
 
@@ -23,7 +24,7 @@ const { title = "Legal Information" } = Astro.props;
         const href = "/" + routes.slice(0, index + 1).join("/");
         const isLast = index === routes.length - 1;
         return {
-          label: segment.charAt(0).toUpperCase() + segment.slice(1),
+          label: segment.replace("-", " "),
           href: isLast ? undefined : href,
         };
       })}
@@ -34,20 +35,3 @@ const { title = "Legal Information" } = Astro.props;
   </main>
   <Footer />
 </Base>
-
-<style>
-  header {
-    padding: 1rem;
-  }
-
-  main {
-    overflow-y: auto;
-    padding: 1rem;
-    flex-grow: 1;
-  }
-
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-</style>
