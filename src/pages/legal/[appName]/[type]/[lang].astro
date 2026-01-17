@@ -33,7 +33,7 @@ const { Content } = await policy.render();
 ---
 
 <LegalBase title={policy.data.title}>
-  <main class="legal-container">
+  <div class="legal-container">
     <h1>{t("legal.privacy")}</h1>
 
     <p>
@@ -44,15 +44,21 @@ const { Content } = await policy.render();
       }
     </p>
 
-    <Divider />
+    <div class="divider-container">
+      <Divider />
+    </div>
 
     <article>
       <Content />
     </article>
-  </main>
+  </div>
 </LegalBase>
 
 <style>
+  .divider-container {
+    margin: 24px 0px;
+  }
+
   .legal-container {
     max-width: 800px;
     margin: 0 auto;

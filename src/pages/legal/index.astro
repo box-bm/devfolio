@@ -27,7 +27,7 @@ const apps = policyApps.filter(
     {
       apps.map((app) => (
         <li key={app.normalizedAppName}>
-          <a href={`legal/${app.normalizedAppName}`}>{app.appName}</a>
+          <a href={app.normalizedAppName}>{app.appName}</a>
         </li>
       ))
     }
