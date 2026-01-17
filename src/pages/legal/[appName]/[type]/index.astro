@@ -1,0 +1,55 @@
+---
+import LegalLayout from "@layouts/Legal.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const policies = await getCollection("legal");
+
+  const langs = Array.from(new Set(policies.map((policy) => policy.data.lang)));
+
+  return policies.map((policy) => {
+    const { type } = policy.data;
+    const [appName] = policy.slug.split("/");
+    const normalizeAppName = appName.toLowerCase();
+
+    return {
+      params: {
+        appName: normalizeAppName,
+        type,
+      },
+      props: {
+        langs,
+        policy,
+        app: normalizeAppName,
+        type,
+      },
+    };
+  });
+}
+
+const { langs, policy, app, type } = Astro.props;
+---
+
+<LegalLayout title={`${policy.data.title} - ${app}`}>
+  <h1>
+    Available Languages for {type} of {app}
+  </h1>
+  <ul>
+    {
+      langs.map((lang) => (
+        <a href={`${type}/${lang}`}>
+          <li key={lang}>{lang}</li>
+        </a>
+      ))
+    }
+  </ul>
+</LegalLayout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+</style>

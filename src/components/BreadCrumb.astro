@@ -1,0 +1,89 @@
+---
+import { HomeIcon } from "@lucide/astro";
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item">
+      <a href="/" class="breadcrumb-link breadcrumb-link--home-icon">
+        <HomeIcon size={16} aria-hidden="true" />
+      </a>
+    </li>
+    {
+      items.map((item, index) => (
+        <li class="breadcrumb-item" key={index}>
+          {item.href ? (
+            <a href={item.href} class="breadcrumb-link">
+              {item.label}
+            </a>
+          ) : (
+            <span class="breadcrumb-current" aria-current="page">
+              {item.label}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-item::after {
+    content: "/";
+    margin-left: 0.5rem;
+    color: var(--color-text-secondary);
+  }
+
+  .breadcrumb-item:last-child::after {
+    content: "";
+  }
+
+  .breadcrumb-link {
+    text-decoration: none;
+    color: var(--color-link);
+    text-align: center;
+    padding: 8px 12px;
+  }
+
+  .breadcrumb-link--home-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+    text-align: center;
+  }
+
+  .breadcrumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb-current {
+    font-weight: bold;
+    color: var(--color-text-primary);
+  }
+</style>
