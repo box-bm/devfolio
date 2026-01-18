@@ -48,7 +48,7 @@ const { appName, types, normalizedAppName } = Astro.props;
     {
       types.map((type) => (
         <li key={type}>
-          <a href={`${normalizedAppName}/${type}`}>{typeLabels[type]}</a>
+          <a href={type}>{typeLabels[type]}</a>
         </li>
       ))
     }

@@ -36,7 +36,7 @@ const { langs, policy, app, type } = Astro.props;
   <ul>
     {
       langs.map((lang) => (
-        <a href={`${type}/${lang}`}>
+        <a href={lang}>
           <li key={lang}>{lang}</li>
         </a>
       ))
