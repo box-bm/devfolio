@@ -11,7 +11,7 @@ const t = useTranslations(lang);
     <p class="caption">
       BoxDev by Brandon M. - {t("footer.label")}
     </p>
-    <AstroIcon />
+    <AstroIcon class="icon" />
   </div>
 </footer>
 
@@ -42,5 +42,9 @@ const t = useTranslations(lang);
 
   p {
     margin: 0;
+  }
+
+  .icon {
+    color: var(--neutral-light);
   }
 </style>
