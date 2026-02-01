@@ -12,8 +12,7 @@ draft: false
 Esta guía explica **cómo construir un sitio web con Astro** tomando como referencia un proyecto real y funcional.  
 El enfoque es práctico: estructura, routing, contenido, internacionalización y generación estática.
 
-Repositorio del proyecto base:  
-https://github.com/box-bm/devfolio
+> Repositorio del proyecto base [devfolio](https://github.com/box-bm/devfolio)
 
 ## Índice
 
@@ -53,6 +52,7 @@ Astro permite tratar el sitio como **contenido primero**, no como una aplicació
 
 La estructura separa claramente responsabilidades:
 
+```sh
 src/
 pages/
 layouts/
@@ -62,6 +62,7 @@ content/
 guides/
 projects/
 legal/
+```
 
 Responsabilidades principales:
 
@@ -79,18 +80,24 @@ Astro genera rutas a partir de archivos dentro de `src/pages`.
 
 Este proyecto utiliza rutas dinámicas con prefijo de idioma:
 
+```
 src/pages/[…lang]/
+```
 
 Esto permite generar URLs como:
 
+```
 /en
 /es
 /es/guides
 /es/guides/construyendo-un-sitio-con-astro
+```
 
 El idioma se obtiene directamente desde:
 
+```
 Astro.params.lang
+```
 
 No se utilizan query params ni carpetas duplicadas por idioma.
 
@@ -123,14 +130,18 @@ Tipos de contenido:
 
 Ejemplo de estructura:
 
+```sh
 content/
 guides/
 construyendo-un-sitio-con-astro.es.md
 construyendo-un-sitio-con-astro.en.md
+```
 
 Convención utilizada:
 
+```sh
 slug.lang.md
+```
 
 El idioma se extrae desde el `id` del archivo, no desde el slug de la URL, evitando inferencias frágiles.
 
@@ -145,7 +156,9 @@ Las guías tienen dos tipos de páginas:
 
 Ruta:
 
+```sh
 src/pages/[…lang]/guides/index.astro
+```
 
 Responsabilidades:
 
@@ -159,7 +172,9 @@ Responsabilidades:
 
 Ruta:
 
+```sh
 src/pages/[…lang]/guides/[slug].astro
+```
 
 Flujo:
 

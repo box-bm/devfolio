@@ -12,8 +12,7 @@ draft: false
 This guide explains **how to build a website with Astro** using a real, functional project as a reference.  
 The focus is practical: structure, routing, content, internationalization, and static generation.
 
-Base project repository:  
-https://github.com/box-bm/devfolio
+> Base project repository: [devfolio](https://github.com/box-bm/devfolio)
 
 ## Table of contents
 
@@ -53,7 +52,7 @@ Astro allows treating the site as **content-first**, not as a heavy application.
 
 The structure clearly separates responsibilities:
 
-```
+```sh
 src/
   pages/
   layouts/
@@ -81,13 +80,13 @@ Astro generates routes from files inside `src/pages`.
 
 This project uses dynamic routes with a language prefix:
 
-```
+```sh
 src/pages/[...lang]/
 ```
 
 This allows generating URLs such as:
 
-```
+```sh
 /en
 /es
 /es/guides
@@ -96,7 +95,7 @@ This allows generating URLs such as:
 
 The language is read directly from:
 
-```
+```sh
 Astro.params.lang
 ```
 
@@ -131,7 +130,7 @@ Content types:
 
 Example structure:
 
-```
+```sh
 content/
   guides/
     building-a-site-with-astro.es.md
