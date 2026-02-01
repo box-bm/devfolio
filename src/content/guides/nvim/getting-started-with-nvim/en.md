@@ -1,6 +1,6 @@
 ---
-title: Guía completa de configuración y primeros pasos en Neovim
-description: Una guía práctica para configurar Neovim de manera moderna y estable, ideal para quienes desean un entorno funcional y mantenible.
+title: Complete Neovim Setup and Getting Started Guide
+description: A practical guide to setting up Neovim in a modern and stable way, ideal for those who want a functional and maintainable environment.
 tags: [neovim, text editor, setup, guia]
 topic: nvim
 guide: getting-started-with-neovim
