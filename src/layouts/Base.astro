@@ -24,6 +24,14 @@ const { title, lang } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const theme = stored ?? (prefersDark ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+    </script>
   </head>
   <body>
     <slot />

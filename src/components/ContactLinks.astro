@@ -5,22 +5,14 @@ import { email, githubProfile, linkedIn } from "@constants";
 ---
 
 <div class="contact-links">
-  <Button
-    type="Text"
-    color="black"
-    ariaLabel="Github Profile"
-    href={githubProfile}
-  >
+  <Button type="Text" ariaLabel="Github Profile" href={githubProfile}>
     <Github />
   </Button>
-  <Button type="Text" color="black" ariaLabel="LinkedIn" href={linkedIn}>
+  <Button type="Text" ariaLabel="LinkedIn" href={linkedIn}>
     <Linkedin />
   </Button>
-  <Button
-    type="Text"
-    color="black"
-    ariaLabel="MailTo Author"
-    href={`mailto:${email}`}><Mail /></Button
+  <Button type="Text" ariaLabel="MailTo Author" href={`mailto:${email}`}
+    ><Mail /></Button
   >
 </div>
 

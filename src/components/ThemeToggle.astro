@@ -1,0 +1,55 @@
+---
+import { Sun, Moon } from "@lucide/astro";
+---
+
+<label class="theme-toggle">
+  <input type="checkbox" id="theme-toggle" aria-label="Toggle theme" />
+  <Moon class="icon moon" />
+  <Sun class="icon sun" />
+</label>
+
+<style>
+  .theme-toggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .theme-toggle {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  input {
+    display: none;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-primary);
+    display: none;
+  }
+
+  html[data-theme="dark"] .sun {
+    display: block;
+  }
+
+  html[data-theme="light"] .moon {
+    display: block;
+  }
+</style>
+
+<script is:inline>
+  const input = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  // sync initial state
+  input.checked = html.dataset.theme === "dark";
+
+  input.addEventListener("change", () => {
+    const next = input.checked ? "dark" : "light";
+    html.dataset.theme = next;
+    localStorage.setItem("theme", next);
+  });
+</script>

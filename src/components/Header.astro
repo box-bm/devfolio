@@ -1,5 +1,6 @@
 ---
 import LanguagePicker from "@components/LanguagePicker.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { MenuIcon } from "@lucide/astro";
 import Divider from "@components/Divider.astro";
 ---
@@ -11,6 +12,7 @@ import Divider from "@components/Divider.astro";
       <slot name="link" />
     </div>
     <div class="header-right">
+      <ThemeToggle />
       <div class="header-links">
         <slot name="secondary-link" />
       </div>
@@ -38,7 +40,7 @@ import Divider from "@components/Divider.astro";
     top: 0;
     left: 0;
     right: 0;
-    background-color: #ffffffd9;
+    background-color: var(--neutral-white);
     height: 60px;
     align-items: center;
     border-bottom: 1px solid var(--neutral-medium);
