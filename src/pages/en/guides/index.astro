@@ -15,7 +15,7 @@ const topics = Array.from(new Set(guides.map((guide) => guide.data.topic)));
     {
       topics.map((topic) => (
         <li key={topic}>
-          <a class="topic-link" href={`guides/${topic}`} key={topic}>
+          <a class="topic-link" href={`/en/guides/${topic}`} key={topic}>
             {topic}
           </a>
         </li>

@@ -23,9 +23,9 @@ The configuration uses **lazy.nvim** as the plugin manager and clearly separates
 1. [Important: Why I use Neovim](#important-why-i-use-neovim)
 2. [Getting started: how to think and navigate in Neovim](#getting-started-how-to-think-and-navigate-in-neovim)
    - [Modes: the foundation](#modes-the-foundation)
-   - [The `<Esc>` key](#the-esc-key)
+   - [The <Esc> key](#the-esc-key)
    - [Basic movement](#basic-movement)
-   - [What is `<leader>`?](#what-is-leader)
+   - [What is <leader>?](#what-is-leader)
    - [The general idea behind Neovim](#the-general-idea-behind-neovim)
 
 3. [Terminal and environment](#terminal-and-environment)
