@@ -29,6 +29,10 @@ if (
 ) {
   years--;
 }
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
 ---
 
 <Base title="Brandon — Portfolio">

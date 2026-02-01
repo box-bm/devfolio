@@ -1,16 +1,13 @@
 ---
-title: Complete Neovim Setup and Getting Started Guide
+title: Getting Started Guide With Neovim
 description: A practical guide to setting up Neovim in a modern and stable way, ideal for those who want a functional and maintainable environment.
-tags: [neovim, text editor, setup, guia]
-topic: nvim
-guide: getting-started-with-neovim
-slug: en/guides/nvim/getting-started-with-neovim
-language: en
+tags: [neovim, text editor, setup, lua]
+date: 2026-01-31T11:35:00-6:00
+updatedDate: 2026-02-01T00:00:00-6:00
 draft: false
-date: 2026-01-31
 ---
 
-# Complete Neovim Setup and Getting Started Guide
+# Getting Started Guide With Neovim
 
 This guide documents a **modern, stable, and realistic** Neovim configuration and, at the same time, serves as a **practical introduction** to getting started with Neovim without falling into fragile or unnecessarily complex setups. It is aimed at people who want to move from a traditional editor—or from a very basic Neovim setup—to an environment that is actually usable day to day.
 
@@ -18,14 +15,22 @@ This is not an experimental or extreme minimalist setup. It is a system that **w
 
 The configuration uses **lazy.nvim** as the plugin manager and clearly separates responsibilities (LSP, autocompletion, formatting, linting, and UI) in a progressive and understandable way.
 
+## Configuration repository
+
+The complete, up-to-date configuration referenced in this guide lives in the following repository:
+
+- **[Terminal - Settings](https://github.com/box-bm/terminal-settings)**
+
+You can use it as a reference, clone it, or adapt parts of it to your own setup. The guide is written to explain the why behind the configuration, not just the final result.
+
 ## Table of Contents
 
-1. [Important: Why I use Neovim](#important-why-i-use-neovim)
+1. [Why I use Neovim](#why-i-use-neovim)
 2. [Getting started: how to think and navigate in Neovim](#getting-started-how-to-think-and-navigate-in-neovim)
    - [Modes: the foundation](#modes-the-foundation)
-   - [The <Esc> key](#the-esc-key)
+   - [The \<Esc> key](#the-esc-key)
    - [Basic movement](#basic-movement)
-   - [What is <leader>?](#what-is-leader)
+   - [What is \<leader>?](#what-is-leader)
    - [The general idea behind Neovim](#the-general-idea-behind-neovim)
 
 3. [Terminal and environment](#terminal-and-environment)
@@ -35,7 +40,7 @@ The configuration uses **lazy.nvim** as the plugin manager and clearly separates
 7. [Main plugins](#main-plugins)
 8. [Conclusion](#conclusion)
 
-## Important: Why I use Neovim
+## Why I use Neovim
 
 This guide starts from a personal decision that is worth clarifying from the beginning.
 

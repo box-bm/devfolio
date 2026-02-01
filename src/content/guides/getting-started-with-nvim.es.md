@@ -1,16 +1,13 @@
 ---
-title: Guía completa de configuración y primeros pasos en Neovim
+title: Guia de inicio con Neovim
 description: Una guía práctica para configurar Neovim de manera moderna y estable, ideal para quienes desean un entorno funcional y mantenible.
-tags: [neovim, text editor, setup, guia]
-topic: nvim
-guide: getting-started-with-neovim
-slug: es/guides/nvim/getting-started-with-neovim
-language: es
+tags: [neovim, editor de texto, setup, lua]
+date: 2026-01-31T00:00:00-6:00
+updatedDate: 2026-02-01T00:00:00-6:00
 draft: false
-date: 2026-01-31
 ---
 
-# Guía completa de configuración y primeros pasos en Neovim
+# Guía de inicio con Neovim
 
 Esta guía documenta una configuración **moderna, estable y realista** de Neovim y, al mismo tiempo, sirve como **introducción práctica** para empezar a usarlo sin perderse en setups frágiles o innecesariamente complejos. Está pensada para quienes quieren pasar de un editor tradicional —o de un Neovim básico— a un entorno usable en el día a día.
 
@@ -18,14 +15,22 @@ No es un setup experimental ni minimalista extremo: es un sistema que **funciona
 
 La configuración utiliza **lazy.nvim** como gestor de plugins y separa responsabilidades (LSP, autocompletado, formato, linting y UI) de forma clara y progresiva.
 
+## Repositorio de configuración
+
+La configuración completa y actualizada a la que hace referencia esta guía se encuentra en el siguiente repositorio:
+
+- **[Terminal - Settings](https://github.com/box-bm/terminal-settings)**
+
+Puedes usarlo como referencia, clonarlo o adaptar partes a tu propio setup. La guía está escrita para explicar el porqué detrás de la configuración, no solo el resultado final.
+
 ## Índice
 
 1. [Importante: ¿por qué uso Neovim?](#importante-por-qué-uso-neovim)
 2. [Primeros pasos: cómo pensar y navegar en Neovim](#primeros-pasos-cómo-pensar-y-navegar-en-neovim)
    - [Modos: la base de todo](#modos-la-base-de-todo)
-   - [La tecla <Esc>](#la-tecla-esc)
+   - [La tecla \<Esc>](#la-tecla-esc)
    - [Movimiento básico](#movimiento-básico)
-   - [¿Qué es <leader>?](#qué-es-leader)
+   - [¿Qué es \<leader>?](#qué-es-leader)
    - [La idea general de Neovim](#la-idea-general-de-neovim)
 3. [Terminal y entorno](#terminal-y-entorno)
 4. [Filosofía del setup](#filosofía-del-setup)

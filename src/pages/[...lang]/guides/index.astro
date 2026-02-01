@@ -1,0 +1,100 @@
+---
+import GuidesLayout from "@layouts/Guides.astro";
+import Chip from "@components/Chip.astro";
+import Button from "@components/Button.astro";
+import { LANG_CODES } from "@i18n/ui";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getCollection } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export const getStaticPaths = () => {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+};
+
+const guides = await getCollection(
+  "guides",
+  (guide) => !guide.data.draft && guide.id.endsWith(`${lang}.md`),
+);
+---
+
+<GuidesLayout title="Guides">
+  <h1>Guides</h1>
+  <section class="grid">
+    {
+      guides.map((guide) => (
+        <article class="guide-preview" key={guide.slug}>
+          <div class="guide-preview-content">
+            <h2>
+              {guide.data.title} {guide.data.draft && <Chip text="Draft" />}
+            </h2>
+            <p>{guide.data.description}</p>
+            {guide.data.tags && (
+              <div class="tags">
+                {guide.data.tags.map((tag) => (
+                  <Chip key={tag} text={tag} />
+                ))}
+              </div>
+            )}
+          </div>
+          <div class="guide-preview-actions">
+            <Button
+              type="Text"
+              href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}
+            >
+              Leer más
+            </Button>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</GuidesLayout>
+
+<style>
+  article.guide-preview {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.3s ease;
+    max-width: 420px;
+  }
+
+  article.guide-preview:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  section {
+    margin: 16px 0px;
+  }
+
+  p {
+    margin: 8px 0px;
+  }
+
+  .guide-preview-content {
+    margin-bottom: 16px;
+  }
+
+  .guide-preview-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .tags {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .read-more-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+</style>

@@ -8,7 +8,6 @@ export function getLangFromUrl(url: URL) {
 
 export function getLangFromLegalUrl(url: URL) {
   const segments = url.pathname.split("/");
-  // Assuming the URL structure is /legal/[app]/[type]/[lang]
   const lang = segments[4];
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;

@@ -19,12 +19,9 @@ const guides = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    slug: z.string().optional(),
-    topic: z.string().optional(),
-    guide: z.string().optional(),
-    language: z.enum(["en", "es"]).default("en"),
-    draft: z.boolean().default(false),
     date: z.date(),
+    updatedDate: z.date(),
+    draft: z.boolean().default(false),
   }),
 });
 

@@ -3,9 +3,13 @@ export const languages = {
   es: "Español",
 };
 
+export const LANG_CODES = Object.keys(languages) as Array<
+  keyof typeof languages
+>;
+
 export type Lang = keyof typeof languages;
 
-export const defaultLang = "en";
+export const defaultLang: Lang = "en";
 
 export const ui = {
   en: {

@@ -1,24 +1,23 @@
 ---
-import type { ui } from "@i18n/ui";
-import { useTranslations } from "@i18n/utils";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { Astro as AstroIcon } from "simple-icons-astro";
 
-interface Props {
-  lang: keyof typeof ui;
-}
-
-const { lang = "en" } = Astro.props;
-
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <footer>
-  <p class="caption">© 2025 Brandon - {t("footer.label")} <AstroIcon /></p>
+  <div class="footer-content">
+    <p class="caption">
+      BoxDev by Brandon M. - {t("footer.label")}
+    </p>
+    <AstroIcon />
+  </div>
 </footer>
 
 <style>
   footer {
-    min-height: 60px;
+    min-height: 80px;
     background-color: var(--neutral-light);
     text-align: center;
     display: flex;
@@ -32,5 +31,16 @@ const t = useTranslations(lang);
     justify-content: center;
     text-align: center;
     margin-bottom: 0 !important;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    margin: 0;
   }
 </style>

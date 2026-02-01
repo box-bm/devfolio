@@ -1,50 +1,38 @@
 ---
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import LanguagePicker from "@components/LanguagePicker.astro";
 import { MenuIcon } from "@lucide/astro";
 import Divider from "@components/Divider.astro";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <header class="header-container">
-  <a class="header-link--brand" href={`/${lang}`}>BoxDev</a>
-  <div class="header-links">
-    <a class="header-link" href="#about">{t("nav.about")}</a>
-    <a class="header-link" href="#projects">{t("nav.project")}</a>
-    <a class="header-link" href="#contact">{t("nav.contact")}</a>
-  </div>
-  <div class="header-right">
+  <div class="header-content">
+    <a class="header-link--brand" href={`/`}>BoxDev</a>
     <div class="header-links">
-      <a class="header-link" href={`/${lang}/guides`}>{t("nav.guides")}</a>
+      <slot name="link" />
     </div>
-    <LanguagePicker />
-    <div class="menu-icon">
-      <MenuIcon />
+    <div class="header-right">
+      <div class="header-links">
+        <slot name="secondary-link" />
+      </div>
+      <LanguagePicker />
+      <div class="menu-icon">
+        <MenuIcon />
+      </div>
     </div>
-  </div>
-  <div class="mobile-menu">
-    <ul class="mobile-menu-links">
-      <a class="header-link--brand" href="/" target="_top">BoxDev</a>
-      <li><a class="header-link" href="#about">{t("nav.about")}</a></li>
-      <li><a class="header-link" href="#projects">{t("nav.project")}</a></li>
-      <li><a class="header-link" href="#contact">{t("nav.contact")}</a></li>
-      <Divider />
-      <li>
-        <a class="header-link" href={`/${lang}/guides`}>{t("nav.guides")}</a>
-      </li>
-    </ul>
+    <div class="mobile-menu">
+      <ul class="mobile-menu-links">
+        <slot name="link" />
+        <Divider />
+        <slot name="secondary-link" />
+      </ul>
+    </div>
   </div>
 </header>
 
 <style>
   .header-container {
     z-index: 2000;
-    display: flex;
     padding: 16px;
-    flex-direction: row;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
@@ -55,6 +43,13 @@ const t = useTranslations(lang);
     border-bottom: 1px solid var(--neutral-medium);
     transition: transform 0.3s ease;
     backdrop-filter: blur(8px);
+  }
+
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
   }
 
   .header-links {

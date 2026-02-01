@@ -3,59 +3,28 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import Base from "@layouts/Base.astro";
 import Footer from "@components/Footer.astro";
 import Bradcrumb from "@components/BreadCrumb.astro";
-import LanguagePicker from "@components/LanguagePicker.astro";
-import "@styles/GuidesStyles.astro";
+import Header from "@components/Header.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 interface Props {
   title?: string;
-  topic?: string;
+  guide?: string;
 }
 
-const { title = t("title.guides"), topic } = Astro.props;
+const { title = t("title.guides"), guide } = Astro.props;
 const breadcrumbItems = [{ label: t("nav.guides"), href: `/${lang}/guides` }];
-
-if (topic) {
-  breadcrumbItems.push({ label: topic, href: `/${lang}/guides/${topic}` });
+if (guide) {
+  breadcrumbItems.push({ label: guide, href: "" });
 }
 ---
 
 <Base title={title} lang={lang}>
-  <!-- breadcrumbs could go here -->
-  <header>
-    <a class="header-link--brand" href={`/${lang}`}>BoxDev</a>
-    <LanguagePicker />
-  </header>
-
+  <Header />
   <main>
-    <Bradcrumb items={breadcrumbItems} />
+    <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
     <slot />
   </main>
-  <Footer lang={lang} />
+  <Footer />
 </Base>
-
-<style>
-  header {
-    z-index: 2000;
-    display: flex;
-    padding: 16px;
-    flex-direction: row;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #ffffffd9;
-    height: 60px;
-    align-items: center;
-    border-bottom: 1px solid var(--neutral-medium);
-    transition: transform 0.3s ease;
-    backdrop-filter: blur(8px);
-  }
-
-  main {
-    padding-top: 76px;
-  }
-</style>
