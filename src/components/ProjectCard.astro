@@ -13,22 +13,24 @@ interface Props {
 const { title, description, viewLink, codeLink } = Astro.props;
 ---
 
-<Card data-card>
-  <div class="project-card-content">
-    <h4>{title}</h4>
-    <p>
-      {description}
-    </p>
-    <slot name="content" />
-  </div>
-  <div class="project-card-tech">
-    <slot name="tech" />
-  </div>
-  <div class="project-card-actions">
-    <Button type="Outlined" href={codeLink}><Github />Code</Button>
-    <Button href={viewLink}><Link />View</Button>
-  </div>
-</Card>
+<div data-card>
+  <Card>
+    <div class="project-card-content">
+      <h4>{title}</h4>
+      <p>
+        {description}
+      </p>
+      <slot name="content" />
+    </div>
+    <div class="project-card-tech">
+      <slot name="tech" />
+    </div>
+    <div class="project-card-actions">
+      <Button type="Outlined" href={codeLink}><Github />Code</Button>
+      <Button href={viewLink}><Link />View</Button>
+    </div>
+  </Card>
+</div>
 
 <style>
   .project-card-content {
