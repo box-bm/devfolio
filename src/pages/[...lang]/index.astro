@@ -15,6 +15,10 @@ import Divider from "@components/Divider.astro";
 
 // constants
 import { email, linkedIn, githubRepos } from "@constants";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import Card from "@components/Card.astro";
+
+import { UiKey } from "@i18n/ui";
 
 // years of experience
 const startDate = new Date("2018-09-01");
@@ -29,6 +33,9 @@ if (
 ) {
   years--;
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
@@ -46,16 +53,21 @@ export async function getStaticPaths() {
         loading="eager"
       />
       <div>
-        <h1>Hello 👋🏼, I’m <span class="h1 primary-text">Brandon</span></h1>
+        <h1>
+          {t(UiKey["portfolio.hero.title"])}
+          <span class="h1 primary-text">Brandon</span>
+        </h1>
         <p class="caption">
-          Frontend Developer passionate about minimalist design and web
-          performance
+          {t(UiKey["portfolio.hero.caption"])}
         </p>
       </div>
       <div>
         <div class="principal-links">
-          <Button href="#projects" target="_parent">Projects</Button>
-          <Button type="Text" href="contact" target="_parent">Contact me</Button
+          <Button href="#projects" target="_parent"
+            >{t(UiKey["general.projects"])}</Button
+          >
+          <Button type="Text" href="contact" target="_parent"
+            >{t(UiKey["general.contact"])}</Button
           >
         </div>
         <ContactLinks />
@@ -69,31 +81,37 @@ export async function getStaticPaths() {
   <section id="about">
     <div class="container">
       <div>
-        <h2>About me 👨🏻‍💻</h2>
+        <h2>{t(UiKey["portfolio.about.title"])}</h2>
         <p class="body-large">
-          I’m Brandon, a Full Stack Developer with {years} years of experience building
-          efficient, user-centered solutions. Passionate about bringing design and
-          development together to create clean and impactful digital products.
+          {t(UiKey["portfolio.about.description1"])}
+          {years}
+          {t(UiKey["portfolio.about.description2"])}
         </p>
       </div>
       <div class="grid small-grid">
-        <div class="card">
-          <h1>{years}+ years</h1>
-          <p>Turning problems into solutions.</p>
-        </div>
-        <div class="card">
-          <h1>7+ Projects</h1>
-          <p>Published on web and mobile.</p>
-        </div>
-        <div class="card">
-          <h1>10+ Techs & Tools</h1>
-          <p>Used to create great solutions.</p>
-        </div>
+        <Card>
+          <h1>{years}+ {t(UiKey["general.years"])}</h1>
+          <p>{t(UiKey["portfolio.about.experience.projects.description"])}</p>
+        </Card>
+        <Card>
+          <h1>7+ {t(UiKey["general.projects"])}</h1>
+          <p>{t(UiKey["portfolio.about.experience.techAndTools.title"])}</p>
+        </Card>
+        <Card>
+          <h1>
+            10+ {t(UiKey["portfolio.about.experience.techAndTools.title"])}
+          </h1>
+          <p>
+            {t(UiKey["portfolio.about.experience.techAndTools.description"])}
+          </p>
+        </Card>
       </div>
 
       <div id="skills-and-tech-section">
-        <h3>Skills and technologies</h3>
-        <p class="caption">Frameworks & Libraries</p>
+        <h3>{t(UiKey["portfolio.about.skillsAndTech.title"])}</h3>
+        <p class="caption">
+          {t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"])}
+        </p>
         <div class="skills-chips-container">
           <TechChip tech="React" />
           <TechChip tech="React Native" />
@@ -103,7 +121,9 @@ export async function getStaticPaths() {
           <TechChip tech="Nestjs" />
           <TechChip tech="Jest" />
         </div>
-        <p class="caption">Languages</p>
+        <p class="caption">
+          {t(UiKey["portfolio.about.skillsAndTech.languages"])}
+        </p>
         <div class="skills-chips-container">
           <TechChip tech="HTML" />
           <TechChip tech="CSS" />
@@ -116,7 +136,7 @@ export async function getStaticPaths() {
           <TechChip tech="CPlusplus" />
           <TechChip tech="Dotnet" />
         </div>
-        <p class="caption">Tools</p>
+        <p class="caption">{t(UiKey["portfolio.about.skillsAndTech.tools"])}</p>
         <div class="skills-chips-container">
           <TechChip tech="NeoVim" />
           <TechChip tech="Xcode" />
@@ -131,37 +151,63 @@ export async function getStaticPaths() {
         </div>
       </div>
       <div>
-        <h3>Why work with me?</h3>
+        <h3>{t(UiKey["portfolio.about.whyWorkWithMe.title"])}</h3>
         <div class="why-work-reasons">
           <div>
-            <h4>🎨 Design + 🧑🏻‍💻 Development</h4>
+            <h4>
+              {
+                t(
+                  UiKey[
+                    "portfolio.about.whyWorkWithMe.designAndDevelopment.title"
+                  ],
+                )
+              }
+            </h4>
             <p>
-              I combine design and development to create visually polished and
-              technically solid products.
+              {
+                t(
+                  UiKey[
+                    "portfolio.about.whyWorkWithMe.designAndDevelopment.description"
+                  ],
+                )
+              }
             </p>
           </div>
           <div>
-            <h4>🤳🏼 User-centered approach</h4>
+            <h4>
+              {t(UiKey["portfolio.about.whyWorkWithMe.userApproach.title"])}
+            </h4>
             <p>
-              I design intuitive and engaging interfaces focused on real user
-              needs.
+              {
+                t(
+                  UiKey[
+                    "portfolio.about.whyWorkWithMe.userApproach.description"
+                  ],
+                )
+              }
             </p>
           </div>
           <div>
-            <h4>🚀 Performance optimization</h4>
+            <h4>
+              {t(UiKey["portfolio.about.whyWorkWithMe.performance.title"])}
+            </h4>
             <p>
-              I build fast and reliable applications using performance best
-              practices.
+              {
+                t(
+                  UiKey[
+                    "portfolio.about.whyWorkWithMe.performance.description"
+                  ],
+                )
+              }
             </p>
           </div>
         </div>
       </div>
 
       <div>
-        <h3>Fun fact</h3>
+        <h3>{t(UiKey["portfolio.about.funFact.title"])}</h3>
         <p class="fun-fact">
-          In my free time I love drawing 🎨, playing video games 👾, and
-          exploring how creativity connects with software development.
+          {t(UiKey["portfolio.about.funFact.description"])}
         </p>
       </div>
     </div>
@@ -172,14 +218,14 @@ export async function getStaticPaths() {
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <h2>Projects 🖥️</h2>
+      <h2>{t(UiKey["portfolio.projects.title"])}</h2>
       <p class="body-large">
-        Some of my work, directly from my GitHub repositories
+        {t(UiKey["portfolio.projects.description"])}
       </p>
       <div class="projects grid">
         <ProjectCard
-          title="Tic tac toe"
-          description="A tic tac toe game for Android, created as an introduction to mobile development using Flutter and building applications."
+          title={t(UiKey["portfolio.projects.app1.title"])}
+          description={t(UiKey["portfolio.projects.app1.description"])}
           viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
           codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
         >
@@ -188,8 +234,8 @@ export async function getStaticPaths() {
         </ProjectCard>
 
         <ProjectCard
-          title="DPI_Validator"
-          description="Simple tool to validate a DPI using Dart"
+          title={t(UiKey["portfolio.projects.app2.title"])}
+          description={t(UiKey["portfolio.projects.app2.description"])}
           codeLink="https://github.com/box-bm/dpi_validator"
           viewLink="https://pub.dev/packages/dpi_validator"
         >
@@ -197,8 +243,8 @@ export async function getStaticPaths() {
         </ProjectCard>
 
         <ProjectCard
-          title="NIT_Validator"
-          description="Simple tool to validate a NIT using Dart"
+          title={t(UiKey["portfolio.projects.app3.title"])}
+          description={t(UiKey["portfolio.projects.app3.description"])}
           codeLink="https://github.com/box-bm/nit_validator"
           viewLink="https://pub.dev/packages/nit_validator"
         >
@@ -206,7 +252,9 @@ export async function getStaticPaths() {
         </ProjectCard>
       </div>
       <div>
-        <Button href={githubRepos}>View all projects</Button>
+        <Button href={githubRepos}>
+          {t(UiKey["portfolio.projects.viewAll"])}
+        </Button>
       </div>
     </div>
   </section>
@@ -217,23 +265,22 @@ export async function getStaticPaths() {
   <section id="contact">
     <div class="container">
       <div>
-        <h2>Get in touch ☎️</h2>
-        <p class="body-large">Let’s collaborate or just say hello.</p>
+        <h2>{t(UiKey["portfolio.contact.title"])}</h2>
+        <p class="body-large">{t(UiKey["portfolio.contact.description"])}</p>
       </div>
       <div class="contact-buttons-container">
         <Button href={`mailto:${email}`}>
           <Mail size={20} />
-          Send me an email
+          {t(UiKey["portfolio.contact.sendEmail"])}
         </Button>
         <Button type="Outlined" href={linkedIn}>
           <Linkedin size={20} />
-          Connect on LinkedIn
+          {t(UiKey["portfolio.contact.connectOnLinkedin"])}
         </Button>
       </div>
       <ContactLinks />
       <p class="caption">
-        I’m always open to new projects, collaborations, or simply saying hello
-        👋.
+        {t(UiKey["portfolio.contact.caption"])}
       </p>
     </div>
   </section>

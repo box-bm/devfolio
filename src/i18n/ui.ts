@@ -1,69 +1,94 @@
-export const languages = {
-  en: "English",
-  es: "Español",
-};
+export enum UiKey {
+  // Navigation
+  "nav.about" = "nav.about",
+  "nav.projects" = "nav.projects",
+  "nav.contact" = "nav.contact",
+  "nav.guides" = "nav.guides",
 
-export const LANG_CODES = Object.keys(languages) as Array<
-  keyof typeof languages
->;
+  // Portfolio – Hero
+  "portfolio.hero.title" = "portfolio.hero.title",
+  "portfolio.hero.caption" = "portfolio.hero.caption",
 
-export type Lang = keyof typeof languages;
+  // Portfolio – About
+  "portfolio.about.title" = "portfolio.about.title",
+  "portfolio.about.description1" = "portfolio.about.description1",
+  "portfolio.about.description2" = "portfolio.about.description2",
 
-export const defaultLang: Lang = "en";
+  // Portfolio – Experience
+  "portfolio.about.experience.projects.description" = "portfolio.about.experience.projects.description",
+  "portfolio.about.experience.techAndTools.title" = "portfolio.about.experience.techAndTools.title",
+  "portfolio.about.experience.techAndTools.description" = "portfolio.about.experience.techAndTools.description",
 
-export const ui = {
-  en: {
-    // header
-    "nav.about": "About",
-    "nav.project": "Projects",
-    "nav.contact": "Contact",
-    "nav.guides": "Guides",
+  // Portfolio – Skills & Tech
+  "portfolio.about.skillsAndTech.title" = "portfolio.about.skillsAndTech.title",
+  "portfolio.about.skillsAndTech.frameworksAndLibraries" = "portfolio.about.skillsAndTech.frameworksAndLibraries",
+  "portfolio.about.skillsAndTech.languages" = "portfolio.about.skillsAndTech.languages",
+  "portfolio.about.skillsAndTech.tools" = "portfolio.about.skillsAndTech.tools",
 
-    //legal
-    "legal.privacy": "Privacy Policy",
-    "legal.terms": "Terms of Service",
-    "legal.languages": "Languages",
-    "legal.app": "App",
-    "legal.version": "Version",
-    "legal.effectiveDate": "Effective Date",
+  // Portfolio – Why work with me
+  "portfolio.about.whyWorkWithMe.title" = "portfolio.about.whyWorkWithMe.title",
 
-    // footer
-    "footer.label": "Build with Astro",
+  "portfolio.about.whyWorkWithMe.designAndDevelopment.title" = "portfolio.about.whyWorkWithMe.designAndDevelopment.title",
+  "portfolio.about.whyWorkWithMe.designAndDevelopment.description" = "portfolio.about.whyWorkWithMe.designAndDevelopment.description",
 
-    // titles
-    "title.guides": "Guides - BoxDev",
+  "portfolio.about.whyWorkWithMe.userApproach.title" = "portfolio.about.whyWorkWithMe.userApproach.title",
+  "portfolio.about.whyWorkWithMe.userApproach.description" = "portfolio.about.whyWorkWithMe.userApproach.description",
 
-    // keywords
-    readMore: "Read More",
-    "guides.getInTouch.title": "Get in Touch",
-    "guides.getInTouch.description":
-      "If you have any questions, suggestions, or need assistance, feel free to reach out. I'm here to help!",
-  },
-  es: {
-    // header
-    "nav.about": "Sobre Mi",
-    "nav.project": "Proyectos",
-    "nav.contact": "Contacto",
-    "nav.guides": "Guías",
+  "portfolio.about.whyWorkWithMe.performance.title" = "portfolio.about.whyWorkWithMe.performance.title",
+  "portfolio.about.whyWorkWithMe.performance.description" = "portfolio.about.whyWorkWithMe.performance.description",
 
-    // legal
-    "legal.privacy": "Política de Privacidad",
-    "legal.terms": "Términos de Servicio",
-    "legal.languages": "Idiomas",
-    "legal.app": "Aplicación",
-    "legal.version": "Versión",
-    "legal.effectiveDate": "Fecha de Vigencia",
+  // Portfolio – Fun fact
+  "portfolio.about.funFact.title" = "portfolio.about.funFact.title",
+  "portfolio.about.funFact.description" = "portfolio.about.funFact.description",
 
-    // footer
-    "footer.label": "Construido con Astro",
+  // Portfolio – Projects
+  "portfolio.projects.title" = "portfolio.projects.title",
+  "portfolio.projects.description" = "portfolio.projects.description",
 
-    // titles
-    "title.guides": "Guías - BoxDev",
+  "portfolio.projects.app1.title" = "portfolio.projects.app1.title",
+  "portfolio.projects.app1.description" = "portfolio.projects.app1.description",
 
-    // keywords
-    readMore: "Leer Más",
-    "guides.getInTouch.title": "Ponte en Contacto",
-    "guides.getInTouch.description":
-      "Si tienes alguna pregunta, sugerencia o necesitas ayuda, no dudes en contactarme. ¡Estoy aquí para ayudarte!",
-  },
-};
+  "portfolio.projects.app2.title" = "portfolio.projects.app2.title",
+  "portfolio.projects.app2.description" = "portfolio.projects.app2.description",
+
+  "portfolio.projects.app3.title" = "portfolio.projects.app3.title",
+  "portfolio.projects.app3.description" = "portfolio.projects.app3.description",
+
+  "portfolio.projects.viewAll" = "portfolio.projects.viewAll",
+
+  // Portfolio – Contact
+  "portfolio.contact.title" = "portfolio.contact.title",
+  "portfolio.contact.description" = "portfolio.contact.description",
+  "portfolio.contact.sendEmail" = "portfolio.contact.sendEmail",
+  "portfolio.contact.connectOnLinkedin" = "portfolio.contact.connectOnLinkedin",
+  "portfolio.contact.caption" = "portfolio.contact.caption",
+
+  // Legal
+  "legal.privacy" = "legal.privacy",
+  "legal.terms" = "legal.terms",
+  "legal.languages" = "legal.languages",
+  "legal.app" = "legal.app",
+  "legal.version" = "legal.version",
+  "legal.effectiveDate" = "legal.effectiveDate",
+
+  // Guides
+  "title.guides" = "title.guides",
+  "guides.title" = "guides.title",
+  "guides.createdAt" = "guides.createdAt",
+  "guides.updatedAt" = "guides.updatedAt",
+  "guides.contact.title" = "guides.contact.title",
+  "guides.contact.description" = "guides.contact.description",
+
+  // Footer
+  "footer.label" = "footer.label",
+
+  // General
+  "general.readmore" = "general.readmore",
+  "general.projects" = "general.projects",
+  "general.contact" = "general.contact",
+  "general.years" = "general.years",
+}
+
+export type UiKeys = `${UiKey}`;
+
+export type UiDict = { [K in UiKey]: string };

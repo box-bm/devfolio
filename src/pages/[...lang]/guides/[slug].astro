@@ -2,8 +2,11 @@
 import GuidesLayout from "@layouts/Guides.astro";
 import ContactLinks from "@components/ContactLinks.astro";
 import Divider from "@components/Divider.astro";
+import MeImage from "@images/me.jpeg";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
+import { UiKey } from "@i18n/ui";
+import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -29,12 +32,12 @@ const { Content } = await guide.render();
 <GuidesLayout title={guide.data.title} guide={guide.data.title}>
   <article class="guide-content">
     <p class="caption">
-      <strong>Created</strong>: {
+      <strong>{t(UiKey["guides.createdAt"])}</strong>: {
         guide.data.date.toLocaleDateString(lang, { dateStyle: "full" })
       }
     </p>
     <p class="caption">
-      <strong>Updated</strong>: {
+      <strong>{t(UiKey["guides.updatedAt"])}</strong>: {
         guide.data.updatedDate.toLocaleDateString(lang, { dateStyle: "full" })
       }
     </p>
@@ -42,9 +45,17 @@ const { Content } = await guide.render();
   </article>
   <Divider />
   <section>
-    <h4>{t("guides.getInTouch.title")}</h4>
-    <p>{t("guides.getInTouch.description")}</p>
-    <ContactLinks />
+    <Image
+      src={MeImage}
+      alt="Brandon Manzo profile"
+      class="profile-picture"
+      loading="eager"
+    />
+    <div>
+      <h2>{t(UiKey["guides.contact.title"])}</h2>
+      <p>{t(UiKey["guides.contact.description"])}</p>
+      <ContactLinks />
+    </div>
   </section>
 </GuidesLayout>
 
@@ -87,7 +98,10 @@ const { Content } = await guide.render();
 
   section {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
     padding: 60px 20px;
     scroll-margin-top: 60px;
   }

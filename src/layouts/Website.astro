@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
 import Base from "@layouts/Base.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -16,12 +17,16 @@ const { title = "BoxDev - Frontend Developer Portfolio" } = Astro.props;
 
 <Base title={title} lang={lang}>
   <Header>
-    <a slot="link" class="header-link" href="#about">{t("nav.about")}</a>
-    <a slot="link" class="header-link" href="#projects">{t("nav.project")}</a>
-    <a slot="link" class="header-link" href="#contact">{t("nav.contact")}</a>
-    <a slot="secondary-link" class="header-link" href={`/${lang}/guides`}
-      >{t("nav.guides")}</a
-    >
+    <a slot="link" class="header-link" href="#about">{t(UiKey["nav.about"])}</a>
+    <a slot="link" class="header-link" href="#projects">
+      {t(UiKey["nav.projects"])}
+    </a>
+    <a slot="link" class="header-link" href="#contact">
+      {t(UiKey["nav.contact"])}
+    </a>
+    <a slot="secondary-link" class="header-link" href={`/${lang}/guides`}>
+      {t(UiKey["nav.guides"])}
+    </a>
   </Header>
   <main>
     <slot />
@@ -76,22 +81,7 @@ const { title = "BoxDev - Frontend Developer Portfolio" } = Astro.props;
     color: var(--accent-primary);
   }
 
-  .profile-picture {
-    width: 100%;
-    height: 100%;
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: cover;
-    object-position: center -10px;
-    border-radius: 100%;
-  }
-
   .projects {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
     margin: 12px 0px;
   }
 
@@ -120,15 +110,6 @@ const { title = "BoxDev - Frontend Developer Portfolio" } = Astro.props;
     background-color: var(--accent-primary);
     padding: 16px;
     border-radius: 20px;
-  }
-
-  .card {
-    border-radius: 12px;
-    border-style: solid;
-    border-color: var(--neutral-medium);
-    border-width: 1px;
-    padding: 20px;
-    background-color: var(--neutral-white);
   }
 
   h1,

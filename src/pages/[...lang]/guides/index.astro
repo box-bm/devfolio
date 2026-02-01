@@ -2,7 +2,8 @@
 import GuidesLayout from "@layouts/Guides.astro";
 import Chip from "@components/Chip.astro";
 import Button from "@components/Button.astro";
-import { LANG_CODES } from "@i18n/ui";
+import { UiKey } from "@i18n/ui";
+import { LANG_CODES } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
 
@@ -19,8 +20,8 @@ const guides = await getCollection(
 );
 ---
 
-<GuidesLayout title="Guides">
-  <h1>Guides</h1>
+<GuidesLayout title={t(UiKey["title.guides"])}>
+  <h1>{t(UiKey["guides.title"])}</h1>
   <section class="grid">
     {
       guides.map((guide) => (
@@ -43,7 +44,7 @@ const guides = await getCollection(
               type="Text"
               href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}
             >
-              Leer más
+              {t(UiKey["general.readmore"])}
             </Button>
           </div>
         </article>
