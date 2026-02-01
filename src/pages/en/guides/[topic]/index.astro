@@ -5,7 +5,7 @@ import Chip from "@components/Chip.astro";
 import type { Lang } from "@i18n/ui";
 
 export async function getStaticPaths() {
-  const lang: Lang = "es";
+  const lang: Lang = "en";
   const guides = await getGuides(lang);
   return guides.map((guide) => {
     return {
