@@ -15,7 +15,11 @@ const { items } = Astro.props;
 <nav aria-label="Breadcrumb">
   <ol class="breadcrumb-list">
     <li class="breadcrumb-item">
-      <a href="/" class="breadcrumb-link breadcrumb-link--home-icon">
+      <a
+        href="/"
+        class="breadcrumb-link breadcrumb-link--home-icon"
+        aria-label="go home icon"
+      >
         <HomeIcon size={16} aria-hidden="true" />
       </a>
     </li>

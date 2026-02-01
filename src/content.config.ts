@@ -13,6 +13,22 @@ const legal = defineCollection({
   }),
 });
 
+const guides = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    slug: z.string().optional(),
+    topic: z.string().optional(),
+    guide: z.string().optional(),
+    language: z.enum(["en", "es"]).default("en"),
+    draft: z.boolean().default(false),
+    date: z.date(),
+  }),
+});
+
 export const collections = {
   legal,
+  guides,
 };

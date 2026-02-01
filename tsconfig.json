@@ -38,6 +38,9 @@
       "@constants": [
         "./src/constants/index.ts",
         "./src/constants/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   }

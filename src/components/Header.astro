@@ -2,6 +2,7 @@
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import LanguagePicker from "@components/LanguagePicker.astro";
 import { MenuIcon } from "@lucide/astro";
+import Divider from "@components/Divider.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,6 +16,9 @@ const t = useTranslations(lang);
     <a class="header-link" href="#contact">{t("nav.contact")}</a>
   </div>
   <div class="header-right">
+    <div class="header-links">
+      <a class="header-link" href={`/${lang}/guides`}>{t("nav.guides")}</a>
+    </div>
     <LanguagePicker />
     <div class="menu-icon">
       <MenuIcon />
@@ -26,6 +30,10 @@ const t = useTranslations(lang);
       <li><a class="header-link" href="#about">{t("nav.about")}</a></li>
       <li><a class="header-link" href="#projects">{t("nav.project")}</a></li>
       <li><a class="header-link" href="#contact">{t("nav.contact")}</a></li>
+      <Divider />
+      <li>
+        <a class="header-link" href={`/${lang}/guides`}>{t("nav.guides")}</a>
+      </li>
     </ul>
   </div>
 </header>
@@ -64,11 +72,6 @@ const t = useTranslations(lang);
 
   .header-link {
     color: var(--neutral-black);
-  }
-
-  .header-link--brand {
-    text-decoration: none;
-    color: var(--accent-primary);
   }
 
   .menu-icon {

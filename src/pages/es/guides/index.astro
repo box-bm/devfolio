@@ -1,0 +1,25 @@
+---
+import GuidesLayout from "@layouts/Guides.astro";
+import "@styles/GuidesStyles.astro";
+import { getGuides } from "@utils/guides";
+
+const guides = await getGuides("es");
+
+const topics = Array.from(new Set(guides.map((guide) => guide.data.topic)));
+---
+
+<GuidesLayout title="Guias">
+  <h1>Guias</h1>
+  <p>Explore nossos guias detalhados sobre diversos tópicos.</p>
+  <ul>
+    {
+      topics.map((topic) => (
+        <li key={topic}>
+          <a class="topic-link" href={`guides/${topic}`}>
+            {topic}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</GuidesLayout>

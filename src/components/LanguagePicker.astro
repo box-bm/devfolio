@@ -3,13 +3,15 @@ import { languages } from "@i18n/ui";
 import Dropdown from "@components/Dropdown.astro";
 import { getLangFromUrl } from "@i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
+const currentLang = getLangFromUrl(Astro.url);
+const currentURL = new URL(Astro.url);
+
 const langs = Object.entries(languages).map(([lang, label]) => ({
   label,
-  href: `/${lang}/`,
+  href: `/${lang}${currentURL.pathname.replace(`/${currentLang}`, "")}`,
 }));
 ---
 
 <Dropdown items={langs}>
-  <span slot="trigger">{lang.toUpperCase()}</span>
+  <span slot="trigger">{currentLang.toUpperCase()}</span>
 </Dropdown>
