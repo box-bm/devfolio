@@ -1,5 +1,5 @@
 ---
-title: "How this guide is built with Astro"
+title: "Building a Portfolio Site with Astro"
 description: "Technical guide documenting how this site is built using Astro, including routing, content collections, and internationalization."
 tags: ["astro", "frontend", "architecture", "guides"]
 date: 2026-02-01T00:00:00-6:00
@@ -7,240 +7,330 @@ updatedDate: 2026-02-01T00:00:00-6:00
 draft: false
 ---
 
-# Building a site with Astro
+# Building a Portfolio Site with Astro
 
-This guide explains **how to build a website with Astro** using a real, functional project as a reference.  
-The focus is practical: structure, routing, content, internationalization, and static generation.
+This guide documents the architecture and design decisions behind a real portfolio site built with Astro. Rather than focusing on code details, it explains **why** things are structured the way they are, making it useful for developers new to Astro who want to understand how to build maintainable, scalable sites.
 
-> Base project repository: [devfolio](https://github.com/box-bm/devfolio)
+> **Reference project**: [devfolio on GitHub](https://github.com/box-bm/devfolio)
 
-## Table of contents
+## Table of Contents
 
-- [Introduction](#introduction)
 - [Why Astro?](#why-astro)
-- [Project structure](#project-structure)
-- [File-based routing](#file-based-routing)
-- [Language-prefixed internationalization](#language-prefixed-internationalization)
-- [Content management with Content Collections](#content-management-with-content-collections)
-- [Guides: index and individual pages](#guides-index-and-individual-pages)
-- [Static generation and getStaticPaths](#static-generation-and-getstaticpaths)
-- [SEO and performance](#seo-and-performance)
+- [Project Overview](#project-overview)
+- [Core Architecture Decisions](#core-architecture-decisions)
+- [File-Based Routing](#file-based-routing)
+- [Internationalization Strategy](#internationalization-strategy)
+- [Content Collections](#content-collections)
+- [Component Structure](#component-structure)
+- [TypeScript Configuration](#typescript-configuration)
 - [Conclusion](#conclusion)
-- [References](#references)
-
-## Introduction
-
-Astro is especially well suited for **content-oriented sites** such as portfolios, documentation, blogs, and technical guides.  
-This project demonstrates how to use Astro beyond a simple static site, applying an architecture designed to scale.
-
-This guide assumes basic knowledge of HTML, CSS, and JavaScript.
 
 ## Why Astro?
 
-Astro was chosen for the following reasons:
+Astro was chosen for this project because it excels at **content-first websites**. Unlike traditional SPAs that ship entire JavaScript frameworks to the browser, Astro generates static HTML by default and only adds JavaScript where specifically needed.
 
-- Static rendering by default
-- Minimal JavaScript sent to the client
-- File-based routing
-- Native Markdown integration
-- Typed Content Collections
-- Excellent performance and SEO
+Key benefits for this use case:
 
-Astro allows treating the site as **content-first**, not as a heavy application.
+- **Zero JS by default**: Perfect for portfolios and content sites where interactivity is minimal
+- **Performance out of the box**: Static generation means fast load times without optimization work
+- **Content Collections**: Type-safe content management with Markdown/MDX
+- **Island Architecture**: Add React, Vue, or other frameworks only where needed
+- **Developer Experience**: File-based routing, hot reload, and great TypeScript support
 
-## Project structure
+The official Astro documentation provides comprehensive information on these concepts: [docs.astro.build](https://docs.astro.build)
 
-The structure clearly separates responsibilities:
+## Project Overview
 
-```sh
+The site serves multiple purposes:
+
+- Personal portfolio showcasing projects and skills
+- Technical guides and blog posts
+- Legal documentation for mobile apps
+- Multi-language support (English and Spanish)
+
+The architecture needed to handle:
+
+- Dynamic content in multiple languages
+- Type-safe content schemas
+- Reusable UI components
+- Clean, maintainable code structure
+
+## Core Architecture Decisions
+
+### Separation of Concerns
+
+The project structure clearly separates different responsibilities:
+
+```
 src/
-  pages/
-  layouts/
-  components/
-  i18n/
-content/
-  guides/
-  projects/
-  legal/
+├── pages/           # Routes and page templates
+├── layouts/         # Shared page structures
+├── components/      # Reusable UI elements
+├── content/         # Markdown content
+├── i18n/           # Translation logic
+├── styles/         # Global styles
+└── constants/      # Shared constants
 ```
 
-Main responsibilities:
+**Why this matters**: Each directory has a single, clear purpose. When you need to modify routing, you go to `pages/`. When you need to update a reusable button, you go to `components/`. This predictability makes the codebase easier to navigate and maintain as it grows.
 
-- `pages`: defines site routes
-- `layouts`: shared structure (header, footer, SEO)
-- `components`: reusable UI
-- `i18n`: translatable text
-- `content`: Markdown-based content
+### Static Site Generation
 
-This separation allows changing UI or content without unnecessary coupling.
+The entire site is pre-rendered at build time using Astro's Static Site Generation (SSG). No content is fetched at runtime.
 
-## File-based routing
+**Why this matters**:
 
-Astro generates routes from files inside `src/pages`.
+- Every page is pure HTML, loaded instantly
+- No runtime data fetching means no loading states or spinners
+- Better SEO because search engines see complete content immediately
+- Lower hosting costs (can be served from CDN)
 
-This project uses dynamic routes with a language prefix:
+Learn more: [Static Site Generation in Astro](https://docs.astro.build/en/guides/server-side-rendering/)
 
-```sh
-src/pages/[...lang]/
-```
+## File-Based Routing
 
-This allows generating URLs such as:
+Astro generates routes based on files in `src/pages/`. This project uses a dynamic routing strategy with language prefixes.
 
-```sh
-/en
-/es
-/es/guides
-/es/guides/building-a-site-with-astro
-```
-
-The language is read directly from:
-
-```sh
-Astro.params.lang
-```
-
-No query parameters or duplicated language folders are used.
-
-Related documentation:  
-https://docs.astro.build/en/core-concepts/routing/
-
-## Language-prefixed internationalization
-
-Internationalization follows these principles:
-
-- All languages use a prefix (`/en`, `/es`)
-- The default language is also prefixed
-- The root `/` redirects to the default language
-- The language is determined from the URL
-
-This approach keeps URLs consistent and simplifies SEO.
-
-Official documentation:  
-https://docs.astro.build/en/guides/internationalization/
-
-## Content management with Content Collections
-
-Astro Content Collections are used to manage structured content.
-
-Content types:
-
-- Guides
-- Projects
-- Legal
-
-Example structure:
-
-```sh
-content/
-  guides/
-    building-a-site-with-astro.es.md
-    building-a-site-with-astro.en.md
-```
-
-Naming convention:
+### The Route Structure
 
 ```
-slug.lang.md
+src/pages/
+├── index.astro                          → / (redirects to /en)
+├── [...lang]/
+│   ├── index.astro                     → /en, /es
+│   └── guides/
+│       ├── index.astro                 → /en/guides, /es/guides
+│       └── [slug].astro                → /en/guides/getting-started-with-nvim
+└── legal/
+    └── [appName]/
+        └── [type]/
+            ├── index.astro
+            └── [lang].astro
 ```
 
-The language is derived from the file `id`, not from the URL slug, avoiding fragile inferences.
+### Why Dynamic Routes?
 
-Documentation:  
-https://docs.astro.build/en/guides/content-collections/
+The `[...lang]` syntax creates a catch-all route that captures the language code. This approach has several advantages:
 
-## Guides: index and individual pages
+1. **Single source of truth**: One template generates all language variants
+2. **Type safety**: TypeScript knows what params are available
+3. **Easy to extend**: Adding a new language requires minimal changes
+4. **URL consistency**: `/en/guides` and `/es/guides` follow the same pattern
 
-Guides have two types of pages:
+### How Static Paths Work
 
-### Guides index
+For dynamic routes to work with SSG, you must tell Astro which paths to generate using `getStaticPaths()`:
 
-Route:
-
-```
-src/pages/[...lang]/guides/index.astro
-```
-
-Responsibilities:
-
-- Load all guides
-- Filter by language
-- Exclude drafts
-- Sort by date
-- Expose metadata (title, description, tags)
-
-### Individual guide
-
-Route:
-
-```
-src/pages/[...lang]/guides/[slug].astro
+```typescript
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
 ```
 
-Flow:
+This explicitly defines which language routes should be pre-rendered at build time.
 
-1. Read `lang` and `slug` from the URL
-2. Resolve the correct file from the collection
-3. Render the Markdown content
+**Official documentation**: [Dynamic Routes](https://docs.astro.build/en/core-concepts/routing/#dynamic-routes)
 
-This allows prerendering all guides at build time.
+## Internationalization Strategy
 
-## Static generation and getStaticPaths
+Rather than using folder-based routing (`/en/` vs `/es/`) or query parameters, this project uses **language prefixes in URLs**.
 
-The site uses **Static Site Generation (SSG)**.
+### Key Principles
 
-Because routes are dynamic (`[...lang]`, `[slug]`), the following are explicitly defined:
+1. **Every language has a prefix**: Even the default language uses `/en`
+2. **No implicit redirects**: The root `/` explicitly redirects to `/en`
+3. **Language extracted from URL**: The `getLangFromUrl()` utility reads params, not cookies or headers
 
-- Supported languages
-- Available slugs
+### Astro i18n Configuration
 
-This is done using `getStaticPaths`.
+```javascript
+// astro.config.mjs
+export default defineConfig({
+  i18n: {
+    locales: ["es", "en"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false, // Set to false for cleaner URLs
+    },
+  },
+});
+```
 
-Benefits:
+**Why this approach?**
 
-- Deterministic builds
-- Better SEO
-- Less runtime complexity
+- URLs are predictable and shareable
+- No server-side logic needed to determine language
+- Better for SEO (each language has distinct URLs)
+- Users can manually switch languages by editing the URL
 
-Documentation:  
-https://docs.astro.build/en/reference/api-reference/#getstaticpaths
+The i18n utilities handle translation lookup:
 
-## SEO and performance
+```typescript
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+```
 
-From the architecture level, the site prioritizes:
+**Learn more**: [Astro Internationalization Guide](https://docs.astro.build/en/guides/internationalization/)
 
-- Static HTML
-- Indexable content (real text)
-- Semantic URLs
-- Minimal client-side JavaScript
+## Content Collections
 
-Astro allows sending almost pure HTML to the browser, improving metrics like LCP and CLS without complex optimizations.
+Content Collections are Astro's recommended way to manage structured content like blog posts, documentation, or project descriptions.
+
+### Why Content Collections?
+
+Instead of manually importing Markdown files, Content Collections provide:
+
+- **Type safety**: Define schemas with Zod
+- **Automatic validation**: Content is checked at build time
+- **Organized content**: Clear separation from code
+- **Powerful queries**: Filter and sort with JavaScript
+
+### Schema Definition
+
+The project defines two collections in `src/content.config.ts`:
+
+```typescript
+const guides = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    date: z.date(),
+    updatedDate: z.date(),
+    draft: z.boolean().default(false),
+  }),
+});
+```
+
+**What this achieves**:
+
+- TypeScript knows exactly what frontmatter fields exist
+- Required fields are enforced
+- Date fields are parsed correctly
+- Draft posts can be excluded from production builds
+
+### Content File Naming
+
+Content files follow a specific pattern:
+
+```
+content/guides/
+├── building-an-astro-app.en.md
+├── building-an-astro-app.es.md
+├── getting-started-with-nvim.en.md
+└── getting-started-with-nvim.es.md
+```
+
+The naming convention `{slug}.{lang}.md` makes it easy to:
+
+- Identify content by language
+- Generate routes programmatically
+- Keep related translations together
+
+### Loading Content in Pages
+
+Dynamic guide pages use `getStaticPaths()` to generate all possible routes:
+
+```typescript
+export async function getStaticPaths() {
+  const guides = await getCollection("guides", (guide) => !guide.data.draft);
+
+  return guides.flatMap((guide) => ({
+    props: { guide },
+    params: {
+      lang: guide.id.split(".")[1],
+      slug: guide.id.split(".")[0],
+    },
+  }));
+}
+```
+
+This creates routes like `/en/guides/building-an-astro-app` and `/es/guides/construyendo-un-sitio-con-astro`.
+
+**Official docs**: [Content Collections](https://docs.astro.build/en/guides/content-collections/)
+
+## Component Structure
+
+Components are organized by responsibility, not by page. This makes them more reusable and easier to maintain.
+
+### Component Categories
+
+**Layout Components** (`src/layouts/`)
+
+- `Base.astro`: HTML structure, fonts, theme initialization
+- `Website.astro`: Portfolio page wrapper with header/footer
+- `Guides.astro`: Guide page wrapper with breadcrumbs
+- `Legal.astro`: Legal document wrapper
+
+**UI Components** (`src/components/`)
+
+- `Button.astro`: Reusable button with variants
+- `Card.astro`: Content cards with hover effects
+- `Chip.astro`: Tags and labels
+- `Header.astro`: Navigation with mobile menu
+- `Footer.astro`: Site footer with translations
+
+**Specialized Components**
+
+- `ProjectCard.astro`: Portfolio project display
+- `TechChip.astro`: Technology stack badges
+- `LanguagePicker.astro`: Language switching dropdown
+
+### Component Design Philosophy
+
+Components in this project follow these principles:
+
+1. **Single Responsibility**: Each component does one thing well
+2. **Prop-based Configuration**: Behavior is controlled through props, not hard-coded
+3. **Scoped Styles**: CSS is scoped to components to avoid conflicts
+4. **Minimal JavaScript**: Only add client-side JS when necessary
+
+Example: The `Button` component accepts a `type` prop to change appearance rather than having separate button components for each variant.
+
+## TypeScript Configuration
+
+The `tsconfig.json` uses path aliases to make imports cleaner and more maintainable:
+
+```json
+{
+  "paths": {
+    "@components/*": ["./src/components/*"],
+    "@layouts/*": ["./src/layouts/*"],
+    "@i18n/*": ["./src/i18n/*"],
+    "@constants": ["./src/constants/index.ts"]
+  }
+}
+```
+
+**Why this matters**:
+
+- Imports are easier to read: `@components/Button.astro` vs `../../../components/Button.astro`
+- Refactoring is safer: Moving files doesn't break imports
+- IDE autocomplete works better with absolute paths
+
+The configuration also enables:
+
+- `strictNullChecks`: Catches potential null/undefined errors
+- `verbatimModuleSyntax`: Ensures imports are handled correctly
+- Astro-specific TypeScript support via `@astrojs/ts-plugin`
 
 ## Conclusion
 
-This project shows how to use Astro as a **framework for building content-based sites**.
+This architecture demonstrates how to build a content-focused site with Astro by:
 
-The combination of:
+- **Embracing static generation**: Pre-render everything for maximum performance
+- **Using file-based routing**: Let the file system define your URLs
+- **Leveraging Content Collections**: Get type safety for all content
+- **Organizing by responsibility**: Keep related code together
+- **Making i18n explicit**: Language is part of the URL structure
 
-- Dynamic routing
-- Content Collections
-- Static generation
-- Explicit internationalization
+The key insight is that Astro works best when you treat your site as **content that needs to be displayed**, not as an application that happens to have content. This mindset shift leads to simpler, faster, and more maintainable sites.
 
-makes it possible to build a clear, fast, and maintainable site as content grows.
+### Further Reading
 
-## References
-
-- Project repository:  
-  https://github.com/box-bm/devfolio
-
-- Astro official documentation:  
-  https://docs.astro.build/
-
-- Routing in Astro:  
-  https://docs.astro.build/en/core-concepts/routing/
-
-- Content Collections:  
-  https://docs.astro.build/en/guides/content-collections/
-
-- Internationalization:  
-  https://docs.astro.build/en/guides/internationalization/
+- [Astro Documentation](https://docs.astro.build/)
+- [Content Collections Deep Dive](https://docs.astro.build/en/guides/content-collections/)
+- [Routing in Astro](https://docs.astro.build/en/core-concepts/routing/)
+- [Internationalization Guide](https://docs.astro.build/en/guides/internationalization/)
+- [TypeScript in Astro](https://docs.astro.build/en/guides/typescript/)
