@@ -3,6 +3,12 @@ import LanguagePicker from "@components/LanguagePicker.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 import { MenuIcon } from "@lucide/astro";
 import Divider from "@components/Divider.astro";
+
+interface Props {
+  hideMenu?: boolean;
+}
+
+const { hideMenu = false } = Astro.props;
 ---
 
 <header class="header-container">
@@ -13,13 +19,17 @@ import Divider from "@components/Divider.astro";
     </div>
     <div class="header-right">
       <ThemeToggle />
+      <LanguagePicker />
       <div class="header-links">
         <slot name="secondary-link" />
       </div>
-      <LanguagePicker />
-      <div class="menu-icon">
-        <MenuIcon />
-      </div>
+      {
+        !hideMenu && (
+          <div class="menu-icon">
+            <MenuIcon class="icon" />
+          </div>
+        )
+      }
     </div>
     <div class="mobile-menu">
       <ul class="mobile-menu-links">
@@ -78,6 +88,10 @@ import Divider from "@components/Divider.astro";
     padding: 4px 8px;
   }
 
+  .icon {
+    color: var(--text-primary);
+  }
+
   .mobile-menu {
     position: absolute;
     top: 59px;
@@ -127,7 +141,11 @@ import Divider from "@components/Divider.astro";
   }
 </style>
 
-<script>
+<script define:vars={{ hideMenu }}>
+  if (hideMenu) {
+    return;
+  }
+
   const menuIcon = document.querySelector(".menu-icon");
   const mobileMenu = document.querySelector(".mobile-menu");
 

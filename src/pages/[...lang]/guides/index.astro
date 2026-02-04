@@ -26,8 +26,11 @@ const guides = await getCollection(
   <section class="grid">
     {
       guides.map((guide) => (
-        <article key={guide.slug} onclick={`window.location.href='/${lang}/guides/${guide.slug.slice(0, -2)}'`}>
-          <Card>
+        <article
+          key={guide.slug}
+          onclick={`window.location.href='/${lang}/guides/${guide.slug.slice(0, -2)}'`}
+        >
+          <Card pressable>
             <div class="guide-preview-content">
               <h2>
                 {guide.data.title} {guide.data.draft && <Chip text="Draft" />}

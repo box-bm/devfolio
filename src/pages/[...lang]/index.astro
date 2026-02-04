@@ -109,45 +109,55 @@ export async function getStaticPaths() {
 
       <div id="skills-and-tech-section">
         <h3>{t(UiKey["portfolio.about.skillsAndTech.title"])}</h3>
-        <p class="caption">
-          {t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"])}
-        </p>
-        <div class="skills-chips-container">
-          <TechChip tech="React" />
-          <TechChip tech="React Native" />
-          <TechChip tech="Astro" />
-          <TechChip tech="Flutter" />
-          <TechChip tech="Next.JS" />
-          <TechChip tech="Nestjs" />
-          <TechChip tech="Jest" />
-        </div>
-        <p class="caption">
-          {t(UiKey["portfolio.about.skillsAndTech.languages"])}
-        </p>
-        <div class="skills-chips-container">
-          <TechChip tech="HTML" />
-          <TechChip tech="CSS" />
-          <TechChip tech="Typescript" />
-          <TechChip tech="Javascript" />
-          <TechChip tech="Dart" />
-          <TechChip tech="Kotlin" />
-          <TechChip tech="Swift" />
-          <TechChip tech="Rust" />
-          <TechChip tech="CPlusplus" />
-          <TechChip tech="Dotnet" />
-        </div>
-        <p class="caption">{t(UiKey["portfolio.about.skillsAndTech.tools"])}</p>
-        <div class="skills-chips-container">
-          <TechChip tech="NeoVim" />
-          <TechChip tech="Xcode" />
-          <TechChip tech="Androidstudio" />
-          <TechChip tech="Node" />
-          <TechChip tech="Vercel" />
-          <TechChip tech="Git" />
-          <TechChip tech="Github" />
-          <TechChip tech="Prettier" />
-          <TechChip tech="Eslint" />
-          <TechChip tech="Figma" />
+        <div class="grid">
+          <div>
+            <p class="caption skill-and-tech-area">
+              {t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"])}
+            </p>
+            <div class="skills-chips-container">
+              <TechChip tech="React" />
+              <TechChip tech="React Native" />
+              <TechChip tech="Astro" />
+              <TechChip tech="Flutter" />
+              <TechChip tech="Next.JS" />
+              <TechChip tech="Nestjs" />
+              <TechChip tech="Jest" />
+            </div>
+          </div>
+          <div>
+            <p class="caption skill-and-tech-area">
+              {t(UiKey["portfolio.about.skillsAndTech.languages"])}
+            </p>
+            <div class="skills-chips-container">
+              <TechChip tech="HTML" />
+              <TechChip tech="CSS" />
+              <TechChip tech="Typescript" />
+              <TechChip tech="Javascript" />
+              <TechChip tech="Dart" />
+              <TechChip tech="Kotlin" />
+              <TechChip tech="Swift" />
+              <TechChip tech="Rust" />
+              <TechChip tech="CPlusplus" />
+              <TechChip tech="Dotnet" />
+            </div>
+          </div>
+          <div>
+            <p class="caption skill-and-tech-area">
+              {t(UiKey["portfolio.about.skillsAndTech.tools"])}
+            </p>
+            <div class="skills-chips-container">
+              <TechChip tech="NeoVim" />
+              <TechChip tech="Xcode" />
+              <TechChip tech="Androidstudio" />
+              <TechChip tech="Node" />
+              <TechChip tech="Vercel" />
+              <TechChip tech="Git" />
+              <TechChip tech="Github" />
+              <TechChip tech="Prettier" />
+              <TechChip tech="Eslint" />
+              <TechChip tech="Figma" />
+            </div>
+          </div>
         </div>
       </div>
       <div>

@@ -4,6 +4,7 @@ import Base from "@layouts/Base.astro";
 import Footer from "@components/Footer.astro";
 import Bradcrumb from "@components/BreadCrumb.astro";
 import Header from "@components/Header.astro";
+import { UiKey } from "@i18n/ui";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,16 +13,17 @@ interface Props {
   title?: string;
   guide?: string;
 }
-
-const { title = t("title.guides"), guide } = Astro.props;
-const breadcrumbItems = [{ label: t("nav.guides"), href: `/${lang}/guides` }];
+const { title = t(UiKey["title.guides"]), guide } = Astro.props;
+const breadcrumbItems = [
+  { label: t(UiKey["nav.guides"]), href: `/${lang}/guides` },
+];
 if (guide) {
   breadcrumbItems.push({ label: guide, href: "" });
 }
 ---
 
 <Base title={title} lang={lang}>
-  <Header />
+  <Header hideMenu />
   <main>
     <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
     <slot />

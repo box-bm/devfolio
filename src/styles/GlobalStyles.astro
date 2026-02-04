@@ -25,23 +25,23 @@
   }
 
   [data-theme="dark"] {
-    /* Neutral — ultra dark blue */
-    --neutral-white: #030712; /* fondo principal */
-    --neutral-light: #050b1a; /* superficies */
-    --neutral-medium: #0f1a30; /* bordes / divisores */
-    --neutral-dark: #c7d0dd; /* texto fuerte */
-    --neutral-black: #f8fafc; /* casi blanco */
-    --neutral-light-gray: #091225; /* panels */
+    /* Neutral — true blacks and grays */
+    --neutral-white: #000000; /* fondo principal */
+    --neutral-light: #1f1f1f; /* superficies */
+    --neutral-medium: #2b2b2b; /* bordes / divisores */
+    --neutral-dark: #e5e5e5; /* texto fuerte */
+    --neutral-black: #ffffff; /* casi blanco */
+    --neutral-light-gray: #141414; /* panels */
 
-    /* Accent — restrained cold blue */
-    --accent-primary: #2563eb; /* azul sobrio */
-    --accent-dark: #1d4ed8; /* hover */
-    --accent-darkest: #1e3a8a; /* énfasis profundo */
+    /* Accent — vibrant blue */
+    --accent-primary: #3b82f6; /* azul vibrante */
+    --accent-dark: #2563eb; /* hover */
+    --accent-darkest: #1d4ed8; /* énfasis profundo */
 
     /* Text */
-    --text-primary: #c7d0dd; /* lectura prolongada */
-    --text-secondary: #8b97ab; /* texto secundario */
-    --text-inverse: #030712; /* sobre accent */
+    --text-primary: #e5e5e5; /* lectura prolongada */
+    --text-secondary: #a3a3a3; /* texto secundario */
+    --text-inverse: #000000; /* sobre accent */
 
     /* Feedback */
     --success: #22c55e;
@@ -53,6 +53,9 @@
   *::before,
   *::after {
     box-sizing: border-box;
+    transition:
+      color 250ms ease,
+      background-color 250ms ease;
   }
 
   /* Reset mínimo */
@@ -209,5 +212,8 @@
     object-fit: cover;
     object-position: center -10px;
     border-radius: 100%;
+  }
+  .skill-and-tech-area {
+    margin-bottom: 8px !important;
   }
 </style>
