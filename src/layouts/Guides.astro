@@ -11,9 +11,11 @@ const t = useTranslations(lang);
 
 interface Props {
   title?: string;
+  description?: string;
+  type?: "website" | "article";
   guide?: string;
 }
-const { title = t(UiKey["title.guides"]), guide } = Astro.props;
+const { title = t(UiKey["title.guides"]), description, type, guide } = Astro.props;
 const breadcrumbItems = [
   { label: t(UiKey["nav.guides"]), href: `/${lang}/guides` },
 ];
@@ -22,7 +24,7 @@ if (guide) {
 }
 ---
 
-<Base title={title} lang={lang}>
+<Base title={title} description={description} lang={lang} type={type}>
   <Header hideMenu />
   <main>
     <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />

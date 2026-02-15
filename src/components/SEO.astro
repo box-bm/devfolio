@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  type?: "website" | "article";
+}
+
+const { title, description, lang = "en", type = "website" } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const locale = lang === "es" ? "es_GT" : "en_US";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Brandon Manzo",
+  jobTitle: "Frontend Developer",
+  url: "https://boxdev.me",
+  sameAs: [
+    "https://github.com/brandonmanzo",
+    "https://linkedin.com/in/brandonmanzo",
+  ],
+};
+---
+
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL.href} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content={locale} />
+<meta property="og:site_name" content="BoxDev" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

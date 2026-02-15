@@ -9,15 +9,16 @@ const lang = getLangFromLegalUrl(Astro.url);
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
 const url = new URL(Astro.url);
 const routes = url.pathname.split("/").filter(Boolean);
 
-const { title = "Legal Information" } = Astro.props;
+const { title = "Legal Information", description } = Astro.props;
 ---
 
-<Base title={title} lang={lang}>
+<Base title={title} description={description} lang={lang} type="article">
   <header>
     <BreadCrumb
       items={routes.map((segment, index) => {

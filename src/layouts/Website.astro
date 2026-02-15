@@ -10,12 +10,16 @@ const t = useTranslations(lang);
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "BoxDev - Frontend Developer Portfolio" } = Astro.props;
+const {
+  title = "BoxDev - Frontend Developer Portfolio",
+  description = "Brandon Manzo — Frontend Developer passionate about minimalist design and web performance.",
+} = Astro.props;
 ---
 
-<Base title={title} lang={lang}>
+<Base title={title} description={description} lang={lang} type="website">
   <Header>
     <a slot="link" class="header-link" href="#about">{t(UiKey["nav.about"])}</a>
     <a slot="link" class="header-link" href="#projects">
