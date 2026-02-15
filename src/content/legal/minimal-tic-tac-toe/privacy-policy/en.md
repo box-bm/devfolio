@@ -35,7 +35,7 @@ The App reserves the right to modify this Privacy Policy at any time. If changes
 
 If you have any questions or concerns about this Privacy Policy or the App's use of your personal information, please contact us using one of the following methods:
 
-- Visit our website at [boxdev.me](https://www.boxdev.me)
+- Visit my website at [boxdev.me](https://www.boxdev.me)
 - Email us at [brandong.manzog@gmail.com](mailto:brandong.manzog@gmail.com)
 
 We will make every effort to respond to your inquiry within a reasonable timeframe.
