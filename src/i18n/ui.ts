@@ -71,6 +71,10 @@ export enum UiKey {
   "legal.version" = "legal.version",
   "legal.effectiveDate" = "legal.effectiveDate",
 
+  // Legal
+  "title.legal" = "title.legal",
+  "legal.title" = "legal.title",
+
   // Guides
   "title.guides" = "title.guides",
   "guides.title" = "guides.title",

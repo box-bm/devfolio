@@ -1,0 +1,85 @@
+---
+import LegalLayout from "@layouts/Legal.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getCollection } from "astro:content";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  const docs = await getCollection("legal");
+
+  return docs.map((doc) => ({
+    props: { doc },
+    params: {
+      lang: doc.data.lang,
+      slug: doc.id.replace(/\/[^/]+$/, ""),
+    },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+---
+
+<LegalLayout title={doc.data.title} document={doc.data.title}>
+  <article class="legal-content">
+    <p class="caption">
+      <strong>{t(UiKey["legal.app"])}:</strong> {doc.data.app}
+    </p>
+    <p class="caption">
+      <strong>{t(UiKey["legal.version"])}:</strong> {doc.data.version}
+    </p>
+    {
+      doc.data.effectiveDate && (
+        <p class="caption">
+          <strong>{t(UiKey["legal.effectiveDate"])}:</strong>{" "}
+          {doc.data.effectiveDate.toLocaleDateString(lang, {
+            dateStyle: "full",
+          })}
+        </p>
+      )
+    }
+    <Content />
+  </article>
+</LegalLayout>
+
+<style is:global>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 8px;
+  }
+
+  pre.astro-code {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  pre {
+    line-height: 1.3;
+  }
+
+  blockquote {
+    background-color: var(--neutral-light);
+    border-left: 4px solid var(--neutral-medium);
+    color: var(--text-secondary);
+    margin: 0px;
+    padding: 0 12px;
+  }
+
+  article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+    font-size: 1rem;
+  }
+
+  p.caption {
+    margin: 4px 0px !important;
+  }
+</style>
