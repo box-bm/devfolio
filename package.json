@@ -6,9 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/ts-plugin": "^1.10.6",
     "@lucide/astro": "^0.545.0",
     "astro": "^5.16.6",
@@ -16,7 +18,10 @@
     "simple-icons-astro": "^16.1.0"
   },
   "devDependencies": {
+    "glob": "^13.0.3",
+    "gray-matter": "^4.0.3",
     "prettier": "3.6.2",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "vitest": "^4.0.18"
   }
 }

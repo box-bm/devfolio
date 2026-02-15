@@ -29,7 +29,7 @@ const { guide } = Astro.props;
 const { Content } = await guide.render();
 ---
 
-<GuidesLayout title={guide.data.title} guide={guide.data.title}>
+<GuidesLayout title={guide.data.title} description={guide.data.description} type="article" guide={guide.data.title}>
   <article class="guide-content">
     <p class="caption">
       <strong>{t(UiKey["guides.createdAt"])}</strong>: {

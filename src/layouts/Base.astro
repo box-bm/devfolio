@@ -1,13 +1,16 @@
 ---
 import "@styles/GlobalStyles.astro";
 import "normalize.css";
+import SEO from "@components/SEO.astro";
 
 interface Props {
   title?: string;
+  description?: string;
   lang?: string;
+  type?: "website" | "article";
 }
 
-const { title, lang } = Astro.props;
+const { title, description, lang, type } = Astro.props;
 ---
 
 <html lang={lang}>
@@ -15,6 +18,7 @@ const { title, lang } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <slot name="meta" />
+    {description && <SEO title={title ?? ""} description={description} lang={lang} type={type} />}
     <title>{title}</title>
 
     <!-- Fonts -->
