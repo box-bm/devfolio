@@ -83,6 +83,9 @@ export const es: UiDict = {
   "legal.version": "Versión",
   "legal.effectiveDate": "Fecha de vigencia",
 
+  "title.legal": "Legal - BoxDev",
+  "legal.title": "Legal",
+
   "footer.label": "Construido con Astro",
   "title.guides": "Guías - BoxDev",
 

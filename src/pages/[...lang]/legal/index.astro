@@ -1,0 +1,94 @@
+---
+import LegalLayout from "@layouts/Legal.astro";
+import Chip from "@components/Chip.astro";
+import Button from "@components/Button.astro";
+import Card from "@components/Card.astro";
+import { UiKey } from "@i18n/ui";
+import { LANG_CODES } from "@i18n/langs";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getCollection } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export const getStaticPaths = () => {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+};
+
+const docs = await getCollection(
+  "legal",
+  (doc) => doc.data.lang === lang,
+);
+---
+
+<LegalLayout title={t(UiKey["title.legal"])}>
+  <h1>{t(UiKey["legal.title"])}</h1>
+  <section class="grid">
+    {
+      docs.map((doc) => {
+        const slug = doc.id.replace(/\/[^/]+$/, "");
+        return (
+          <article
+            key={doc.id}
+            onclick={`window.location.href='/${lang}/legal/${slug}'`}
+          >
+            <Card pressable>
+              <div class="doc-preview-content">
+                <h2>{doc.data.title}</h2>
+                <p class="app-name">
+                  <Chip text={doc.data.app} />
+                </p>
+                <p>
+                  <strong>{t(UiKey["legal.version"])}:</strong>{" "}
+                  {doc.data.version}
+                </p>
+                {doc.data.effectiveDate && (
+                  <p>
+                    <strong>{t(UiKey["legal.effectiveDate"])}:</strong>{" "}
+                    {doc.data.effectiveDate.toLocaleDateString(lang, {
+                      dateStyle: "long",
+                    })}
+                  </p>
+                )}
+              </div>
+              <div class="doc-preview-actions">
+                <Button type="Text" href={`/${lang}/legal/${slug}`}>
+                  {t(UiKey["general.readmore"])}
+                </Button>
+              </div>
+            </Card>
+          </article>
+        );
+      })
+    }
+  </section>
+</LegalLayout>
+
+<style>
+  article {
+    cursor: pointer;
+  }
+
+  section {
+    margin: 16px 0px;
+  }
+
+  p {
+    margin: 8px 0px;
+  }
+
+  .doc-preview-content {
+    flex-grow: 1;
+    margin-bottom: 16px;
+  }
+
+  .doc-preview-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .app-name {
+    margin-top: 8px;
+  }
+</style>
