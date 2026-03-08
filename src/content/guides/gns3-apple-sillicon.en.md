@@ -11,6 +11,9 @@ draft: false
 
 This guide documents how to install and configure GNS3 on a Mac with Apple Silicon. The traditional GNS3 VM does not work on these machines due to architecture incompatibility, but there is an official ARM64 solution that works well.
 
+![gns3-apple-silicon](./images/gns3-guides/virtual-machine.png)
+![gns3-vm-custom](./images/gns3-guides/gns3-vm-custom.png)
+
 ## Table of Contents
 
 - [Understanding the Problem](#understanding-the-problem)
