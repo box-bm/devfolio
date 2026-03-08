@@ -29,7 +29,12 @@ const { guide } = Astro.props;
 const { Content } = await guide.render();
 ---
 
-<GuidesLayout title={guide.data.title} description={guide.data.description} type="article" guide={guide.data.title}>
+<GuidesLayout
+  title={guide.data.title}
+  description={guide.data.description}
+  type="article"
+  guide={guide.data.title}
+>
   <article class="guide-content">
     <p class="caption">
       <strong>{t(UiKey["guides.createdAt"])}</strong>: {
@@ -45,13 +50,10 @@ const { Content } = await guide.render();
   </article>
   <Divider />
   <section>
-    <Image
-      src={MeImage}
-      alt="Brandon Manzo profile"
-      class="profile-picture"
-      loading="lazy"
-    />
-    <div>
+    <div class="avatar">
+      <Image src={MeImage} alt="Brandon Manzo profile" loading="lazy" />
+    </div>
+    <div class="contact">
       <h2>{t(UiKey["guides.contact.title"])}</h2>
       <p>{t(UiKey["guides.contact.description"])}</p>
       <ContactLinks />
@@ -95,12 +97,49 @@ const { Content } = await guide.render();
 
   section {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
-    padding: 60px 20px;
+    gap: 24px;
+    padding: 40px 0;
     scroll-margin-top: 60px;
+  }
+
+  .avatar {
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 220px;
+    max-height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  section > div {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  section > div.contact h2 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  section > div.contact p {
+    margin: 0;
   }
 
   .tags {

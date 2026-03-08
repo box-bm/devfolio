@@ -9,7 +9,13 @@ draft: false
 
 # Terminal Environment Setup Guide
 
-This guide walks you through setting up a **complete development environment** using Zsh, Neovim, and Fastfetch. The configuration is modular, portable, and works across macOS, Linux, and WSL.
+This guide walks you through setting up a **complete development environment** using Zsh, Neovim, and Fastfetch. The configuration is modular, portable, and works across macOS and Linux.
+
+Getting a terminal from here:
+![before](./images/terminal-env-setup/before.png)
+
+to something like this:
+![after](./images/terminal-env-setup/after.png)
 
 ## What You'll Get
 

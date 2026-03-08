@@ -6,6 +6,14 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://boxdev.me",
   integrations: [sitemap()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+    },
+  },
   i18n: {
     locales: ["es", "en"],
     defaultLocale: "en",
