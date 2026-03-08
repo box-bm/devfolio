@@ -5,6 +5,8 @@ import Footer from "@components/Footer.astro";
 import Bradcrumb from "@components/BreadCrumb.astro";
 import Header from "@components/Header.astro";
 import { UiKey } from "@i18n/ui";
+import LegalStyles from "@styles/LegalStyles.astro";
+import MarkdownStyles from "@styles/MarkdownStyles.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,10 +25,14 @@ if (document) {
 ---
 
 <Base title={title} lang={lang}>
+  <LegalStyles />
+  <MarkdownStyles />
   <Header hideMenu />
   <main>
     <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
-    <slot />
+    <div class="markdown-body">
+      <slot />
+    </div>
   </main>
   <Footer />
 </Base>
