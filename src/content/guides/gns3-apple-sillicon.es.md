@@ -1,6 +1,6 @@
 ---
 title: "GNS3 en Apple Silicon"
-description: "Guía paso a paso para instalar y configurar GNS3 en Macs con Apple Silicon (M1/M2/M3/M4) usando VMware Fusion y la VM ARM64 oficial."
+description: "Guía paso a paso para instalar y configurar GNS3 en Macs con Apple Silicon usando VMware Fusion y la VM ARM64 oficial."
 tags: ["gns3", "redes", "apple-silicon", "vmware", "guias"]
 date: 2026-03-08T00:00:00-6:00
 updatedDate: 2026-03-08T00:00:00-6:00
