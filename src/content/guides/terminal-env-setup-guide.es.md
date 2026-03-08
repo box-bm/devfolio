@@ -20,7 +20,12 @@ draft: false
 
 # Guía de Configuración de Entorno de Terminal
 
-Esta guía te lleva paso a paso en la configuración de un **entorno de desarrollo completo** usando Zsh, Neovim y Fastfetch. La configuración es modular, portable y funciona en macOS, Linux y WSL.
+Esta guía te lleva paso a paso en la configuración de un **entorno de desarrollo completo** usando Zsh, Neovim y Fastfetch. La configuración es modular, portable y funciona en macOS, Linux.
+
+Imagina pasar de esto:
+![antes](./images/terminal-env-setup/before.png)
+a esto:
+![después](./images/terminal-env-setup/after.png)
 
 ## Lo que Obtendrás
 
