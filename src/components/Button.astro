@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type?: "Outlined" | "Default" | "Text";
+  type?: "Outlined" | "Default" | "Text" | "Icon";
   target?: "_self" | "_blank" | "_parent" | "_top";
   color?: string;
   id?: string;
@@ -29,6 +29,7 @@ const {
     type === "Default" && "btn-default",
     type === "Outlined" && "btn-outlined",
     type === "Text" && "btn-text",
+    type === "Icon" && "btn-icon",
   ]}
 >
   <slot />
@@ -82,12 +83,36 @@ const {
   }
 
   .btn-text:hover {
-    border-color: var(--accent-dark);
     color: var(--accent-dark);
+    background-color: var(--neutral-medium);
   }
 
   .btn-text:active {
-    border-color: var(--accent-darkest);
     color: var(--accent-darkest);
+    background-color: var(--neutral-medium);
+  }
+
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: color 150ms ease, background-color 150ms ease;
+    text-decoration: none;
+  }
+
+  .btn-icon:hover {
+    color: var(--accent-primary);
+    background-color: var(--neutral-medium);
+    text-decoration: none;
+  }
+
+  .btn-icon:active {
+    color: var(--accent-darkest);
+    background-color: var(--neutral-medium);
   }
 </style>

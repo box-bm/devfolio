@@ -21,7 +21,7 @@ const { pressable } = Astro.props;
     border-width: 1px;
     padding: 20px;
     gap: 8px;
-    transition: all ease 250ms;
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
   }
 
   .pressable-card {
@@ -29,7 +29,8 @@ const { pressable } = Astro.props;
   }
 
   .pressable-card:hover {
-    border-color: var(--neutral-dark);
-    background-color: var(--neutral-medium);
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
   }
 </style>
