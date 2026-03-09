@@ -46,10 +46,13 @@ La solución es usar la versión oficial **ARM64** de la VM de GNS3 junto con VM
 
 ## Paso 1 — Descargar los Archivos Correctos
 
-Ve a la página oficial de releases de GNS3 en GitHub:
+Ve al repositorio oficial de GNS3 en GitHub:
+[https://github.com/GNS3/gns3-gui](https://github.com/GNS3/gns3-gui)
+
+Luego dirígete a la página de releases:
 [https://github.com/GNS3/gns3-gui/releases](https://github.com/GNS3/gns3-gui/releases)
 
-> la versión que funciona para mí es la 3.0.4 pero deberías revisar cuál es la última versión estable.
+> La versión que estoy usando actualmente y que funciona de forma confiable es la [3.0.4](https://github.com/GNS3/gns3-gui/releases/tag/v3.0.4). Puedes comenzar con esa o revisar si hay una versión estable más reciente.
 
 Descarga **exactamente estos dos archivos** y asegúrate de que sean la **misma versión**:
 
@@ -95,11 +98,9 @@ VMware Fusion es gratuito para uso personal.
 
 Cada vez que quieras usar GNS3, sigue este orden:
 
-```
 1. Abre VMware Fusion e inicia la VM de GNS3
 2. Espera la pantalla azul que muestra la dirección IP de la VM
 3. Abre GNS3
-```
 
 Para configurar la conexión:
 
@@ -110,6 +111,8 @@ Para configurar la conexión:
 5. Haz clic en **Refresh** — GNS3 debería detectar la VM automáticamente
 6. Haz clic en **Apply → OK**
 
+![Panel de preferencias del servidor en GNS3 mostrando la configuración de la VM](./images/gns3-guides/ServerPreferences.png)
+
 La entrada **GNS3 VM** en el panel Servers Summary debería ponerse en **verde** ✅.
 
 ## Gestión de Usuarios y Credenciales
@@ -117,9 +120,20 @@ La entrada **GNS3 VM** en el panel Servers Summary debería ponerse en **verde**
 GNS3 3.x gestiona la autenticación a través de una interfaz web. Para configurar usuarios:
 
 1. Con la VM corriendo, abre tu navegador y ve a `http://<IP_DE_LA_VM>`
+
+![Página de inicio de sesión de la interfaz web de GNS3](./images/gns3-guides/LoginPaginaWebGNS3.png)
+
 2. Haz clic en el ícono **⋮** (tres puntos) en la esquina superior derecha
-3. Ve a **Users** → selecciona el usuario **admin**
-4. Establece o actualiza la contraseña según necesites
+
+![Menú de tres puntos en la interfaz web de GNS3](./images/gns3-guides/Menu3Dots.png)
+
+3. Ve a **Users** — verás la lista de cuentas configuradas
+
+![Lista de usuarios en la interfaz web de GNS3](./images/gns3-guides/UserList.png)
+
+4. Selecciona el usuario **admin** y establece o actualiza la contraseña según necesites
+
+![Formulario de configuración del usuario admin en la interfaz web de GNS3](./images/gns3-guides/UserSettings.png)
 
 Las credenciales por defecto después de una instalación nueva son `admin / admin`, pero se recomienda cambiarlas.
 
@@ -127,8 +141,15 @@ Las credenciales por defecto después de una instalación nueva son `admin / adm
 
 ### El servidor aparece en gris en GNS3
 
+Si la entrada GNS3 VM aparece en el panel Servers Summary pero está **en gris**, GNS3 detectó la VM pero no pudo autenticarse. La VM es accesible — el problema son las credenciales.
+
+- Abre tu navegador y ve a `http://<IP_DE_LA_VM>` para acceder a la interfaz web
+- Inicia sesión y verifica que la contraseña del admin esté configurada correctamente (por defecto es `admin / admin`)
+- En GNS3, ve a **Preferencias → GNS3 VM** y haz clic en **Refresh**
+
+Si la VM **no aparece en absoluto**:
+
 - Asegúrate de que la VM esté corriendo en VMware Fusion antes de abrir GNS3
-- Ve a **Preferencias → GNS3 VM** y haz clic en **Refresh**
 - Verifica que la IP mostrada coincida con la que aparece en la pantalla azul de la VM
 
 ### La IP de la VM cambia en cada reinicio
@@ -137,7 +158,10 @@ La VM usa DHCP por defecto, por lo que la IP puede cambiar entre sesiones. Puede
 
 ### Error "Not authenticated"
 
-Generalmente significa que la versión del cliente GNS3 no coincide con la versión de la VM. Verifica que ambas sean **versión 3.x**. Si las versiones coinciden, restablece la contraseña del admin desde la Web UI en `http://<IP_DE_LA_VM>`.
+Puede tener dos causas:
+
+1. **Versiones no coinciden** — Verifica que tanto el cliente GNS3 como la VM sean **versión 3.x**. La versión 2.x usa Basic Auth mientras que la 3.x usa tokens JWT, haciéndolas incompatibles incluso con credenciales correctas.
+2. **Credenciales incorrectas** — Restablece la contraseña del admin desde la Web UI en `http://<IP_DE_LA_VM>`. El valor por defecto es `admin / admin`.
 
 ### KVM support available: False
 
