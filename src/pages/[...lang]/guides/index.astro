@@ -21,7 +21,7 @@ const guides = await getCollection(
 );
 ---
 
-<GuidesLayout title={t(UiKey["title.guides"])}>
+<GuidesLayout title={t(UiKey["title.guides"])} fullWidth>
   <h1>{t(UiKey["guides.title"])}</h1>
   <section class="grid">
     {
@@ -46,7 +46,7 @@ const guides = await getCollection(
             </div>
             <div class="guide-preview-actions">
               <Button
-                type="Text"
+                type="Default"
                 href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}
               >
                 {t(UiKey["general.readmore"])}

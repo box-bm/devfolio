@@ -16,8 +16,9 @@ interface Props {
   description?: string;
   type?: "website" | "article";
   guide?: string;
+  fullWidth?: boolean;
 }
-const { title = t(UiKey["title.guides"]), description, type, guide } = Astro.props;
+const { title = t(UiKey["title.guides"]), description, type, guide, fullWidth = false } = Astro.props;
 const breadcrumbItems = [
   { label: t(UiKey["nav.guides"]), href: `/${lang}/guides` },
 ];
@@ -31,10 +32,18 @@ if (guide) {
   <Header hideMenu />
   <main>
     <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
-    <div class="markdown-body">
+    <div class:list={[!fullWidth && "markdown-body", fullWidth && "full-width-body"]}>
       <slot />
     </div>
   </main>
   <Footer />
-  <BuyMeACoffee />
+    <BuyMeACoffee />
+<style>
+  .full-width-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+</style>
+
 </Base>

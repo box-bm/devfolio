@@ -1,50 +1,212 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { defaultLang } from "@i18n/langs";
+import { UiKey } from "@i18n/ui";
 import { Astro as AstroIcon } from "simple-icons-astro";
+import { Github, Linkedin, Mail } from "@lucide/astro";
+import { email, githubProfile, linkedIn } from "@constants";
+import Button from "@components/Button.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const currentYear = new Date().getFullYear();
+
+// English is at `/`, Spanish at `/es/`
+const base = lang === defaultLang ? "" : `/${lang}`;
 ---
 
 <footer>
-  <div class="footer-content">
-    <p class="caption">
-      BoxDev by Brandon M. - {t("footer.label")}
-    </p>
-    <AstroIcon class="icon" />
+  <div class="footer-inner">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <a class="header-link--brand" href="/">BoxDev</a>
+      <p class="brand-tagline">{t(UiKey["portfolio.hero.caption"])}</p>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <span class="footer-section-label">Explore</span>
+      <ul>
+        <li><a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a></li>
+        <li><a class="nav-link" href={`${base}/#projects`}>{t(UiKey["nav.projects"])}</a></li>
+        <li><a class="nav-link" href={`${base}/guides`}>{t(UiKey["nav.guides"])}</a></li>
+        <li><a class="nav-link" href={`${base}/legal`}>{t(UiKey["legal.title"])}</a></li>
+      </ul>
+    </nav>
+
+    <!-- Social + BMaC -->
+    <div class="footer-social">
+      <span class="footer-section-label">{t(UiKey["nav.contact"])}</span>
+      <div class="social-icons">
+        <Button type="Icon" href={githubProfile} ariaLabel="GitHub"><Github size={20} /></Button>
+        <Button type="Icon" href={linkedIn} ariaLabel="LinkedIn"><Linkedin size={20} /></Button>
+        <Button type="Icon" href={`mailto:${email}`} ariaLabel="Send email"><Mail size={20} /></Button>
+      </div>
+      <a
+        href="https://www.buymeacoffee.com/boxdev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bmc-btn"
+        aria-label="Buy me a coffee"
+      >
+        ☕ Buy me a coffee
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <AstroIcon class="astro-icon" />
+    <p class="caption">© {currentYear} Brandon M. — {t(UiKey["footer.label"])}</p>
   </div>
 </footer>
 
 <style>
   footer {
-    min-height: 80px;
     background-color: var(--neutral-light);
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-top: 1px solid var(--neutral-medium);
+    padding: 40px 24px 20px;
   }
 
-  footer > .caption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 0 !important;
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--neutral-medium);
   }
 
-  .footer-content {
+  /* Brand */
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+.brand-tagline {
+    font-size: 0.875rem;
+    color: var(--text-secondary) !important;
+    line-height: 1.5;
+    max-width: 260px;
+    margin: 0 !important;
+  }
+
+  /* Nav */
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: var(--text-secondary) !important;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    text-decoration: underline;
+    color: var(--accent-primary) !important;
+  }
+
+  /* Social */
+  .footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary) !important;
+  }
+
+  .social-icons {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    gap: 4px;
+  }
+
+  /* BMaC */
+  .bmc-btn {
+    display: inline-flex;
     align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background-color: #5f7fff;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: background-color 100ms ease-in;
+    width: fit-content;
   }
 
-  p {
-    margin: 0;
+  .bmc-btn:hover {
+    background-color: #4a6ae8;
+    text-decoration: none !important;
   }
 
-  .icon {
-    color: var(--neutral-light);
+  .bmc-btn:active {
+    background-color: #3a56cc;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-bottom p {
+    margin: 0 !important;
+    color: var(--text-secondary) !important;
+  }
+
+  .astro-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    fill: currentColor;
+  }
+
+  /* Responsive — tablet */
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Responsive — mobile */
+  @media (max-width: 480px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      grid-column: auto;
+    }
   }
 </style>
