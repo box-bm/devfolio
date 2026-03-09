@@ -46,10 +46,13 @@ The solution is to use the official **ARM64 version** of the GNS3 VM together wi
 
 ## Step 1 — Download the Correct Files
 
-Go to the official GNS3 releases page on GitHub:
+Go to the official GNS3 repository on GitHub:
+[https://github.com/GNS3/gns3-gui](https://github.com/GNS3/gns3-gui)
+
+Then head to the releases page:
 [https://github.com/GNS3/gns3-gui/releases](https://github.com/GNS3/gns3-gui/releases)
 
-> the version that works for me is 3.0.4 but you should check for the latest stable release.
+> The version I am currently using and that works reliably is [3.0.4](https://github.com/GNS3/gns3-gui/releases/tag/v3.0.4). You can start there or check for a newer stable release.
 
 Download **exactly these two files** and make sure they are the **same version**:
 
@@ -95,11 +98,9 @@ VMware Fusion is free for personal use.
 
 Every time you want to use GNS3, follow this order:
 
-```
 1. Open VMware Fusion and start the GNS3 VM
 2. Wait for the blue screen showing the VM's IP address
 3. Open GNS3
-```
 
 To configure the connection:
 
@@ -110,6 +111,8 @@ To configure the connection:
 5. Click **Refresh** — GNS3 should detect the VM automatically
 6. Click **Apply → OK**
 
+![GNS3 Server Preferences panel showing the GNS3 VM configuration](./images/gns3-guides/ServerPreferences.png)
+
 The **GNS3 VM** entry in the Servers Summary panel should turn **green** ✅.
 
 ## Managing Users and Credentials
@@ -117,9 +120,20 @@ The **GNS3 VM** entry in the Servers Summary panel should turn **green** ✅.
 GNS3 3.x manages authentication through a web interface. To configure users:
 
 1. With the VM running, open your browser and navigate to `http://<VM_IP_ADDRESS>`
+
+![GNS3 web login page](./images/gns3-guides/LoginPaginaWebGNS3.png)
+
 2. Click the **⋮** (three dots) icon in the top right corner
-3. Go to **Users** → select the **admin** user
-4. Set or update the password as needed
+
+![Three-dots menu in the GNS3 web interface](./images/gns3-guides/Menu3Dots.png)
+
+3. Go to **Users** — you will see the list of configured accounts
+
+![User list in GNS3 web interface](./images/gns3-guides/UserList.png)
+
+4. Select the **admin** user and set or update the password as needed
+
+![Admin user settings form in GNS3 web interface](./images/gns3-guides/UserSettings.png)
 
 The default credentials after a fresh install are `admin / admin`, but it is recommended to change them.
 
@@ -127,8 +141,15 @@ The default credentials after a fresh install are `admin / admin`, but it is rec
 
 ### The server appears gray in GNS3
 
+If the GNS3 VM entry appears in the Servers Summary panel but is **gray**, GNS3 has detected the VM but could not authenticate. The VM is reachable — the issue is credentials.
+
+- Open your browser and go to `http://<VM_IP>` to access the web interface
+- Log in and verify the admin password is correctly set (default is `admin / admin`)
+- In GNS3, go to **Preferences → GNS3 VM** and click **Refresh**
+
+If the VM is **not appearing at all**:
+
 - Make sure the VM is running in VMware Fusion before opening GNS3
-- Go to **Preferences → GNS3 VM** and click **Refresh**
 - Verify the IP shown matches the one on the VM's blue screen
 
 ### The VM's IP address changes on every restart
@@ -137,7 +158,10 @@ The VM uses DHCP by default, so the IP may change between sessions. You can set 
 
 ### "Not authenticated" error
 
-This usually means the GNS3 client version does not match the VM version. Verify both are running **version 3.x**. If versions match, reset the admin password through the Web UI at `http://<VM_IP>`.
+This can have two causes:
+
+1. **Version mismatch** — Verify both the GNS3 client and VM are running **version 3.x**. Version 2.x uses Basic Auth while 3.x uses JWT tokens, making them incompatible even with correct credentials.
+2. **Wrong credentials** — Reset the admin password through the Web UI at `http://<VM_IP>`. The default is `admin / admin`.
 
 ### KVM support available: False
 

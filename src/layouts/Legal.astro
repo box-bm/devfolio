@@ -7,6 +7,7 @@ import Header from "@components/Header.astro";
 import { UiKey } from "@i18n/ui";
 import LegalStyles from "@styles/LegalStyles.astro";
 import MarkdownStyles from "@styles/MarkdownStyles.astro";
+import BuyMeACoffee from "@components/BuyMeACoffee.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -35,4 +36,5 @@ if (document) {
     </div>
   </main>
   <Footer />
+  <BuyMeACoffee />
 </Base>

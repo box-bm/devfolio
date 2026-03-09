@@ -6,6 +6,7 @@ import Bradcrumb from "@components/BreadCrumb.astro";
 import Header from "@components/Header.astro";
 import { UiKey } from "@i18n/ui";
 import MarkdownStyles from "@styles/MarkdownStyles.astro";
+import BuyMeACoffee from "@components/BuyMeACoffee.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -36,6 +37,7 @@ if (guide) {
     </div>
   </main>
   <Footer />
+    <BuyMeACoffee />
 <style>
   .full-width-body {
     max-width: 1100px;
@@ -43,4 +45,5 @@ if (guide) {
     padding: 24px 16px 48px;
   }
 </style>
+
 </Base>
