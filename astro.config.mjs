@@ -6,6 +6,10 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://boxdev.me",
   integrations: [sitemap()],
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
+  },
   markdown: {
     shikiConfig: {
       themes: {
