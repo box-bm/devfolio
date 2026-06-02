@@ -2,55 +2,75 @@
 import { Sun, Moon } from "@lucide/astro";
 ---
 
-<label class="theme-toggle">
-  <input type="checkbox" id="theme-toggle" aria-label="Toggle theme" />
-  <Moon class="icon moon" />
-  <Sun class="icon sun" />
-</label>
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <span class="icon-wrap">
+    <Moon class="icon moon" size={18} />
+    <Sun class="icon sun" size={18} />
+  </span>
+</button>
 
 <style>
-  .theme-toggle input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
   .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    background: transparent;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-  }
-
-  input {
-    display: none;
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
     color: var(--text-primary);
-    display: none;
+    transition:
+      background var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out);
+  }
+  .theme-toggle:hover {
+    background: var(--accent-soft);
+    border-color: var(--glass-border);
   }
 
+  .icon-wrap {
+    position: relative;
+    width: 18px;
+    height: 18px;
+  }
+  .icon {
+    position: absolute;
+    inset: 0;
+    color: var(--text-primary);
+    transition:
+      transform var(--dur) var(--ease-spring),
+      opacity var(--dur) var(--ease-out);
+  }
+  /* default (light) shows moon, hides sun */
+  .sun {
+    transform: rotate(-90deg) scale(0.4);
+    opacity: 0;
+  }
+  .moon {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
   html[data-theme="dark"] .sun {
-    display: block;
+    transform: rotate(0) scale(1);
+    opacity: 1;
   }
-
-  html[data-theme="light"] .moon {
-    display: block;
+  html[data-theme="dark"] .moon {
+    transform: rotate(90deg) scale(0.4);
+    opacity: 0;
   }
 </style>
 
-<script is:inline>
-  const input = document.getElementById("theme-toggle");
-  const html = document.documentElement;
-
-  // sync initial state
-  input.checked = html.dataset.theme === "dark";
-
-  input.addEventListener("change", () => {
-    const next = input.checked ? "dark" : "light";
-    html.dataset.theme = next;
-    localStorage.setItem("theme", next);
-  });
+<script>
+  function initThemeToggle() {
+    const btn = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const next = html.dataset.theme === "dark" ? "light" : "dark";
+      html.dataset.theme = next;
+      localStorage.setItem("theme", next);
+    });
+  }
+  document.addEventListener("astro:page-load", initThemeToggle);
 </script>

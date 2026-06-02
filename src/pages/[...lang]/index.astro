@@ -1,31 +1,20 @@
 ---
 import Base from "@layouts/Website.astro";
-import Button from "@components/Button.astro";
-import ProjectCard from "@components/ProjectCard.astro";
 
-// generic layout components
-import ContactLinks from "@components/ContactLinks.astro";
-import { Image } from "astro:assets";
-import MeImage from "@images/me.jpeg";
-
-// icons
-import { Linkedin, Mail } from "@lucide/astro";
-import TechChip from "@components/TechChip.astro";
-import Divider from "@components/Divider.astro";
-
-// constants
-import { email, linkedIn, githubRepos } from "@constants";
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import Card from "@components/Card.astro";
-
-import { UiKey } from "@i18n/ui";
+import HeroSection from "@components/sections/HeroSection.astro";
+import TechMarquee from "@components/sections/TechMarquee.astro";
+import AboutSection from "@components/sections/AboutSection.astro";
+import ServicesSection from "@components/sections/ServicesSection.astro";
+import SkillsSection from "@components/sections/SkillsSection.astro";
+import HowIWorkSection from "@components/sections/HowIWorkSection.astro";
+import ProjectsSection from "@components/sections/ProjectsSection.astro";
+import ContactSection from "@components/sections/ContactSection.astro";
 
 // years of experience
 const startDate = new Date("2018-09-01");
 const today = new Date();
 
 let years = today.getFullYear() - startDate.getFullYear();
-
 if (
   today.getMonth() < startDate.getMonth() ||
   (today.getMonth() === startDate.getMonth() &&
@@ -34,264 +23,18 @@ if (
   years--;
 }
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
 }
 ---
 
-<Base title="Brandon — Portfolio">
-  <!-- HERO -->
-  <section id="hero">
-    <div class="container">
-      <Image
-        src={MeImage}
-        alt="Brandon Manzo profile"
-        class="profile-picture"
-        loading="eager"
-      />
-      <div>
-        <h1>
-          {t(UiKey["portfolio.hero.title"])}
-          <span class="h1 primary-text">Brandon</span>
-        </h1>
-        <p class="caption">
-          {t(UiKey["portfolio.hero.caption"])}
-        </p>
-      </div>
-      <div>
-        <div class="principal-links">
-          <Button href="#projects" target="_parent"
-            >{t(UiKey["general.projects"])}</Button
-          >
-          <Button type="Text" href="#contact" target="_parent"
-            >{t(UiKey["general.contact"])}</Button
-          >
-        </div>
-        <ContactLinks />
-      </div>
-    </div>
-  </section>
-
-  <Divider />
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div>
-        <h2>{t(UiKey["portfolio.about.title"])}</h2>
-        <p class="body-large">
-          {t(UiKey["portfolio.about.description1"])}
-          {years}
-          {t(UiKey["portfolio.about.description2"])}
-        </p>
-      </div>
-      <div class="grid small-grid">
-        <Card>
-          <h1>{years}+ {t(UiKey["general.years"])}</h1>
-          <p>{t(UiKey["portfolio.about.experience.projects.description"])}</p>
-        </Card>
-        <Card>
-          <h1>7+ {t(UiKey["general.projects"])}</h1>
-          <p>{t(UiKey["portfolio.about.experience.techAndTools.title"])}</p>
-        </Card>
-        <Card>
-          <h1>
-            10+ {t(UiKey["portfolio.about.experience.techAndTools.title"])}
-          </h1>
-          <p>
-            {t(UiKey["portfolio.about.experience.techAndTools.description"])}
-          </p>
-        </Card>
-      </div>
-
-      <div id="skills-and-tech-section">
-        <h3>{t(UiKey["portfolio.about.skillsAndTech.title"])}</h3>
-        <div class="grid">
-          <div>
-            <p class="caption skill-and-tech-area">
-              {t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"])}
-            </p>
-            <div class="skills-chips-container">
-              <TechChip tech="React" />
-              <TechChip tech="React Native" />
-              <TechChip tech="Astro" />
-              <TechChip tech="Flutter" />
-              <TechChip tech="Next.JS" />
-              <TechChip tech="Nestjs" />
-              <TechChip tech="Jest" />
-            </div>
-          </div>
-          <div>
-            <p class="caption skill-and-tech-area">
-              {t(UiKey["portfolio.about.skillsAndTech.languages"])}
-            </p>
-            <div class="skills-chips-container">
-              <TechChip tech="HTML" />
-              <TechChip tech="CSS" />
-              <TechChip tech="Typescript" />
-              <TechChip tech="Javascript" />
-              <TechChip tech="Dart" />
-              <TechChip tech="Kotlin" />
-              <TechChip tech="Swift" />
-              <TechChip tech="Rust" />
-              <TechChip tech="CPlusplus" />
-              <TechChip tech="Dotnet" />
-            </div>
-          </div>
-          <div>
-            <p class="caption skill-and-tech-area">
-              {t(UiKey["portfolio.about.skillsAndTech.tools"])}
-            </p>
-            <div class="skills-chips-container">
-              <TechChip tech="NeoVim" />
-              <TechChip tech="Xcode" />
-              <TechChip tech="Androidstudio" />
-              <TechChip tech="Node" />
-              <TechChip tech="Vercel" />
-              <TechChip tech="Git" />
-              <TechChip tech="Github" />
-              <TechChip tech="Prettier" />
-              <TechChip tech="Eslint" />
-              <TechChip tech="Figma" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3>{t(UiKey["portfolio.about.whyWorkWithMe.title"])}</h3>
-        <div class="why-work-reasons">
-          <div>
-            <h4>
-              {
-                t(
-                  UiKey[
-                    "portfolio.about.whyWorkWithMe.designAndDevelopment.title"
-                  ],
-                )
-              }
-            </h4>
-            <p>
-              {
-                t(
-                  UiKey[
-                    "portfolio.about.whyWorkWithMe.designAndDevelopment.description"
-                  ],
-                )
-              }
-            </p>
-          </div>
-          <div>
-            <h4>
-              {t(UiKey["portfolio.about.whyWorkWithMe.userApproach.title"])}
-            </h4>
-            <p>
-              {
-                t(
-                  UiKey[
-                    "portfolio.about.whyWorkWithMe.userApproach.description"
-                  ],
-                )
-              }
-            </p>
-          </div>
-          <div>
-            <h4>
-              {t(UiKey["portfolio.about.whyWorkWithMe.performance.title"])}
-            </h4>
-            <p>
-              {
-                t(
-                  UiKey[
-                    "portfolio.about.whyWorkWithMe.performance.description"
-                  ],
-                )
-              }
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h3>{t(UiKey["portfolio.about.funFact.title"])}</h3>
-        <p class="fun-fact">
-          {t(UiKey["portfolio.about.funFact.description"])}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <Divider />
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <h2>{t(UiKey["portfolio.projects.title"])}</h2>
-      <p class="body-large">
-        {t(UiKey["portfolio.projects.description"])}
-      </p>
-      <div class="projects grid">
-        <ProjectCard
-          title={t(UiKey["portfolio.projects.app1.title"])}
-          description={t(UiKey["portfolio.projects.app1.description"])}
-          viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
-          codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
-        >
-          <TechChip tech="Dart" slot="tech" />
-          <TechChip tech="Flutter" slot="tech" />
-        </ProjectCard>
-
-        <ProjectCard
-          title={t(UiKey["portfolio.projects.app2.title"])}
-          description={t(UiKey["portfolio.projects.app2.description"])}
-          codeLink="https://github.com/box-bm/dpi_validator"
-          viewLink="https://pub.dev/packages/dpi_validator"
-        >
-          <TechChip tech="Dart" slot="tech" />
-        </ProjectCard>
-
-        <ProjectCard
-          title={t(UiKey["portfolio.projects.app3.title"])}
-          description={t(UiKey["portfolio.projects.app3.description"])}
-          codeLink="https://github.com/box-bm/nit_validator"
-          viewLink="https://pub.dev/packages/nit_validator"
-        >
-          <TechChip tech="Dart" slot="tech" />
-        </ProjectCard>
-      </div>
-      <div>
-        <Button href={githubRepos}>
-          {t(UiKey["portfolio.projects.viewAll"])}
-        </Button>
-      </div>
-    </div>
-  </section>
-
-  <Divider />
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div>
-        <h2>{t(UiKey["portfolio.contact.title"])}</h2>
-        <p class="body-large">{t(UiKey["portfolio.contact.description"])}</p>
-      </div>
-      <div class="contact-buttons-container">
-        <Button href={`mailto:${email}`}>
-          <Mail size={20} />
-          {t(UiKey["portfolio.contact.sendEmail"])}
-        </Button>
-        <Button type="Outlined" href={linkedIn}>
-          <Linkedin size={20} />
-          {t(UiKey["portfolio.contact.connectOnLinkedin"])}
-        </Button>
-      </div>
-      <ContactLinks />
-      <p class="caption">
-        {t(UiKey["portfolio.contact.caption"])}
-      </p>
-    </div>
-  </section>
+<Base title="Brandon Manzo — Frontend & Mobile Developer">
+  <HeroSection />
+  <TechMarquee />
+  <AboutSection years={years} />
+  <ServicesSection />
+  <SkillsSection />
+  <HowIWorkSection />
+  <ProjectsSection />
+  <ContactSection />
 </Base>

@@ -2,14 +2,23 @@
 
 ---
 
-<div class="divider">
+<div class="divider" role="separator">
   <div class="line"></div>
 </div>
 
 <style>
+  .divider {
+    width: 100%;
+  }
   .line {
-    background-color: var(--neutral-light-gray);
     width: 100%;
     height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--line-strong) 20%,
+      var(--line-strong) 80%,
+      transparent
+    );
   }
 </style>

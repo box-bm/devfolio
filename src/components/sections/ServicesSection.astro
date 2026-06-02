@@ -1,0 +1,144 @@
+---
+import Card from "@components/Card.astro";
+import SectionHeading from "@components/visuals/SectionHeading.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+import {
+  Layers,
+  Smartphone,
+  Server,
+  Workflow,
+  FlaskConical,
+} from "@lucide/astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const services = [
+  {
+    icon: Layers,
+    title: t(UiKey["portfolio.services.frontend.title"]),
+    desc: t(UiKey["portfolio.services.frontend.description"]),
+  },
+  {
+    icon: Smartphone,
+    title: t(UiKey["portfolio.services.mobile.title"]),
+    desc: t(UiKey["portfolio.services.mobile.description"]),
+  },
+  {
+    icon: Server,
+    title: t(UiKey["portfolio.services.backend.title"]),
+    desc: t(UiKey["portfolio.services.backend.description"]),
+  },
+  {
+    icon: Workflow,
+    title: t(UiKey["portfolio.services.qa.title"]),
+    desc: t(UiKey["portfolio.services.qa.description"]),
+  },
+  {
+    icon: FlaskConical,
+    title: t(UiKey["portfolio.services.testing.title"]),
+    desc: t(UiKey["portfolio.services.testing.description"]),
+    featured: true,
+  },
+];
+---
+
+<section id="services" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={t(UiKey["portfolio.services.eyebrow"])}
+      heading={t(UiKey["portfolio.services.heading"])}
+      description={t(UiKey["portfolio.services.description"])}
+    />
+
+    <div class="services__grid">
+      {
+        services.map((s, i) => (
+          <div
+            class:list={["service", s.featured && "service--featured"]}
+            data-reveal
+            style={`--reveal-delay: ${i * 80}ms`}
+          >
+            <Card tilt>
+              <span class="service__icon">
+                <s.icon size={22} />
+              </span>
+              <h3 class="h4">{s.title}</h3>
+              <p>{s.desc}</p>
+              {s.featured && <span class="service__badge">★ favorite</span>}
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+  }
+
+  .service {
+    position: relative;
+  }
+  .service :global(.card) {
+    gap: 14px;
+  }
+
+  .service__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+    transition:
+      transform var(--dur) var(--ease-spring),
+      background var(--dur) var(--ease-out),
+      color var(--dur) var(--ease-out);
+  }
+  .service:hover .service__icon {
+    transform: translateY(-3px) rotate(-6deg);
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  }
+
+  .service p {
+    font-size: 0.94rem;
+  }
+
+  /* Featured testing card */
+  .service--featured :global(.card) {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
+    background:
+      linear-gradient(160deg, var(--accent-soft), transparent 60%),
+      var(--glass-bg);
+  }
+  .service__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    padding: 5px 11px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 6px 16px var(--accent-glow);
+  }
+
+  @media (min-width: 760px) {
+    /* let the featured card span to feel intentional on wide grids */
+    .service--featured {
+      grid-column: span 1;
+    }
+  }
+</style>

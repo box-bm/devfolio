@@ -2,6 +2,10 @@
 import "@styles/GlobalStyles.astro";
 import "normalize.css";
 import SEO from "@components/SEO.astro";
+import MeshBackground from "@components/visuals/MeshBackground.astro";
+import Motion from "@components/visuals/Motion.astro";
+import NavProgress from "@components/visuals/NavProgress.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -20,17 +24,40 @@ const { title, description, lang, type, date, updatedDate } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <slot name="meta" />
-    {description && <SEO title={title ?? ""} description={description} lang={lang} type={type} date={date} updatedDate={updatedDate} />}
+    {
+      description && (
+        <SEO
+          title={title ?? ""}
+          description={description}
+          lang={lang}
+          type={type}
+          date={date}
+          updatedDate={updatedDate}
+        />
+      )
+    }
     <title>{title}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <meta
+      name="theme-color"
+      content="#06070b"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#eef0f4"
+      media="(prefers-color-scheme: light)"
+    />
+    <ClientRouter />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:ital,wght@0,300..700;1,300..600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
@@ -43,6 +70,9 @@ const { title, description, lang, type, date, updatedDate } = Astro.props;
     </script>
   </head>
   <body>
+    <MeshBackground transition:persist />
+    <NavProgress />
     <slot />
+    <Motion />
   </body>
 </html>

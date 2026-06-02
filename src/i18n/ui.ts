@@ -1,62 +1,104 @@
 export enum UiKey {
   // Navigation
   "nav.about" = "nav.about",
+  "nav.services" = "nav.services",
+  "nav.skills" = "nav.skills",
   "nav.projects" = "nav.projects",
   "nav.contact" = "nav.contact",
   "nav.guides" = "nav.guides",
 
   // Portfolio – Hero
+  "portfolio.hero.eyebrow" = "portfolio.hero.eyebrow",
+  "portfolio.hero.available" = "portfolio.hero.available",
   "portfolio.hero.title" = "portfolio.hero.title",
+  "portfolio.hero.highlight" = "portfolio.hero.highlight",
   "portfolio.hero.caption" = "portfolio.hero.caption",
+  "portfolio.hero.viewWork" = "portfolio.hero.viewWork",
+  "portfolio.hero.getInTouch" = "portfolio.hero.getInTouch",
+  "portfolio.hero.scroll" = "portfolio.hero.scroll",
+  "portfolio.hero.role.frontend" = "portfolio.hero.role.frontend",
+  "portfolio.hero.role.mobile" = "portfolio.hero.role.mobile",
+  "portfolio.hero.role.testing" = "portfolio.hero.role.testing",
+
+  // Portfolio – Marquee
+  "portfolio.marquee.label" = "portfolio.marquee.label",
 
   // Portfolio – About
+  "portfolio.about.eyebrow" = "portfolio.about.eyebrow",
+  "portfolio.about.heading" = "portfolio.about.heading",
   "portfolio.about.title" = "portfolio.about.title",
   "portfolio.about.description1" = "portfolio.about.description1",
   "portfolio.about.description2" = "portfolio.about.description2",
+  "portfolio.about.description3" = "portfolio.about.description3",
+  "portfolio.about.location" = "portfolio.about.location",
+  "portfolio.about.roleTag" = "portfolio.about.roleTag",
 
-  // Portfolio – Experience
-  "portfolio.about.experience.projects.description" = "portfolio.about.experience.projects.description",
-  "portfolio.about.experience.techAndTools.title" = "portfolio.about.experience.techAndTools.title",
-  "portfolio.about.experience.techAndTools.description" = "portfolio.about.experience.techAndTools.description",
-
-  // Portfolio – Skills & Tech
-  "portfolio.about.skillsAndTech.title" = "portfolio.about.skillsAndTech.title",
-  "portfolio.about.skillsAndTech.frameworksAndLibraries" = "portfolio.about.skillsAndTech.frameworksAndLibraries",
-  "portfolio.about.skillsAndTech.languages" = "portfolio.about.skillsAndTech.languages",
-  "portfolio.about.skillsAndTech.tools" = "portfolio.about.skillsAndTech.tools",
-
-  // Portfolio – Why work with me
-  "portfolio.about.whyWorkWithMe.title" = "portfolio.about.whyWorkWithMe.title",
-
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.title" = "portfolio.about.whyWorkWithMe.designAndDevelopment.title",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.description" = "portfolio.about.whyWorkWithMe.designAndDevelopment.description",
-
-  "portfolio.about.whyWorkWithMe.userApproach.title" = "portfolio.about.whyWorkWithMe.userApproach.title",
-  "portfolio.about.whyWorkWithMe.userApproach.description" = "portfolio.about.whyWorkWithMe.userApproach.description",
-
-  "portfolio.about.whyWorkWithMe.performance.title" = "portfolio.about.whyWorkWithMe.performance.title",
-  "portfolio.about.whyWorkWithMe.performance.description" = "portfolio.about.whyWorkWithMe.performance.description",
+  // Portfolio – Stats
+  "portfolio.about.stats.years.label" = "portfolio.about.stats.years.label",
+  "portfolio.about.stats.projects.value" = "portfolio.about.stats.projects.value",
+  "portfolio.about.stats.projects.label" = "portfolio.about.stats.projects.label",
+  "portfolio.about.stats.tech.value" = "portfolio.about.stats.tech.value",
+  "portfolio.about.stats.tech.label" = "portfolio.about.stats.tech.label",
+  "portfolio.about.stats.tests.value" = "portfolio.about.stats.tests.value",
+  "portfolio.about.stats.tests.label" = "portfolio.about.stats.tests.label",
 
   // Portfolio – Fun fact
   "portfolio.about.funFact.title" = "portfolio.about.funFact.title",
   "portfolio.about.funFact.description" = "portfolio.about.funFact.description",
 
+  // Portfolio – Services (What I do)
+  "portfolio.services.eyebrow" = "portfolio.services.eyebrow",
+  "portfolio.services.heading" = "portfolio.services.heading",
+  "portfolio.services.description" = "portfolio.services.description",
+  "portfolio.services.frontend.title" = "portfolio.services.frontend.title",
+  "portfolio.services.frontend.description" = "portfolio.services.frontend.description",
+  "portfolio.services.mobile.title" = "portfolio.services.mobile.title",
+  "portfolio.services.mobile.description" = "portfolio.services.mobile.description",
+  "portfolio.services.backend.title" = "portfolio.services.backend.title",
+  "portfolio.services.backend.description" = "portfolio.services.backend.description",
+  "portfolio.services.qa.title" = "portfolio.services.qa.title",
+  "portfolio.services.qa.description" = "portfolio.services.qa.description",
+  "portfolio.services.testing.title" = "portfolio.services.testing.title",
+  "portfolio.services.testing.description" = "portfolio.services.testing.description",
+
+  // Portfolio – Skills & Tech
+  "portfolio.skills.eyebrow" = "portfolio.skills.eyebrow",
+  "portfolio.skills.heading" = "portfolio.skills.heading",
+  "portfolio.skills.description" = "portfolio.skills.description",
+  "portfolio.about.skillsAndTech.title" = "portfolio.about.skillsAndTech.title",
+  "portfolio.about.skillsAndTech.frameworksAndLibraries" = "portfolio.about.skillsAndTech.frameworksAndLibraries",
+  "portfolio.about.skillsAndTech.languages" = "portfolio.about.skillsAndTech.languages",
+  "portfolio.about.skillsAndTech.testingAndQa" = "portfolio.about.skillsAndTech.testingAndQa",
+  "portfolio.about.skillsAndTech.tools" = "portfolio.about.skillsAndTech.tools",
+
+  // Portfolio – How I work
+  "portfolio.about.whyWorkWithMe.eyebrow" = "portfolio.about.whyWorkWithMe.eyebrow",
+  "portfolio.about.whyWorkWithMe.title" = "portfolio.about.whyWorkWithMe.title",
+  "portfolio.about.whyWorkWithMe.designAndDevelopment.title" = "portfolio.about.whyWorkWithMe.designAndDevelopment.title",
+  "portfolio.about.whyWorkWithMe.designAndDevelopment.description" = "portfolio.about.whyWorkWithMe.designAndDevelopment.description",
+  "portfolio.about.whyWorkWithMe.userApproach.title" = "portfolio.about.whyWorkWithMe.userApproach.title",
+  "portfolio.about.whyWorkWithMe.userApproach.description" = "portfolio.about.whyWorkWithMe.userApproach.description",
+  "portfolio.about.whyWorkWithMe.performance.title" = "portfolio.about.whyWorkWithMe.performance.title",
+  "portfolio.about.whyWorkWithMe.performance.description" = "portfolio.about.whyWorkWithMe.performance.description",
+  "portfolio.about.whyWorkWithMe.testing.title" = "portfolio.about.whyWorkWithMe.testing.title",
+  "portfolio.about.whyWorkWithMe.testing.description" = "portfolio.about.whyWorkWithMe.testing.description",
+
   // Portfolio – Projects
+  "portfolio.projects.eyebrow" = "portfolio.projects.eyebrow",
   "portfolio.projects.title" = "portfolio.projects.title",
   "portfolio.projects.description" = "portfolio.projects.description",
-
   "portfolio.projects.app1.title" = "portfolio.projects.app1.title",
   "portfolio.projects.app1.description" = "portfolio.projects.app1.description",
-
   "portfolio.projects.app2.title" = "portfolio.projects.app2.title",
   "portfolio.projects.app2.description" = "portfolio.projects.app2.description",
-
   "portfolio.projects.app3.title" = "portfolio.projects.app3.title",
   "portfolio.projects.app3.description" = "portfolio.projects.app3.description",
-
+  "portfolio.projects.viewCode" = "portfolio.projects.viewCode",
+  "portfolio.projects.viewProject" = "portfolio.projects.viewProject",
   "portfolio.projects.viewAll" = "portfolio.projects.viewAll",
 
   // Portfolio – Contact
+  "portfolio.contact.eyebrow" = "portfolio.contact.eyebrow",
   "portfolio.contact.title" = "portfolio.contact.title",
   "portfolio.contact.description" = "portfolio.contact.description",
   "portfolio.contact.sendEmail" = "portfolio.contact.sendEmail",
@@ -70,14 +112,14 @@ export enum UiKey {
   "legal.app" = "legal.app",
   "legal.version" = "legal.version",
   "legal.effectiveDate" = "legal.effectiveDate",
-
-  // Legal
   "title.legal" = "title.legal",
   "legal.title" = "legal.title",
 
   // Guides
   "title.guides" = "title.guides",
   "guides.title" = "guides.title",
+  "guides.subtitle" = "guides.subtitle",
+  "guides.empty" = "guides.empty",
   "guides.createdAt" = "guides.createdAt",
   "guides.updatedAt" = "guides.updatedAt",
   "guides.contact.title" = "guides.contact.title",
@@ -85,6 +127,8 @@ export enum UiKey {
 
   // Footer
   "footer.label" = "footer.label",
+  "footer.explore" = "footer.explore",
+  "footer.builtWith" = "footer.builtWith",
 
   // General
   "general.readmore" = "general.readmore",

@@ -1,0 +1,73 @@
+---
+import Button from "@components/Button.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import TechChip from "@components/TechChip.astro";
+import SectionHeading from "@components/visuals/SectionHeading.astro";
+import { ArrowRight } from "@lucide/astro";
+import { githubRepos } from "@constants";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="projects" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={t(UiKey["portfolio.projects.eyebrow"])}
+      heading={t(UiKey["portfolio.projects.title"])}
+      description={t(UiKey["portfolio.projects.description"])}
+    />
+
+    <div class="projects__grid">
+      <ProjectCard
+        title={t(UiKey["portfolio.projects.app1.title"])}
+        description={t(UiKey["portfolio.projects.app1.description"])}
+        viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
+        codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
+      >
+        <TechChip tech="Dart" slot="tech" />
+        <TechChip tech="Flutter" slot="tech" />
+      </ProjectCard>
+
+      <ProjectCard
+        title={t(UiKey["portfolio.projects.app2.title"])}
+        description={t(UiKey["portfolio.projects.app2.description"])}
+        codeLink="https://github.com/box-bm/dpi_validator"
+        viewLink="https://pub.dev/packages/dpi_validator"
+      >
+        <TechChip tech="Dart" slot="tech" />
+      </ProjectCard>
+
+      <ProjectCard
+        title={t(UiKey["portfolio.projects.app3.title"])}
+        description={t(UiKey["portfolio.projects.app3.description"])}
+        codeLink="https://github.com/box-bm/nit_validator"
+        viewLink="https://pub.dev/packages/nit_validator"
+      >
+        <TechChip tech="Dart" slot="tech" />
+      </ProjectCard>
+    </div>
+
+    <div class="projects__cta" data-reveal>
+      <Button type="Outlined" href={githubRepos}>
+        {t(UiKey["portfolio.projects.viewAll"])}
+        <ArrowRight size={18} />
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 20px;
+  }
+  .projects__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+  }
+</style>

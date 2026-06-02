@@ -1,0 +1,89 @@
+---
+import Button from "@components/Button.astro";
+import ContactLinks from "@components/ContactLinks.astro";
+import { Mail, Linkedin } from "@lucide/astro";
+import { email, linkedIn } from "@constants";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-panel glass" data-reveal="scale">
+      <div class="contact-panel__glow" aria-hidden="true"></div>
+      <span class="eyebrow">{t(UiKey["portfolio.contact.eyebrow"])}</span>
+      <h2 class="contact-panel__title">
+        {t(UiKey["portfolio.contact.title"])}
+      </h2>
+      <p class="body-large">{t(UiKey["portfolio.contact.description"])}</p>
+
+      <div class="contact-panel__actions">
+        <Button href={`mailto:${email}`} magnetic>
+          <Mail size={18} />
+          {t(UiKey["portfolio.contact.sendEmail"])}
+        </Button>
+        <Button type="Outlined" href={linkedIn}>
+          <Linkedin size={18} />
+          {t(UiKey["portfolio.contact.connectOnLinkedin"])}
+        </Button>
+      </div>
+
+      <ContactLinks />
+
+      <p class="caption contact-panel__caption">
+        {t(UiKey["portfolio.contact.caption"])}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-panel {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: clamp(40px, 7vw, 80px) clamp(24px, 5vw, 64px);
+    border-radius: var(--radius-xl);
+  }
+  .contact-panel__glow {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow), transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .contact-panel > *:not(.contact-panel__glow) {
+    position: relative;
+    z-index: 1;
+  }
+  .contact-panel__title {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    max-width: 16ch;
+  }
+  .contact-panel .body-large {
+    max-width: 52ch;
+  }
+  .contact-panel__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .contact-panel__caption {
+    margin-top: 4px;
+    color: var(--text-tertiary);
+  }
+</style>

@@ -3,6 +3,7 @@ import GuidesLayout from "@layouts/Guides.astro";
 import Chip from "@components/Chip.astro";
 import Button from "@components/Button.astro";
 import Card from "@components/Card.astro";
+import { ArrowRight, CalendarDays } from "@lucide/astro";
 import { UiKey } from "@i18n/ui";
 import { LANG_CODES } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
@@ -19,81 +20,141 @@ const guides = await getCollection(
   "guides",
   (guide) => !guide.data.draft && guide.id.endsWith(`${lang}.md`),
 );
+
+guides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <GuidesLayout title={t(UiKey["title.guides"])} fullWidth>
-  <h1>{t(UiKey["guides.title"])}</h1>
-  <section class="grid">
-    {
-      guides.map((guide) => (
-        <article
-          key={guide.slug}
-          onclick={`window.location.href='/${lang}/guides/${guide.slug.slice(0, -2)}'`}
-        >
-          <Card pressable>
-            <div class="guide-preview-content">
-              <h2>
-                {guide.data.title} {guide.data.draft && <Chip text="Draft" />}
-              </h2>
-              <p>{guide.data.description}</p>
-              {guide.data.tags && (
-                <div class="tags">
-                  {guide.data.tags.map((tag) => (
-                    <Chip key={tag} text={tag} />
-                  ))}
+  <header class="guides-hero">
+    <span class="eyebrow" data-reveal>{t(UiKey["nav.guides"])}</span>
+    <h1 data-reveal style="--reveal-delay: 60ms">{t(UiKey["guides.title"])}</h1>
+    <p class="body-large" data-reveal style="--reveal-delay: 120ms">
+      {t(UiKey["guides.subtitle"])}
+    </p>
+  </header>
+
+  {
+    guides.length === 0 ? (
+      <p class="guides-empty">{t(UiKey["guides.empty"])}</p>
+    ) : (
+      <section class="guides-grid">
+        {guides.map((guide, i) => {
+          const url = `/${lang}/guides/${guide.slug.slice(0, -2)}`;
+          return (
+            <article
+              data-card
+              data-href={url}
+              data-reveal
+              style={`--reveal-delay: ${i * 70}ms`}
+            >
+              <Card pressable tilt>
+                <div class="guide-content">
+                  <div class="guide-meta">
+                    <CalendarDays size={15} />
+                    <time datetime={guide.data.date.toISOString()}>
+                      {guide.data.date.toLocaleDateString(lang, {
+                        dateStyle: "medium",
+                      })}
+                    </time>
+                  </div>
+                  <h2 class="h3">{guide.data.title}</h2>
+                  {guide.data.description && <p>{guide.data.description}</p>}
+                  {guide.data.tags && (
+                    <div class="tags">
+                      {guide.data.tags.map((tag) => (
+                        <Chip text={tag} />
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <div class="guide-preview-actions">
-              <Button
-                type="Default"
-                href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}
-              >
-                {t(UiKey["general.readmore"])}
-              </Button>
-            </div>
-          </Card>
-        </article>
-      ))
-    }
-  </section>
+                <span class="read-more">
+                  {t(UiKey["general.readmore"])}
+                  <ArrowRight size={16} />
+                </span>
+              </Card>
+            </article>
+          );
+        })}
+      </section>
+    )
+  }
 </GuidesLayout>
 
 <style>
+  .guides-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 680px;
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+
+  .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 20px;
+  }
+
   article {
     cursor: pointer;
   }
 
-  section {
-    margin: 16px 0px;
-  }
-
-  p {
-    margin: 8px 0px;
-  }
-
-  .guide-preview-content {
+  .guide-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     flex-grow: 1;
-    margin-bottom: 16px;
   }
-
-  .guide-preview-actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  .guide-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-tertiary);
   }
-
+  .guide-content p {
+    font-size: 0.94rem;
+  }
   .tags {
-    margin-top: 8px;
     display: flex;
-    gap: 8px;
     flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
   }
 
-  .read-more-link {
-    display: inline-block;
-    margin-top: 12px;
-    color: var(--accent-primary);
-    text-decoration: none;
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--accent);
+  }
+  .read-more :global(svg) {
+    transition: transform var(--dur) var(--ease-spring);
+  }
+  article:hover .read-more :global(svg) {
+    transform: translateX(4px);
+  }
+
+  .guides-empty {
+    padding: 40px 0;
+    color: var(--text-secondary);
   }
 </style>
+
+<script>
+  function initGuideCards() {
+    document.querySelectorAll<HTMLElement>("[data-card]").forEach((card) => {
+      const href = card.dataset.href;
+      if (!href) return;
+      card.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).closest("a")) return;
+        window.location.href = href;
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", initGuideCards);
+</script>

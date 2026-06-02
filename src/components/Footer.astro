@@ -17,21 +17,43 @@ const base = lang === defaultLang ? "" : `/${lang}`;
 
 <footer>
   <div class="footer-inner">
-
     <!-- Brand -->
     <div class="footer-brand">
-      <a class="header-link--brand" href="/">BoxDev</a>
+      <a class="brand" href="/">
+        <span class="brand__mark">B</span>
+        <span>Box<span class="brand__accent">Dev</span></span>
+      </a>
       <p class="brand-tagline">{t(UiKey["portfolio.hero.caption"])}</p>
     </div>
 
     <!-- Nav links -->
     <nav class="footer-nav" aria-label="Footer navigation">
-      <span class="footer-section-label">Explore</span>
+      <span class="footer-section-label">{t(UiKey["footer.explore"])}</span>
       <ul>
-        <li><a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a></li>
-        <li><a class="nav-link" href={`${base}/#projects`}>{t(UiKey["nav.projects"])}</a></li>
-        <li><a class="nav-link" href={`${base}/guides`}>{t(UiKey["nav.guides"])}</a></li>
-        <li><a class="nav-link" href={`${base}/legal`}>{t(UiKey["legal.title"])}</a></li>
+        <li>
+          <a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href={`${base}/#services`}
+            >{t(UiKey["nav.services"])}</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href={`${base}/#projects`}
+            >{t(UiKey["nav.projects"])}</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href={`${base}/guides`}
+            >{t(UiKey["nav.guides"])}</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href={`${base}/legal`}
+            >{t(UiKey["legal.title"])}</a
+          >
+        </li>
       </ul>
     </nav>
 
@@ -39,9 +61,15 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     <div class="footer-social">
       <span class="footer-section-label">{t(UiKey["nav.contact"])}</span>
       <div class="social-icons">
-        <Button type="Icon" href={githubProfile} ariaLabel="GitHub"><Github size={20} /></Button>
-        <Button type="Icon" href={linkedIn} ariaLabel="LinkedIn"><Linkedin size={20} /></Button>
-        <Button type="Icon" href={`mailto:${email}`} ariaLabel="Send email"><Mail size={20} /></Button>
+        <Button type="Icon" href={githubProfile} ariaLabel="GitHub"
+          ><Github size={20} /></Button
+        >
+        <Button type="Icon" href={linkedIn} ariaLabel="LinkedIn"
+          ><Linkedin size={20} /></Button
+        >
+        <Button type="Icon" href={`mailto:${email}`} ariaLabel="Send email"
+          ><Mail size={20} /></Button
+        >
       </div>
       <a
         href="https://www.buymeacoffee.com/boxdev"
@@ -53,21 +81,26 @@ const base = lang === defaultLang ? "" : `/${lang}`;
         ☕ Buy me a coffee
       </a>
     </div>
-
   </div>
 
   <!-- Bottom bar -->
   <div class="footer-bottom">
     <AstroIcon class="astro-icon" />
-    <p class="caption">© {currentYear} Brandon M. — {t(UiKey["footer.label"])}</p>
+    <p class="caption">
+      © {currentYear} Brandon Manzo — {t(UiKey["footer.builtWith"])}
+    </p>
   </div>
 </footer>
 
 <style>
   footer {
-    background-color: var(--neutral-light);
-    border-top: 1px solid var(--neutral-medium);
-    padding: 40px 24px 20px;
+    position: relative;
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 56px 24px 24px;
   }
 
   .footer-inner {
@@ -77,21 +110,42 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     max-width: 1100px;
     margin: 0 auto;
     padding-bottom: 32px;
-    border-bottom: 1px solid var(--neutral-medium);
+    border-bottom: 1px solid var(--line);
   }
 
   /* Brand */
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
   }
-
-.brand-tagline {
-    font-size: 0.875rem;
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+  }
+  .brand__mark {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 4px 14px var(--accent-glow);
+  }
+  .brand__accent {
+    color: var(--accent);
+  }
+  .brand-tagline {
+    font-size: 0.9rem;
     color: var(--text-secondary) !important;
-    line-height: 1.5;
-    max-width: 260px;
+    line-height: 1.6;
+    max-width: 320px;
     margin: 0 !important;
   }
 
@@ -99,42 +153,36 @@ const base = lang === defaultLang ? "" : `/${lang}`;
   .footer-nav ul {
     list-style: none;
     padding: 0;
-    margin: 8px 0 0;
+    margin: 14px 0 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
-
   .nav-link {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: var(--text-secondary) !important;
-    text-decoration: none;
   }
-
   .nav-link:hover {
-    text-decoration: underline;
-    color: var(--accent-primary) !important;
+    color: var(--accent) !important;
   }
 
   /* Social */
   .footer-social {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
   }
-
   .footer-section-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-secondary) !important;
+    color: var(--text-tertiary) !important;
   }
-
   .social-icons {
     display: flex;
-    flex-direction: row;
-    gap: 4px;
+    gap: 8px;
   }
 
   /* BMaC */
@@ -142,24 +190,20 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 0.8125rem;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
     font-weight: 600;
     background-color: #5f7fff;
     color: #ffffff !important;
-    text-decoration: none !important;
-    transition: background-color 100ms ease-in;
     width: fit-content;
+    transition:
+      transform var(--dur) var(--ease-spring),
+      box-shadow var(--dur);
   }
-
   .bmc-btn:hover {
-    background-color: #4a6ae8;
-    text-decoration: none !important;
-  }
-
-  .bmc-btn:active {
-    background-color: #3a56cc;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(95, 127, 255, 0.4);
   }
 
   /* Bottom bar */
@@ -168,43 +212,35 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding-top: 16px;
+    padding-top: 20px;
     max-width: 1100px;
     margin: 0 auto;
   }
-
   .footer-bottom p {
     margin: 0 !important;
-    color: var(--text-secondary) !important;
+    color: var(--text-tertiary) !important;
   }
-
   .astro-icon {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     fill: currentColor;
   }
 
-  /* Responsive — tablet */
   @media (max-width: 768px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
       gap: 28px;
     }
-
     .footer-brand {
       grid-column: 1 / -1;
     }
   }
-
-  /* Responsive — mobile */
   @media (max-width: 480px) {
     .footer-inner {
       grid-template-columns: 1fr;
-      gap: 24px;
     }
-
     .footer-brand {
       grid-column: auto;
     }

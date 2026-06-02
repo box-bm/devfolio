@@ -29,6 +29,10 @@ import {
   Eslint,
   Prettier,
   Jest,
+  Vitest,
+  Testinglibrary,
+  Postman,
+  Storybook,
 } from "simple-icons-astro";
 
 type Tech =
@@ -60,6 +64,10 @@ type Tech =
   | "Eslint"
   | "Prettier"
   | "Jest"
+  | "Vitest"
+  | "Testing Library"
+  | "Postman"
+  | "Storybook"
   | "Androidstudio";
 
 interface TechConfig {
@@ -95,6 +103,10 @@ const TechSettings: Record<Tech, TechConfig> = {
   Eslint: { icon: Eslint, text: "ESLint" },
   Prettier: { icon: Prettier, text: "Prettier" },
   Jest: { icon: Jest, text: "Jest" },
+  Vitest: { icon: Vitest, text: "Vitest" },
+  "Testing Library": { icon: Testinglibrary, text: "Testing Library" },
+  Postman: { icon: Postman, text: "Postman" },
+  Storybook: { icon: Storybook, text: "Storybook" },
   Swift: { icon: Swift, text: "Swift" },
   Androidstudio: { icon: Androidstudio, text: "Android Studio" },
 };

@@ -1,0 +1,80 @@
+---
+/** Thin top progress bar shown during View Transitions navigation.
+ *  Persisted across swaps so it survives the page change, and driven by
+ *  Astro's navigation lifecycle events for instant feedback. */
+---
+
+<div id="nav-progress" transition:persist aria-hidden="true"></div>
+
+<style is:global>
+  #nav-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    z-index: 5000;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    box-shadow: 0 0 12px var(--accent-glow);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      width 240ms var(--ease-out),
+      opacity 240ms var(--ease-out);
+  }
+  #nav-progress.loading {
+    opacity: 1;
+  }
+  #nav-progress.done {
+    width: 100% !important;
+    opacity: 0;
+    transition:
+      width 160ms var(--ease-out),
+      opacity 260ms var(--ease-out) 120ms;
+  }
+</style>
+
+<script>
+  function setupNavProgress() {
+    if ((window as any).__navProgress) return;
+    (window as any).__navProgress = true;
+
+    const bar = () => document.getElementById("nav-progress");
+    let timer: number | undefined;
+
+    const start = () => {
+      const el = bar();
+      if (!el) return;
+      window.clearInterval(timer);
+      el.classList.remove("done");
+      el.classList.add("loading");
+      let w = 8;
+      el.style.width = w + "%";
+      // creep toward ~90% while the next page loads
+      timer = window.setInterval(() => {
+        w = Math.min(w + (90 - w) * 0.18, 92);
+        el.style.width = w + "%";
+      }, 180);
+    };
+
+    const finish = () => {
+      const el = bar();
+      if (!el) return;
+      window.clearInterval(timer);
+      el.classList.remove("loading");
+      el.classList.add("done");
+      el.style.width = "100%";
+      window.setTimeout(() => {
+        if (!el.classList.contains("loading")) el.style.width = "0";
+      }, 320);
+    };
+
+    document.addEventListener("astro:before-preparation", start);
+    document.addEventListener("astro:page-load", finish);
+    document.addEventListener("astro:after-swap", finish);
+  }
+
+  setupNavProgress();
+  document.addEventListener("astro:page-load", setupNavProgress);
+</script>

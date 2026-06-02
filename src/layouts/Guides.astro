@@ -20,7 +20,15 @@ interface Props {
   date?: Date;
   updatedDate?: Date;
 }
-const { title = t(UiKey["title.guides"]), description, type, guide, fullWidth = false, date, updatedDate } = Astro.props;
+const {
+  title = t(UiKey["title.guides"]),
+  description,
+  type,
+  guide,
+  fullWidth = false,
+  date,
+  updatedDate,
+} = Astro.props;
 const breadcrumbItems = [
   { label: t(UiKey["nav.guides"]), href: `/${lang}/guides` },
 ];
@@ -29,23 +37,34 @@ if (guide) {
 }
 ---
 
-<Base title={title} description={description} lang={lang} type={type} date={date} updatedDate={updatedDate}>
+<Base
+  title={title}
+  description={description}
+  lang={lang}
+  type={type}
+  date={date}
+  updatedDate={updatedDate}
+>
   <MarkdownStyles />
   <Header hideMenu />
-  <main>
+  <main class="doc-main">
     <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
-    <div class:list={[!fullWidth && "markdown-body", fullWidth && "full-width-body"]}>
+    <div
+      class:list={[
+        !fullWidth && "markdown-body",
+        fullWidth && "full-width-body",
+      ]}
+    >
       <slot />
     </div>
   </main>
   <Footer />
-    <BuyMeACoffee />
-<style>
-  .full-width-body {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px 16px 48px;
-  }
-</style>
-
+  <BuyMeACoffee />
+  <style>
+    .full-width-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+  </style>
 </Base>
