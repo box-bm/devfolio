@@ -8,9 +8,11 @@ interface Props {
   description?: string;
   lang?: string;
   type?: "website" | "article";
+  date?: Date;
+  updatedDate?: Date;
 }
 
-const { title, description, lang, type } = Astro.props;
+const { title, description, lang, type, date, updatedDate } = Astro.props;
 ---
 
 <html lang={lang}>
@@ -18,8 +20,11 @@ const { title, description, lang, type } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <slot name="meta" />
-    {description && <SEO title={title ?? ""} description={description} lang={lang} type={type} />}
+    {description && <SEO title={title ?? ""} description={description} lang={lang} type={type} date={date} updatedDate={updatedDate} />}
     <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

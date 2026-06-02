@@ -17,8 +17,10 @@ interface Props {
   type?: "website" | "article";
   guide?: string;
   fullWidth?: boolean;
+  date?: Date;
+  updatedDate?: Date;
 }
-const { title = t(UiKey["title.guides"]), description, type, guide, fullWidth = false } = Astro.props;
+const { title = t(UiKey["title.guides"]), description, type, guide, fullWidth = false, date, updatedDate } = Astro.props;
 const breadcrumbItems = [
   { label: t(UiKey["nav.guides"]), href: `/${lang}/guides` },
 ];
@@ -27,7 +29,7 @@ if (guide) {
 }
 ---
 
-<Base title={title} description={description} lang={lang} type={type}>
+<Base title={title} description={description} lang={lang} type={type} date={date} updatedDate={updatedDate}>
   <MarkdownStyles />
   <Header hideMenu />
   <main>
