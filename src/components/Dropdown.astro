@@ -45,24 +45,41 @@ const { items, align } = Astro.props;
 
   .dropdown__menu {
     position: absolute;
-    top: 52px;
+    top: 48px;
     right: 0;
-    min-width: 120px;
-    border-radius: 8px;
-    border: 1px solid var(--neutral-medium);
-    background-color: var(--neutral-white);
+    min-width: 130px;
+    border-radius: var(--radius);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    box-shadow: var(--shadow-lg);
 
     opacity: 0;
     pointer-events: none;
-    padding: 16px 12px;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top right;
+    padding: 10px;
     transition:
-      opacity 0.15s ease,
-      transform 0.15s ease;
+      opacity var(--dur) var(--ease-out),
+      transform var(--dur) var(--ease-spring);
   }
 
   .dropdown__trigger {
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition:
+      color var(--dur),
+      background var(--dur);
+  }
+  .dropdown__trigger:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
   }
 
   .dropdown--open .dropdown__menu {
@@ -74,6 +91,16 @@ const { items, align } = Astro.props;
   .dropdown__item {
     width: 100%;
     display: block;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    transition:
+      color var(--dur),
+      background var(--dur);
+  }
+  .dropdown__item:hover {
+    color: var(--accent);
+    background: var(--accent-soft);
   }
 
   .list {
@@ -93,16 +120,20 @@ const { items, align } = Astro.props;
 </style>
 
 <script>
-  const dropdown = document.querySelector(".dropdown");
-  const trigger = dropdown.querySelector(".dropdown__trigger");
-
-  trigger.addEventListener("click", () => {
-    dropdown.classList.toggle("dropdown--open");
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("dropdown--open");
-    }
-  });
+  function initDropdown() {
+    document.querySelectorAll<HTMLElement>(".dropdown").forEach((dropdown) => {
+      const trigger = dropdown.querySelector(".dropdown__trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("dropdown--open");
+      });
+    });
+    document.addEventListener("click", (e) => {
+      document.querySelectorAll(".dropdown").forEach((d) => {
+        if (!d.contains(e.target as Node)) d.classList.remove("dropdown--open");
+      });
+    });
+  }
+  document.addEventListener("astro:page-load", initDropdown);
 </script>

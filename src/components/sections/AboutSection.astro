@@ -1,0 +1,148 @@
+---
+import Card from "@components/Card.astro";
+import SectionHeading from "@components/visuals/SectionHeading.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+import { Sparkles } from "@lucide/astro";
+
+interface Props {
+  years: number;
+}
+const { years } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stats = [
+  { value: `${years}+`, label: t(UiKey["portfolio.about.stats.years.label"]) },
+  {
+    value: t(UiKey["portfolio.about.stats.projects.value"]),
+    label: t(UiKey["portfolio.about.stats.projects.label"]),
+  },
+  {
+    value: t(UiKey["portfolio.about.stats.tech.value"]),
+    label: t(UiKey["portfolio.about.stats.tech.label"]),
+  },
+  {
+    value: t(UiKey["portfolio.about.stats.tests.value"]),
+    label: t(UiKey["portfolio.about.stats.tests.label"]),
+  },
+];
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={t(UiKey["portfolio.about.eyebrow"])}
+      heading={t(UiKey["portfolio.about.heading"])}
+    />
+
+    <div class="about__grid">
+      <div class="about__text">
+        <p class="body-large" data-reveal>
+          {t(UiKey["portfolio.about.description1"])}
+          <strong class="accent-text"
+            >{years} {t(UiKey["general.years"])}</strong
+          >
+          {t(UiKey["portfolio.about.description2"])}
+        </p>
+        <p data-reveal style="--reveal-delay: 80ms">
+          {t(UiKey["portfolio.about.description3"])}
+        </p>
+
+        <div class="fun-fact" data-reveal style="--reveal-delay: 160ms">
+          <span class="fun-fact__icon"><Sparkles size={18} /></span>
+          <div>
+            <span class="fun-fact__title"
+              >{t(UiKey["portfolio.about.funFact.title"])}</span
+            >
+            <p>{t(UiKey["portfolio.about.funFact.description"])}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__stats">
+        {
+          stats.map((stat, i) => (
+            <div data-reveal="scale" style={`--reveal-delay: ${i * 90}ms`}>
+              <Card tilt>
+                <span class="stat__value gradient-text">{stat.value}</span>
+                <span class="stat__label">{stat.label}</span>
+              </Card>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .fun-fact {
+    display: flex;
+    gap: 14px;
+    margin-top: 8px;
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .fun-fact__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    color: var(--accent-contrast);
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  }
+  .fun-fact__title {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .fun-fact p {
+    margin: 4px 0 0;
+    font-size: 0.92rem;
+  }
+
+  .about__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat__value {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat__label {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 420px) {
+    .about__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

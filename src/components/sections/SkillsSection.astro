@@ -1,0 +1,126 @@
+---
+import Card from "@components/Card.astro";
+import TechChip from "@components/TechChip.astro";
+import SectionHeading from "@components/visuals/SectionHeading.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const categories = [
+  {
+    label: t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"]),
+    techs: ["React", "React Native", "Flutter", "Astro", "Next.JS", "Nestjs"],
+  },
+  {
+    label: t(UiKey["portfolio.about.skillsAndTech.languages"]),
+    techs: [
+      "Typescript",
+      "Javascript",
+      "Dart",
+      "Kotlin",
+      "Swift",
+      "Rust",
+      "CPlusplus",
+      "Dotnet",
+      "HTML",
+      "CSS",
+    ],
+  },
+  {
+    label: t(UiKey["portfolio.about.skillsAndTech.testingAndQa"]),
+    techs: [
+      "Jest",
+      "Vitest",
+      "Cypress",
+      "Testing Library",
+      "Selenium",
+      "Postman",
+    ],
+    featured: true,
+  },
+  {
+    label: t(UiKey["portfolio.about.skillsAndTech.tools"]),
+    techs: [
+      "Git",
+      "Github",
+      "NeoVim",
+      "Xcode",
+      "Androidstudio",
+      "Node",
+      "Vercel",
+      "Figma",
+      "Storybook",
+      "Prettier",
+      "Eslint",
+    ],
+  },
+] as const;
+---
+
+<section id="skills" class="section">
+  <div class="container">
+    <SectionHeading
+      eyebrow={t(UiKey["portfolio.skills.eyebrow"])}
+      heading={t(UiKey["portfolio.skills.heading"])}
+      description={t(UiKey["portfolio.skills.description"])}
+    />
+
+    <div class="skills__grid">
+      {
+        categories.map((cat, i) => (
+          <div
+            class:list={["skill-cat", cat.featured && "skill-cat--featured"]}
+            data-reveal
+            style={`--reveal-delay: ${i * 80}ms`}
+          >
+            <Card>
+              <span class="skill-cat__label">{cat.label}</span>
+              <div class="skill-cat__chips">
+                {cat.techs.map((tech) => (
+                  <TechChip tech={tech} />
+                ))}
+              </div>
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .skill-cat__label {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .skill-cat__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .skill-cat--featured :global(.card) {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
+    background:
+      linear-gradient(160deg, var(--accent-soft), transparent 55%),
+      var(--glass-bg);
+  }
+
+  @media (max-width: 760px) {
+    .skills__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

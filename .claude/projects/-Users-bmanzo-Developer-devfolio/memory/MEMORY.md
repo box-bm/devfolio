@@ -1,0 +1,1 @@
+- [Portfolio redesign direction](portfolio-redesign-direction.md) — monochrome glass + electric-blue, all-in motion, frontend/mobile focus; token & motion architecture

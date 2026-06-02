@@ -12,20 +12,35 @@ const { text } = Astro.props;
 </span>
 
 <style>
-  .chip-icon {
-    display: flex;
-    align-items: center;
-  }
-
   .chip {
-    padding: 4px 12px;
+    padding: 8px 14px;
     color: var(--text-primary);
-    border: 1px solid var(--neutral-medium);
-    gap: 8;
-    border-radius: 16px;
-    gap: 4px;
-    display: flex;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
+    gap: 8px;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
+    font-weight: 500;
+    transition:
+      transform var(--dur) var(--ease-spring),
+      border-color var(--dur) var(--ease-out),
+      color var(--dur) var(--ease-out),
+      box-shadow var(--dur) var(--ease-out);
+  }
+  .chip:hover {
+    transform: translateY(-3px);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+  }
+  .chip :global(svg) {
+    transition: transform var(--dur) var(--ease-spring);
+  }
+  .chip:hover :global(svg) {
+    transform: scale(1.15) rotate(-4deg);
   }
 </style>

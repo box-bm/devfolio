@@ -15,10 +15,7 @@ export const getStaticPaths = () => {
   return LANG_CODES.map((lang) => ({ params: { lang } }));
 };
 
-const docs = await getCollection(
-  "legal",
-  (doc) => doc.data.lang === lang,
-);
+const docs = await getCollection("legal", (doc) => doc.data.lang === lang);
 ---
 
 <LegalLayout title={t(UiKey["title.legal"])}>

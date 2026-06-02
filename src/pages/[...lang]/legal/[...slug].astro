@@ -26,10 +26,12 @@ const { Content } = await doc.render();
 <LegalLayout title={doc.data.title} document={doc.data.title}>
   <article class="legal-content">
     <p class="caption">
-      <strong>{t(UiKey["legal.app"])}:</strong> {doc.data.app}
+      <strong>{t(UiKey["legal.app"])}:</strong>
+      {doc.data.app}
     </p>
     <p class="caption">
-      <strong>{t(UiKey["legal.version"])}:</strong> {doc.data.version}
+      <strong>{t(UiKey["legal.version"])}:</strong>
+      {doc.data.version}
     </p>
     {
       doc.data.effectiveDate && (

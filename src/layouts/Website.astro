@@ -14,18 +14,26 @@ interface Props {
 }
 
 const {
-  title = "BoxDev - Frontend Developer Portfolio",
-  description = "Brandon Manzo — Frontend Developer passionate about minimalist design and web performance.",
+  title = "BoxDev — Frontend & Mobile Developer",
+  description = "Brandon Manzo — frontend & mobile developer obsessed with motion, detail and tested, reliable code.",
 } = Astro.props;
 ---
 
 <Base title={title} description={description} lang={lang} type="website">
   <Header>
-    <a slot="link" class="header-link" href="#about">{t(UiKey["nav.about"])}</a>
-    <a slot="link" class="header-link" href="#projects">
+    <a slot="link" class="header-link" data-nav-link href="#about">
+      {t(UiKey["nav.about"])}
+    </a>
+    <a slot="link" class="header-link" data-nav-link href="#services">
+      {t(UiKey["nav.services"])}
+    </a>
+    <a slot="link" class="header-link" data-nav-link href="#skills">
+      {t(UiKey["nav.skills"])}
+    </a>
+    <a slot="link" class="header-link" data-nav-link href="#projects">
       {t(UiKey["nav.projects"])}
     </a>
-    <a slot="link" class="header-link" href="#contact">
+    <a slot="link" class="header-link" data-nav-link href="#contact">
       {t(UiKey["nav.contact"])}
     </a>
     <a slot="secondary-link" class="header-link" href={`/${lang}/guides`}>
@@ -37,109 +45,3 @@ const {
   </main>
   <Footer />
 </Base>
-
-<style is:global>
-  #hero {
-    height: 90vh;
-    max-height: 1000px;
-    justify-content: center;
-  }
-
-  #hero > div {
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-  }
-
-  .principal-links {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-  }
-
-  .principal-links {
-    margin-bottom: 8px;
-  }
-
-  #about > div {
-    gap: 32px;
-  }
-
-  #contact {
-    gap: 16px;
-  }
-
-  #contact > div {
-    gap: 16px;
-  }
-
-  .contact-buttons-container {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .primary-text {
-    color: var(--accent-primary);
-  }
-
-  .projects {
-    margin: 12px 0px;
-  }
-
-  #skills-and-tech-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .skills-chips-container {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 12px;
-    row-gap: 8px;
-  }
-
-  .why-work-reasons {
-    display: flex;
-    flex-direction: column;
-    margin-top: 8px;
-    gap: 12px;
-  }
-
-  .fun-fact-container {
-    max-width: 250px;
-    background-color: var(--accent-primary);
-    padding: 16px;
-    border-radius: 20px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  .h1,
-  .h2,
-  .h3,
-  .h4 {
-    margin: 0 !important;
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    padding: 60px 20px;
-    scroll-margin-top: 60px;
-  }
-
-  section .container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    max-width: 1100px;
-    width: 100%;
-  }
-</style>

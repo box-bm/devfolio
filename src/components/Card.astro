@@ -1,36 +1,89 @@
 ---
 interface Props {
   pressable?: boolean;
+  tilt?: boolean;
+  glow?: boolean;
+  class?: string;
 }
 
-const { pressable } = Astro.props;
+const { pressable, tilt = false, glow = true, class: className } = Astro.props;
 ---
 
-<div class:list={`card ${pressable ? "pressable-card" : ""}`}>
-  <slot />
+<div
+  data-tilt={tilt ? "6" : undefined}
+  class:list={[
+    "card",
+    "glass",
+    pressable && "pressable-card",
+    tilt && "tilt-card",
+    glow && "glow-card",
+    className,
+  ]}
+>
+  <div class="card__inner"><slot /></div>
 </div>
 
 <style>
   .card {
+    position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 12px;
-    border: 1px solid var(--neutral-medium);
-    border-style: solid;
-    border-width: 1px;
-    padding: 20px;
-    gap: 8px;
-    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    gap: 10px;
+    transition:
+      border-color var(--dur) var(--ease-out),
+      box-shadow var(--dur) var(--ease-out),
+      transform 250ms var(--ease-out);
+  }
+
+  .card__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    transform: translateZ(40px);
+  }
+
+  /* fluent reveal — radial highlight follows the pointer */
+  .glow-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 0%),
+      var(--accent-soft),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease-out);
+    pointer-events: none;
+  }
+  .glow-card:hover::before {
+    opacity: 1;
+  }
+
+  .tilt-card {
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(var(--rx, 0deg))
+      rotateY(var(--ry, 0deg));
   }
 
   .pressable-card {
     cursor: pointer;
   }
 
-  .pressable-card:hover {
-    border-color: var(--accent-primary);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
+  .card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
+    box-shadow:
+      var(--shadow-lg),
+      inset 0 1px 0 var(--glass-highlight);
+  }
+  .pressable-card:not(.tilt-card):hover {
+    transform: translateY(-4px);
   }
 </style>

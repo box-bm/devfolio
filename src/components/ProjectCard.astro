@@ -1,7 +1,9 @@
 ---
 import Button from "@components/Button.astro";
-import { Link, Github } from "@lucide/astro";
+import { ArrowUpRight, Github } from "@lucide/astro";
 import Card from "@components/Card.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
 
 interface Props {
   title: string;
@@ -11,23 +13,30 @@ interface Props {
 }
 
 const { title, description, viewLink, codeLink } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<div data-card>
-  <Card pressable>
+<div class="project-card" data-card data-href={viewLink} data-reveal="scale">
+  <Card pressable tilt>
     <div class="project-card-content">
-      <h4>{title}</h4>
-      <p>
-        {description}
-      </p>
+      <div class="project-card-top">
+        <h3 class="h4">{title}</h3>
+        <span class="project-card-arrow"><ArrowUpRight size={20} /></span>
+      </div>
+      <p>{description}</p>
       <slot name="content" />
     </div>
     <div class="project-card-tech">
       <slot name="tech" />
     </div>
     <div class="project-card-actions">
-      <Button type="Outlined" href={codeLink}><Github />Code</Button>
-      <Button href={viewLink}><Link />View</Button>
+      <Button type="Outlined" href={codeLink}>
+        <Github size={18} />{t(UiKey["portfolio.projects.viewCode"])}
+      </Button>
+      <Button href={viewLink}
+        >{t(UiKey["portfolio.projects.viewProject"])}</Button
+      >
     </div>
   </Card>
 </div>
@@ -37,42 +46,54 @@ const { title, description, viewLink, codeLink } = Astro.props;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    height: 100%;
-    gap: 4px;
-    margin-bottom: 8px;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .project-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .project-card-arrow {
+    display: grid;
+    place-items: center;
+    color: var(--text-tertiary);
+    transition:
+      transform var(--dur) var(--ease-spring),
+      color var(--dur) var(--ease-out);
+  }
+  .project-card:hover .project-card-arrow {
+    color: var(--accent);
+    transform: translate(3px, -3px);
   }
 
   .project-card-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 
   .project-card-actions {
     display: flex;
     gap: 8px;
-    flex-direction: row;
   }
-
-  .project-card-actions a {
-    width: 100%;
+  .project-card-actions :global(.btn) {
+    flex: 1;
   }
 </style>
 
-<script define:vars={{ viewLink }}>
-  const cards = document.querySelectorAll("[data-card]");
-
-  cards.forEach((card) => {
-    const buttons = card.querySelectorAll("a, button");
-
-    card.addEventListener("click", () => {
-      window.open(viewLink, "_blank");
-    });
-
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
+<script>
+  function initProjectCards() {
+    document.querySelectorAll<HTMLElement>("[data-card]").forEach((card) => {
+      const href = card.dataset.href;
+      if (!href) return;
+      card.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).closest("a")) return;
+        window.open(href, "_blank");
       });
     });
-  });
+  }
+  document.addEventListener("astro:page-load", initProjectCards);
 </script>
