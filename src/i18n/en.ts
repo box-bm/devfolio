@@ -35,6 +35,8 @@ export const en: UiDict = {
     "years of experience shipping user-centered products. My heart is in the frontend and on mobile — crafting interfaces that are smooth, accessible, and a joy to use.",
   "portfolio.about.description3":
     "But I don't stop at the surface: I'm comfortable across the backend, and I genuinely love QA, automation, and testing. Solid tests are how I ship with confidence and sleep at night.",
+  "portfolio.about.location": "Guatemala",
+  "portfolio.about.roleTag": "Frontend & Mobile Developer",
 
   // STATS
   "portfolio.about.stats.years.label": "Years building software",

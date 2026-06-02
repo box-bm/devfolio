@@ -35,6 +35,8 @@ export const es: UiDict = {
     "años de experiencia creando productos centrados en el usuario. Mi corazón está en el frontend y en lo móvil — creando interfaces fluidas, accesibles y placenteras de usar.",
   "portfolio.about.description3":
     "Pero no me quedo en la superficie: me muevo cómodo en el backend y me encantan el QA, la automatización y el testing. Unas buenas pruebas son lo que me permite lanzar con confianza y dormir tranquilo.",
+  "portfolio.about.location": "Guatemala",
+  "portfolio.about.roleTag": "Desarrollador Frontend y Móvil",
 
   // ESTADÍSTICAS
   "portfolio.about.stats.years.label": "Años creando software",

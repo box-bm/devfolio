@@ -30,6 +30,8 @@ export enum UiKey {
   "portfolio.about.description1" = "portfolio.about.description1",
   "portfolio.about.description2" = "portfolio.about.description2",
   "portfolio.about.description3" = "portfolio.about.description3",
+  "portfolio.about.location" = "portfolio.about.location",
+  "portfolio.about.roleTag" = "portfolio.about.roleTag",
 
   // Portfolio – Stats
   "portfolio.about.stats.years.label" = "portfolio.about.stats.years.label",

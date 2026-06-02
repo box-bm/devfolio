@@ -4,6 +4,7 @@ import "normalize.css";
 import SEO from "@components/SEO.astro";
 import MeshBackground from "@components/visuals/MeshBackground.astro";
 import Motion from "@components/visuals/Motion.astro";
+import NavProgress from "@components/visuals/NavProgress.astro";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -69,7 +70,8 @@ const { title, description, lang, type, date, updatedDate } = Astro.props;
     </script>
   </head>
   <body>
-    <MeshBackground />
+    <MeshBackground transition:persist />
+    <NavProgress />
     <slot />
     <Motion />
   </body>
