@@ -1,7 +1,5 @@
 ---
 interface Props {
-  index?: number;
-  total?: number;
   label?: string;
   heading?: string;
   description?: string;
@@ -10,16 +8,12 @@ interface Props {
 }
 
 const {
-  index,
-  total = 5,
   label,
   heading,
   description,
   split = false,
   align = "left",
 } = Astro.props;
-
-const pad = (n: number) => String(n).padStart(2, "0");
 ---
 
 <header
@@ -30,13 +24,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
   ]}
 >
   {
-    index && (
+    label && (
       <div class="section-eyebrow-row" data-reveal>
-        <span class="section-eyebrow-num">
-          {pad(index)} / {pad(total)}
-        </span>
-        <span class="section-eyebrow-rule" />
         <span class="section-eyebrow-label">{label}</span>
+        <span class="section-eyebrow-rule" />
       </div>
     )
   }
@@ -68,16 +59,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
   .section-eyebrow-row {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 16px;
     margin-bottom: clamp(28px, 4vw, 44px);
-  }
-  .section-eyebrow-num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    white-space: nowrap;
   }
   .section-eyebrow-rule {
     flex: 1;
@@ -90,6 +74,13 @@ const pad = (n: number) => String(n).padStart(2, "0");
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .section-heading.is-center .section-eyebrow-row {
+    justify-content: center;
+  }
+  .section-heading.is-center .section-eyebrow-rule {
+    display: none;
   }
 
   .heading-row {

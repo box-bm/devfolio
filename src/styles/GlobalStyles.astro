@@ -43,8 +43,7 @@
     --accent-glow: rgba(217, 160, 91, 0.14);
     --accent-contrast: var(--on-accent);
 
-    /* Ambient blueprint field */
-    --dot: rgba(23, 24, 26, 0.06);
+    /* Ambient glow */
     --glow-2: rgba(222, 155, 134, 0.08);
 
     /* Glass / acrylic */
@@ -114,7 +113,6 @@
     --accent-glow: rgba(217, 160, 91, 0.13);
     --accent-contrast: var(--on-accent);
 
-    --dot: rgba(236, 237, 238, 0.07);
     --glow-2: rgba(222, 155, 134, 0.08);
 
     --glass-bg: var(--surface);
@@ -299,23 +297,6 @@
     max-width: 1180px;
     margin-inline: auto;
     padding-inline: clamp(20px, 5vw, 40px);
-    border-inline: 1px solid var(--line-soft);
-  }
-
-  /* Fixed blueprint dot-grid field, faded toward the edges */
-  .dot-field {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size: 34px 34px;
-    -webkit-mask-image: radial-gradient(
-      circle at 50% 8%,
-      #000 10%,
-      transparent 68%
-    );
-    mask-image: radial-gradient(circle at 50% 8%, #000 10%, transparent 68%);
   }
 
   /* Small corner-bracket marks — viewfinder/crop-mark signature detail */
