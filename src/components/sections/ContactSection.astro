@@ -1,6 +1,5 @@
 ---
 import Button from "@components/Button.astro";
-import SectionHeading from "@components/visuals/SectionHeading.astro";
 import { Mail, Linkedin } from "@lucide/astro";
 import { email, linkedIn } from "@constants";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
@@ -12,8 +11,6 @@ const t = useTranslations(lang);
 
 <section id="contact" class="section">
   <div class="container">
-    <SectionHeading index={5} label={t(UiKey["portfolio.contact.eyebrow"])} />
-
     <div class="contact-panel glass" data-reveal="scale" data-tilt="2">
       <div class="contact-panel__glow" aria-hidden="true"></div>
       <span class="corner-mark corner-mark--tl"></span>

@@ -33,22 +33,18 @@ const stats = [
 
 <section id="about" class="section">
   <div class="container">
-    <SectionHeading index={1} label={t(UiKey["portfolio.about.eyebrow"])} />
+    <SectionHeading label={t(UiKey["portfolio.about.eyebrow"])} />
 
     <div class="about__top">
       <div class="about__portrait" data-reveal="left">
-        <div class="portrait-frame">
-          <Image
-            src={MeImage}
-            alt="Brandon Manzo"
-            class="portrait-img"
-            loading="lazy"
-            widths={[320, 480, 640]}
-            sizes="(max-width: 760px) 70vw, 360px"
-          />
-          <span class="corner-mark corner-mark--tl"></span>
-          <span class="corner-mark corner-mark--br"></span>
-        </div>
+        <Image
+          src={MeImage}
+          alt="Brandon Manzo"
+          class="portrait-img"
+          loading="lazy"
+          widths={[280, 420, 560]}
+          sizes="(max-width: 900px) 60vw, 280px"
+        />
         <div class="portrait-caption">
           <span>{t(UiKey["portfolio.about.location"]).toUpperCase()}</span>
           <span>{t(UiKey["portfolio.about.roleTag"]).toUpperCase()}</span>
@@ -95,47 +91,21 @@ const stats = [
 <style>
   .about__top {
     display: grid;
-    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    grid-template-columns: clamp(200px, 24vw, 280px) minmax(0, 1fr);
     gap: clamp(28px, 5vw, 56px);
     align-items: start;
   }
 
   /* Portrait */
-  .portrait-frame {
-    position: relative;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 12px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
+  .about__portrait {
+    max-width: 280px;
   }
   .portrait-img {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: var(--radius);
+    height: auto;
+    border-radius: var(--radius-lg);
     filter: saturate(0.92);
-  }
-  .corner-mark {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border-color: var(--accent);
-  }
-  .corner-mark--tl {
-    top: -1px;
-    left: -1px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-  }
-  .corner-mark--br {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
   }
   .portrait-caption {
     margin-top: 14px;
@@ -233,7 +203,7 @@ const stats = [
       grid-template-columns: 1fr;
     }
     .about__portrait {
-      max-width: 320px;
+      max-width: 260px;
       margin-inline: auto;
     }
   }
