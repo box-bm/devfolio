@@ -55,8 +55,8 @@ const { pressable, tilt = false, glow = true, class: className } = Astro.props;
     inset: 0;
     border-radius: inherit;
     background: radial-gradient(
-      220px circle at var(--mx, 50%) var(--my, 0%),
-      var(--accent-soft),
+      300px circle at var(--mx, 50%) var(--my, 50%),
+      var(--accent-glow),
       transparent 60%
     );
     opacity: 0;
@@ -78,10 +78,7 @@ const { pressable, tilt = false, glow = true, class: className } = Astro.props;
   }
 
   .card:hover {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
-    box-shadow:
-      var(--shadow-lg),
-      inset 0 1px 0 var(--glass-highlight);
+    border-color: var(--accent);
   }
   .pressable-card:not(.tilt-card):hover {
     transform: translateY(-4px);

@@ -8,6 +8,7 @@ export const es: UiDict = {
   "nav.projects": "Proyectos",
   "nav.contact": "Contacto",
   "nav.guides": "Guías",
+  "nav.backToPortfolio": "Volver al portafolio",
 
   // HERO
   "portfolio.hero.eyebrow": "Desarrollador Frontend y Móvil",
@@ -22,6 +23,18 @@ export const es: UiDict = {
   "portfolio.hero.role.frontend": "Oficio frontend",
   "portfolio.hero.role.mobile": "Apps móviles",
   "portfolio.hero.role.testing": "Probado y confiable",
+
+  // HERO — PANEL "AHORA MISMO"
+  "portfolio.hero.currently.label": "Ahora mismo",
+  "portfolio.hero.currently.location": "Guatemala · GMT-6",
+  "portfolio.hero.currently.locationCaption":
+    "Remoto, en cualquier zona horaria",
+  "portfolio.hero.currently.stack": "React · React Native · TypeScript",
+  "portfolio.hero.currently.stackCaption": "Herramientas del día a día",
+  "portfolio.hero.currently.testing": "7+ años, con pruebas de principio a fin",
+  "portfolio.hero.currently.testingCaption":
+    "TDD, Jest, Vitest, Testing Library",
+  "portfolio.hero.currently.latest": "Último: Minimal Tic Tac Toe",
 
   // MARQUEE
   "portfolio.marquee.label": "Herramientas que uso a diario",
@@ -72,6 +85,7 @@ export const es: UiDict = {
   "portfolio.services.testing.title": "Testing",
   "portfolio.services.testing.description":
     "Mi oficio favorito. Pruebas unitarias, de integración y e2e con mentalidad TDD. Código documentado, confiable y seguro de cambiar.",
+  "portfolio.services.favorite": "Favorito",
 
   // HABILIDADES
   "portfolio.skills.eyebrow": "Stack",
@@ -84,25 +98,13 @@ export const es: UiDict = {
   "portfolio.about.skillsAndTech.languages": "Lenguajes",
   "portfolio.about.skillsAndTech.testingAndQa": "Testing y QA",
   "portfolio.about.skillsAndTech.tools": "Herramientas",
-
-  // CÓMO TRABAJO
-  "portfolio.about.whyWorkWithMe.eyebrow": "Cómo trabajo",
-  "portfolio.about.whyWorkWithMe.title": "¿Por qué trabajar conmigo?",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.title":
-    "Diseño + Desarrollo",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.description":
-    "Uno diseño e ingeniería para crear productos visualmente pulidos y técnicamente sólidos.",
-  "portfolio.about.whyWorkWithMe.userApproach.title":
-    "Enfoque centrado en el usuario",
-  "portfolio.about.whyWorkWithMe.userApproach.description":
-    "Diseño interfaces intuitivas y atractivas basadas en necesidades reales, no en suposiciones.",
-  "portfolio.about.whyWorkWithMe.performance.title":
-    "Obsesionado con el rendimiento",
-  "portfolio.about.whyWorkWithMe.performance.description":
-    "Rápido, fluido y confiable por defecto, aplicando buenas prácticas en cada capa.",
-  "portfolio.about.whyWorkWithMe.testing.title": "Probado y confiable",
-  "portfolio.about.whyWorkWithMe.testing.description":
-    "Respaldo cada funcionalidad con pruebas automatizadas, para que lo que funciona hoy siga funcionando mañana.",
+  "portfolio.skills.frameworksDescription":
+    "Donde pasa la mayor parte de mi día — web y móvil.",
+  "portfolio.skills.languagesDescription":
+    "Tipado donde importa, nativo donde ayuda.",
+  "portfolio.skills.testingDescription": "Mi parte favorita del trabajo.",
+  "portfolio.skills.toolsDescription":
+    "Editor, dispositivos, pipelines y handoff de diseño.",
 
   // PROYECTOS
   "portfolio.projects.eyebrow": "Trabajo seleccionado",
@@ -141,6 +143,8 @@ export const es: UiDict = {
   "legal.effectiveDate": "Fecha de vigencia",
   "title.legal": "Legal - BoxDev",
   "legal.title": "Legal",
+  "legal.subtitle":
+    "Políticas de privacidad y términos de las apps que publico, en inglés y español.",
 
   // GUÍAS
   "title.guides": "Guías - BoxDev",
@@ -153,6 +157,11 @@ export const es: UiDict = {
   "guides.contact.title": "Ponte en contacto",
   "guides.contact.description":
     "¿Tienes alguna pregunta o una idea en mente? No dudes en escribirme.",
+  "guides.eyebrow.notes": "Notas",
+  "guides.eyebrow.entries": "entradas",
+  "legal.eyebrow.documents": "Documentos",
+  "legal.eyebrow.apps": "apps",
+  "legal.questions": "¿Preguntas sobre alguno de estos documentos? Escribe a",
 
   // FOOTER
   "footer.label": "Construido con Astro",

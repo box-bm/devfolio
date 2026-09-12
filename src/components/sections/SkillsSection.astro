@@ -1,5 +1,4 @@
 ---
-import Card from "@components/Card.astro";
 import TechChip from "@components/TechChip.astro";
 import SectionHeading from "@components/visuals/SectionHeading.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
@@ -11,10 +10,12 @@ const t = useTranslations(lang);
 const categories = [
   {
     label: t(UiKey["portfolio.about.skillsAndTech.frameworksAndLibraries"]),
+    desc: t(UiKey["portfolio.skills.frameworksDescription"]),
     techs: ["React", "React Native", "Flutter", "Astro", "Next.JS", "Nestjs"],
   },
   {
     label: t(UiKey["portfolio.about.skillsAndTech.languages"]),
+    desc: t(UiKey["portfolio.skills.languagesDescription"]),
     techs: [
       "Typescript",
       "Javascript",
@@ -30,11 +31,12 @@ const categories = [
   },
   {
     label: t(UiKey["portfolio.about.skillsAndTech.testingAndQa"]),
+    desc: t(UiKey["portfolio.skills.testingDescription"]),
     techs: ["Jest", "Vitest", "Testing Library", "Postman"],
-    featured: true,
   },
   {
     label: t(UiKey["portfolio.about.skillsAndTech.tools"]),
+    desc: t(UiKey["portfolio.skills.toolsDescription"]),
     techs: [
       "Git",
       "Github",
@@ -55,27 +57,30 @@ const categories = [
 <section id="skills" class="section">
   <div class="container">
     <SectionHeading
-      eyebrow={t(UiKey["portfolio.skills.eyebrow"])}
+      index={3}
+      label={t(UiKey["portfolio.skills.eyebrow"])}
       heading={t(UiKey["portfolio.skills.heading"])}
       description={t(UiKey["portfolio.skills.description"])}
+      split
     />
 
-    <div class="skills__grid">
+    <div class="skills__list">
       {
         categories.map((cat, i) => (
           <div
-            class:list={["skill-cat", cat.featured && "skill-cat--featured"]}
+            class="skill-row"
             data-reveal
-            style={`--reveal-delay: ${i * 80}ms`}
+            style={`--reveal-delay: ${i * 60}ms`}
           >
-            <Card>
-              <span class="skill-cat__label">{cat.label}</span>
-              <div class="skill-cat__chips">
-                {cat.techs.map((tech) => (
-                  <TechChip tech={tech} />
-                ))}
-              </div>
-            </Card>
+            <div class="skill-row__label">
+              <h3>{cat.label}</h3>
+              <p>{cat.desc}</p>
+            </div>
+            <div class="skill-row__chips">
+              {cat.techs.map((tech) => (
+                <TechChip tech={tech} />
+              ))}
+            </div>
           </div>
         ))
       }
@@ -84,36 +89,47 @@ const categories = [
 </section>
 
 <style>
-  .skills__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+  .skills__list {
+    display: flex;
+    flex-direction: column;
   }
 
-  .skill-cat__label {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
+  .skill-row {
+    display: grid;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 48px;
+    padding: 44px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: start;
   }
-  .skill-cat__chips {
+  .skill-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .skill-row__label h3 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .skill-row__label p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 30ch;
+  }
+
+  .skill-row__chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
+    padding-top: 6px;
   }
 
-  .skill-cat--featured :global(.card) {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
-    background:
-      linear-gradient(160deg, var(--accent-soft), transparent 55%),
-      var(--glass-bg);
-  }
-
-  @media (max-width: 760px) {
-    .skills__grid {
+  @media (max-width: 700px) {
+    .skill-row {
       grid-template-columns: 1fr;
+      gap: 16px;
     }
   }
 </style>

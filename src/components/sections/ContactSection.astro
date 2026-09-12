@@ -1,6 +1,6 @@
 ---
 import Button from "@components/Button.astro";
-import ContactLinks from "@components/ContactLinks.astro";
+import SectionHeading from "@components/visuals/SectionHeading.astro";
 import { Mail, Linkedin } from "@lucide/astro";
 import { email, linkedIn } from "@constants";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
@@ -12,9 +12,15 @@ const t = useTranslations(lang);
 
 <section id="contact" class="section">
   <div class="container">
-    <div class="contact-panel glass" data-reveal="scale">
+    <SectionHeading index={5} label={t(UiKey["portfolio.contact.eyebrow"])} />
+
+    <div class="contact-panel glass" data-reveal="scale" data-tilt="2">
       <div class="contact-panel__glow" aria-hidden="true"></div>
-      <span class="eyebrow">{t(UiKey["portfolio.contact.eyebrow"])}</span>
+      <span class="corner-mark corner-mark--tl"></span>
+      <span class="corner-mark corner-mark--tr"></span>
+      <span class="corner-mark corner-mark--bl"></span>
+      <span class="corner-mark corner-mark--br"></span>
+
       <h2 class="contact-panel__title">
         {t(UiKey["portfolio.contact.title"])}
       </h2>
@@ -22,16 +28,14 @@ const t = useTranslations(lang);
 
       <div class="contact-panel__actions">
         <Button href={`mailto:${email}`} magnetic>
-          <Mail size={18} />
+          <Mail size={16} />
           {t(UiKey["portfolio.contact.sendEmail"])}
         </Button>
         <Button type="Outlined" href={linkedIn}>
-          <Linkedin size={18} />
+          <Linkedin size={16} />
           {t(UiKey["portfolio.contact.connectOnLinkedin"])}
         </Button>
       </div>
-
-      <ContactLinks />
 
       <p class="caption contact-panel__caption">
         {t(UiKey["portfolio.contact.caption"])}
@@ -44,46 +48,76 @@ const t = useTranslations(lang);
   .contact-panel {
     position: relative;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 18px;
-    padding: clamp(40px, 7vw, 80px) clamp(24px, 5vw, 64px);
+    padding: clamp(40px, 7vw, 64px) clamp(24px, 6vw, 56px);
     border-radius: var(--radius-xl);
   }
   .contact-panel__glow {
     position: absolute;
-    top: -40%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 520px;
-    height: 520px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--accent-glow), transparent 65%);
-    filter: blur(40px);
+    inset: 0;
+    background: radial-gradient(
+      520px circle at var(--mx, 50%) var(--my, 50%),
+      var(--accent-glow),
+      transparent 60%
+    );
     pointer-events: none;
   }
-  .contact-panel > *:not(.contact-panel__glow) {
+  .contact-panel > *:not(.contact-panel__glow):not(.corner-mark) {
     position: relative;
     z-index: 1;
   }
+
+  .corner-mark {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--accent);
+  }
+  .corner-mark--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-mark--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 1px solid;
+    border-right: 1px solid;
+  }
+  .corner-mark--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-mark--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
   .contact-panel__title {
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    max-width: 16ch;
+    max-width: 24ch;
+    font-size: clamp(32px, 4.2vw, 54px);
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
   .contact-panel .body-large {
+    margin-top: 22px;
     max-width: 52ch;
   }
   .contact-panel__actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 12px;
-    margin-top: 8px;
+    margin-top: 34px;
   }
   .contact-panel__caption {
-    margin-top: 4px;
-    color: var(--text-tertiary);
+    margin-top: 30px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
   }
 </style>

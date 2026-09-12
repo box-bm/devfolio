@@ -1,46 +1,124 @@
 ---
 interface Props {
-  eyebrow?: string;
-  heading: string;
+  index?: number;
+  total?: number;
+  label?: string;
+  heading?: string;
   description?: string;
+  split?: boolean;
   align?: "left" | "center";
 }
 
-const { eyebrow, heading, description, align = "left" } = Astro.props;
+const {
+  index,
+  total = 5,
+  label,
+  heading,
+  description,
+  split = false,
+  align = "left",
+} = Astro.props;
+
+const pad = (n: number) => String(n).padStart(2, "0");
 ---
 
-<header class:list={["section-heading", align === "center" && "is-center"]}>
+<header
+  class:list={[
+    "section-heading",
+    align === "center" && "is-center",
+    split && "is-split-heading",
+  ]}
+>
   {
-    eyebrow && (
-      <span class="eyebrow" data-reveal>
-        {eyebrow}
-      </span>
+    index && (
+      <div class="section-eyebrow-row" data-reveal>
+        <span class="section-eyebrow-num">
+          {pad(index)} / {pad(total)}
+        </span>
+        <span class="section-eyebrow-rule" />
+        <span class="section-eyebrow-label">{label}</span>
+      </div>
     )
   }
-  <h2 data-reveal style="--reveal-delay: 60ms">{heading}</h2>
   {
-    description && (
-      <p class="body-large" data-reveal style="--reveal-delay: 120ms">
-        {description}
-      </p>
+    heading && (
+      <div class:list={["heading-row", split && "is-split"]}>
+        <h2 data-reveal style="--reveal-delay: 60ms">
+          {heading}
+        </h2>
+        {description && (
+          <p class="body-large" data-reveal style="--reveal-delay: 120ms">
+            {description}
+          </p>
+        )}
+      </div>
     )
   }
 </header>
 
 <style>
   .section-heading {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
     max-width: 640px;
     margin-bottom: clamp(32px, 5vw, 56px);
   }
-  .section-heading.is-center {
+  .section-heading.is-center,
+  .section-heading.is-split-heading {
+    max-width: none;
+  }
+
+  .section-eyebrow-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: clamp(28px, 4vw, 44px);
+  }
+  .section-eyebrow-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .section-eyebrow-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .section-eyebrow-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .heading-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .heading-row.is-split {
+    max-width: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+  .heading-row.is-split h2 {
+    flex: 1;
+    min-width: 260px;
+  }
+  .heading-row.is-split p {
+    margin: 0;
+    max-width: 46ch;
+  }
+  .section-heading.is-center .heading-row {
     align-items: center;
     text-align: center;
     margin-inline: auto;
   }
-  .section-heading p {
+  .heading-row p {
     margin: 0;
   }
 </style>

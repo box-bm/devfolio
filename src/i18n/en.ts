@@ -8,6 +8,7 @@ export const en: UiDict = {
   "nav.projects": "Projects",
   "nav.contact": "Contact",
   "nav.guides": "Guides",
+  "nav.backToPortfolio": "Back to portfolio",
 
   // HERO
   "portfolio.hero.eyebrow": "Frontend & Mobile Engineer",
@@ -22,6 +23,17 @@ export const en: UiDict = {
   "portfolio.hero.role.frontend": "Frontend craft",
   "portfolio.hero.role.mobile": "Mobile apps",
   "portfolio.hero.role.testing": "Tested & reliable",
+
+  // HERO — CURRENTLY PANEL
+  "portfolio.hero.currently.label": "Currently",
+  "portfolio.hero.currently.location": "Guatemala · GMT-6",
+  "portfolio.hero.currently.locationCaption": "Remote, any timezone",
+  "portfolio.hero.currently.stack": "React · React Native · TypeScript",
+  "portfolio.hero.currently.stackCaption": "Daily drivers",
+  "portfolio.hero.currently.testing": "7+ years, tested end to end",
+  "portfolio.hero.currently.testingCaption":
+    "TDD, Jest, Vitest, Testing Library",
+  "portfolio.hero.currently.latest": "Latest: Minimal Tic Tac Toe",
 
   // MARQUEE
   "portfolio.marquee.label": "Tools I reach for every day",
@@ -72,6 +84,7 @@ export const en: UiDict = {
   "portfolio.services.testing.title": "Testing",
   "portfolio.services.testing.description":
     "My favorite craft. Unit, integration and e2e tests with a TDD mindset. Code that's documented, trustworthy and safe to change.",
+  "portfolio.services.favorite": "Favorite",
 
   // SKILLS
   "portfolio.skills.eyebrow": "Stack",
@@ -84,23 +97,13 @@ export const en: UiDict = {
   "portfolio.about.skillsAndTech.languages": "Languages",
   "portfolio.about.skillsAndTech.testingAndQa": "Testing & QA",
   "portfolio.about.skillsAndTech.tools": "Tools",
-
-  // HOW I WORK
-  "portfolio.about.whyWorkWithMe.eyebrow": "How I work",
-  "portfolio.about.whyWorkWithMe.title": "Why work with me?",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.title":
-    "Design + Development",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.description":
-    "I bridge design and engineering to create products that are visually polished and technically solid.",
-  "portfolio.about.whyWorkWithMe.userApproach.title": "User-centered approach",
-  "portfolio.about.whyWorkWithMe.userApproach.description":
-    "I design intuitive, engaging interfaces built around real user needs — not assumptions.",
-  "portfolio.about.whyWorkWithMe.performance.title": "Performance obsessed",
-  "portfolio.about.whyWorkWithMe.performance.description":
-    "Fast, smooth and reliable by default, using performance best practices on every layer.",
-  "portfolio.about.whyWorkWithMe.testing.title": "Tested & reliable",
-  "portfolio.about.whyWorkWithMe.testing.description":
-    "I back features with automated tests, so what works today keeps working tomorrow.",
+  "portfolio.skills.frameworksDescription":
+    "Where most of my day happens — web and mobile.",
+  "portfolio.skills.languagesDescription":
+    "Typed where it counts, native where it helps.",
+  "portfolio.skills.testingDescription": "My favorite part of the job.",
+  "portfolio.skills.toolsDescription":
+    "Editor, devices, pipelines and design handoff.",
 
   // PROJECTS
   "portfolio.projects.eyebrow": "Selected work",
@@ -139,6 +142,8 @@ export const en: UiDict = {
   "legal.effectiveDate": "Effective date",
   "title.legal": "Legal - BoxDev",
   "legal.title": "Legal",
+  "legal.subtitle":
+    "Privacy policies and terms for the apps I publish, in English and Spanish.",
 
   // GUIDES
   "title.guides": "Guides - BoxDev",
@@ -151,6 +156,11 @@ export const en: UiDict = {
   "guides.contact.title": "Get in touch",
   "guides.contact.description":
     "Have a question or an idea in mind? Feel free to reach out.",
+  "guides.eyebrow.notes": "Notes",
+  "guides.eyebrow.entries": "entries",
+  "legal.eyebrow.documents": "Documents",
+  "legal.eyebrow.apps": "apps",
+  "legal.questions": "Questions about any of these documents? Write to",
 
   // FOOTER
   "footer.label": "Built with Astro",

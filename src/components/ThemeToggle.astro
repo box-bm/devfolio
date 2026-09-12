@@ -4,59 +4,62 @@ import { Sun, Moon } from "@lucide/astro";
 
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="icon-wrap">
-    <Moon class="icon moon" size={18} />
-    <Sun class="icon sun" size={18} />
+    <Moon class="icon moon" size={13} />
+    <Sun class="icon sun" size={13} />
   </span>
+  <span class="theme-toggle__label" id="theme-toggle-label">DARK</span>
 </button>
 
 <style>
   .theme-toggle {
-    display: inline-grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
     background: transparent;
     cursor: pointer;
-    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
     transition:
-      background var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out);
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
   }
   .theme-toggle:hover {
-    background: var(--accent-soft);
-    border-color: var(--glass-border);
+    color: var(--text-primary);
+    border-color: var(--accent);
   }
 
   .icon-wrap {
     position: relative;
-    width: 18px;
-    height: 18px;
+    width: 13px;
+    height: 13px;
   }
   .icon {
     position: absolute;
     inset: 0;
-    color: var(--text-primary);
     transition:
-      transform var(--dur) var(--ease-spring),
+      transform var(--dur) var(--ease-out),
       opacity var(--dur) var(--ease-out);
   }
-  /* default (light) shows moon, hides sun */
-  .sun {
-    transform: rotate(-90deg) scale(0.4);
+  /* default (light) shows sun, hides moon */
+  .moon {
+    transform: scale(0.5);
     opacity: 0;
   }
-  .moon {
-    transform: rotate(0) scale(1);
-    opacity: 1;
-  }
-  html[data-theme="dark"] .sun {
-    transform: rotate(0) scale(1);
+  .sun {
+    transform: scale(1);
     opacity: 1;
   }
   html[data-theme="dark"] .moon {
-    transform: rotate(90deg) scale(0.4);
+    transform: scale(1);
+    opacity: 1;
+  }
+  html[data-theme="dark"] .sun {
+    transform: scale(0.5);
     opacity: 0;
   }
 </style>
@@ -64,12 +67,21 @@ import { Sun, Moon } from "@lucide/astro";
 <script>
   function initThemeToggle() {
     const btn = document.getElementById("theme-toggle");
+    const label = document.getElementById("theme-toggle-label");
     const html = document.documentElement;
     if (!btn) return;
+
+    const sync = () => {
+      if (label)
+        label.textContent = html.dataset.theme === "dark" ? "DARK" : "LIGHT";
+    };
+    sync();
+
     btn.addEventListener("click", () => {
       const next = html.dataset.theme === "dark" ? "light" : "dark";
       html.dataset.theme = next;
       localStorage.setItem("theme", next);
+      sync();
     });
   }
   document.addEventListener("astro:page-load", initThemeToggle);

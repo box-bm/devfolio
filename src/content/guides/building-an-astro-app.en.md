@@ -275,7 +275,7 @@ Components are organized by responsibility, not by page. This makes them more re
 
 - `ProjectCard.astro`: Portfolio project display
 - `TechChip.astro`: Technology stack badges
-- `LanguagePicker.astro`: Language switching dropdown
+- `LanguagePicker.astro`: Language switch toggle
 
 ### Component Design Philosophy
 

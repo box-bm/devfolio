@@ -1,10 +1,9 @@
 ---
 import Button from "@components/Button.astro";
-import ContactLinks from "@components/ContactLinks.astro";
-import HeroVisual from "@components/visuals/HeroVisual.astro";
+import CurrentlyPanel from "@components/visuals/CurrentlyPanel.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
-import { Layers, Smartphone, ShieldCheck, ChevronDown } from "@lucide/astro";
+import { ArrowRight, Mail } from "@lucide/astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,9 +17,9 @@ const t = useTranslations(lang);
         {t(UiKey["portfolio.hero.available"])}
       </span>
 
-      <span class="eyebrow" data-reveal style="--reveal-delay: 60ms">
+      <p class="eyebrow" data-reveal style="--reveal-delay: 60ms">
         {t(UiKey["portfolio.hero.eyebrow"])}
-      </span>
+      </p>
 
       <h1 class="hero__title" data-reveal style="--reveal-delay: 120ms">
         {t(UiKey["portfolio.hero.title"])}
@@ -39,121 +38,106 @@ const t = useTranslations(lang);
       <div class="hero__actions" data-reveal style="--reveal-delay: 280ms">
         <Button href="#projects" target="_parent" magnetic>
           {t(UiKey["portfolio.hero.viewWork"])}
+          <ArrowRight size={16} />
         </Button>
         <Button type="Outlined" href="#contact" target="_parent">
+          <Mail size={16} />
           {t(UiKey["portfolio.hero.getInTouch"])}
         </Button>
       </div>
 
       <div class="hero__roles" data-reveal style="--reveal-delay: 360ms">
-        <span class="role"
-          ><Layers size={16} />{t(UiKey["portfolio.hero.role.frontend"])}</span
-        >
-        <span class="role"
-          ><Smartphone size={16} />{
-            t(UiKey["portfolio.hero.role.mobile"])
-          }</span
-        >
-        <span class="role"
-          ><ShieldCheck size={16} />{
-            t(UiKey["portfolio.hero.role.testing"])
-          }</span
-        >
-      </div>
-
-      <div class="hero__social" data-reveal style="--reveal-delay: 440ms">
-        <ContactLinks />
+        <span class="role">{t(UiKey["portfolio.hero.role.frontend"])}</span>
+        <span class="role">{t(UiKey["portfolio.hero.role.mobile"])}</span>
+        <span class="role">{t(UiKey["portfolio.hero.role.testing"])}</span>
       </div>
     </div>
 
-    <div
-      class="hero__visual"
-      data-reveal="scale"
-      style="--reveal-delay: 200ms"
-      data-parallax="0.05"
-    >
-      <HeroVisual />
+    <div class="hero__visual" data-reveal="scale" style="--reveal-delay: 200ms">
+      <CurrentlyPanel />
+    </div>
+
+    <div class="scroll-cue">
+      <span class="scroll-cue__line"></span>
+      <span>{t(UiKey["portfolio.hero.scroll"])}</span>
     </div>
   </div>
-
-  <a
-    href="#about"
-    class="scroll-cue"
-    aria-label={t(UiKey["portfolio.hero.scroll"])}
-  >
-    <span>{t(UiKey["portfolio.hero.scroll"])}</span>
-    <ChevronDown size={18} />
-  </a>
 </section>
 
 <style>
   .hero {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 110px;
-    padding-bottom: 80px;
+    padding-top: clamp(140px, 16vw, 176px);
+    padding-bottom: 118px;
   }
 
   .hero__grid {
+    position: relative;
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    align-items: center;
-    gap: clamp(32px, 6vw, 72px);
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+    gap: clamp(32px, 6vw, 64px);
   }
 
   .hero__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 0;
   }
 
   .status {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 7px 14px;
+    gap: 10px;
+    width: fit-content;
+    padding: 6px 12px 6px 10px;
     border-radius: var(--radius-pill);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    font-size: 0.82rem;
-    font-weight: 500;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
     color: var(--text-secondary);
   }
   .status__dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: #16a34a;
-    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
-    animation: pulse 2s infinite;
+    background: var(--accent);
+    animation: pulse 2.6s ease-in-out infinite;
   }
   @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
-    }
-    70% {
-      box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
-    }
+    0%,
     100% {
-      box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.82);
     }
   }
 
+  .eyebrow {
+    margin: 26px 0 14px;
+  }
+
   .hero__title {
-    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
-    line-height: 1.02;
+    font-size: clamp(42px, 6.4vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
   .hero__title .gradient-text {
     display: block;
   }
 
   .hero__caption {
-    max-width: 540px;
+    margin-top: 28px;
+    max-width: 52ch;
     color: var(--text-secondary);
   }
 
@@ -161,57 +145,47 @@ const t = useTranslations(lang);
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 6px;
+    margin-top: 34px;
   }
 
   .hero__roles {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 8px;
+    gap: 10px;
+    margin-top: 52px;
   }
   .role {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
     color: var(--text-secondary);
-  }
-  .role :global(svg) {
-    color: var(--accent);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 5px 10px;
   }
 
-  .hero__social {
-    margin-top: 6px;
+  .hero__visual {
+    margin-top: 62px;
   }
 
   .scroll-cue {
     position: absolute;
-    left: 50%;
-    bottom: 26px;
-    transform: translateX(-50%);
-    display: inline-flex;
-    flex-direction: column;
+    left: -4px;
+    bottom: -80px;
+    display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
+  }
+  .scroll-cue__line {
+    width: 26px;
+    height: 1px;
+    background: var(--line);
+  }
+  .scroll-cue span:last-child {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
-  }
-  .scroll-cue :global(svg) {
-    animation: bob 1.8s ease-in-out infinite;
-  }
-  @keyframes bob {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(5px);
-    }
+    color: var(--text-secondary);
   }
 
   @media (max-width: 900px) {
@@ -221,6 +195,7 @@ const t = useTranslations(lang);
     }
     .hero__visual {
       order: -1;
+      margin-top: 0;
     }
     .scroll-cue {
       display: none;

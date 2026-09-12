@@ -1,9 +1,8 @@
 ---
-import Button from "@components/Button.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import TechChip from "@components/TechChip.astro";
 import SectionHeading from "@components/visuals/SectionHeading.astro";
-import { ArrowRight } from "@lucide/astro";
+import { ArrowUpRight } from "@lucide/astro";
 import { githubRepos } from "@constants";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
@@ -15,13 +14,17 @@ const t = useTranslations(lang);
 <section id="projects" class="section">
   <div class="container">
     <SectionHeading
-      eyebrow={t(UiKey["portfolio.projects.eyebrow"])}
+      index={4}
+      label={t(UiKey["portfolio.projects.eyebrow"])}
       heading={t(UiKey["portfolio.projects.title"])}
       description={t(UiKey["portfolio.projects.description"])}
+      split
     />
 
     <div class="projects__grid">
       <ProjectCard
+        index={1}
+        badge="GOOGLE PLAY"
         title={t(UiKey["portfolio.projects.app1.title"])}
         description={t(UiKey["portfolio.projects.app1.description"])}
         viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
@@ -32,6 +35,8 @@ const t = useTranslations(lang);
       </ProjectCard>
 
       <ProjectCard
+        index={2}
+        badge="PUB.DEV"
         title={t(UiKey["portfolio.projects.app2.title"])}
         description={t(UiKey["portfolio.projects.app2.description"])}
         codeLink="https://github.com/box-bm/dpi_validator"
@@ -41,6 +46,8 @@ const t = useTranslations(lang);
       </ProjectCard>
 
       <ProjectCard
+        index={3}
+        badge="PUB.DEV"
         title={t(UiKey["portfolio.projects.app3.title"])}
         description={t(UiKey["portfolio.projects.app3.description"])}
         codeLink="https://github.com/box-bm/nit_validator"
@@ -51,10 +58,15 @@ const t = useTranslations(lang);
     </div>
 
     <div class="projects__cta" data-reveal>
-      <Button type="Outlined" href={githubRepos}>
+      <a
+        class="projects__cta-link"
+        href={githubRepos}
+        target="_blank"
+        rel="noreferrer"
+      >
         {t(UiKey["portfolio.projects.viewAll"])}
-        <ArrowRight size={18} />
-      </Button>
+        <ArrowUpRight size={15} />
+      </a>
     </div>
   </div>
 </section>
@@ -67,7 +79,21 @@ const t = useTranslations(lang);
   }
   .projects__cta {
     display: flex;
-    justify-content: center;
-    margin-top: 36px;
+    justify-content: flex-end;
+    margin-top: 22px;
+  }
+  .projects__cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+  }
+  .projects__cta-link:hover {
+    color: var(--accent) !important;
   }
 </style>

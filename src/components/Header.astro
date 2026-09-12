@@ -1,53 +1,59 @@
 ---
-import LanguagePicker from "@components/LanguagePicker.astro";
+import Logo from "@components/visuals/Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import Divider from "@components/Divider.astro";
+import LanguagePicker from "@components/LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+import { ArrowLeft } from "@lucide/astro";
 
 interface Props {
   hideMenu?: boolean;
 }
 
 const { hideMenu = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const base = lang === "en" ? "" : `/${lang}`;
 ---
 
 <header class="site-header" data-site-header>
-  <nav class="nav glass">
-    <a class="brand" href="/">
-      <span class="brand__mark">B</span>
-      <span class="brand__text">Box<span class="brand__accent">Dev</span></span>
-    </a>
+  <div class="nav">
+    <Logo />
 
-    <div class="nav__links">
-      <slot name="link" />
-    </div>
+    {
+      hideMenu ? (
+        <a class="back-link" href={`${base}/`}>
+          <ArrowLeft size={15} />
+          {t(UiKey["nav.backToPortfolio"])}
+        </a>
+      ) : (
+        <>
+          <div class="nav__links">
+            <slot name="link" />
+          </div>
 
-    <div class="nav__right">
-      <ThemeToggle />
-      <LanguagePicker />
-      <div class="nav__secondary">
-        <slot name="secondary-link" />
-      </div>
-      {
-        !hideMenu && (
-          <button
-            class="menu-btn"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-          >
-            <span />
-            <span />
-          </button>
-        )
-      }
-    </div>
-  </nav>
+          <div class="nav__right">
+            <LanguagePicker />
+            <ThemeToggle />
+            <button
+              class="menu-btn"
+              aria-label="Toggle menu"
+              aria-expanded="false"
+            >
+              <span />
+              <span />
+            </button>
+          </div>
+        </>
+      )
+    }
+  </div>
 
   {
     !hideMenu && (
-      <div class="mobile-menu glass">
+      <div class="mobile-menu">
         <div class="mobile-menu__links">
           <slot name="link" />
-          <Divider />
           <slot name="secondary-link" />
         </div>
       </div>
@@ -62,75 +68,54 @@ const { hideMenu = false } = Astro.props;
     left: 0;
     right: 0;
     z-index: 2000;
-    display: flex;
-    justify-content: center;
-    padding: 14px clamp(16px, 4vw, 28px);
-    transition: padding var(--dur) var(--ease-out);
+    border-bottom: 1px solid transparent;
+    transition:
+      background var(--dur) var(--ease-out),
+      border-color var(--dur) var(--ease-out),
+      backdrop-filter var(--dur) var(--ease-out);
+  }
+  .site-header.scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-bottom-color: var(--line);
   }
 
   .nav {
-    width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 14px clamp(16px, 4vw, 28px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 10px 12px 10px 16px;
-    border-radius: var(--radius-pill);
-    transition:
-      box-shadow var(--dur) var(--ease-out),
-      background var(--dur) var(--ease-out);
-  }
-
-  .site-header.scrolled .nav {
-    background: var(--glass-bg-strong);
-    box-shadow:
-      var(--shadow-lg),
-      inset 0 1px 0 var(--glass-highlight);
-  }
-
-  /* Brand */
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text-primary);
-  }
-  .brand__mark {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
-    color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-    box-shadow: 0 4px 14px var(--accent-glow);
-    transition: transform var(--dur) var(--ease-spring);
-  }
-  .brand:hover .brand__mark {
-    transform: rotate(-8deg) scale(1.08);
-  }
-  .brand__accent {
-    color: var(--accent);
+    gap: 28px;
   }
 
   .nav__links {
+    flex: 1;
     display: flex;
-    gap: 4px;
     align-items: center;
+    justify-content: flex-end;
+    gap: 22px;
   }
 
   .nav__right {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    margin-left: 6px;
   }
-  .nav__secondary {
-    display: flex;
+
+  .back-link {
+    flex: 1;
+    display: inline-flex;
     align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+  .back-link:hover {
+    color: var(--text-primary);
   }
 
   /* Hamburger */
@@ -139,63 +124,62 @@ const { hideMenu = false } = Astro.props;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
     background: transparent;
     cursor: pointer;
   }
   .menu-btn span {
     display: block;
-    width: 18px;
-    height: 2px;
+    width: 14px;
+    height: 1px;
     margin-inline: auto;
-    border-radius: 2px;
-    background: var(--text-primary);
+    background: var(--text-secondary);
     transition:
       transform var(--dur) var(--ease-out),
       opacity var(--dur);
   }
   .menu-btn[aria-expanded="true"] span:first-child {
-    transform: translateY(3.5px) rotate(45deg);
+    transform: translateY(2.5px) rotate(45deg);
   }
   .menu-btn[aria-expanded="true"] span:last-child {
-    transform: translateY(-3.5px) rotate(-45deg);
+    transform: translateY(-2.5px) rotate(-45deg);
   }
 
   /* Mobile menu */
   .mobile-menu {
     position: absolute;
-    top: 76px;
-    left: clamp(16px, 4vw, 28px);
-    right: clamp(16px, 4vw, 28px);
-    border-radius: var(--radius-lg);
-    padding: 18px;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    padding: 8px clamp(16px, 4vw, 28px) 18px;
     opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-    transform-origin: top right;
+    transform: translateY(-8px);
     pointer-events: none;
     transition:
       opacity var(--dur) var(--ease-out),
-      transform var(--dur) var(--ease-spring);
+      transform var(--dur) var(--ease-out);
   }
   .mobile-menu.open {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     pointer-events: auto;
   }
   .mobile-menu__links {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 4px;
     align-items: flex-start;
-    font-size: 1.05rem;
   }
 
   @media (max-width: 720px) {
-    .nav__links,
-    .nav__secondary {
+    .nav__links {
       display: none;
     }
     .menu-btn {
@@ -206,47 +190,17 @@ const { hideMenu = false } = Astro.props;
 
 <style is:global>
   .header-link {
-    position: relative;
-    padding: 8px 14px;
-    border-radius: var(--radius-pill);
+    font-size: 13.5px;
     color: var(--text-secondary);
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition:
-      color var(--dur) var(--ease-out),
-      background var(--dur);
+    transition: color var(--dur) var(--ease-out);
   }
-  .header-link::after {
-    content: "";
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 4px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur) var(--ease-out);
-  }
-  .header-link:hover {
+  .header-link:hover,
+  .header-link.active {
     color: var(--text-primary);
   }
-  .header-link:hover::after,
-  .header-link.active::after {
-    transform: scaleX(1);
-  }
-  .header-link.active {
-    color: var(--accent);
-  }
   .mobile-menu__links .header-link {
-    padding: 6px 0;
+    padding: 10px 0;
     width: 100%;
-  }
-  .mobile-menu__links .header-link::after {
-    left: 0;
-    right: auto;
-    width: 24px;
   }
 </style>
 

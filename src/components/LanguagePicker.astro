@@ -1,17 +1,37 @@
 ---
+import { Languages } from "@lucide/astro";
 import { languages } from "@i18n/langs";
-import Dropdown from "@components/Dropdown.astro";
 import { getLangFromUrl } from "@i18n/utils";
 
 const currentLang = getLangFromUrl(Astro.url);
 const currentURL = new URL(Astro.url);
-
-const langs = Object.entries(languages).map(([lang, label]) => ({
-  label,
-  href: `/${lang}${currentURL.pathname.replace(`/${currentLang}`, "")}`,
-}));
+const otherLang = Object.keys(languages).find((l) => l !== currentLang)!;
+const href = `/${otherLang}${currentURL.pathname.replace(`/${currentLang}`, "")}`;
 ---
 
-<Dropdown items={langs}>
-  <span slot="trigger">{currentLang.toUpperCase()}</span>
-</Dropdown>
+<a class="lang-toggle" href={href} aria-label="Switch language">
+  <Languages size={13} />
+  <span>{currentLang.toUpperCase()}</span>
+</a>
+
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary) !important;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .lang-toggle:hover {
+    color: var(--text-primary) !important;
+    border-color: var(--accent);
+  }
+</style>
