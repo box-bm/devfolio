@@ -1,14 +1,11 @@
 ---
-/** Fixed, animated mesh-gradient backdrop with floating accent blobs,
- *  a faint grid and a grain overlay. Purely decorative. */
+/** Fixed blueprint backdrop: a soft warm glow over the near-dark/near-light
+ *  base, plus a faint dot-grid field fading out toward the edges.
+ *  Purely decorative — mounted once in Base.astro. */
 ---
 
 <div class="mesh" aria-hidden="true">
-  <div class="mesh__grid"></div>
-  <span class="blob blob--1"></span>
-  <span class="blob blob--2"></span>
-  <span class="blob blob--3"></span>
-  <div class="mesh__grain"></div>
+  <div class="dot-field"></div>
 </div>
 
 <style>
@@ -20,100 +17,11 @@
     pointer-events: none;
     background:
       radial-gradient(
-        120% 80% at 50% -10%,
-        var(--accent-soft),
-        transparent 60%
+        1100px 640px at 78% -10%,
+        var(--accent-glow),
+        transparent 64%
       ),
+      radial-gradient(760px 460px at 2% 28%, var(--glow-2), transparent 62%),
       var(--bg);
-  }
-
-  .mesh__grid {
-    position: absolute;
-    inset: -2px;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(
-      120% 90% at 50% 0%,
-      #000 0%,
-      transparent 70%
-    );
-    mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 70%);
-    opacity: 0.6;
-  }
-
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.9;
-    will-change: transform;
-  }
-
-  .blob--1 {
-    width: 46vw;
-    height: 46vw;
-    top: -12vw;
-    left: -8vw;
-    background: radial-gradient(circle, var(--mesh-1), transparent 70%);
-    animation: drift1 22s var(--ease-out) infinite alternate;
-  }
-
-  .blob--2 {
-    width: 40vw;
-    height: 40vw;
-    top: 20vh;
-    right: -10vw;
-    background: radial-gradient(circle, var(--mesh-2), transparent 70%);
-    animation: drift2 28s var(--ease-out) infinite alternate;
-  }
-
-  .blob--3 {
-    width: 38vw;
-    height: 38vw;
-    bottom: -14vw;
-    left: 28vw;
-    background: radial-gradient(circle, var(--mesh-3), transparent 70%);
-    animation: drift3 26s var(--ease-out) infinite alternate;
-  }
-
-  .mesh__grain {
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  @keyframes drift1 {
-    from {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-    to {
-      transform: translate3d(8vw, 6vh, 0) scale(1.12);
-    }
-  }
-  @keyframes drift2 {
-    from {
-      transform: translate3d(0, 0, 0) scale(1.05);
-    }
-    to {
-      transform: translate3d(-7vw, 8vh, 0) scale(0.95);
-    }
-  }
-  @keyframes drift3 {
-    from {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-    to {
-      transform: translate3d(6vw, -8vh, 0) scale(1.1);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .blob {
-      animation: none !important;
-    }
   }
 </style>

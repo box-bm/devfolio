@@ -7,118 +7,130 @@
   :root {
     color-scheme: light;
 
-    /* Fonts */
-    --font-display: "Space Grotesk", "Work Sans", system-ui, sans-serif;
-    --font-body: "Work Sans", system-ui, -apple-system, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+    /* Fonts — Geist (UI/headings) + JetBrains Mono (annotations, tags, code) */
+    --font-display: "Geist", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+    --font-body: "Geist", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+    --font-mono:
+      "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-    /* Monochrome surfaces (light) */
-    --bg: #eef0f4;
-    --bg-deep: #e4e7ee;
-    --surface: #ffffff;
-    --surface-2: #f4f5f8;
-    --surface-3: #e9ebf1;
-    --line: rgba(13, 16, 24, 0.1);
-    --line-strong: rgba(13, 16, 24, 0.16);
+    /* Base — cool, light (blueprint hairline system) */
+    --bg: #f5f4f2;
+    --bg-deep: #ecebe8;
+    --surface: rgba(255, 255, 255, 0.74);
+    --surface-2: #ffffff;
+    --surface-3: #f0eee9;
+    --line: #dcd9d4;
+    --line-soft: rgba(130, 126, 120, 0.26);
+    --line-strong: #c9c5be;
 
     /* Text */
-    --text-primary: #0c0e14;
-    --text-secondary: #545a68;
-    --text-tertiary: #8a909e;
-    --text-inverse: #ffffff;
+    --text-primary: #17181a;
+    --text-secondary: #5e6469;
+    --text-tertiary: #83898d;
+    --text-inverse: #17181a;
 
-    /* Single accent — electric blue */
-    --accent: #2f6bff;
-    --accent-strong: #1d4ed8;
-    --accent-soft: rgba(47, 107, 255, 0.12);
-    --accent-glow: rgba(47, 107, 255, 0.35);
-    --accent-contrast: #ffffff;
+    /* Accents — sand (primary) + corinto (secondary), never neon */
+    --olive: #d9a05b;
+    --olive-hover: #e4af6d;
+    --olive-ink: #8a5a1e;
+    --on-accent: #17181a;
+    --corinto: #8a4436;
+    --corinto-ink: #8a4436;
 
-    /* Glass / fluent */
-    --glass-bg: rgba(255, 255, 255, 0.62);
-    --glass-bg-strong: rgba(255, 255, 255, 0.82);
-    --glass-border: rgba(13, 16, 24, 0.08);
-    --glass-highlight: rgba(255, 255, 255, 0.9);
-    --glass-blur: 18px;
+    --accent: var(--olive-ink);
+    --accent-strong: var(--olive-hover);
+    --accent-soft: rgba(217, 160, 91, 0.12);
+    --accent-glow: rgba(217, 160, 91, 0.14);
+    --accent-contrast: var(--on-accent);
 
-    /* Shadows (layered depth) */
-    --shadow-sm:
-      0 1px 2px rgba(13, 16, 24, 0.06), 0 2px 6px rgba(13, 16, 24, 0.05);
-    --shadow-md:
-      0 6px 16px rgba(13, 16, 24, 0.08), 0 12px 32px rgba(13, 16, 24, 0.06);
-    --shadow-lg: 0 18px 50px rgba(13, 16, 24, 0.14);
-    --shadow-glow: 0 14px 40px var(--accent-glow);
+    /* Ambient blueprint field */
+    --dot: rgba(23, 24, 26, 0.06);
+    --glow-2: rgba(222, 155, 134, 0.08);
 
-    /* Radii */
-    --radius-sm: 12px;
-    --radius: 18px;
-    --radius-lg: 26px;
-    --radius-xl: 34px;
+    /* Glass / acrylic */
+    --glass-bg: var(--surface);
+    --glass-bg-strong: rgba(255, 255, 255, 0.88);
+    --glass-border: var(--line);
+    --glass-highlight: rgba(255, 255, 255, 0.7);
+    --glass-blur: 20px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 0 rgba(23, 24, 26, 0.04);
+    --shadow-md: 0 10px 30px rgba(23, 24, 26, 0.08);
+    --shadow-lg: 0 18px 48px rgba(23, 24, 26, 0.12);
+    --shadow-accent: 0 10px 30px rgba(217, 160, 91, 0.22);
+    --shadow-glow: var(--shadow-accent);
+
+    /* Radii — tags -> buttons -> cards -> hero frames */
+    --radius-sm: 6px;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
     --radius-pill: 999px;
 
-    /* Motion */
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --dur-fast: 160ms;
-    --dur: 320ms;
-    --dur-slow: 620ms;
+    /* Motion — single restrained ease, no bounce */
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-spring: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --dur-fast: 250ms;
+    --dur: 350ms;
+    --dur-slow: 700ms;
 
-    /* Mesh background hues */
-    --mesh-1: rgba(47, 107, 255, 0.5);
-    --mesh-2: rgba(120, 90, 255, 0.28);
-    --mesh-3: rgba(40, 180, 255, 0.22);
-
-    /* Legacy aliases (do not remove) */
-    --neutral-white: var(--surface);
-    --neutral-light: var(--surface-2);
+    /* Legacy aliases (do not remove — markdown/legal/breadcrumb depend on these) */
+    --neutral-white: var(--surface-2);
+    --neutral-light: var(--surface-3);
     --neutral-medium: var(--line-strong);
     --neutral-light-gray: var(--surface-3);
     --neutral-dark: #2b2b2b;
-    --neutral-black: #0c0e14;
+    --neutral-black: #17181a;
     --accent-primary: var(--accent);
-    --accent-dark: var(--accent-strong);
-    --accent-darkest: #16308a;
+    --accent-dark: var(--corinto-ink);
+    --accent-darkest: #5c1a24;
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
 
-    --bg: #06070b;
-    --bg-deep: #04050a;
-    --surface: #0e1016;
-    --surface-2: #14171f;
-    --surface-3: #1a1e28;
-    --line: rgba(255, 255, 255, 0.08);
-    --line-strong: rgba(255, 255, 255, 0.14);
+    /* Base — cool, near-dark */
+    --bg: #15171a;
+    --bg-deep: #101316;
+    --surface: rgba(30, 33, 37, 0.7);
+    --surface-2: #1e2125;
+    --surface-3: #24272b;
+    --line: #2c3034;
+    --line-soft: rgba(44, 48, 52, 0.5);
+    --line-strong: #3a3f45;
 
-    --text-primary: #eef1f7;
-    --text-secondary: #a3abbb;
-    --text-tertiary: #6b7283;
-    --text-inverse: #06070b;
+    --text-primary: #ecedee;
+    --text-secondary: #949ba3;
+    --text-tertiary: #6e747c;
+    --text-inverse: #17181a;
 
-    --accent: #5b86ff;
-    --accent-strong: #3b6bff;
-    --accent-soft: rgba(91, 134, 255, 0.16);
-    --accent-glow: rgba(91, 134, 255, 0.45);
-    --accent-contrast: #06070b;
+    --olive-ink: #e6b778;
+    --corinto-ink: #de9b86;
 
-    --glass-bg: rgba(255, 255, 255, 0.045);
-    --glass-bg-strong: rgba(20, 23, 31, 0.72);
-    --glass-border: rgba(255, 255, 255, 0.09);
-    --glass-highlight: rgba(255, 255, 255, 0.14);
+    --accent: var(--olive-ink);
+    --accent-strong: var(--olive-hover);
+    --accent-soft: rgba(217, 160, 91, 0.14);
+    --accent-glow: rgba(217, 160, 91, 0.13);
+    --accent-contrast: var(--on-accent);
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 16px 50px var(--accent-glow);
+    --dot: rgba(236, 237, 238, 0.07);
+    --glow-2: rgba(222, 155, 134, 0.08);
 
-    --mesh-1: rgba(91, 134, 255, 0.4);
-    --mesh-2: rgba(140, 90, 255, 0.26);
-    --mesh-3: rgba(40, 200, 255, 0.2);
+    --glass-bg: var(--surface);
+    --glass-bg-strong: rgba(30, 33, 37, 0.88);
+    --glass-border: var(--line);
+    --glass-highlight: rgba(236, 237, 238, 0.06);
+
+    --shadow-sm: 0 1px 0 rgba(236, 237, 238, 0.03);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.28);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --shadow-accent: 0 10px 30px rgba(217, 160, 91, 0.22);
+    --shadow-glow: var(--shadow-accent);
 
     --neutral-dark: #e5e5e5;
-    --neutral-black: #ffffff;
-    --accent-darkest: #2a4fd0;
+    --neutral-black: #ecedee;
+    --accent-darkest: #de9b86;
   }
 
   /* ================================================================
@@ -205,28 +217,33 @@
   .h3,
   .h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
     color: var(--text-primary);
   }
 
   h1,
   .h1 {
-    font-size: clamp(2.4rem, 6vw, 4.4rem);
-    font-weight: 700;
+    font-size: clamp(2.5rem, 5.6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
   }
   h2,
   .h2 {
-    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-size: clamp(1.875rem, 3.4vw, 2.75rem);
   }
   h3,
   .h3 {
-    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-size: 1.1875rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
   h4,
   .h4 {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
 
   p,
@@ -242,6 +259,7 @@
 
   p {
     color: var(--text-secondary);
+    line-height: 1.65;
   }
 
   .body-large {
@@ -281,6 +299,68 @@
     max-width: 1180px;
     margin-inline: auto;
     padding-inline: clamp(20px, 5vw, 40px);
+    border-inline: 1px solid var(--line-soft);
+  }
+
+  /* Fixed blueprint dot-grid field, faded toward the edges */
+  .dot-field {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 8%,
+      #000 10%,
+      transparent 68%
+    );
+    mask-image: radial-gradient(circle at 50% 8%, #000 10%, transparent 68%);
+  }
+
+  /* Small corner-bracket marks — viewfinder/crop-mark signature detail */
+  .corner-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .corner-marks span {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--accent);
+  }
+  .corner-marks span:nth-child(1) {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-marks span:nth-child(2) {
+    top: -1px;
+    right: -1px;
+    border-top: 1px solid;
+    border-right: 1px solid;
+  }
+  .corner-marks span:nth-child(3) {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-marks span:nth-child(4) {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+  .corner-marks.corner-marks--sm span {
+    width: 8px;
+    height: 8px;
+  }
+  .corner-marks--two span:nth-child(2),
+  .corner-marks--two span:nth-child(3) {
+    display: none;
   }
 
   .grid {
@@ -299,37 +379,25 @@
     color: var(--accent);
   }
 
-  /* Gradient text — single accent fading into text color */
+  /* Muted headline span — pairs with a solid-ink lead line in hero/heading copy */
   .gradient-text {
-    background: linear-gradient(
-      120deg,
-      var(--accent) 0%,
-      var(--accent-strong) 40%,
-      var(--text-primary) 120%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text-secondary);
   }
 
-  /* Mono eyebrow label */
+  /* Mono eyebrow label — plain uppercase caption, no decoration */
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-secondary);
   }
-  .eyebrow::before {
-    content: "";
-    width: 26px;
-    height: 1px;
-    background: var(--accent);
-    opacity: 0.6;
+  .eyebrow.is-accent {
+    color: var(--accent);
   }
 
   /* ================================================================

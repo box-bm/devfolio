@@ -10,15 +10,21 @@ interface Props {
   description: string;
   viewLink: string;
   codeLink: string;
+  index: number;
+  badge: string;
 }
 
-const { title, description, viewLink, codeLink } = Astro.props;
+const { title, description, viewLink, codeLink, index, badge } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
 <div class="project-card" data-card data-href={viewLink} data-reveal="scale">
   <Card pressable tilt>
+    <div class="project-card-strip">
+      <span>PROJECT {String(index).padStart(2, "0")}</span>
+      <span class="project-card-badge">{badge}</span>
+    </div>
     <div class="project-card-content">
       <div class="project-card-top">
         <h3 class="h4">{title}</h3>
@@ -42,7 +48,42 @@ const t = useTranslations(lang);
 </div>
 
 <style>
+  .project-card :global(.card) {
+    overflow: hidden;
+    padding: 0;
+    gap: 0;
+  }
+  .project-card :global(.card__inner) {
+    gap: 0;
+  }
+
+  .project-card-strip {
+    position: relative;
+    height: 132px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    background:
+      linear-gradient(150deg, var(--surface-2), transparent 70%),
+      radial-gradient(
+        240px circle at 80% 120%,
+        var(--accent-glow),
+        transparent 60%
+      );
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+  }
+  .project-card-badge {
+    align-self: flex-end;
+    color: var(--accent);
+  }
+
   .project-card-content {
+    padding: 22px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -72,12 +113,14 @@ const t = useTranslations(lang);
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    padding: 0 22px;
     margin-bottom: 16px;
   }
 
   .project-card-actions {
     display: flex;
     gap: 8px;
+    padding: 0 22px 22px;
   }
   .project-card-actions :global(.btn) {
     flex: 1;

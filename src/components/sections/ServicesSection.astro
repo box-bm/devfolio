@@ -4,10 +4,10 @@ import SectionHeading from "@components/visuals/SectionHeading.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
 import {
-  Layers,
+  Monitor,
   Smartphone,
   Server,
-  Workflow,
+  ShieldCheck,
   FlaskConical,
 } from "@lucide/astro";
 
@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 
 const services = [
   {
-    icon: Layers,
+    icon: Monitor,
     title: t(UiKey["portfolio.services.frontend.title"]),
     desc: t(UiKey["portfolio.services.frontend.description"]),
   },
@@ -31,7 +31,7 @@ const services = [
     desc: t(UiKey["portfolio.services.backend.description"]),
   },
   {
-    icon: Workflow,
+    icon: ShieldCheck,
     title: t(UiKey["portfolio.services.qa.title"]),
     desc: t(UiKey["portfolio.services.qa.description"]),
   },
@@ -47,9 +47,11 @@ const services = [
 <section id="services" class="section">
   <div class="container">
     <SectionHeading
-      eyebrow={t(UiKey["portfolio.services.eyebrow"])}
+      index={2}
+      label={t(UiKey["portfolio.services.eyebrow"])}
       heading={t(UiKey["portfolio.services.heading"])}
       description={t(UiKey["portfolio.services.description"])}
+      split
     />
 
     <div class="services__grid">
@@ -58,15 +60,24 @@ const services = [
           <div
             class:list={["service", s.featured && "service--featured"]}
             data-reveal
-            style={`--reveal-delay: ${i * 80}ms`}
+            style={`--reveal-delay: ${i * 60}ms`}
           >
-            <Card tilt>
-              <span class="service__icon">
-                <s.icon size={22} />
-              </span>
+            <Card>
+              <div class="service__top">
+                <span class="service__icon-group">
+                  <s.icon size={17} class="service__icon" />
+                  <span class="service__num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </span>
+                {s.featured && (
+                  <span class="service__badge">
+                    {t(UiKey["portfolio.services.favorite"])}
+                  </span>
+                )}
+              </div>
               <h3 class="h4">{s.title}</h3>
               <p>{s.desc}</p>
-              {s.featured && <span class="service__badge">★ favorite</span>}
             </Card>
           </div>
         ))
@@ -78,7 +89,7 @@ const services = [
 <style>
   .services__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
   }
 
@@ -86,57 +97,72 @@ const services = [
     position: relative;
   }
   .service :global(.card) {
-    gap: 14px;
+    gap: 0;
   }
 
+  .service__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .service__icon-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .service__icon {
-    display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 16px;
     color: var(--accent);
-    background: var(--accent-soft);
-    border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
-    transition:
-      transform var(--dur) var(--ease-spring),
-      background var(--dur) var(--ease-out),
-      color var(--dur) var(--ease-out);
   }
-  .service:hover .service__icon {
-    transform: translateY(-3px) rotate(-6deg);
-    color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  .service__num {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--text-secondary);
   }
 
+  .service h3 {
+    margin: 14px 0 10px;
+  }
   .service p {
-    font-size: 0.94rem;
+    margin: 0;
+    font-size: 14px;
   }
 
   /* Featured testing card */
+  .service--featured {
+    grid-column: span 2;
+  }
   .service--featured :global(.card) {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
-    background:
-      linear-gradient(160deg, var(--accent-soft), transparent 60%),
-      var(--glass-bg);
+    border-color: var(--corinto-ink, var(--accent));
+    --accent-glow: rgba(201, 138, 147, 0.12);
   }
   .service__badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 2;
-    padding: 5px 11px;
-    border-radius: var(--radius-pill);
+    padding: 4px 8px;
+    border: 1px solid var(--corinto-ink, var(--accent));
+    border-radius: var(--radius-sm);
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-    box-shadow: 0 6px 16px var(--accent-glow);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--corinto-ink, var(--accent));
+  }
+  .service--featured p {
+    max-width: 64ch;
   }
 
-  @media (min-width: 760px) {
-    /* let the featured card span to feel intentional on wide grids */
+  @media (max-width: 900px) {
+    .services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .service--featured {
+      grid-column: span 2;
+    }
+  }
+  @media (max-width: 620px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
     .service--featured {
       grid-column: span 1;
     }

@@ -1,5 +1,4 @@
 ---
-import TechChip from "@components/TechChip.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
 
@@ -9,15 +8,13 @@ const t = useTranslations(lang);
 const techs = [
   "React",
   "React Native",
+  "TypeScript",
   "Flutter",
-  "Astro",
-  "Next.JS",
-  "Typescript",
-  "Dart",
-  "Nestjs",
-  "Node",
   "Jest",
-  "Vitest",
+  "Neovim",
+  "Astro",
+  "NestJS",
+  "Dart",
   "Swift",
   "Kotlin",
   "Figma",
@@ -28,29 +25,31 @@ const loop = [...techs, ...techs];
 ---
 
 <section
-  class="marquee-section"
+  class="marquee-section container"
   aria-label={t(UiKey["portfolio.marquee.label"])}
 >
-  <p class="marquee-label" data-reveal>{t(UiKey["portfolio.marquee.label"])}</p>
+  <p class="marquee-label">{t(UiKey["portfolio.marquee.label"])}</p>
   <div class="marquee">
     <div class="marquee__track">
-      {loop.map((tech) => <TechChip tech={tech} />)}
+      {loop.map((tech) => <span>{tech}</span>)}
     </div>
   </div>
 </section>
 
 <style>
   .marquee-section {
-    padding-block: 8px 24px;
+    padding-block: 26px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
   }
   .marquee-label {
-    text-align: center;
+    margin: 0 0 16px;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 10.5px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 22px !important;
+    color: var(--text-secondary);
   }
 
   .marquee {
@@ -59,24 +58,31 @@ const loop = [...techs, ...techs];
     -webkit-mask-image: linear-gradient(
       90deg,
       transparent,
-      #000 12%,
-      #000 88%,
+      #000 8%,
+      #000 92%,
       transparent
     );
     mask-image: linear-gradient(
       90deg,
       transparent,
-      #000 12%,
-      #000 88%,
+      #000 8%,
+      #000 92%,
       transparent
     );
   }
 
   .marquee__track {
-    display: inline-flex;
-    gap: 14px;
+    display: flex;
     width: max-content;
-    animation: scroll 38s linear infinite;
+    animation: scroll 34s linear infinite;
+  }
+  .marquee__track span {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 0 22px;
+    border-right: 1px solid var(--line-soft);
+    white-space: nowrap;
   }
   .marquee:hover .marquee__track {
     animation-play-state: paused;

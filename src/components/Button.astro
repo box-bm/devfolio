@@ -45,21 +45,21 @@ const {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 11px 20px;
-    border-radius: var(--radius-pill);
-    font-weight: 600;
-    font-size: 0.95rem;
+    gap: 9px;
+    padding: 13px 22px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    font-size: 0.9rem;
     line-height: 1;
     cursor: pointer;
     overflow: hidden;
     isolation: isolate;
     transition:
-      transform var(--dur) var(--ease-spring),
-      box-shadow var(--dur) var(--ease-out),
-      background-color var(--dur) var(--ease-out),
-      border-color var(--dur) var(--ease-out),
-      color var(--dur) var(--ease-out);
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
   }
   .btn__label {
     display: inline-flex;
@@ -90,35 +90,30 @@ const {
     transform: scale(0.96);
   }
 
-  /* Default — accent gradient + glow */
+  /* Default — flat sand fill */
   .btn-default {
-    color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-    box-shadow:
-      var(--shadow-md),
-      0 8px 24px var(--accent-glow);
+    color: var(--on-accent);
+    background: var(--olive, var(--accent));
+    border: 1px solid var(--olive, var(--accent));
   }
   .btn-default:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      var(--shadow-lg),
-      0 14px 36px var(--accent-glow);
+    background: var(--olive-hover, var(--accent-strong));
+    border-color: var(--olive-hover, var(--accent-strong));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-accent);
   }
 
-  /* Outlined — glass */
+  /* Outlined — acrylic hairline */
   .btn-outlined {
     color: var(--text-primary);
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-sm);
   }
   .btn-outlined:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     border-color: var(--accent);
-    color: var(--accent);
-    box-shadow: var(--shadow-md);
   }
 
   /* Text */
@@ -134,25 +129,21 @@ const {
     display: none;
   }
 
-  /* Icon — glass circle */
+  /* Icon — hairline square */
   .btn-icon {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
     padding: 0;
-    border-radius: 50%;
+    border-radius: var(--radius-sm);
     color: var(--text-secondary);
-    background: var(--glass-bg);
+    background: transparent;
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
   .btn-icon::before {
     display: none;
   }
   .btn-icon:hover {
-    transform: translateY(-3px);
-    color: var(--accent);
+    color: var(--text-primary);
     border-color: var(--accent);
-    box-shadow: var(--shadow-md);
   }
 </style>

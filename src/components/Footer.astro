@@ -1,9 +1,9 @@
 ---
+import Logo from "@components/visuals/Logo.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { defaultLang } from "@i18n/langs";
 import { UiKey } from "@i18n/ui";
-import { Astro as AstroIcon } from "simple-icons-astro";
-import { Github, Linkedin, Mail } from "@lucide/astro";
+import { Github, Linkedin, Mail, Coffee } from "@lucide/astro";
 import { email, githubProfile, linkedIn } from "@constants";
 import Button from "@components/Button.astro";
 
@@ -19,42 +19,19 @@ const base = lang === defaultLang ? "" : `/${lang}`;
   <div class="footer-inner">
     <!-- Brand -->
     <div class="footer-brand">
-      <a class="brand" href="/">
-        <span class="brand__mark">B</span>
-        <span>Box<span class="brand__accent">Dev</span></span>
-      </a>
+      <Logo variant="footer" />
       <p class="brand-tagline">{t(UiKey["portfolio.hero.caption"])}</p>
     </div>
 
     <!-- Nav links -->
     <nav class="footer-nav" aria-label="Footer navigation">
       <span class="footer-section-label">{t(UiKey["footer.explore"])}</span>
-      <ul>
-        <li>
-          <a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a
-          >
-        </li>
-        <li>
-          <a class="nav-link" href={`${base}/#services`}
-            >{t(UiKey["nav.services"])}</a
-          >
-        </li>
-        <li>
-          <a class="nav-link" href={`${base}/#projects`}
-            >{t(UiKey["nav.projects"])}</a
-          >
-        </li>
-        <li>
-          <a class="nav-link" href={`${base}/guides`}
-            >{t(UiKey["nav.guides"])}</a
-          >
-        </li>
-        <li>
-          <a class="nav-link" href={`${base}/legal`}
-            >{t(UiKey["legal.title"])}</a
-          >
-        </li>
-      </ul>
+      <a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a>
+      <a class="nav-link" href={`${base}/#projects`}
+        >{t(UiKey["nav.projects"])}</a
+      >
+      <a class="nav-link" href={`${base}/guides`}>{t(UiKey["nav.guides"])}</a>
+      <a class="nav-link" href={`${base}/legal`}>{t(UiKey["legal.title"])}</a>
     </nav>
 
     <!-- Social + BMaC -->
@@ -62,123 +39,89 @@ const base = lang === defaultLang ? "" : `/${lang}`;
       <span class="footer-section-label">{t(UiKey["nav.contact"])}</span>
       <div class="social-icons">
         <Button type="Icon" href={githubProfile} ariaLabel="GitHub"
-          ><Github size={20} /></Button
+          ><Github size={16} /></Button
         >
         <Button type="Icon" href={linkedIn} ariaLabel="LinkedIn"
-          ><Linkedin size={20} /></Button
+          ><Linkedin size={16} /></Button
         >
         <Button type="Icon" href={`mailto:${email}`} ariaLabel="Send email"
-          ><Mail size={20} /></Button
+          ><Mail size={16} /></Button
         >
       </div>
       <a
         href="https://www.buymeacoffee.com/boxdev"
         target="_blank"
         rel="noopener noreferrer"
-        class="bmc-btn"
-        aria-label="Buy me a coffee"
+        class="bmc-link"
       >
-        ☕ Buy me a coffee
+        <Coffee size={15} />Buy me a coffee
       </a>
     </div>
   </div>
 
   <!-- Bottom bar -->
   <div class="footer-bottom">
-    <AstroIcon class="astro-icon" />
-    <p class="caption">
-      © {currentYear} Brandon Manzo — {t(UiKey["footer.builtWith"])}
-    </p>
+    <span>© {currentYear} BOXDEV</span>
+    <span>{t(UiKey["footer.builtWith"])}</span>
   </div>
 </footer>
 
 <style>
   footer {
     position: relative;
-    margin-top: 40px;
+    z-index: 2;
     border-top: 1px solid var(--line);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    padding: 56px 24px 24px;
   }
 
   .footer-inner {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--line);
+    padding: 40px clamp(16px, 4vw, 28px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 40px;
   }
 
   /* Brand */
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-  }
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--text-primary);
-  }
-  .brand__mark {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
-    color: var(--accent-contrast);
-    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-    box-shadow: 0 4px 14px var(--accent-glow);
-  }
-  .brand__accent {
-    color: var(--accent);
+    gap: 16px;
   }
   .brand-tagline {
-    font-size: 0.9rem;
+    font-size: 13.5px;
     color: var(--text-secondary) !important;
     line-height: 1.6;
-    max-width: 320px;
+    max-width: 34ch;
     margin: 0 !important;
   }
 
   /* Nav */
-  .footer-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 14px 0 0;
+  .footer-nav {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
   .nav-link {
-    font-size: 0.9rem;
+    font-size: 13.5px;
     color: var(--text-secondary) !important;
   }
   .nav-link:hover {
-    color: var(--accent) !important;
+    color: var(--text-primary) !important;
   }
 
   /* Social */
   .footer-social {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
   }
   .footer-section-label {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
+    font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-tertiary) !important;
+    color: var(--text-secondary) !important;
   }
   .social-icons {
     display: flex;
@@ -186,46 +129,30 @@ const base = lang === defaultLang ? "" : `/${lang}`;
   }
 
   /* BMaC */
-  .bmc-btn {
+  .bmc-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 9px 16px;
-    border-radius: var(--radius-pill);
-    font-size: 0.85rem;
-    font-weight: 600;
-    background-color: #5f7fff;
-    color: #ffffff !important;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 13.5px;
+    color: var(--text-secondary) !important;
     width: fit-content;
-    transition:
-      transform var(--dur) var(--ease-spring),
-      box-shadow var(--dur);
   }
-  .bmc-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(95, 127, 255, 0.4);
+  .bmc-link:hover {
+    color: var(--text-primary) !important;
   }
 
   /* Bottom bar */
   .footer-bottom {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding-top: 20px;
-    max-width: 1100px;
+    justify-content: space-between;
+    max-width: 1200px;
     margin: 0 auto;
-  }
-  .footer-bottom p {
-    margin: 0 !important;
-    color: var(--text-tertiary) !important;
-  }
-  .astro-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    color: var(--text-tertiary);
-    fill: currentColor;
+    padding: 0 clamp(16px, 4vw, 28px) 32px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
   }
 
   @media (max-width: 768px) {
@@ -243,6 +170,11 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     }
     .footer-brand {
       grid-column: auto;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
     }
   }
 </style>

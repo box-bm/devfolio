@@ -1,12 +1,11 @@
 ---
 import LegalLayout from "@layouts/Legal.astro";
-import Chip from "@components/Chip.astro";
-import Button from "@components/Button.astro";
-import Card from "@components/Card.astro";
+import { ArrowUpRight } from "@lucide/astro";
 import { UiKey } from "@i18n/ui";
 import { LANG_CODES } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
+import { email } from "@constants";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,77 +14,219 @@ export const getStaticPaths = () => {
   return LANG_CODES.map((lang) => ({ params: { lang } }));
 };
 
-const docs = await getCollection("legal", (doc) => doc.data.lang === lang);
+const allDocs = await getCollection("legal");
+
+const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
+  (appName) => {
+    const docs = allDocs.filter((d) => d.data.app === appName);
+    const primary = docs[0];
+    return {
+      appName,
+      version: primary.data.version,
+      effectiveDate: primary.data.effectiveDate,
+      docs: docs.map((doc) => ({
+        title: doc.data.title,
+        lang: doc.data.lang,
+        slug: doc.id.replace(/\/[^/]+$/, ""),
+      })),
+    };
+  },
+);
+
+const appCount = String(apps.length).padStart(2, "0");
 ---
 
 <LegalLayout title={t(UiKey["title.legal"])}>
-  <h1>{t(UiKey["legal.title"])}</h1>
-  <section class="grid">
+  <header class="legal-hero">
+    <p class="eyebrow is-accent" data-reveal>
+      {t(UiKey["legal.eyebrow.documents"])} / {appCount}
+      {t(UiKey["legal.eyebrow.apps"])}
+    </p>
+    <h1 data-reveal style="--reveal-delay: 60ms">{t(UiKey["legal.title"])}</h1>
+    <p class="body-large" data-reveal style="--reveal-delay: 120ms">
+      {t(UiKey["legal.subtitle"])}
+    </p>
+  </header>
+
+  <div class="legal-grid">
     {
-      docs.map((doc) => {
-        const slug = doc.id.replace(/\/[^/]+$/, "");
-        return (
-          <article
-            key={doc.id}
-            onclick={`window.location.href='/${lang}/legal/${slug}'`}
-          >
-            <Card pressable>
-              <div class="doc-preview-content">
-                <h2>{doc.data.title}</h2>
-                <p class="app-name">
-                  <Chip text={doc.data.app} />
-                </p>
-                <p>
-                  <strong>{t(UiKey["legal.version"])}:</strong>{" "}
-                  {doc.data.version}
-                </p>
-                {doc.data.effectiveDate && (
-                  <p>
-                    <strong>{t(UiKey["legal.effectiveDate"])}:</strong>{" "}
-                    {doc.data.effectiveDate.toLocaleDateString(lang, {
-                      dateStyle: "long",
-                    })}
-                  </p>
-                )}
+      apps.map((app, i) => (
+        <div
+          class="legal-card"
+          data-tilt="3"
+          data-reveal
+          style={`--reveal-delay: ${i * 70}ms`}
+        >
+          <div class="legal-card__head">
+            <h2>{app.appName}</h2>
+            <span class="legal-card__version">v{app.version}</span>
+          </div>
+          <div class="legal-card__body">
+            {app.effectiveDate && (
+              <div class="legal-card__meta">
+                <span>{t(UiKey["legal.effectiveDate"]).toUpperCase()}</span>
+                <span class="legal-card__meta-value">
+                  {app.effectiveDate.toLocaleDateString(lang, {
+                    dateStyle: "long",
+                  })}
+                </span>
               </div>
-              <div class="doc-preview-actions">
-                <Button type="Text" href={`/${lang}/legal/${slug}`}>
-                  {t(UiKey["general.readmore"])}
-                </Button>
-              </div>
-            </Card>
-          </article>
-        );
-      })
+            )}
+            <div class="legal-card__divider" />
+            <div class="legal-card__links">
+              {app.docs.map((doc) => (
+                <a
+                  class="legal-card__link"
+                  href={`/${doc.lang}/legal/${doc.slug}`}
+                >
+                  <span>{doc.title}</span>
+                  <span class="legal-card__link-lang">
+                    {doc.lang.toUpperCase()}
+                    <ArrowUpRight size={14} />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))
     }
-  </section>
+  </div>
+
+  <p class="legal-questions">
+    {t(UiKey["legal.questions"])}
+    <a href={`mailto:${email}`}>{email}</a>.
+  </p>
 </LegalLayout>
 
 <style>
-  article {
-    cursor: pointer;
-  }
-
-  section {
-    margin: 16px 0px;
-  }
-
-  p {
-    margin: 8px 0px;
-  }
-
-  .doc-preview-content {
-    flex-grow: 1;
-    margin-bottom: 16px;
-  }
-
-  .doc-preview-actions {
+  .legal-hero {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 60ch;
+    margin-bottom: clamp(32px, 5vw, 56px);
   }
 
-  .app-name {
-    margin-top: 8px;
+  .legal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding-bottom: 20px;
+  }
+
+  .legal-card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    overflow: hidden;
+    transition: border-color var(--dur) var(--ease-out);
+  }
+  .legal-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      320px circle at var(--mx, 50%) var(--my, 50%),
+      var(--accent-glow),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease-out);
+    pointer-events: none;
+  }
+  .legal-card:hover {
+    border-color: var(--accent);
+  }
+  .legal-card:hover::before {
+    opacity: 1;
+  }
+
+  .legal-card__head {
+    position: relative;
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .legal-card__head h2 {
+    margin: 0;
+    font-size: 19px;
+    letter-spacing: -0.015em;
+  }
+  .legal-card__version {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+  }
+
+  .legal-card__body {
+    position: relative;
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .legal-card__meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+  }
+  .legal-card__meta-value {
+    color: var(--text-primary);
+  }
+  .legal-card__divider {
+    height: 1px;
+    background: var(--line-soft);
+  }
+  .legal-card__links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal-card__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14.5px;
+    color: var(--text-primary) !important;
+  }
+  .legal-card__link:hover {
+    color: var(--accent) !important;
+  }
+  .legal-card__link-lang {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .legal-questions {
+    margin: 20px 0 96px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 60ch;
+  }
+
+  @media (max-width: 700px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

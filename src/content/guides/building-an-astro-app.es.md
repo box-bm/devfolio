@@ -275,7 +275,7 @@ Los componentes están organizados por responsabilidad, no por página. Esto los
 
 - `ProjectCard.astro`: Visualización de proyectos del portfolio
 - `TechChip.astro`: Badges de tecnologías
-- `LanguagePicker.astro`: Dropdown de cambio de idioma
+- `LanguagePicker.astro`: Selector de cambio de idioma
 
 ### Filosofía de Diseño de Componentes
 

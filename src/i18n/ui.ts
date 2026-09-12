@@ -6,6 +6,7 @@ export enum UiKey {
   "nav.projects" = "nav.projects",
   "nav.contact" = "nav.contact",
   "nav.guides" = "nav.guides",
+  "nav.backToPortfolio" = "nav.backToPortfolio",
 
   // Portfolio – Hero
   "portfolio.hero.eyebrow" = "portfolio.hero.eyebrow",
@@ -19,6 +20,16 @@ export enum UiKey {
   "portfolio.hero.role.frontend" = "portfolio.hero.role.frontend",
   "portfolio.hero.role.mobile" = "portfolio.hero.role.mobile",
   "portfolio.hero.role.testing" = "portfolio.hero.role.testing",
+
+  // Portfolio – Hero "Currently" panel
+  "portfolio.hero.currently.label" = "portfolio.hero.currently.label",
+  "portfolio.hero.currently.location" = "portfolio.hero.currently.location",
+  "portfolio.hero.currently.locationCaption" = "portfolio.hero.currently.locationCaption",
+  "portfolio.hero.currently.stack" = "portfolio.hero.currently.stack",
+  "portfolio.hero.currently.stackCaption" = "portfolio.hero.currently.stackCaption",
+  "portfolio.hero.currently.testing" = "portfolio.hero.currently.testing",
+  "portfolio.hero.currently.testingCaption" = "portfolio.hero.currently.testingCaption",
+  "portfolio.hero.currently.latest" = "portfolio.hero.currently.latest",
 
   // Portfolio – Marquee
   "portfolio.marquee.label" = "portfolio.marquee.label",
@@ -60,6 +71,7 @@ export enum UiKey {
   "portfolio.services.qa.description" = "portfolio.services.qa.description",
   "portfolio.services.testing.title" = "portfolio.services.testing.title",
   "portfolio.services.testing.description" = "portfolio.services.testing.description",
+  "portfolio.services.favorite" = "portfolio.services.favorite",
 
   // Portfolio – Skills & Tech
   "portfolio.skills.eyebrow" = "portfolio.skills.eyebrow",
@@ -70,18 +82,10 @@ export enum UiKey {
   "portfolio.about.skillsAndTech.languages" = "portfolio.about.skillsAndTech.languages",
   "portfolio.about.skillsAndTech.testingAndQa" = "portfolio.about.skillsAndTech.testingAndQa",
   "portfolio.about.skillsAndTech.tools" = "portfolio.about.skillsAndTech.tools",
-
-  // Portfolio – How I work
-  "portfolio.about.whyWorkWithMe.eyebrow" = "portfolio.about.whyWorkWithMe.eyebrow",
-  "portfolio.about.whyWorkWithMe.title" = "portfolio.about.whyWorkWithMe.title",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.title" = "portfolio.about.whyWorkWithMe.designAndDevelopment.title",
-  "portfolio.about.whyWorkWithMe.designAndDevelopment.description" = "portfolio.about.whyWorkWithMe.designAndDevelopment.description",
-  "portfolio.about.whyWorkWithMe.userApproach.title" = "portfolio.about.whyWorkWithMe.userApproach.title",
-  "portfolio.about.whyWorkWithMe.userApproach.description" = "portfolio.about.whyWorkWithMe.userApproach.description",
-  "portfolio.about.whyWorkWithMe.performance.title" = "portfolio.about.whyWorkWithMe.performance.title",
-  "portfolio.about.whyWorkWithMe.performance.description" = "portfolio.about.whyWorkWithMe.performance.description",
-  "portfolio.about.whyWorkWithMe.testing.title" = "portfolio.about.whyWorkWithMe.testing.title",
-  "portfolio.about.whyWorkWithMe.testing.description" = "portfolio.about.whyWorkWithMe.testing.description",
+  "portfolio.skills.frameworksDescription" = "portfolio.skills.frameworksDescription",
+  "portfolio.skills.languagesDescription" = "portfolio.skills.languagesDescription",
+  "portfolio.skills.testingDescription" = "portfolio.skills.testingDescription",
+  "portfolio.skills.toolsDescription" = "portfolio.skills.toolsDescription",
 
   // Portfolio – Projects
   "portfolio.projects.eyebrow" = "portfolio.projects.eyebrow",
@@ -114,6 +118,7 @@ export enum UiKey {
   "legal.effectiveDate" = "legal.effectiveDate",
   "title.legal" = "title.legal",
   "legal.title" = "legal.title",
+  "legal.subtitle" = "legal.subtitle",
 
   // Guides
   "title.guides" = "title.guides",
@@ -124,6 +129,11 @@ export enum UiKey {
   "guides.updatedAt" = "guides.updatedAt",
   "guides.contact.title" = "guides.contact.title",
   "guides.contact.description" = "guides.contact.description",
+  "guides.eyebrow.notes" = "guides.eyebrow.notes",
+  "guides.eyebrow.entries" = "guides.eyebrow.entries",
+  "legal.eyebrow.documents" = "legal.eyebrow.documents",
+  "legal.eyebrow.apps" = "legal.eyebrow.apps",
+  "legal.questions" = "legal.questions",
 
   // Footer
   "footer.label" = "footer.label",
