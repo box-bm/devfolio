@@ -2,8 +2,6 @@
 import SectionHeading from "@components/visuals/SectionHeading.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
-import { Image } from "astro:assets";
-import MeImage from "@images/me.jpeg";
 
 interface Props {
   years: number;
@@ -36,21 +34,6 @@ const stats = [
     <SectionHeading label={t(UiKey["portfolio.about.eyebrow"])} />
 
     <div class="about__top">
-      <div class="about__portrait" data-reveal="left">
-        <Image
-          src={MeImage}
-          alt="Brandon Manzo"
-          class="portrait-img"
-          loading="lazy"
-          widths={[280, 420, 560]}
-          sizes="(max-width: 900px) 60vw, 280px"
-        />
-        <div class="portrait-caption">
-          <span>{t(UiKey["portfolio.about.location"]).toUpperCase()}</span>
-          <span>{t(UiKey["portfolio.about.roleTag"]).toUpperCase()}</span>
-        </div>
-      </div>
-
       <div class="about__text">
         <h2 data-reveal>{t(UiKey["portfolio.about.heading"])}</h2>
         <p class="body-large" data-reveal>
@@ -89,34 +72,6 @@ const stats = [
 </section>
 
 <style>
-  .about__top {
-    display: grid;
-    grid-template-columns: clamp(200px, 24vw, 280px) minmax(0, 1fr);
-    gap: clamp(28px, 5vw, 56px);
-    align-items: start;
-  }
-
-  /* Portrait */
-  .about__portrait {
-    max-width: 280px;
-  }
-  .portrait-img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    filter: saturate(0.92);
-  }
-  .portrait-caption {
-    margin-top: 14px;
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.12em;
-    color: var(--text-secondary);
-  }
-
   /* Text column */
   .about__text {
     display: flex;
@@ -125,6 +80,9 @@ const stats = [
   }
   .about__text h2 {
     margin: 0 0 6px;
+  }
+  .about__text > p {
+    max-width: 68ch;
   }
 
   .accent-text {
@@ -135,10 +93,10 @@ const stats = [
     color: var(--accent);
   }
 
-  /* Stats */
+  /* Stats — spans the full width of the section */
   .about__stats {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -149,13 +107,9 @@ const stats = [
   .stat {
     padding: 22px 24px;
     border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
-  .stat:nth-child(2n) {
+  .stat:last-child {
     border-right: none;
-  }
-  .stat:nth-last-child(-n + 2) {
-    border-bottom: none;
   }
   .stat__value {
     display: block;
@@ -174,7 +128,7 @@ const stats = [
     color: var(--text-secondary);
   }
 
-  /* Fun fact */
+  /* Fun fact — spans the full width, like the stats bar above it */
   .fun-fact {
     padding: 20px 24px;
     border: 1px solid var(--line);
@@ -194,17 +148,23 @@ const stats = [
   }
   .fun-fact p {
     margin: 0;
+    max-width: 65ch;
     font-size: 14.5px;
     text-wrap: pretty;
   }
 
   @media (max-width: 900px) {
-    .about__top {
-      grid-template-columns: 1fr;
+    .about__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .about__portrait {
-      max-width: 260px;
-      margin-inline: auto;
+    .stat {
+      border-bottom: 1px solid var(--line);
+    }
+    .stat:nth-child(2n) {
+      border-right: none;
+    }
+    .stat:nth-last-child(-n + 2) {
+      border-bottom: none;
     }
   }
   @media (max-width: 480px) {

@@ -30,11 +30,20 @@ if (document) {
   <MarkdownStyles />
   <Header hideMenu />
   <main class="doc-main">
-    <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
+    <div class="doc-breadcrumb">
+      <Bradcrumb items={breadcrumbItems} />
+    </div>
     <div class="markdown-body">
       <slot />
     </div>
   </main>
   <Footer />
   <BuyMeACoffee />
+  <style>
+    .doc-breadcrumb {
+      max-width: 72ch;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+  </style>
 </Base>

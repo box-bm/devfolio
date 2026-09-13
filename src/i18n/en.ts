@@ -12,7 +12,6 @@ export const en: UiDict = {
 
   // HERO
   "portfolio.hero.eyebrow": "Frontend & Mobile Engineer",
-  "portfolio.hero.available": "Available for new projects",
   "portfolio.hero.title": "I build interfaces",
   "portfolio.hero.highlight": "that feel alive.",
   "portfolio.hero.caption":
@@ -23,17 +22,6 @@ export const en: UiDict = {
   "portfolio.hero.role.frontend": "Frontend craft",
   "portfolio.hero.role.mobile": "Mobile apps",
   "portfolio.hero.role.testing": "Tested & reliable",
-
-  // HERO — CURRENTLY PANEL
-  "portfolio.hero.currently.label": "Currently",
-  "portfolio.hero.currently.location": "Guatemala · GMT-6",
-  "portfolio.hero.currently.locationCaption": "Remote, any timezone",
-  "portfolio.hero.currently.stack": "React · React Native · TypeScript",
-  "portfolio.hero.currently.stackCaption": "Daily drivers",
-  "portfolio.hero.currently.testing": "7+ years, tested end to end",
-  "portfolio.hero.currently.testingCaption":
-    "TDD, Jest, Vitest, Testing Library",
-  "portfolio.hero.currently.latest": "Latest: Minimal Tic Tac Toe",
 
   // MARQUEE
   "portfolio.marquee.label": "Tools I reach for every day",
@@ -47,8 +35,6 @@ export const en: UiDict = {
     "years of experience shipping user-centered products. My heart is in the frontend and on mobile — crafting interfaces that are smooth, accessible, and a joy to use.",
   "portfolio.about.description3":
     "But I don't stop at the surface: I'm comfortable across the backend, and I genuinely love QA, automation, and testing. Solid tests are how I ship with confidence and sleep at night.",
-  "portfolio.about.location": "Guatemala",
-  "portfolio.about.roleTag": "Frontend & Mobile Developer",
 
   // STATS
   "portfolio.about.stats.years.label": "Years building software",
@@ -131,7 +117,7 @@ export const en: UiDict = {
   "portfolio.contact.sendEmail": "Send me an email",
   "portfolio.contact.connectOnLinkedin": "Connect on LinkedIn",
   "portfolio.contact.caption":
-    "I'm always open to new projects, collaborations, or simply saying hello 👋.",
+    "I'm always open to new projects, collaborations, or simply saying hello.",
 
   // LEGAL
   "legal.privacy": "Privacy Policy",

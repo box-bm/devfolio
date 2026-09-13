@@ -12,7 +12,6 @@ export const es: UiDict = {
 
   // HERO
   "portfolio.hero.eyebrow": "Desarrollador Frontend y Móvil",
-  "portfolio.hero.available": "Disponible para nuevos proyectos",
   "portfolio.hero.title": "Construyo interfaces",
   "portfolio.hero.highlight": "que cobran vida.",
   "portfolio.hero.caption":
@@ -23,18 +22,6 @@ export const es: UiDict = {
   "portfolio.hero.role.frontend": "Oficio frontend",
   "portfolio.hero.role.mobile": "Apps móviles",
   "portfolio.hero.role.testing": "Probado y confiable",
-
-  // HERO — PANEL "AHORA MISMO"
-  "portfolio.hero.currently.label": "Ahora mismo",
-  "portfolio.hero.currently.location": "Guatemala · GMT-6",
-  "portfolio.hero.currently.locationCaption":
-    "Remoto, en cualquier zona horaria",
-  "portfolio.hero.currently.stack": "React · React Native · TypeScript",
-  "portfolio.hero.currently.stackCaption": "Herramientas del día a día",
-  "portfolio.hero.currently.testing": "7+ años, con pruebas de principio a fin",
-  "portfolio.hero.currently.testingCaption":
-    "TDD, Jest, Vitest, Testing Library",
-  "portfolio.hero.currently.latest": "Último: Minimal Tic Tac Toe",
 
   // MARQUEE
   "portfolio.marquee.label": "Herramientas que uso a diario",
@@ -48,8 +35,6 @@ export const es: UiDict = {
     "años de experiencia creando productos centrados en el usuario. Mi corazón está en el frontend y en lo móvil — creando interfaces fluidas, accesibles y placenteras de usar.",
   "portfolio.about.description3":
     "Pero no me quedo en la superficie: me muevo cómodo en el backend y me encantan el QA, la automatización y el testing. Unas buenas pruebas son lo que me permite lanzar con confianza y dormir tranquilo.",
-  "portfolio.about.location": "Guatemala",
-  "portfolio.about.roleTag": "Desarrollador Frontend y Móvil",
 
   // ESTADÍSTICAS
   "portfolio.about.stats.years.label": "Años creando software",
@@ -132,7 +117,7 @@ export const es: UiDict = {
   "portfolio.contact.sendEmail": "Envíame un correo",
   "portfolio.contact.connectOnLinkedin": "Conectar en LinkedIn",
   "portfolio.contact.caption":
-    "Siempre estoy abierto a nuevos proyectos, colaboraciones o simplemente a saludar 👋.",
+    "Siempre estoy abierto a nuevos proyectos, colaboraciones o simplemente a saludar.",
 
   // LEGAL
   "legal.privacy": "Política de privacidad",

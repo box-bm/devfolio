@@ -61,12 +61,21 @@ const { title, description, lang, type, date, updatedDate } = Astro.props;
       rel="stylesheet"
     />
     <script is:inline>
-      const stored = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      const theme = stored ?? (prefersDark ? "dark" : "light");
-      document.documentElement.dataset.theme = theme;
+      function applyStoredTheme(doc) {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        doc.documentElement.dataset.theme =
+          stored ?? (prefersDark ? "dark" : "light");
+      }
+      applyStoredTheme(document);
+      // View transitions swap in a freshly server-rendered <html> that has no
+      // data-theme yet — reapply the stored theme before it's painted so
+      // navigating to another page doesn't flash back to the default theme.
+      document.addEventListener("astro:before-swap", (event) => {
+        applyStoredTheme(event.newDocument);
+      });
     </script>
   </head>
   <body>

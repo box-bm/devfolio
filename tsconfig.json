@@ -1,12 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ],
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true,
@@ -17,31 +12,14 @@
       }
     ],
     "paths": {
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@layouts/*": [
-        "./src/layouts/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
-      "@images/*": [
-        "./src/images/*"
-      ],
-      "@i18n/*": [
-        "./src/i18n/*"
-      ],
-      "@constants": [
-        "./src/constants/index.ts",
-        "./src/constants/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ]
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@images/*": ["./src/images/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@constants": ["./src/constants/index.ts", "./src/constants/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   }
 }

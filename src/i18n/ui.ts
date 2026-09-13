@@ -10,7 +10,6 @@ export enum UiKey {
 
   // Portfolio – Hero
   "portfolio.hero.eyebrow" = "portfolio.hero.eyebrow",
-  "portfolio.hero.available" = "portfolio.hero.available",
   "portfolio.hero.title" = "portfolio.hero.title",
   "portfolio.hero.highlight" = "portfolio.hero.highlight",
   "portfolio.hero.caption" = "portfolio.hero.caption",
@@ -20,16 +19,6 @@ export enum UiKey {
   "portfolio.hero.role.frontend" = "portfolio.hero.role.frontend",
   "portfolio.hero.role.mobile" = "portfolio.hero.role.mobile",
   "portfolio.hero.role.testing" = "portfolio.hero.role.testing",
-
-  // Portfolio – Hero "Currently" panel
-  "portfolio.hero.currently.label" = "portfolio.hero.currently.label",
-  "portfolio.hero.currently.location" = "portfolio.hero.currently.location",
-  "portfolio.hero.currently.locationCaption" = "portfolio.hero.currently.locationCaption",
-  "portfolio.hero.currently.stack" = "portfolio.hero.currently.stack",
-  "portfolio.hero.currently.stackCaption" = "portfolio.hero.currently.stackCaption",
-  "portfolio.hero.currently.testing" = "portfolio.hero.currently.testing",
-  "portfolio.hero.currently.testingCaption" = "portfolio.hero.currently.testingCaption",
-  "portfolio.hero.currently.latest" = "portfolio.hero.currently.latest",
 
   // Portfolio – Marquee
   "portfolio.marquee.label" = "portfolio.marquee.label",
@@ -41,8 +30,6 @@ export enum UiKey {
   "portfolio.about.description1" = "portfolio.about.description1",
   "portfolio.about.description2" = "portfolio.about.description2",
   "portfolio.about.description3" = "portfolio.about.description3",
-  "portfolio.about.location" = "portfolio.about.location",
-  "portfolio.about.roleTag" = "portfolio.about.roleTag",
 
   // Portfolio – Stats
   "portfolio.about.stats.years.label" = "portfolio.about.stats.years.label",

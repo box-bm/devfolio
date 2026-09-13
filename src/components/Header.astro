@@ -27,7 +27,7 @@ const base = lang === "en" ? "" : `/${lang}`;
           {t(UiKey["nav.backToPortfolio"])}
         </a>
       ) : (
-        <>
+        <div class="nav__end">
           <div class="nav__links">
             <slot name="link" />
           </div>
@@ -44,7 +44,7 @@ const base = lang === "en" ? "" : `/${lang}`;
               <span />
             </button>
           </div>
-        </>
+        </div>
       )
     }
   </div>
@@ -90,11 +90,16 @@ const base = lang === "en" ? "" : `/${lang}`;
     gap: 28px;
   }
 
-  .nav__links {
-    flex: 1;
+  .nav__end {
+    margin-left: auto;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    gap: 22px;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
     gap: 22px;
   }
 
@@ -102,7 +107,6 @@ const base = lang === "en" ? "" : `/${lang}`;
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 6px;
   }
 
   .back-link {

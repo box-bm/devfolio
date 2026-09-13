@@ -13,20 +13,19 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<nav aria-label="Breadcrumb">
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <ol class="breadcrumb-list">
     <li class="breadcrumb-item">
-      <a
-        href="/"
-        class="breadcrumb-link breadcrumb-link--home-icon"
-        aria-label="go home icon"
-      >
-        <House size={16} aria-hidden="true" />
+      <a href="/" class="breadcrumb-link" aria-label="Home">
+        <House size={13} aria-hidden="true" />
       </a>
     </li>
     {
       items.map((item) => (
         <li class="breadcrumb-item">
+          <span class="breadcrumb-sep" aria-hidden="true">
+            /
+          </span>
           {item.href ? (
             <a href={item.href} class="breadcrumb-link">
               {item.label}
@@ -47,54 +46,38 @@ const { items } = Astro.props;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
     padding: 0;
     margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
   }
 
   .breadcrumb-item {
     display: flex;
     align-items: center;
+    gap: 8px;
   }
 
-  .breadcrumb-item::after {
-    content: "/";
-    margin-left: 0.5rem;
-    color: var(--text-secondary);
-  }
-
-  .breadcrumb-item:last-child::after {
-    content: "";
+  .breadcrumb-sep {
+    color: var(--text-tertiary);
   }
 
   .breadcrumb-link {
-    text-decoration: none;
-    text-align: center;
-    padding: 8px 12px;
-    text-transform: capitalize;
-  }
-
-  .breadcrumb-link--home-icon {
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    color: var(--accent-primary);
-    text-align: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
   }
-
   .breadcrumb-link:hover {
-    text-decoration: underline;
+    color: var(--accent);
   }
 
   .breadcrumb-current {
+    color: var(--text-primary);
     font-weight: 500;
-    color: var(--accent-primary);
-  }
-
-  @media (max-width: 600px) {
-    .breadcrumb-list {
-      gap: 4px;
-    }
   }
 </style>

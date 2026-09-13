@@ -48,7 +48,11 @@ if (guide) {
   <MarkdownStyles />
   <Header hideMenu />
   <main class="doc-main">
-    <Bradcrumb slot="breadcrumb" items={breadcrumbItems} />
+    <div
+      class:list={["doc-breadcrumb", !fullWidth && "doc-breadcrumb--narrow"]}
+    >
+      <Bradcrumb items={breadcrumbItems} />
+    </div>
     <div
       class:list={[
         !fullWidth && "markdown-body",
@@ -61,6 +65,14 @@ if (guide) {
   <Footer />
   <BuyMeACoffee />
   <style>
+    .doc-breadcrumb {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+    .doc-breadcrumb--narrow {
+      max-width: 72ch;
+    }
     .full-width-body {
       max-width: 1100px;
       margin: 0 auto;

@@ -12,6 +12,7 @@ npm run test     # Run tests with vitest
 ```
 
 Format with Prettier (configured for Astro via `prettier-plugin-astro`):
+
 ```bash
 npx prettier --write .
 ```
@@ -51,16 +52,16 @@ Two Astro content collections defined in `src/content.config.ts`:
 
 Configured in both `astro.config.mjs` (implicitly via tsconfig) and `vitest.config.ts`:
 
-| Alias | Path |
-|-------|------|
+| Alias         | Path             |
+| ------------- | ---------------- |
 | `@components` | `src/components` |
-| `@layouts` | `src/layouts` |
-| `@styles` | `src/styles` |
-| `@images` | `src/images` |
-| `@i18n` | `src/i18n` |
-| `@constants` | `src/constants` |
-| `@utils` | `src/utils` |
-| `@pages` | `src/pages` |
+| `@layouts`    | `src/layouts`    |
+| `@styles`     | `src/styles`     |
+| `@images`     | `src/images`     |
+| `@i18n`       | `src/i18n`       |
+| `@constants`  | `src/constants`  |
+| `@utils`      | `src/utils`      |
+| `@pages`      | `src/pages`      |
 
 ### Theme
 

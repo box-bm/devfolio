@@ -49,12 +49,7 @@ const {
 
 <style>
   .section-heading {
-    max-width: 640px;
     margin-bottom: clamp(32px, 5vw, 56px);
-  }
-  .section-heading.is-center,
-  .section-heading.is-split-heading {
-    max-width: none;
   }
 
   .section-eyebrow-row {
@@ -87,13 +82,14 @@ const {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-width: 640px;
   }
   .heading-row.is-split {
     max-width: none;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     gap: 32px;
   }
   .heading-row.is-split h2 {
