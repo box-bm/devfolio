@@ -140,6 +140,7 @@ export const es: UiDict = {
   "guides.createdAt": "Creado",
   "guides.updatedAt": "Actualizado",
   "guides.contact.title": "Ponte en contacto",
+  "guides.contact.buyMeACoffee": "Invítame un café",
   "guides.contact.description":
     "¿Tienes alguna pregunta o una idea en mente? No dudes en escribirme.",
   "guides.eyebrow.notes": "Notas",
@@ -152,6 +153,7 @@ export const es: UiDict = {
   "footer.label": "Construido con Astro",
   "footer.explore": "Explora",
   "footer.builtWith": "Construido con Astro",
+  "footer.buyMeACoffee": "Invítame un café",
 
   // GENERAL
   "general.readmore": "Leer más",

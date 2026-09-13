@@ -1,12 +1,15 @@
 ---
 import GuidesLayout from "@layouts/Guides.astro";
 import ContactLinks from "@components/ContactLinks.astro";
+import Button from "@components/Button.astro";
 import Divider from "@components/Divider.astro";
 import MeImage from "@images/me.jpeg";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
 import { UiKey } from "@i18n/ui";
 import { Image } from "astro:assets";
+import { Coffee } from "@lucide/astro";
+import { buyMeACoffee } from "@constants";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -51,14 +54,28 @@ const { Content } = await guide.render();
     <Content />
   </article>
   <Divider />
-  <section>
-    <div class="avatar">
+  <section class="guide-contact glass" data-reveal="scale" data-tilt="2">
+    <div class="guide-contact__glow" aria-hidden="true"></div>
+    <span class="corner-mark corner-mark--tl"></span>
+    <span class="corner-mark corner-mark--tr"></span>
+    <span class="corner-mark corner-mark--bl"></span>
+    <span class="corner-mark corner-mark--br"></span>
+
+    <div class="guide-contact__avatar">
       <Image src={MeImage} alt="Brandon Manzo profile" loading="lazy" />
     </div>
-    <div class="contact">
-      <h2>{t(UiKey["guides.contact.title"])}</h2>
-      <p>{t(UiKey["guides.contact.description"])}</p>
-      <ContactLinks />
+    <div class="guide-contact__body">
+      <span class="eyebrow">{t(UiKey["nav.contact"])}</span>
+      <h2 class="guide-contact__title">{t(UiKey["guides.contact.title"])}</h2>
+      <p class="body-large">{t(UiKey["guides.contact.description"])}</p>
+
+      <div class="guide-contact__actions">
+        <ContactLinks />
+        <Button type="Outlined" href={buyMeACoffee}>
+          <Coffee size={16} />
+          {t(UiKey["guides.contact.buyMeACoffee"])}
+        </Button>
+      </div>
     </div>
   </section>
 </GuidesLayout>
@@ -97,61 +114,123 @@ const { Content } = await guide.render();
     font-size: 1rem;
   }
 
-  section {
+  p.caption {
+    margin: 4px 0px !important;
+  }
+</style>
+
+<style>
+  .guide-contact {
+    position: relative;
+    overflow: hidden;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 24px;
-    padding: 40px 0;
+    gap: clamp(24px, 4vw, 40px);
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding: clamp(28px, 5vw, 44px);
+    border-radius: var(--radius-xl);
     scroll-margin-top: 60px;
   }
-
-  .avatar {
-    min-width: 150px;
-    min-height: 150px;
-    max-width: 220px;
-    max-height: 220px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
+  .guide-contact__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      480px circle at var(--mx, 15%) var(--my, 50%),
+      var(--accent-glow),
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+  .guide-contact > *:not(.guide-contact__glow):not(.corner-mark) {
+    position: relative;
+    z-index: 1;
   }
 
-  .avatar img {
+  .corner-mark {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--accent);
+  }
+  .corner-mark--tl {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-mark--tr {
+    top: -1px;
+    right: -1px;
+    border-top: 1px solid;
+    border-right: 1px solid;
+  }
+  .corner-mark--bl {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-mark--br {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  .guide-contact__avatar {
+    flex-shrink: 0;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+  }
+  .guide-contact__avatar :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     display: block;
-    border-radius: 0 !important;
     margin: 0 !important;
+    border-radius: 0 !important;
   }
 
-  section > div {
+  .guide-contact__body {
     flex: 1;
-    min-width: 200px;
+    min-width: 240px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+  }
+  .guide-contact__title {
+    margin: 0 !important;
+    font-size: clamp(22px, 3vw, 30px);
+  }
+  .guide-contact__body .body-large {
+    margin: 4px 0 0;
+    max-width: 46ch;
   }
 
-  section > div.contact h2 {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  section > div.contact p {
-    margin: 0;
-  }
-
-  .tags {
+  .guide-contact__actions {
     display: flex;
-    flex-direction: row;
-    gap: 8px;
-    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
   }
 
-  p.caption {
-    margin: 4px 0px !important;
+  @media (max-width: 560px) {
+    .guide-contact {
+      flex-direction: column;
+      text-align: center;
+    }
+    .guide-contact__body {
+      align-items: center;
+    }
+    .guide-contact__actions {
+      justify-content: center;
+    }
   }
 </style>

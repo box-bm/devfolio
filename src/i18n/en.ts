@@ -142,6 +142,7 @@ export const en: UiDict = {
   "guides.contact.title": "Get in touch",
   "guides.contact.description":
     "Have a question or an idea in mind? Feel free to reach out.",
+  "guides.contact.buyMeACoffee": "Buy me a coffee",
   "guides.eyebrow.notes": "Notes",
   "guides.eyebrow.entries": "entries",
   "legal.eyebrow.documents": "Documents",
@@ -152,6 +153,7 @@ export const en: UiDict = {
   "footer.label": "Built with Astro",
   "footer.explore": "Explore",
   "footer.builtWith": "Built with Astro",
+  "footer.buyMeACoffee": "Buy me a coffee",
 
   // GENERAL
   "general.readmore": "Read more",

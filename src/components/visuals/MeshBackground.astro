@@ -1,9 +1,12 @@
 ---
-/** Fixed backdrop: a soft warm glow over the near-dark/near-light base.
+/** Fixed blueprint backdrop: a soft warm glow over the near-dark/near-light
+ *  base, plus a faint dot-grid field fading out toward the edges.
  *  Purely decorative — mounted once in Base.astro. */
 ---
 
-<div class="mesh" aria-hidden="true"></div>
+<div class="mesh" aria-hidden="true">
+  <div class="dot-field"></div>
+</div>
 
 <style>
   .mesh {
@@ -20,5 +23,19 @@
       ),
       radial-gradient(760px 460px at 2% 28%, var(--glow-2), transparent 62%),
       var(--bg);
+  }
+
+  /* Fixed blueprint dot-grid field, faded toward the edges */
+  .dot-field {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 8%,
+      #000 10%,
+      transparent 68%
+    );
+    mask-image: radial-gradient(circle at 50% 8%, #000 10%, transparent 68%);
   }
 </style>

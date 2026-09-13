@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { defaultLang } from "@i18n/langs";
 import { UiKey } from "@i18n/ui";
 import { Github, Linkedin, Mail, Coffee } from "@lucide/astro";
-import { email, githubProfile, linkedIn } from "@constants";
+import { email, githubProfile, linkedIn, buyMeACoffee } from "@constants";
 import Button from "@components/Button.astro";
 
 const lang = getLangFromUrl(Astro.url);
@@ -49,12 +49,12 @@ const base = lang === defaultLang ? "" : `/${lang}`;
         >
       </div>
       <a
-        href="https://www.buymeacoffee.com/boxdev"
+        href={buyMeACoffee}
         target="_blank"
         rel="noopener noreferrer"
         class="bmc-link"
       >
-        <Coffee size={15} />Buy me a coffee
+        <Coffee size={15} />{t(UiKey["footer.buyMeACoffee"])}
       </a>
     </div>
   </div>
@@ -134,12 +134,21 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     align-items: center;
     gap: 8px;
     margin-top: 4px;
+    padding: 7px 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
     font-size: 13.5px;
-    color: var(--text-secondary) !important;
+    font-weight: 500;
+    color: var(--accent) !important;
+    background: var(--accent-soft);
     width: fit-content;
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
   }
   .bmc-link:hover {
-    color: var(--text-primary) !important;
+    border-color: var(--accent);
+    transform: translateY(-1px);
   }
 
   /* Bottom bar */

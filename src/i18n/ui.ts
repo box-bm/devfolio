@@ -116,6 +116,7 @@ export enum UiKey {
   "guides.updatedAt" = "guides.updatedAt",
   "guides.contact.title" = "guides.contact.title",
   "guides.contact.description" = "guides.contact.description",
+  "guides.contact.buyMeACoffee" = "guides.contact.buyMeACoffee",
   "guides.eyebrow.notes" = "guides.eyebrow.notes",
   "guides.eyebrow.entries" = "guides.eyebrow.entries",
   "legal.eyebrow.documents" = "legal.eyebrow.documents",
@@ -126,6 +127,7 @@ export enum UiKey {
   "footer.label" = "footer.label",
   "footer.explore" = "footer.explore",
   "footer.builtWith" = "footer.builtWith",
+  "footer.buyMeACoffee" = "footer.buyMeACoffee",
 
   // General
   "general.readmore" = "general.readmore",
