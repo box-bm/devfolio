@@ -1,37 +1,22 @@
 ---
 interface Props {
-  type?: "Outlined" | "Default" | "Text" | "Icon";
+  type?: "Outlined" | "Default" | "Icon";
   target?: "_self" | "_blank" | "_parent" | "_top";
-  color?: string;
-  id?: string;
   href?: string;
   ariaLabel?: string;
-  magnetic?: boolean;
 }
 
-const {
-  type = "Default",
-  href,
-  target = "_blank",
-  color,
-  id,
-  ariaLabel,
-  magnetic = false,
-} = Astro.props;
+const { type = "Default", href, target = "_blank", ariaLabel } = Astro.props;
 ---
 
 <a
-  id={id}
   target={target}
   href={href}
-  style={color ? `color: ${color}` : undefined}
   aria-label={ariaLabel}
-  data-magnetic={magnetic ? "0.25" : undefined}
   class:list={[
     "btn",
     type === "Default" && "btn-default",
     type === "Outlined" && "btn-outlined",
-    type === "Text" && "btn-text",
     type === "Icon" && "btn-icon",
   ]}
 >
@@ -90,16 +75,6 @@ const {
   .btn-outlined:hover {
     color: var(--pencil);
     border-color: var(--pencil);
-  }
-
-  /* Text */
-  .btn-text {
-    background: transparent;
-    color: var(--accent);
-    padding-inline: 14px;
-  }
-  .btn-text:hover {
-    background: var(--accent-soft);
   }
 
   /* Icon */

@@ -197,12 +197,8 @@ const t = useTranslations(lang);
     transform: rotate(-1.4deg);
   }
   .tape {
-    position: absolute;
     width: 104px;
     height: 28px;
-    background: var(--tape);
-    border-left: 1px dashed var(--tape-edge);
-    border-right: 1px dashed var(--tape-edge);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   .tape--a {
@@ -220,7 +216,7 @@ const t = useTranslations(lang);
     position: absolute;
     right: 14px;
     bottom: 10px;
-    color: #1a44a0;
+    color: var(--sheet-pencil);
   }
   .drawing {
     display: block;
@@ -229,13 +225,13 @@ const t = useTranslations(lang);
   }
   .drawing path {
     fill: none;
-    stroke: #222326;
+    stroke: var(--sheet-ink);
     stroke-width: 2.2;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
   .drawing path:last-child {
-    stroke: #1a44a0;
+    stroke: var(--sheet-pencil);
     stroke-width: 3;
   }
 

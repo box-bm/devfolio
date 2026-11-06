@@ -20,6 +20,7 @@ const t = useTranslations(lang);
           alt={t(UiKey["portfolio.hero.photoAlt"])}
           class="study__img"
           loading="eager"
+          fetchpriority="high"
           widths={[400, 560, 800]}
           sizes="(max-width: 860px) 80vw, 460px"
         />
@@ -118,15 +119,6 @@ const t = useTranslations(lang);
     pointer-events: none;
   }
 
-  .tape {
-    position: absolute;
-    width: 116px;
-    height: 30px;
-    background: var(--tape);
-    border-left: 1px dashed var(--tape-edge);
-    border-right: 1px dashed var(--tape-edge);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  }
   .tape--top {
     top: -14px;
     left: 50%;

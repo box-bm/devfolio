@@ -5,5 +5,5 @@ export const languages: Record<Lang, string> = {
   es: "Español",
 };
 
-export const LANG_CODES = ["en", "es"];
+export const LANG_CODES: Lang[] = ["en", "es"];
 export const defaultLang: Lang = "en";

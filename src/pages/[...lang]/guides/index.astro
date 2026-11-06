@@ -4,7 +4,12 @@ import { ArrowRight } from "@lucide/astro";
 import { UiKey } from "@i18n/ui";
 import { LANG_CODES } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { getCollection } from "astro:content";
+import {
+  getGuides,
+  guideDateFormat,
+  guideHref,
+  readingMinutes,
+} from "@utils/guides";
 import { email } from "@constants";
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,24 +19,11 @@ export const getStaticPaths = () => {
   return LANG_CODES.map((lang) => ({ params: { lang } }));
 };
 
-const guides = await getCollection(
-  "guides",
-  (guide) => !guide.data.draft && guide.id.endsWith(`${lang}.md`),
-);
-
-guides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const fmt = new Intl.DateTimeFormat(lang, {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  timeZone: "America/Guatemala",
-});
-const minutes = (body = "") =>
-  Math.max(1, Math.ceil(body.split(/\s+/).filter(Boolean).length / 220));
+const guides = await getGuides(lang);
+const fmt = guideDateFormat(lang);
 ---
 
-<GuidesLayout title={t(UiKey["title.guides"])}>
+<GuidesLayout>
   <header class="guides-head">
     <h1 class="doc-title doc-title--index">{t(UiKey["guides.title"])}</h1>
     <p class="doc-lede">{t(UiKey["guides.subtitle"])}</p>
@@ -44,19 +36,15 @@ const minutes = (body = "") =>
       <ol class="ruled guides-list">
         {guides.map((guide) => (
           <li data-reveal>
-            <a
-              class="ruled-link"
-              href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}
-            >
+            <a class="ruled-link" href={guideHref(guide, lang)}>
               <span class="ruled-link__meta">
                 <time datetime={guide.data.date.toISOString()}>
                   {fmt.format(guide.data.date)}
                 </time>
                 {" · "}
-                {t(UiKey["guides.readingTime"]).replace(
-                  "{n}",
-                  String(minutes(guide.body)),
-                )}
+                {t(UiKey["guides.readingTime"], {
+                  n: readingMinutes(guide.body),
+                })}
               </span>
               <span class="ruled-link__title">{guide.data.title}</span>
               {guide.data.description && (

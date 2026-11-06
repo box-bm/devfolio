@@ -4,8 +4,15 @@ import Contents from "@components/docs/Contents.astro";
 import Button from "@components/Button.astro";
 import MeImage from "@images/me.jpeg";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { getCollection } from "astro:content";
+import { LANG_CODES } from "@i18n/langs";
 import { UiKey } from "@i18n/ui";
+import {
+  getGuides,
+  guideDateFormat,
+  guideHref,
+  guideSlug,
+  readingMinutes,
+} from "@utils/guides";
 import { Image } from "astro:assets";
 import { ArrowRight, Coffee, Mail } from "@lucide/astro";
 import { buyMeACoffee, email } from "@constants";
@@ -14,43 +21,30 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export async function getStaticPaths() {
-  const guides = await getCollection("guides", (guide) => !guide.data.draft);
-
-  return guides.flatMap((guide) => ({
-    props: {
-      guide,
-    },
-    params: {
-      lang: guide.id.split(".")[1],
-      slug: guide.id.split(".")[0],
-    },
-  }));
+  return (
+    await Promise.all(
+      LANG_CODES.map(async (lang) => {
+        const guides = await getGuides(lang);
+        return guides.map((guide, i) => ({
+          params: { lang, slug: guideSlug(guide) },
+          // The next older guide in this language, wrapping to the newest.
+          props: {
+            guide,
+            next:
+              guides.length > 1 ? guides[(i + 1) % guides.length] : undefined,
+          },
+        }));
+      }),
+    )
+  ).flat();
 }
 
-const { guide } = Astro.props;
+const { guide, next } = Astro.props;
 const { Content, headings } = await guide.render();
 
-const fmt = new Intl.DateTimeFormat(lang, {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  timeZone: "America/Guatemala",
-});
-const minutes = Math.max(
-  1,
-  Math.ceil((guide.body ?? "").split(/\s+/).filter(Boolean).length / 220),
-);
+const fmt = guideDateFormat(lang);
+const minutes = readingMinutes(guide.body);
 
-// The next older guide in this language, wrapping to the newest.
-const siblings = (
-  await getCollection(
-    "guides",
-    (g) => !g.data.draft && g.id.endsWith(`${lang}.md`),
-  )
-).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const at = siblings.findIndex((g) => g.id === guide.id);
-const next =
-  siblings.length > 1 ? siblings[(at + 1) % siblings.length] : undefined;
 const sameDay =
   fmt.format(guide.data.date) === fmt.format(guide.data.updatedDate);
 ---
@@ -94,11 +88,7 @@ const sameDay =
             )
           }
         </dl>
-        <span
-          >{
-            t(UiKey["guides.readingTime"]).replace("{n}", String(minutes))
-          }</span
-        >
+        <span>{t(UiKey["guides.readingTime"], { n: minutes })}</span>
       </div>
     </header>
 
@@ -113,7 +103,7 @@ const sameDay =
   {
     next && (
       <nav class="guide-next page-break" aria-label={t(UiKey["guides.next"])}>
-        <a href={`/${lang}/guides/${next.slug.slice(0, -2)}`}>
+        <a href={guideHref(next, lang)}>
           <span class="guide-next__label">{t(UiKey["guides.next"])}</span>
           <span class="guide-next__title">
             {next.data.title}
