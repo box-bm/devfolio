@@ -8,7 +8,8 @@ import Contents from "@components/docs/Contents.astro";
 import { useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
 import type { Lang } from "@i18n/langs";
-import { email } from "@constants";
+import LegalQuestions from "@components/docs/LegalQuestions.astro";
+import { legalDateFormat } from "@utils/legal";
 
 interface Props {
   doc: CollectionEntry<"legal">;
@@ -21,12 +22,7 @@ const { Content, headings } = await doc.render();
 // The document's own H1 names the app ("Privacy Policy for BoxWallet");
 // it becomes the page title and is hidden in the body.
 const heading = headings.find((h) => h.depth === 1)?.text ?? doc.data.title;
-
-// Effective dates are calendar dates; format them without a time-zone shift.
-const fmt = new Intl.DateTimeFormat(lang, {
-  dateStyle: "long",
-  timeZone: "UTC",
-});
+const fmt = legalDateFormat(lang);
 ---
 
 <article class="legal-doc">
@@ -65,25 +61,9 @@ const fmt = new Intl.DateTimeFormat(lang, {
     </div>
   </div>
 
-  <p class="legal-doc__questions">
-    {t(UiKey["legal.questions"])}
-    <a href={`mailto:${email}`}>{email}</a>.
-  </p>
+  <LegalQuestions
+    lang={lang}
+    maxWidth="68ch"
+    marginTop="clamp(48px, 7vw, 80px)"
+  />
 </article>
-
-<style>
-  .legal-doc__questions {
-    max-width: 68ch;
-    margin-top: clamp(48px, 7vw, 80px);
-    padding-top: 24px;
-    border-top: 1px solid var(--line-strong);
-    color: var(--text-secondary);
-  }
-  .legal-doc__questions a {
-    font-weight: 600;
-    color: var(--pencil);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    overflow-wrap: anywhere;
-  }
-</style>

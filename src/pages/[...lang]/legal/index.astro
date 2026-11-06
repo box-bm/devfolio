@@ -4,7 +4,8 @@ import { UiKey } from "@i18n/ui";
 import { LANG_CODES, languages, type Lang } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
-import { email } from "@constants";
+import LegalQuestions from "@components/docs/LegalQuestions.astro";
+import { legalDateFormat, legalSlug } from "@utils/legal";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -14,10 +15,7 @@ export const getStaticPaths = () => {
 };
 
 const allDocs = await getCollection("legal");
-const fmt = new Intl.DateTimeFormat(lang, {
-  dateStyle: "long",
-  timeZone: "UTC",
-});
+const fmt = legalDateFormat(lang);
 
 const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
   (appName) => {
@@ -35,14 +33,14 @@ const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
       docs: docs.map((doc) => ({
         title: doc.data.title,
         lang: doc.data.lang as Lang,
-        slug: doc.id.replace(/\/[^/]+$/, ""),
+        slug: legalSlug(doc),
       })),
     };
   },
 );
 ---
 
-<LegalLayout title={t(UiKey["title.legal"])}>
+<LegalLayout>
   <header>
     <h1 class="doc-title doc-title--index">{t(UiKey["legal.title"])}</h1>
     <p class="doc-lede">{t(UiKey["legal.subtitle"])}</p>
@@ -87,10 +85,11 @@ const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
     }
   </div>
 
-  <p class="legal-questions">
-    {t(UiKey["legal.questions"])}
-    <a href={`mailto:${email}`}>{email}</a>.
-  </p>
+  <LegalQuestions
+    lang={lang}
+    maxWidth="60ch"
+    marginTop="clamp(64px, 9vw, 112px)"
+  />
 </LegalLayout>
 
 <style>
@@ -135,20 +134,6 @@ const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
   }
   .legal-row .ruled-link__title {
     font-size: 1.25rem;
-  }
-  .legal-questions {
-    max-width: 60ch;
-    margin-top: clamp(64px, 9vw, 112px);
-    padding-top: 24px;
-    border-top: 1px solid var(--line-strong);
-    color: var(--text-secondary);
-  }
-  .legal-questions a {
-    font-weight: 600;
-    color: var(--pencil);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    overflow-wrap: anywhere;
   }
   @media (max-width: 760px) {
     .legal-app {

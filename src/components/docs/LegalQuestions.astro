@@ -1,0 +1,43 @@
+---
+/** "Questions? Email me" sign-off shared by the legal index and each legal document. */
+import { useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+import type { Lang } from "@i18n/langs";
+import { email } from "@constants";
+
+interface Props {
+  lang: Lang;
+  /** Measure of the paragraph, e.g. "60ch". */
+  maxWidth: string;
+  /** Space above the rule. */
+  marginTop: string;
+}
+
+const { lang, maxWidth, marginTop } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<p
+  class="legal-questions"
+  style={`--questions-max: ${maxWidth}; --questions-gap: ${marginTop}`}
+>
+  {t(UiKey["legal.questions"])}
+  <a href={`mailto:${email}`}>{email}</a>.
+</p>
+
+<style>
+  .legal-questions {
+    max-width: var(--questions-max);
+    margin-top: var(--questions-gap);
+    padding-top: 24px;
+    border-top: 1px solid var(--line-strong);
+    color: var(--text-secondary);
+  }
+  .legal-questions a {
+    font-weight: 600;
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+</style>

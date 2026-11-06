@@ -31,8 +31,6 @@ export const es: UiDict = {
   "portfolio.projects.validators.description":
     "Dos paquetes de Dart que validan números de identificación guatemaltecos: el DPI (documento personal de identificación) y el NIT (número de identificación tributaria). Ambos con pruebas completas y publicados.",
   "portfolio.projects.validators.built": "Dart, con pruebas unitarias",
-  "portfolio.projects.app2.title": "DPI Validator",
-  "portfolio.projects.app3.title": "NIT Validator",
   "portfolio.projects.viewCode": "Código fuente",
   "portfolio.projects.viewProject": "Abrir",
   "portfolio.projects.viewAll": "Más en GitHub",
@@ -74,9 +72,6 @@ export const es: UiDict = {
   "guides.next": "Siguiente guía",
 
   // LEGAL
-  "legal.privacy": "Política de privacidad",
-  "legal.terms": "Términos del servicio",
-  "legal.languages": "Idiomas",
   "legal.app": "Aplicación",
   "legal.version": "Versión",
   "legal.effectiveDate": "Fecha de vigencia",
@@ -106,8 +101,4 @@ export const es: UiDict = {
   "footer.buyMeACoffee": "Invítame un café",
 
   // GENERAL
-  "general.readmore": "Leer más",
-  "general.projects": "Proyectos",
-  "general.contact": "Contacto",
-  "general.years": "años",
 };

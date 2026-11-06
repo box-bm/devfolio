@@ -3,6 +3,7 @@ import LegalLayout from "@layouts/Legal.astro";
 import LegalDocument from "@components/docs/LegalDocument.astro";
 import { getCollection } from "astro:content";
 import type { Lang } from "@i18n/langs";
+import { legalSlug } from "@utils/legal";
 
 export async function getStaticPaths() {
   const docs = await getCollection("legal");
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
     props: { doc },
     params: {
       lang: doc.data.lang,
-      slug: doc.id.replace(/\/[^/]+$/, ""),
+      slug: legalSlug(doc),
     },
   }));
 }

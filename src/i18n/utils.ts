@@ -15,7 +15,15 @@ export function getLangFromLegalUrl(url: URL) {
 }
 
 export function useTranslations(lang: Lang) {
-  return function t(key: keyof (typeof translations)[typeof defaultLang]) {
-    return translations[lang][key] || translations[defaultLang][key];
+  /** Looks up `key`, filling `{name}` placeholders from `values`. */
+  return function t(
+    key: keyof (typeof translations)[typeof defaultLang],
+    values?: Record<string, string | number>,
+  ) {
+    const text = translations[lang][key] || translations[defaultLang][key];
+    if (!values) return text;
+    return text.replace(/\{(\w+)\}/g, (match, name) =>
+      name in values ? String(values[name]) : match,
+    );
   };
 }

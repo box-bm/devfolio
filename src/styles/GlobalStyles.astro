@@ -2,8 +2,6 @@
   /* ================================================================
      DESIGN TOKENS: the sketchbook
      Toned grey sketch paper, graphite ink, one animator's blue pencil.
-     Legacy variable names (--accent-primary, --neutral-*, --glass-*,
-     --text-*) are kept and mapped so guides / legal / markdown still work.
      ================================================================ */
   :root {
     color-scheme: light;
@@ -19,6 +17,9 @@
     --bg: #d6d4ce;
     --bg-deep: #cbc9c2;
     --sheet: #e4e2dc; /* a lighter sheet taped onto the page */
+    /* Ink on taped-in sheets: the sheet stays light, so these never flip */
+    --sheet-ink: #222326;
+    --sheet-pencil: #1a44a0;
     --surface: #dfddd7;
     --surface-2: #e4e2dc;
     --surface-3: #cfcdc6;
@@ -44,8 +45,6 @@
     --accent-glow: transparent;
     --accent-contrast: #e4e2dc;
     --on-accent: #e4e2dc;
-    --olive-ink: var(--pencil);
-    --corinto-ink: var(--pencil);
 
     /* Ink buttons */
     --ink: #222326;
@@ -56,48 +55,23 @@
     --tape: rgba(236, 233, 222, 0.72);
     --tape-edge: rgba(34, 35, 38, 0.12);
 
-    /* Legacy surfaces, now paper rather than glass */
-    --glass-bg: var(--surface);
-    --glass-bg-strong: var(--bg);
-    --glass-border: var(--line);
-    --glass-highlight: transparent;
-    --glass-blur: 0px;
-    --dot: transparent;
-    --glow-2: transparent;
-
     /* Depth: paper lifts a little, never glows */
     --shadow-sm: 0 1px 1px rgba(34, 35, 38, 0.08);
     --shadow-md:
       0 2px 3px rgba(34, 35, 38, 0.1), 0 10px 22px -12px rgba(34, 35, 38, 0.3);
     --shadow-lg:
       0 3px 4px rgba(34, 35, 38, 0.1), 0 22px 40px -18px rgba(34, 35, 38, 0.38);
-    --shadow-accent: var(--shadow-md);
-    --shadow-glow: var(--shadow-md);
 
     /* Radii: paper has square corners */
     --radius-sm: 2px;
     --radius: 3px;
     --radius-lg: 4px;
-    --radius-xl: 4px;
-    --radius-pill: 999px;
 
     /* Motion */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-spring: var(--ease-out);
     --dur-fast: 180ms;
     --dur: 280ms;
     --dur-slow: 700ms;
-
-    /* Legacy aliases (do not remove: markdown/legal/breadcrumb depend on these) */
-    --neutral-white: var(--sheet);
-    --neutral-light: var(--surface-3);
-    --neutral-medium: var(--line-strong);
-    --neutral-light-gray: var(--surface-3);
-    --neutral-dark: #36373b;
-    --neutral-black: var(--text-primary);
-    --accent-primary: var(--accent);
-    --accent-dark: var(--accent-strong);
-    --accent-darkest: #0d265c;
   }
 
   [data-theme="dark"] {
@@ -141,10 +115,6 @@
       0 2px 3px rgba(0, 0, 0, 0.35), 0 12px 24px -12px rgba(0, 0, 0, 0.6);
     --shadow-lg:
       0 3px 4px rgba(0, 0, 0, 0.35), 0 24px 44px -18px rgba(0, 0, 0, 0.7);
-
-    --neutral-dark: #e8e6e1;
-    --neutral-black: #e8e6e1;
-    --accent-darkest: #d3e0ff;
   }
 
   /* ================================================================
@@ -187,8 +157,6 @@
   /* Smooth theme transition for surfaces & text only (not transforms) */
   a,
   button,
-  .card,
-  .chip,
   header,
   footer,
   input,
@@ -219,11 +187,7 @@
   h3,
   h4,
   h5,
-  h6,
-  .h1,
-  .h2,
-  .h3,
-  .h4 {
+  h6 {
     font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.04;
@@ -231,24 +195,20 @@
     color: var(--text-primary);
   }
 
-  h1,
-  .h1 {
+  h1 {
     font-size: clamp(2.5rem, 5.6vw, 4.25rem);
     line-height: 1;
     letter-spacing: -0.035em;
   }
-  h2,
-  .h2 {
+  h2 {
     font-size: clamp(1.875rem, 3.4vw, 2.75rem);
   }
-  h3,
-  .h3 {
+  h3 {
     font-size: 1.1875rem;
     line-height: 1.3;
     letter-spacing: -0.015em;
   }
-  h4,
-  .h4 {
+  h4 {
     font-size: 1.05rem;
     line-height: 1.3;
     letter-spacing: -0.015em;
@@ -268,20 +228,6 @@
   p {
     color: var(--text-secondary);
     line-height: 1.65;
-  }
-
-  .body-large {
-    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-    line-height: 1.7;
-  }
-  .body-small {
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-  .caption {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
   }
 
   a {
@@ -328,93 +274,66 @@
     padding-inline: clamp(20px, 5vw, 40px);
   }
 
-  /* Small corner-bracket marks — viewfinder/crop-mark signature detail */
-  .corner-marks {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+  /* Ruled notebook rows: guide and legal listings, home-page notes */
+  .ruled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
   }
-  .corner-marks span {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-color: var(--accent);
+  .ruled > li {
+    border-bottom: 1px solid var(--line-strong);
   }
-  .corner-marks span:nth-child(1) {
-    top: -1px;
-    left: -1px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-  }
-  .corner-marks span:nth-child(2) {
-    top: -1px;
-    right: -1px;
-    border-top: 1px solid;
-    border-right: 1px solid;
-  }
-  .corner-marks span:nth-child(3) {
-    bottom: -1px;
-    left: -1px;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-  }
-  .corner-marks span:nth-child(4) {
-    bottom: -1px;
-    right: -1px;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
-  }
-  .corner-marks.corner-marks--sm span {
-    width: 8px;
-    height: 8px;
-  }
-  .corner-marks--two span:nth-child(2),
-  .corner-marks--two span:nth-child(3) {
-    display: none;
-  }
-
-  .grid {
+  .ruled-link {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-    gap: 20px;
-    width: 100%;
+    gap: 6px;
+    padding: 26px 8px 26px 0;
+    color: inherit;
+    transition: padding-left var(--dur) var(--ease-out);
   }
-
-  .small-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  .ruled-link:hover {
+    padding-left: 12px;
   }
-
-  .primary-text,
-  .accent-text {
-    color: var(--accent);
-  }
-
-  /* Muted headline span — pairs with a solid-ink lead line in hero/heading copy */
-  .gradient-text {
+  .ruled-link__meta {
+    font-size: 0.9rem;
     color: var(--text-secondary);
+    font-variant-numeric: proportional-nums;
   }
-
-  /* Legacy label (guides / legal listings): plain small caption */
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.875rem;
-    font-weight: 500;
+  .ruled-link__title {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+  .ruled-link:hover .ruled-link__title {
+    color: var(--pencil);
+  }
+  .ruled-link__desc {
+    max-width: 60ch;
+    line-height: 1.55;
     color: var(--text-secondary);
+    text-wrap: pretty;
   }
-  .eyebrow.is-accent {
-    color: var(--accent);
+  @media (prefers-reduced-motion: reduce) {
+    .ruled-link {
+      transition: none;
+    }
+    .ruled-link:hover {
+      padding-left: 0;
+    }
   }
 
-  /* ================================================================
-     GLASS SURFACE
-     ================================================================ */
-  /* Legacy class name; it is now a sheet of paper, not glass */
-  .glass {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-sm);
+  /* A strip of masking tape holding a sheet down; callers set size and placement */
+  .tape {
+    position: absolute;
+    width: 116px;
+    height: 30px;
+    background: var(--tape);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   }
 
   /* ================================================================

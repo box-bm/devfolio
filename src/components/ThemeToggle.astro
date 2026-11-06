@@ -12,7 +12,7 @@ const switchLabel = t(UiKey["theme.switch"]);
 <button
   class="theme-toggle"
   id="theme-toggle"
-  aria-label={switchLabel.replace("{state}", darkLabel)}
+  aria-label={t(UiKey["theme.switch"], { state: darkLabel })}
   data-light={lightLabel}
   data-dark={darkLabel}
   data-switch={switchLabel}

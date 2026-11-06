@@ -4,9 +4,6 @@
  * Global, dependency-free motion engine. Mounted once in Base.astro.
  *  - [data-reveal]            settle-in on first view (content is visible without JS)
  *  - [data-draw]              blue-pencil SVG strokes draw themselves when the note enters view
- *  - [data-tilt]              3D pointer tilt + reveal glow (sets --rx/--ry/--mx/--my)
- *  - [data-magnetic]          magnetic pull toward the pointer
- *  - [data-parallax="0.1"]    parallax translateY on scroll
  *  - [data-site-header]       gets .scrolled past a threshold
  *  - [data-nav-link]          gets .active when its target section is in view
  * Re-runs on every astro:page-load (View Transitions) and honours prefers-reduced-motion.
@@ -19,7 +16,6 @@
 
   // ---- elements refreshed on every page load -----------------------------
   let header: HTMLElement | null = null;
-  let parallaxEls: HTMLElement[] = [];
   let navLinks: HTMLAnchorElement[] = [];
 
   function setupReveal() {
@@ -68,50 +64,6 @@
     notes.forEach((n) => io.observe(n));
   }
 
-  function setupTilt() {
-    if (PREFERS_REDUCED()) return;
-    document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
-      const max = parseFloat(card.dataset.tilt || "") || 7;
-      let raf = 0;
-      const move = (e: PointerEvent) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          card.style.setProperty("--rx", ((0.5 - py) * max).toFixed(2) + "deg");
-          card.style.setProperty("--ry", ((px - 0.5) * max).toFixed(2) + "deg");
-          card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
-          card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
-        });
-      };
-      const leave = () => {
-        card.style.setProperty("--rx", "0deg");
-        card.style.setProperty("--ry", "0deg");
-      };
-      card.addEventListener("pointermove", move);
-      card.addEventListener("pointerleave", leave);
-    });
-  }
-
-  function setupMagnetic() {
-    if (PREFERS_REDUCED()) return;
-    document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
-      const strength = parseFloat(el.dataset.magnetic || "") || 0.35;
-      const move = (e: PointerEvent) => {
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - (r.left + r.width / 2);
-        const y = e.clientY - (r.top + r.height / 2);
-        el.style.transform = `translate(${(x * strength).toFixed(1)}px, ${(y * strength).toFixed(1)}px)`;
-      };
-      const leave = () => {
-        el.style.transform = "";
-      };
-      el.addEventListener("pointermove", move);
-      el.addEventListener("pointerleave", leave);
-    });
-  }
-
   function setupActiveNav() {
     navLinks = [
       ...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
@@ -143,17 +95,7 @@
   }
 
   function onScroll() {
-    const y = window.scrollY;
-    if (header) header.classList.toggle("scrolled", y > 8);
-    if (!PREFERS_REDUCED()) {
-      const vh = window.innerHeight;
-      for (const el of parallaxEls) {
-        const speed = parseFloat(el.dataset.parallax || "") || 0.12;
-        const r = el.getBoundingClientRect();
-        const offset = r.top + r.height / 2 - vh / 2;
-        el.style.transform = `translate3d(0, ${(offset * -speed).toFixed(1)}px, 0)`;
-      }
-    }
+    header?.classList.toggle("scrolled", window.scrollY > 8);
   }
 
   let ticking = false;
@@ -168,17 +110,12 @@
 
   function refreshGlobals() {
     header = document.querySelector("[data-site-header]");
-    parallaxEls = [
-      ...document.querySelectorAll<HTMLElement>("[data-parallax]"),
-    ];
     onScroll();
   }
 
   function init() {
     setupReveal();
     setupDraw();
-    setupTilt();
-    setupMagnetic();
     setupActiveNav();
     refreshGlobals();
   }
@@ -187,7 +124,6 @@
   if (!(window as any).__motionGlobal) {
     (window as any).__motionGlobal = true;
     window.addEventListener("scroll", scrollHandler, { passive: true });
-    window.addEventListener("resize", scrollHandler, { passive: true });
   }
 
   document.addEventListener("astro:page-load", init);

@@ -24,8 +24,6 @@ export enum UiKey {
   "portfolio.projects.validators.title" = "portfolio.projects.validators.title",
   "portfolio.projects.validators.description" = "portfolio.projects.validators.description",
   "portfolio.projects.validators.built" = "portfolio.projects.validators.built",
-  "portfolio.projects.app2.title" = "portfolio.projects.app2.title",
-  "portfolio.projects.app3.title" = "portfolio.projects.app3.title",
   "portfolio.projects.viewCode" = "portfolio.projects.viewCode",
   "portfolio.projects.viewProject" = "portfolio.projects.viewProject",
   "portfolio.projects.viewAll" = "portfolio.projects.viewAll",
@@ -61,9 +59,6 @@ export enum UiKey {
   "guides.readingTime" = "guides.readingTime",
   "guides.next" = "guides.next",
   // Legal
-  "legal.privacy" = "legal.privacy",
-  "legal.terms" = "legal.terms",
-  "legal.languages" = "legal.languages",
   "legal.app" = "legal.app",
   "legal.version" = "legal.version",
   "legal.effectiveDate" = "legal.effectiveDate",
@@ -90,10 +85,6 @@ export enum UiKey {
   "footer.buyMeACoffee" = "footer.buyMeACoffee",
 
   // General
-  "general.readmore" = "general.readmore",
-  "general.projects" = "general.projects",
-  "general.contact" = "general.contact",
-  "general.years" = "general.years",
 }
 
 export type UiKeys = `${UiKey}`;
