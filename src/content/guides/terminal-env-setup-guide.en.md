@@ -1,6 +1,6 @@
 ---
-title: Terminal Enviromet Setup Guide
-description: A practical guide to setting up your env, using zshrc, themes, fastfetch and other that you should use.
+title: Terminal Environment Setup Guide
+description: A practical guide to setting up your env, using zshrc, themes, fastfetch and other tools you should use.
 tags: [neovim, text editor, setup, lua, lazy, brew, ohmyzsh, alias, fastfech]
 date: 2026-01-31T11:35:00-6:00
 updatedDate: 2026-02-01T00:00:00-6:00

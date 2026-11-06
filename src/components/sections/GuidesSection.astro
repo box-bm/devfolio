@@ -1,0 +1,138 @@
+---
+import { ArrowRight } from "@lucide/astro";
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const guides = (
+  await getCollection(
+    "guides",
+    (guide) => !guide.data.draft && guide.id.endsWith(`${lang}.md`),
+  )
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = new Intl.DateTimeFormat(lang, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "America/Guatemala",
+});
+---
+
+{
+  guides.length > 0 && (
+    <section id="notes" class="section page-break">
+      <div class="container notes">
+        <header class="notes__head">
+          <h2>{t(UiKey["portfolio.guides.title"])}</h2>
+          <p>{t(UiKey["portfolio.guides.description"])}</p>
+          <a class="notes__all" href={`/${lang}/guides`}>
+            {t(UiKey["portfolio.guides.viewAll"])}
+            <ArrowRight size={18} />
+          </a>
+        </header>
+
+        <ol class="notes__list">
+          {guides.map((guide) => (
+            <li class="note-row" data-reveal>
+              <a href={`/${lang}/guides/${guide.slug.slice(0, -2)}`}>
+                <time datetime={guide.data.date.toISOString()}>
+                  {fmt.format(guide.data.date)}
+                </time>
+                <span class="note-row__title">{guide.data.title}</span>
+                {guide.data.description && (
+                  <span class="note-row__desc">{guide.data.description}</span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .notes {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .notes__head {
+    position: sticky;
+    top: 112px;
+  }
+  .notes__head p {
+    margin-top: 16px;
+    font-size: 1.1rem;
+    max-width: 36ch;
+  }
+  .notes__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 24px;
+    min-height: 32px;
+    font-weight: 600;
+    color: var(--pencil);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+  }
+  .notes__all:hover {
+    text-decoration-thickness: 3px;
+  }
+
+  /* Ruled notebook lines */
+  .notes__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+  }
+  .note-row {
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .note-row a {
+    display: grid;
+    gap: 6px;
+    padding: 26px 8px 26px 0;
+    color: inherit;
+    transition: padding-left var(--dur) var(--ease-out);
+  }
+  .note-row a:hover {
+    padding-left: 12px;
+  }
+  .note-row time {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .note-row__title {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+  .note-row a:hover .note-row__title {
+    color: var(--pencil);
+  }
+  .note-row__desc {
+    max-width: 60ch;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 860px) {
+    .notes {
+      grid-template-columns: 1fr;
+    }
+    .notes__head {
+      position: static;
+    }
+  }
+</style>

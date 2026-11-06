@@ -1,7 +1,5 @@
 ---
-import ProjectCard from "@components/ProjectCard.astro";
-import TechChip from "@components/TechChip.astro";
-import SectionHeading from "@components/visuals/SectionHeading.astro";
+import PencilNote from "@components/visuals/PencilNote.astro";
 import { ArrowUpRight } from "@lucide/astro";
 import { githubRepos } from "@constants";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
@@ -11,88 +9,312 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="projects" class="section">
+<section id="work" class="section page-break">
   <div class="container">
-    <SectionHeading
-      label={t(UiKey["portfolio.projects.eyebrow"])}
-      heading={t(UiKey["portfolio.projects.title"])}
-      description={t(UiKey["portfolio.projects.description"])}
-      split
-    />
-
-    <div class="projects__grid">
-      <ProjectCard
-        index={1}
-        badge="GOOGLE PLAY"
-        title={t(UiKey["portfolio.projects.app1.title"])}
-        description={t(UiKey["portfolio.projects.app1.description"])}
-        viewLink="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
-        codeLink="https://github.com/box-bm/Minimal-tic-tac-toe"
+    <header class="work__head">
+      <h2>{t(UiKey["portfolio.projects.title"])}</h2>
+      <p class="work__intro">{t(UiKey["portfolio.projects.description"])}</p>
+      <PencilNote arrow="down-right" class="work__note"
+        >{t(UiKey["portfolio.projects.note"])}</PencilNote
       >
-        <TechChip tech="Dart" slot="tech" />
-        <TechChip tech="Flutter" slot="tech" />
-      </ProjectCard>
+    </header>
 
-      <ProjectCard
-        index={2}
-        badge="PUB.DEV"
-        title={t(UiKey["portfolio.projects.app2.title"])}
-        description={t(UiKey["portfolio.projects.app2.description"])}
-        codeLink="https://github.com/box-bm/dpi_validator"
-        viewLink="https://pub.dev/packages/dpi_validator"
-      >
-        <TechChip tech="Dart" slot="tech" />
-      </ProjectCard>
+    <!-- Minimal Tic Tac Toe -->
+    <article class="entry" data-reveal>
+      <div class="entry__sketch" aria-hidden="true">
+        <svg viewBox="0 0 240 240" class="drawing" data-draw>
+          <path d="M84 22 C82 90 86 160 82 220"></path>
+          <path d="M156 18 C158 86 154 156 158 222"></path>
+          <path d="M20 84 C90 80 160 88 222 82"></path>
+          <path d="M18 156 C88 160 158 152 224 158"></path>
+          <path d="M34 34 L66 68 M66 32 L36 70"></path>
+          <path d="M120 170 m-20 0 a20 22 0 1 0 40 0 a20 22 0 1 0 -40 0"></path>
+          <path d="M178 104 L208 136 M208 102 L180 138"></path>
+          <path d="M120 100 m-20 0 a20 22 0 1 0 40 0 a20 22 0 1 0 -40 0"></path>
+        </svg>
+        <span class="tape tape--a" aria-hidden="true"></span>
+        <PencilNote arrow="up-left" class="entry__callout"
+          >{t(UiKey["portfolio.projects.app1.note"])}</PencilNote
+        >
+      </div>
+      <div class="entry__text">
+        <h3>{t(UiKey["portfolio.projects.app1.title"])}</h3>
+        <p>{t(UiKey["portfolio.projects.app1.description"])}</p>
+        <dl class="entry__facts">
+          <div>
+            <dt>{t(UiKey["portfolio.projects.label.where"])}</dt>
+            <dd>Google Play</dd>
+          </div>
+          <div>
+            <dt>{t(UiKey["portfolio.projects.label.built"])}</dt>
+            <dd>{t(UiKey["portfolio.projects.app1.built"])}</dd>
+          </div>
+        </dl>
+        <ul class="entry__links">
+          <li>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.boxdev.minimal_tic_tac_toe"
+              target="_blank"
+              rel="noreferrer"
+              >{t(UiKey["portfolio.projects.viewProject"])} Google Play<ArrowUpRight
+                size={16}
+              /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/box-bm/Minimal-tic-tac-toe"
+              target="_blank"
+              rel="noreferrer"
+              >{t(UiKey["portfolio.projects.viewCode"])}<ArrowUpRight
+                size={16}
+              /></a
+            >
+          </li>
+        </ul>
+      </div>
+    </article>
 
-      <ProjectCard
-        index={3}
-        badge="PUB.DEV"
-        title={t(UiKey["portfolio.projects.app3.title"])}
-        description={t(UiKey["portfolio.projects.app3.description"])}
-        codeLink="https://github.com/box-bm/nit_validator"
-        viewLink="https://pub.dev/packages/nit_validator"
-      >
-        <TechChip tech="Dart" slot="tech" />
-      </ProjectCard>
-    </div>
+    <!-- DPI & NIT validators -->
+    <article class="entry entry--flip" data-reveal>
+      <div class="entry__sketch" aria-hidden="true">
+        <svg viewBox="0 0 260 200" class="drawing" data-draw>
+          <path
+            d="M22 30 C90 26 170 32 238 28 C240 80 236 130 240 172 C170 176 90 170 20 174 C22 126 18 78 22 30"
+          ></path>
+          <path
+            d="M44 58 C58 56 76 58 92 57 C93 76 91 96 93 116 C76 118 58 116 43 117 C44 98 42 78 44 58"
+          ></path>
+          <path d="M112 62 L214 60"></path>
+          <path d="M112 84 L190 83"></path>
+          <path d="M112 106 L204 104"></path>
+          <path d="M44 142 L150 140"></path>
+          <path d="M176 136 L194 154 L232 112"></path>
+        </svg>
+        <span class="tape tape--b" aria-hidden="true"></span>
+        <PencilNote arrow="up-left" class="entry__callout"
+          >{t(UiKey["portfolio.projects.validators.note"])}</PencilNote
+        >
+      </div>
+      <div class="entry__text">
+        <h3>{t(UiKey["portfolio.projects.validators.title"])}</h3>
+        <p>{t(UiKey["portfolio.projects.validators.description"])}</p>
+        <dl class="entry__facts">
+          <div>
+            <dt>{t(UiKey["portfolio.projects.label.where"])}</dt>
+            <dd>pub.dev</dd>
+          </div>
+          <div>
+            <dt>{t(UiKey["portfolio.projects.label.built"])}</dt>
+            <dd>{t(UiKey["portfolio.projects.validators.built"])}</dd>
+          </div>
+        </dl>
+        <ul class="entry__links">
+          <li>
+            <a
+              href="https://pub.dev/packages/dpi_validator"
+              target="_blank"
+              rel="noreferrer">dpi_validator<ArrowUpRight size={16} /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://pub.dev/packages/nit_validator"
+              target="_blank"
+              rel="noreferrer">nit_validator<ArrowUpRight size={16} /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/box-bm/dpi_validator"
+              target="_blank"
+              rel="noreferrer"
+              >{t(UiKey["portfolio.projects.viewCode"])} (DPI)<ArrowUpRight
+                size={16}
+              /></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/box-bm/nit_validator"
+              target="_blank"
+              rel="noreferrer"
+              >{t(UiKey["portfolio.projects.viewCode"])} (NIT)<ArrowUpRight
+                size={16}
+              /></a
+            >
+          </li>
+        </ul>
+      </div>
+    </article>
 
-    <div class="projects__cta" data-reveal>
-      <a
-        class="projects__cta-link"
-        href={githubRepos}
-        target="_blank"
-        rel="noreferrer"
+    <p class="work__more">
+      <a href={githubRepos} target="_blank" rel="noreferrer"
+        >{t(UiKey["portfolio.projects.viewAll"])}<ArrowUpRight size={18} /></a
       >
-        {t(UiKey["portfolio.projects.viewAll"])}
-        <ArrowUpRight size={15} />
-      </a>
-    </div>
+    </p>
   </div>
 </section>
 
 <style>
-  .projects__grid {
+  .work__head {
+    position: relative;
+    max-width: 640px;
+    margin-bottom: clamp(48px, 7vw, 88px);
+  }
+  .work__intro {
+    margin-top: 16px;
+    font-size: 1.15rem;
+    max-width: 48ch;
+  }
+  .work__head :global(.work__note) {
+    position: absolute;
+    right: -220px;
+    bottom: -46px;
+  }
+
+  .entry {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 20px;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 88px);
+    align-items: center;
   }
-  .projects__cta {
+  .entry + .entry {
+    margin-top: clamp(64px, 9vw, 120px);
+  }
+  .entry--flip .entry__sketch {
+    order: 2;
+  }
+
+  .entry__sketch {
+    position: relative;
+    padding: clamp(20px, 3vw, 36px);
+    background: var(--sheet);
+    box-shadow: var(--shadow-md);
+    transform: rotate(1.2deg);
+  }
+  .entry--flip .entry__sketch {
+    transform: rotate(-1.4deg);
+  }
+  .tape {
+    position: absolute;
+    width: 104px;
+    height: 28px;
+    background: var(--tape);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .tape--a {
+    top: -12px;
+    left: 18px;
+    transform: rotate(-8deg);
+  }
+  .tape--b {
+    top: -12px;
+    right: 22px;
+    transform: rotate(7deg);
+  }
+  /* the callout sits on the sheet, so it uses the sheet's own blue */
+  .entry__sketch :global(.entry__callout) {
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+    color: #1a44a0;
+  }
+  .drawing {
+    display: block;
+    width: 100%;
+    max-height: 300px;
+  }
+  .drawing path {
+    fill: none;
+    stroke: #222326;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .drawing path:last-child {
+    stroke: #1a44a0;
+    stroke-width: 3;
+  }
+
+  .entry__text h3 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .entry__text > p {
+    margin-top: 14px;
+    max-width: 52ch;
+    font-size: 1.075rem;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+
+  .entry__facts {
     display: flex;
-    justify-content: flex-end;
-    margin-top: 22px;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+    margin: 24px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
   }
-  .projects__cta-link {
+  .entry__facts dt {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+  .entry__facts dd {
+    margin: 2px 0 0;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .entry__links a,
+  .work__more a {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    font-family: var(--font-mono);
-    font-size: 12.5px;
-    letter-spacing: 0.08em;
-    color: var(--text-primary) !important;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 4px;
+    gap: 4px;
+    min-height: 32px;
+    font-weight: 600;
+    color: var(--pencil);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
   }
-  .projects__cta-link:hover {
-    color: var(--accent) !important;
+  .entry__links a:hover,
+  .work__more a:hover {
+    text-decoration-thickness: 3px;
+  }
+
+  .work__more {
+    margin-top: clamp(56px, 8vw, 96px);
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: 1180px) {
+    .work__head :global(.work__note) {
+      position: static;
+      margin-top: 18px;
+    }
+  }
+  @media (max-width: 760px) {
+    .entry {
+      grid-template-columns: 1fr;
+    }
+    .entry--flip .entry__sketch {
+      order: 0;
+    }
+    .entry__sketch {
+      max-width: 340px;
+    }
   }
 </style>

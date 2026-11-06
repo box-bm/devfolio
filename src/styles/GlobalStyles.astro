@@ -1,136 +1,150 @@
 <style is:global>
   /* ================================================================
-     DESIGN TOKENS — monochrome glass + a single electric-blue accent
-     Legacy variable names (--accent-primary, --neutral-*, --text-*)
-     are kept and mapped so legal / markdown / dropdown stay intact.
+     DESIGN TOKENS: the sketchbook
+     Toned grey sketch paper, graphite ink, one animator's blue pencil.
+     Legacy variable names (--accent-primary, --neutral-*, --glass-*,
+     --text-*) are kept and mapped so guides / legal / markdown still work.
      ================================================================ */
   :root {
     color-scheme: light;
 
-    /* Fonts — Geist (UI/headings) + JetBrains Mono (annotations, tags, code) */
-    --font-display: "Geist", "Helvetica Neue", Helvetica, system-ui, sans-serif;
-    --font-body: "Geist", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+    /* Type: one grotesk for everything set, a hand for blue-pencil notes */
+    --font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-hand: "Kalam", "Comic Neue", cursive;
     --font-mono:
       "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-    /* Base — cool, light (blueprint hairline system) */
-    --bg: #f5f4f2;
-    --bg-deep: #ecebe8;
-    --surface: rgba(255, 255, 255, 0.74);
-    --surface-2: #ffffff;
-    --surface-3: #f0eee9;
-    --line: #dcd9d4;
-    --line-soft: rgba(130, 126, 120, 0.26);
-    --line-strong: #c9c5be;
+    /* Paper */
+    --bg: #d6d4ce;
+    --bg-deep: #cbc9c2;
+    --sheet: #e4e2dc; /* a lighter sheet taped onto the page */
+    --surface: #dfddd7;
+    --surface-2: #e4e2dc;
+    --surface-3: #cfcdc6;
+    --line: #a9a7a0;
+    --line-soft: rgba(34, 35, 38, 0.16);
+    --line-strong: #7d7b75;
+    --hatch: rgba(34, 35, 38, 0.13);
+    --grain-opacity: 0.35;
+    --grain-blend: multiply;
 
-    /* Text */
-    --text-primary: #17181a;
-    --text-secondary: #5e6469;
-    --text-tertiary: #83898d;
-    --text-inverse: #17181a;
+    /* Graphite */
+    --text-primary: #222326;
+    --text-secondary: #46474c;
+    --text-tertiary: #55565b;
+    --text-inverse: #e4e2dc;
 
-    /* Accents — sand (primary) + corinto (secondary), never neon */
-    --olive: #d9a05b;
-    --olive-hover: #e4af6d;
-    --olive-ink: #8a5a1e;
-    --on-accent: #17181a;
-    --corinto: #8a4436;
-    --corinto-ink: #8a4436;
+    /* Blue pencil: the only colour */
+    --pencil: #1a44a0;
+    --pencil-soft: rgba(26, 68, 160, 0.14);
+    --accent: var(--pencil);
+    --accent-strong: #12337d;
+    --accent-soft: var(--pencil-soft);
+    --accent-glow: transparent;
+    --accent-contrast: #e4e2dc;
+    --on-accent: #e4e2dc;
+    --olive-ink: var(--pencil);
+    --corinto-ink: var(--pencil);
 
-    --accent: var(--olive-ink);
-    --accent-strong: var(--olive-hover);
-    --accent-soft: rgba(217, 160, 91, 0.12);
-    --accent-glow: rgba(217, 160, 91, 0.14);
-    --accent-contrast: var(--on-accent);
+    /* Ink buttons */
+    --ink: #222326;
+    --ink-hover: #36373b;
+    --on-ink: #e4e2dc;
 
-    /* Ambient blueprint field */
-    --dot: rgba(23, 24, 26, 0.06);
-    --glow-2: rgba(222, 155, 134, 0.08);
+    /* Tape */
+    --tape: rgba(236, 233, 222, 0.72);
+    --tape-edge: rgba(34, 35, 38, 0.12);
 
-    /* Glass / acrylic */
+    /* Legacy surfaces, now paper rather than glass */
     --glass-bg: var(--surface);
-    --glass-bg-strong: rgba(255, 255, 255, 0.88);
+    --glass-bg-strong: var(--bg);
     --glass-border: var(--line);
-    --glass-highlight: rgba(255, 255, 255, 0.7);
-    --glass-blur: 20px;
+    --glass-highlight: transparent;
+    --glass-blur: 0px;
+    --dot: transparent;
+    --glow-2: transparent;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 0 rgba(23, 24, 26, 0.04);
-    --shadow-md: 0 10px 30px rgba(23, 24, 26, 0.08);
-    --shadow-lg: 0 18px 48px rgba(23, 24, 26, 0.12);
-    --shadow-accent: 0 10px 30px rgba(217, 160, 91, 0.22);
-    --shadow-glow: var(--shadow-accent);
+    /* Depth: paper lifts a little, never glows */
+    --shadow-sm: 0 1px 1px rgba(34, 35, 38, 0.08);
+    --shadow-md:
+      0 2px 3px rgba(34, 35, 38, 0.1), 0 10px 22px -12px rgba(34, 35, 38, 0.3);
+    --shadow-lg:
+      0 3px 4px rgba(34, 35, 38, 0.1), 0 22px 40px -18px rgba(34, 35, 38, 0.38);
+    --shadow-accent: var(--shadow-md);
+    --shadow-glow: var(--shadow-md);
 
-    /* Radii — tags -> buttons -> cards -> hero frames */
-    --radius-sm: 6px;
-    --radius: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    /* Radii: paper has square corners */
+    --radius-sm: 2px;
+    --radius: 3px;
+    --radius-lg: 4px;
+    --radius-xl: 4px;
     --radius-pill: 999px;
 
-    /* Motion — single restrained ease, no bounce */
-    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-    --ease-spring: cubic-bezier(0.22, 0.61, 0.36, 1);
-    --dur-fast: 250ms;
-    --dur: 350ms;
+    /* Motion */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: var(--ease-out);
+    --dur-fast: 180ms;
+    --dur: 280ms;
     --dur-slow: 700ms;
 
-    /* Legacy aliases (do not remove — markdown/legal/breadcrumb depend on these) */
-    --neutral-white: var(--surface-2);
+    /* Legacy aliases (do not remove: markdown/legal/breadcrumb depend on these) */
+    --neutral-white: var(--sheet);
     --neutral-light: var(--surface-3);
     --neutral-medium: var(--line-strong);
     --neutral-light-gray: var(--surface-3);
-    --neutral-dark: #2b2b2b;
-    --neutral-black: #17181a;
+    --neutral-dark: #36373b;
+    --neutral-black: var(--text-primary);
     --accent-primary: var(--accent);
-    --accent-dark: var(--corinto-ink);
-    --accent-darkest: #5c1a24;
+    --accent-dark: var(--accent-strong);
+    --accent-darkest: #0d265c;
   }
 
   [data-theme="dark"] {
     color-scheme: dark;
 
-    /* Base — cool, near-dark */
-    --bg: #15171a;
-    --bg-deep: #101316;
-    --surface: rgba(30, 33, 37, 0.7);
-    --surface-2: #1e2125;
-    --surface-3: #24272b;
-    --line: #2c3034;
-    --line-soft: rgba(44, 48, 52, 0.5);
-    --line-strong: #3a3f45;
+    /* Black sketchbook paper, white pencil */
+    --bg: #1b1b1d;
+    --bg-deep: #141416;
+    --sheet: #d6d4ce; /* taped-in sheets stay toned grey */
+    --surface: #242427;
+    --surface-2: #2a2a2d;
+    --surface-3: #2f2f33;
+    --line: #4a4a4f;
+    --line-soft: rgba(232, 230, 225, 0.14);
+    --line-strong: #6b6b70;
+    --hatch: rgba(232, 230, 225, 0.1);
+    --grain-opacity: 0.18;
+    --grain-blend: screen;
 
-    --text-primary: #ecedee;
-    --text-secondary: #949ba3;
-    --text-tertiary: #6e747c;
-    --text-inverse: #17181a;
+    --text-primary: #e8e6e1;
+    --text-secondary: #b3b1ab;
+    --text-tertiary: #a4a29c;
+    --text-inverse: #1b1b1d;
 
-    --olive-ink: #e6b778;
-    --corinto-ink: #de9b86;
+    --pencil: #92b1ff;
+    --pencil-soft: rgba(146, 177, 255, 0.16);
+    --accent: var(--pencil);
+    --accent-strong: #b5caff;
+    --accent-contrast: #1b1b1d;
+    --on-accent: #1b1b1d;
 
-    --accent: var(--olive-ink);
-    --accent-strong: var(--olive-hover);
-    --accent-soft: rgba(217, 160, 91, 0.14);
-    --accent-glow: rgba(217, 160, 91, 0.13);
-    --accent-contrast: var(--on-accent);
+    --ink: #e8e6e1;
+    --ink-hover: #ffffff;
+    --on-ink: #1b1b1d;
 
-    --dot: rgba(236, 237, 238, 0.07);
-    --glow-2: rgba(222, 155, 134, 0.08);
+    --tape: rgba(226, 223, 213, 0.82);
+    --tape-edge: rgba(0, 0, 0, 0.18);
 
-    --glass-bg: var(--surface);
-    --glass-bg-strong: rgba(30, 33, 37, 0.88);
-    --glass-border: var(--line);
-    --glass-highlight: rgba(236, 237, 238, 0.06);
+    --shadow-sm: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --shadow-md:
+      0 2px 3px rgba(0, 0, 0, 0.35), 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+    --shadow-lg:
+      0 3px 4px rgba(0, 0, 0, 0.35), 0 24px 44px -18px rgba(0, 0, 0, 0.7);
 
-    --shadow-sm: 0 1px 0 rgba(236, 237, 238, 0.03);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.28);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
-    --shadow-accent: 0 10px 30px rgba(217, 160, 91, 0.22);
-    --shadow-glow: var(--shadow-accent);
-
-    --neutral-dark: #e5e5e5;
-    --neutral-black: #ecedee;
-    --accent-darkest: #de9b86;
+    --neutral-dark: #e8e6e1;
+    --neutral-black: #e8e6e1;
+    --accent-darkest: #d3e0ff;
   }
 
   /* ================================================================
@@ -168,12 +182,6 @@
   main {
     flex-grow: 1;
     width: 100%;
-  }
-
-  /* document pages (guides / legal) clear the fixed header */
-  .doc-main {
-    padding-top: 104px;
-    padding-inline: 16px;
   }
 
   /* Smooth theme transition for surfaces & text only (not transforms) */
@@ -217,9 +225,9 @@
   .h3,
   .h4 {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.04;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
     color: var(--text-primary);
   }
 
@@ -282,8 +290,27 @@
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--accent-contrast);
+    background: var(--pencil-soft);
+    color: var(--text-primary);
+  }
+
+  /* Keyboard focus: a blue-pencil ring, offset off the paper */
+  :focus-visible {
+    outline: 2px solid var(--pencil);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Paper grain over the whole page (fixed, decorative) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   img {
@@ -367,16 +394,13 @@
     color: var(--text-secondary);
   }
 
-  /* Mono eyebrow label — plain uppercase caption, no decoration */
+  /* Legacy label (guides / legal listings): plain small caption */
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--text-secondary);
   }
   .eyebrow.is-accent {
@@ -386,45 +410,27 @@
   /* ================================================================
      GLASS SURFACE
      ================================================================ */
+  /* Legacy class name; it is now a sheet of paper, not glass */
   .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
-    border: 1px solid var(--glass-border);
-    box-shadow:
-      var(--shadow-md),
-      inset 0 1px 0 var(--glass-highlight);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
   }
 
   /* ================================================================
      SCROLL REVEAL (driven by Motion.astro IntersectionObserver)
      ================================================================ */
+  /* Content is visible by default; only with JS running does it wait
+     below the fold and settle in once. */
   [data-reveal] {
-    opacity: 0;
-    transform: translateY(28px);
     transition:
       opacity var(--dur-slow) var(--ease-out),
       transform var(--dur-slow) var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
   }
-  [data-reveal="left"] {
-    transform: translateX(-36px);
-  }
-  [data-reveal="right"] {
-    transform: translateX(36px);
-  }
-  [data-reveal="scale"] {
-    transform: scale(0.92);
-  }
-  [data-reveal="blur"] {
-    filter: blur(12px);
-    transform: translateY(20px);
-  }
-  [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  html.js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(14px);
   }
 
   /* ================================================================
@@ -432,8 +438,24 @@
      ================================================================ */
   .section {
     position: relative;
-    padding-block: clamp(72px, 12vw, 140px);
+    padding-block: clamp(72px, 11vw, 136px);
     scroll-margin-top: 84px;
+  }
+
+  /* Perforated page break: the line where a sketchbook page tears off */
+  .page-break::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: clamp(20px, 5vw, 64px);
+    right: clamp(20px, 5vw, 64px);
+    height: 4px;
+    background: radial-gradient(
+        circle,
+        var(--line-strong) 1.6px,
+        transparent 2px
+      )
+      0 0 / 12px 4px repeat-x;
   }
 
   /* ================================================================
@@ -441,7 +463,7 @@
      ================================================================ */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--line-strong) transparent;
+    scrollbar-color: var(--line-strong) var(--bg);
   }
   *::-webkit-scrollbar {
     width: 10px;
@@ -468,21 +490,17 @@
   /* ================================================================
      REDUCED MOTION
      ================================================================ */
+  /* Movement goes; colour and state changes stay so feedback survives. */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
+    html.js [data-reveal]:not(.is-visible) {
+      opacity: 1;
+      transform: none;
     }
     [data-reveal] {
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
+      transition: none;
     }
   }
 </style>

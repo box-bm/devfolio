@@ -1,0 +1,162 @@
+---
+/**
+ * "On this page": the document's H2s. Sticky in the margin on wide screens,
+ * folded above the text on narrow ones. The section in view is marked.
+ */
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+  label: string;
+}
+
+const { headings, label } = Astro.props;
+// The opening H1 repeats the page title and is hidden; list the sections.
+// Some guides carry their own hand-written contents list; this replaces it.
+const ownContents = ["table-of-contents", "tabla-de-contenidos"];
+const sections = headings.filter(
+  (h) => h.depth === 2 && !ownContents.includes(h.slug),
+);
+---
+
+{
+  sections.length > 1 && (
+    <nav class="contents" aria-label={label} data-contents>
+      <details open>
+        <summary>{label}</summary>
+        <ol>
+          {sections.map((h) => (
+            <li>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
+
+<script>
+  function initContents() {
+    const nav = document.querySelector<HTMLElement>("[data-contents]");
+    if (!nav) return;
+    const details = nav.querySelector("details");
+    const wide = window.matchMedia("(min-width: 1100px)");
+    // Narrow screens start folded so the text comes first.
+    if (details && !wide.matches) details.open = false;
+
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>("a")];
+    const targets = links
+      .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+      .filter((el): el is HTMLElement => !!el);
+
+    const mark = (id: string) =>
+      links.forEach((a) => {
+        if (a.hash.slice(1) === id) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.find((e) => e.isIntersecting);
+        if (hit) mark(hit.target.id);
+      },
+      { rootMargin: "-96px 0px -70% 0px" },
+    );
+    targets.forEach((t) => io.observe(t));
+
+    links.forEach((a) =>
+      a.addEventListener("click", () => {
+        if (details && !wide.matches) details.open = false;
+      }),
+    );
+  }
+  document.addEventListener("astro:page-load", initContents);
+</script>
+
+<style>
+  .contents {
+    font-size: 0.95rem;
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 0 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  details[open] summary::after {
+    transform: translateY(2px) rotate(-135deg);
+  }
+  details {
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+  }
+  ol {
+    display: grid;
+    margin: 0;
+    padding: 0 16px 12px;
+    list-style: none;
+    counter-reset: none;
+  }
+  a {
+    display: block;
+    padding: 8px 0;
+    line-height: 1.35;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--line);
+  }
+  a:hover {
+    color: var(--pencil);
+  }
+  a[aria-current] {
+    color: var(--pencil);
+    font-weight: 700;
+  }
+
+  /* Wide: a margin list, no box and no toggle */
+  @media (min-width: 1100px) {
+    .contents {
+      position: sticky;
+      top: 104px;
+      max-height: calc(100vh - 136px);
+      overflow-y: auto;
+    }
+    details {
+      background: none;
+      border: none;
+    }
+    summary {
+      min-height: 0;
+      padding: 0 0 12px;
+      pointer-events: none;
+    }
+    summary::after {
+      display: none;
+    }
+    ol {
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    a {
+      padding: 9px 0;
+    }
+  }
+</style>

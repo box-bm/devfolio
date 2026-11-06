@@ -1,5 +1,6 @@
 ---
-import { House } from "@lucide/astro";
+import { getLangFromUrl } from "@i18n/utils";
+import { defaultLang } from "@i18n/langs";
 
 interface BreadcrumbItem {
   label: string;
@@ -11,14 +12,14 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const home = lang === defaultLang ? "/" : `/${lang}/`;
 ---
 
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <ol class="breadcrumb-list">
     <li class="breadcrumb-item">
-      <a href="/" class="breadcrumb-link" aria-label="Home">
-        <House size={13} aria-hidden="true" />
-      </a>
+      <a href={home} class="breadcrumb-link">BoxDev</a>
     </li>
     {
       items.map((item) => (
@@ -43,41 +44,47 @@ const { items } = Astro.props;
 
 <style>
   .breadcrumb-list {
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    padding: 0;
+    gap: 4px 10px;
     margin: 0;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
   }
-
   .breadcrumb-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    min-width: 0;
   }
-
   .breadcrumb-sep {
     color: var(--text-tertiary);
   }
-
   .breadcrumb-link {
     display: inline-flex;
     align-items: center;
+    min-height: 32px;
+    font-weight: 600;
     color: var(--text-secondary);
-    text-decoration: none;
-    transition: color var(--dur-fast) var(--ease-out);
   }
   .breadcrumb-link:hover {
-    color: var(--accent);
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
-
   .breadcrumb-current {
+    overflow: hidden;
+    max-width: 40ch;
     color: var(--text-primary);
-    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* small screens: the page title sits right below, so drop the repeat */
+  @media (max-width: 600px) {
+    .breadcrumb-item:has(.breadcrumb-current) {
+      display: none;
+    }
   }
 </style>

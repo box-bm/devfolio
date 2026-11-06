@@ -1,0 +1,89 @@
+---
+/**
+ * One legal document. Same paper and type as the rest of the site, set as a
+ * formal document: no pencil notes, no tape.
+ */
+import type { CollectionEntry } from "astro:content";
+import Contents from "@components/docs/Contents.astro";
+import { useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+import type { Lang } from "@i18n/langs";
+import { email } from "@constants";
+
+interface Props {
+  doc: CollectionEntry<"legal">;
+  lang: Lang;
+}
+
+const { doc, lang } = Astro.props;
+const t = useTranslations(lang);
+const { Content, headings } = await doc.render();
+// The document's own H1 names the app ("Privacy Policy for BoxWallet");
+// it becomes the page title and is hidden in the body.
+const heading = headings.find((h) => h.depth === 1)?.text ?? doc.data.title;
+
+// Effective dates are calendar dates; format them without a time-zone shift.
+const fmt = new Intl.DateTimeFormat(lang, {
+  dateStyle: "long",
+  timeZone: "UTC",
+});
+---
+
+<article class="legal-doc">
+  <header>
+    <h1 class="doc-title">{heading}</h1>
+    <dl class="doc-meta">
+      <div>
+        <dt>{t(UiKey["legal.app"])}</dt>
+        <dd>{doc.data.app}</dd>
+      </div>
+      <div>
+        <dt>{t(UiKey["legal.version"])}</dt>
+        <dd>{doc.data.version}</dd>
+      </div>
+      {
+        doc.data.effectiveDate && (
+          <div>
+            <dt>{t(UiKey["legal.effectiveDate"])}</dt>
+            <dd>
+              <time
+                datetime={doc.data.effectiveDate.toISOString().slice(0, 10)}
+              >
+                {fmt.format(doc.data.effectiveDate)}
+              </time>
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </header>
+
+  <div class="doc-grid">
+    <Contents headings={headings} label={t(UiKey["docs.contents"])} />
+    <div class="markdown-body">
+      <Content />
+    </div>
+  </div>
+
+  <p class="legal-doc__questions">
+    {t(UiKey["legal.questions"])}
+    <a href={`mailto:${email}`}>{email}</a>.
+  </p>
+</article>
+
+<style>
+  .legal-doc__questions {
+    max-width: 68ch;
+    margin-top: clamp(48px, 7vw, 80px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line-strong);
+    color: var(--text-secondary);
+  }
+  .legal-doc__questions a {
+    font-weight: 600;
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+</style>

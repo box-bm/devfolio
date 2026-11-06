@@ -1,5 +1,6 @@
 ---
 import Logo from "@components/visuals/Logo.astro";
+import PencilNote from "@components/visuals/PencilNote.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { defaultLang } from "@i18n/langs";
 import { UiKey } from "@i18n/ui";
@@ -15,37 +16,36 @@ const currentYear = new Date().getFullYear();
 const base = lang === defaultLang ? "" : `/${lang}`;
 ---
 
-<footer>
+<footer class="page-break">
   <div class="footer-inner">
-    <!-- Brand -->
     <div class="footer-brand">
       <Logo variant="footer" />
-      <p class="brand-tagline">{t(UiKey["portfolio.hero.caption"])}</p>
+      <PencilNote arrow="none" class="footer-signoff"
+        >{t(UiKey["footer.signoff"])}</PencilNote
+      >
     </div>
 
-    <!-- Nav links -->
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <span class="footer-section-label">{t(UiKey["footer.explore"])}</span>
+    <nav class="footer-nav" aria-labelledby="footer-explore">
+      <h2 class="footer-label" id="footer-explore">
+        {t(UiKey["footer.explore"])}
+      </h2>
+      <a class="nav-link" href={`${base}/#work`}>{t(UiKey["nav.projects"])}</a>
+      <a class="nav-link" href={`/${lang}/guides`}>{t(UiKey["nav.guides"])}</a>
       <a class="nav-link" href={`${base}/#about`}>{t(UiKey["nav.about"])}</a>
-      <a class="nav-link" href={`${base}/#projects`}
-        >{t(UiKey["nav.projects"])}</a
-      >
-      <a class="nav-link" href={`${base}/guides`}>{t(UiKey["nav.guides"])}</a>
-      <a class="nav-link" href={`${base}/legal`}>{t(UiKey["legal.title"])}</a>
+      <a class="nav-link" href={`/${lang}/legal`}>{t(UiKey["legal.title"])}</a>
     </nav>
 
-    <!-- Social + BMaC -->
     <div class="footer-social">
-      <span class="footer-section-label">{t(UiKey["nav.contact"])}</span>
+      <h2 class="footer-label">{t(UiKey["nav.contact"])}</h2>
       <div class="social-icons">
         <Button type="Icon" href={githubProfile} ariaLabel="GitHub"
-          ><Github size={16} /></Button
+          ><Github size={18} /></Button
         >
         <Button type="Icon" href={linkedIn} ariaLabel="LinkedIn"
-          ><Linkedin size={16} /></Button
+          ><Linkedin size={18} /></Button
         >
         <Button type="Icon" href={`mailto:${email}`} ariaLabel="Send email"
-          ><Mail size={16} /></Button
+          ><Mail size={18} /></Button
         >
       </div>
       <a
@@ -54,14 +54,13 @@ const base = lang === defaultLang ? "" : `/${lang}`;
         rel="noopener noreferrer"
         class="bmc-link"
       >
-        <Coffee size={15} />{t(UiKey["footer.buyMeACoffee"])}
+        <Coffee size={18} />{t(UiKey["footer.buyMeACoffee"])}
       </a>
     </div>
   </div>
 
-  <!-- Bottom bar -->
   <div class="footer-bottom">
-    <span>© {currentYear} BOXDEV</span>
+    <span>© {currentYear} BoxDev</span>
     <span>{t(UiKey["footer.builtWith"])}</span>
   </div>
 </footer>
@@ -70,110 +69,94 @@ const base = lang === defaultLang ? "" : `/${lang}`;
   footer {
     position: relative;
     z-index: 2;
-    border-top: 1px solid var(--line);
   }
 
   .footer-inner {
-    max-width: 1200px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 40px clamp(16px, 4vw, 28px);
+    padding: 56px clamp(20px, 5vw, 40px) 40px;
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
     gap: 40px;
   }
 
-  /* Brand */
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-  }
-  .brand-tagline {
-    font-size: 13.5px;
-    color: var(--text-secondary) !important;
-    line-height: 1.6;
-    max-width: 34ch;
-    margin: 0 !important;
+    align-items: flex-start;
+    gap: 18px;
   }
 
-  /* Nav */
-  .footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .nav-link {
-    font-size: 13.5px;
-    color: var(--text-secondary) !important;
-  }
-  .nav-link:hover {
-    color: var(--text-primary) !important;
+  .footer-label {
+    margin: 0 0 4px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--text-primary);
   }
 
-  /* Social */
+  .footer-nav,
   .footer-social {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 6px;
   }
-  .footer-section-label {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-secondary) !important;
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    font-size: 1rem;
+    color: var(--text-secondary);
   }
+  .nav-link:hover {
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
   .social-icons {
     display: flex;
     gap: 8px;
   }
 
-  /* BMaC */
+  /* Square, outlined: a pencil box, not a pill */
   .bmc-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 4px;
-    padding: 7px 12px;
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-pill);
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--accent) !important;
-    background: var(--accent-soft);
-    width: fit-content;
-    transition:
-      border-color var(--dur-fast) var(--ease-out),
-      transform var(--dur-fast) var(--ease-out);
+    min-height: 44px;
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--text-primary);
   }
   .bmc-link:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
+    color: var(--pencil);
+    border-color: var(--pencil);
   }
 
-  /* Bottom bar */
   .footer-bottom {
     display: flex;
     justify-content: space-between;
-    max-width: 1200px;
+    gap: 8px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 0 clamp(16px, 4vw, 28px) 32px;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.12em;
+    padding: 0 clamp(20px, 5vw, 40px) 32px;
+    font-size: 0.875rem;
     color: var(--text-secondary);
   }
 
   @media (max-width: 768px) {
     .footer-inner {
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 32px;
     }
     .footer-brand {
       grid-column: 1 / -1;
-    }
-    .brand-tagline {
-      max-width: none;
     }
   }
   @media (max-width: 480px) {
@@ -185,8 +168,6 @@ const base = lang === defaultLang ? "" : `/${lang}`;
     }
     .footer-bottom {
       flex-direction: column;
-      gap: 8px;
-      text-align: center;
     }
   }
 </style>

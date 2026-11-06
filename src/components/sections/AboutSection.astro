@@ -1,181 +1,204 @@
 ---
-import SectionHeading from "@components/visuals/SectionHeading.astro";
+import PencilNote from "@components/visuals/PencilNote.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
-
-interface Props {
-  years: number;
-}
-const { years } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const stats = [
-  { value: `${years}+`, label: t(UiKey["portfolio.about.stats.years.label"]) },
+const toolbox = [
   {
-    value: t(UiKey["portfolio.about.stats.projects.value"]),
-    label: t(UiKey["portfolio.about.stats.projects.label"]),
+    label: t(UiKey["portfolio.about.toolbox.web"]),
+    items: ["React", "Next.js", "Astro"],
   },
   {
-    value: t(UiKey["portfolio.about.stats.tech.value"]),
-    label: t(UiKey["portfolio.about.stats.tech.label"]),
+    label: t(UiKey["portfolio.about.toolbox.mobile"]),
+    items: ["Flutter", "React Native", "Xcode", "Android Studio"],
   },
   {
-    value: t(UiKey["portfolio.about.stats.tests.value"]),
-    label: t(UiKey["portfolio.about.stats.tests.label"]),
-    accent: true,
+    label: t(UiKey["portfolio.about.toolbox.testing"]),
+    items: ["Jest", "Vitest", "Testing Library", "Postman"],
+    favourite: true,
+  },
+  {
+    label: t(UiKey["portfolio.about.toolbox.backend"]),
+    items: ["Node", "NestJS"],
+  },
+  {
+    label: t(UiKey["portfolio.about.toolbox.languages"]),
+    items: [
+      "TypeScript",
+      "JavaScript",
+      "Dart",
+      "Kotlin",
+      "Swift",
+      "Rust",
+      "C++",
+    ],
+  },
+  {
+    label: t(UiKey["portfolio.about.toolbox.tools"]),
+    items: [
+      "Git",
+      "GitHub",
+      "Neovim",
+      "Figma",
+      "Storybook",
+      "Prettier",
+      "ESLint",
+    ],
   },
 ];
 ---
 
-<section id="about" class="section">
-  <div class="container">
-    <SectionHeading label={t(UiKey["portfolio.about.eyebrow"])} />
-
-    <div class="about__top">
-      <div class="about__text">
-        <h2 data-reveal>{t(UiKey["portfolio.about.heading"])}</h2>
-        <p class="body-large" data-reveal>
-          {t(UiKey["portfolio.about.description1"])}
-          <span class="accent-text">{years} {t(UiKey["general.years"])}</span>
-          {t(UiKey["portfolio.about.description2"])}
-        </p>
-        <p data-reveal style="--reveal-delay: 80ms">
-          {t(UiKey["portfolio.about.description3"])}
-        </p>
-
-        <div class="about__stats" data-reveal style="--reveal-delay: 140ms">
-          {
-            stats.map((stat) => (
-              <div class="stat">
-                <span
-                  class:list={["stat__value", stat.accent && "accent-text"]}
-                >
-                  {stat.value}
-                </span>
-                <span class="stat__label">{stat.label}</span>
-              </div>
-            ))
-          }
-        </div>
-
-        <div class="fun-fact" data-reveal style="--reveal-delay: 200ms">
-          <span class="fun-fact__label"
-            >{t(UiKey["portfolio.about.funFact.title"]).toUpperCase()}</span
-          >
-          <p>{t(UiKey["portfolio.about.funFact.description"])}</p>
-        </div>
+<section id="about" class="section page-break">
+  <div class="container about">
+    <div class="about__words">
+      <h2>{t(UiKey["portfolio.about.heading"])}</h2>
+      <p>{t(UiKey["portfolio.about.description1"])}</p>
+      <div class="about__testing">
+        <svg
+          class="about__bracket"
+          viewBox="0 0 24 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          data-draw
+        >
+          <path
+            d="M20 4 C10 6 8 14 9 30 C10 48 8 54 3 60 C8 66 10 72 9 90 C8 106 10 114 20 116"
+          ></path>
+        </svg>
+        <p>{t(UiKey["portfolio.about.description2"])}</p>
+        <PencilNote arrow="none" class="about__margin-note"
+          >{t(UiKey["portfolio.about.testingNote"])}</PencilNote
+        >
       </div>
+      <p>{t(UiKey["portfolio.about.description3"])}</p>
+    </div>
+
+    <div class="about__toolbox">
+      <h3>{t(UiKey["portfolio.about.toolbox"])}</h3>
+      <dl>
+        {
+          toolbox.map((group) => (
+            <div class:list={["tool-row", group.favourite && "tool-row--fav"]}>
+              <dt>{group.label}</dt>
+              <dd>{group.items.join(", ")}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  /* Text column */
-  .about__text {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .about__text h2 {
-    margin: 0 0 6px;
-  }
-  .about__text > p {
-    max-width: 68ch;
-  }
-
-  .accent-text {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-  .stat__value.accent-text {
-    color: var(--accent);
-  }
-
-  /* Stats — spans the full width of the section */
-  .about__stats {
+  .about {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-  }
-  .stat {
-    padding: 22px 24px;
-    border-right: 1px solid var(--line);
-  }
-  .stat:last-child {
-    border-right: none;
-  }
-  .stat__value {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 30px;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .stat__label {
-    display: block;
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--text-secondary);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 112px);
+    align-items: start;
   }
 
-  /* Fun fact — spans the full width, like the stats bar above it */
-  .fun-fact {
-    padding: 20px 24px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
+  .about__words h2 {
+    margin-bottom: 24px;
   }
-  .fun-fact__label {
-    flex-shrink: 0;
-    padding-top: 3px;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    color: var(--corinto-ink, var(--accent));
-    white-space: nowrap;
-  }
-  .fun-fact p {
-    margin: 0;
-    max-width: 65ch;
-    font-size: 14.5px;
+  .about__words p {
+    max-width: 58ch;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--text-primary);
     text-wrap: pretty;
   }
+  .about__words p + p,
+  .about__testing + p {
+    margin-top: 18px;
+  }
+  /* the sentence that matters most gets bracketed in blue pencil */
+  .about__testing {
+    position: relative;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+  .about__testing p {
+    margin: 0;
+  }
+  .about__bracket {
+    position: absolute;
+    left: -30px;
+    top: -6px;
+    width: 18px;
+    height: calc(100% + 12px);
+    overflow: visible;
+  }
+  .about__bracket path {
+    fill: none;
+    stroke: var(--pencil);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .about__testing :global(.about__margin-note) {
+    margin-top: 8px;
+  }
 
-  @media (max-width: 900px) {
-    .about__stats {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .about__toolbox {
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .about__toolbox h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  .about__toolbox dl {
+    margin: 0;
+  }
+  .tool-row {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-row:last-child {
+    border-bottom: none;
+  }
+  .tool-row dt {
+    position: relative;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .tool-row dd {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .tool-row--fav dd {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 860px) {
+    .about {
+      grid-template-columns: 1fr;
     }
-    .stat {
-      border-bottom: 1px solid var(--line);
+  }
+  /* narrow screens: keep the bracket inside the column, clear of the binding */
+  @media (max-width: 1240px) {
+    .about__testing {
+      padding-left: 26px;
     }
-    .stat:nth-child(2n) {
-      border-right: none;
-    }
-    .stat:nth-last-child(-n + 2) {
-      border-bottom: none;
+    .about__bracket {
+      left: 0;
     }
   }
   @media (max-width: 480px) {
-    .about__stats {
+    .tool-row {
       grid-template-columns: 1fr;
-    }
-    .stat {
-      border-right: none !important;
-    }
-    .stat:not(:last-child) {
-      border-bottom: 1px solid var(--line) !important;
+      gap: 4px;
     }
   }
 </style>

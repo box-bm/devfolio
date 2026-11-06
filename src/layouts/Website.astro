@@ -15,26 +15,20 @@ interface Props {
 
 const {
   title = "BoxDev — Frontend & Mobile Developer",
-  description = "Brandon Manzo — frontend & mobile developer obsessed with motion, detail and tested, reliable code.",
+  description = "Brandon Manzo, frontend and mobile developer. Flutter apps, Dart packages and practical guides, built and tested with care.",
 } = Astro.props;
 ---
 
 <Base title={title} description={description} lang={lang} type="website">
   <Header>
-    <a slot="link" class="header-link" data-nav-link href="#about">
-      {t(UiKey["nav.about"])}
-    </a>
-    <a slot="link" class="header-link" data-nav-link href="#services">
-      {t(UiKey["nav.services"])}
-    </a>
-    <a slot="link" class="header-link" data-nav-link href="#skills">
-      {t(UiKey["nav.skills"])}
-    </a>
-    <a slot="link" class="header-link" data-nav-link href="#projects">
+    <a slot="link" class="header-link" data-nav-link href="#work">
       {t(UiKey["nav.projects"])}
     </a>
-    <a slot="link" class="header-link" href={`/${lang}/guides`}>
+    <a slot="link" class="header-link" data-nav-link href="#notes">
       {t(UiKey["nav.guides"])}
+    </a>
+    <a slot="link" class="header-link" data-nav-link href="#about">
+      {t(UiKey["nav.about"])}
     </a>
     <a slot="link" class="header-link" data-nav-link href="#contact">
       {t(UiKey["nav.contact"])}

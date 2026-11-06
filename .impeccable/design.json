@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T06:30:56.191323+00:00",
+  "title": "Design System: BoxDev",
+  "extensions": {
+    "colorMeta": {
+      "blue-pencil": {
+        "role": "primary",
+        "displayName": "Animator's Blue Pencil",
+        "tonalRamp": [
+          "#162036",
+          "#203460",
+          "#25468e",
+          "#2556c0",
+          "#4e7ada",
+          "#89a3dc",
+          "#c1cde7",
+          "#eef1f6"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "tonalRamp": [
+          "#252528",
+          "#3d3e42",
+          "#55575e",
+          "#6c6f79",
+          "#8e909a",
+          "#afb0b6",
+          "#d2d3d5",
+          "#f2f2f3"
+        ]
+      },
+      "graphite-soft": {
+        "role": "neutral",
+        "displayName": "Soft Graphite",
+        "tonalRamp": [
+          "#252627",
+          "#3e3e42",
+          "#56575d",
+          "#6d7078",
+          "#8f9199",
+          "#b0b1b5",
+          "#d2d3d5",
+          "#f2f2f3"
+        ]
+      },
+      "graphite-hover": {
+        "role": "neutral",
+        "displayName": "Graphite Hover",
+        "tonalRamp": [
+          "#252627",
+          "#3e3e42",
+          "#56575d",
+          "#6d7078",
+          "#8f9199",
+          "#b0b1b5",
+          "#d2d3d5",
+          "#f2f2f3"
+        ]
+      },
+      "toned-paper": {
+        "role": "neutral",
+        "displayName": "Toned Paper",
+        "tonalRamp": [
+          "#282725",
+          "#43413d",
+          "#5e5c54",
+          "#7a776b",
+          "#9b978d",
+          "#b7b5ae",
+          "#d5d5d2",
+          "#f3f2f2"
+        ]
+      },
+      "paper-shade": {
+        "role": "neutral",
+        "displayName": "Paper Shade",
+        "tonalRamp": [
+          "#282725",
+          "#43423d",
+          "#5e5d54",
+          "#7a786b",
+          "#9b988d",
+          "#b7b5ae",
+          "#d5d5d2",
+          "#f3f3f2"
+        ]
+      },
+      "paper-panel": {
+        "role": "neutral",
+        "displayName": "Paper Panel",
+        "tonalRamp": [
+          "#282724",
+          "#43423c",
+          "#5f5c53",
+          "#7b776a",
+          "#9c988c",
+          "#b7b5ae",
+          "#d6d5d2",
+          "#f3f2f2"
+        ]
+      },
+      "taped-sheet": {
+        "role": "neutral",
+        "displayName": "Taped Sheet",
+        "tonalRamp": [
+          "#282724",
+          "#44423b",
+          "#615d52",
+          "#7e7868",
+          "#9e998a",
+          "#b8b5ad",
+          "#d6d5d1",
+          "#f3f3f2"
+        ]
+      },
+      "rule-line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "tonalRamp": [
+          "#272725",
+          "#42413e",
+          "#5c5b56",
+          "#77756e",
+          "#989690",
+          "#b5b4b0",
+          "#d5d4d3",
+          "#f2f2f2"
+        ]
+      },
+      "rule-line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "tonalRamp": [
+          "#272726",
+          "#41403e",
+          "#5b5a57",
+          "#767470",
+          "#979591",
+          "#b4b3b1",
+          "#d4d4d3",
+          "#f2f2f2"
+        ]
+      },
+      "night-paper": {
+        "role": "neutral",
+        "displayName": "Night Paper",
+        "tonalRamp": [
+          "#252527",
+          "#3e3e42",
+          "#56565c",
+          "#6e6e77",
+          "#909098",
+          "#b0b0b5",
+          "#d3d3d5",
+          "#f2f2f2"
+        ],
+        "theme": "dark"
+      },
+      "night-panel": {
+        "role": "neutral",
+        "displayName": "Night Panel",
+        "tonalRamp": [
+          "#252527",
+          "#3e3e42",
+          "#56565c",
+          "#6e6e77",
+          "#909098",
+          "#b0b0b5",
+          "#d3d3d5",
+          "#f2f2f2"
+        ],
+        "theme": "dark"
+      },
+      "night-rule": {
+        "role": "neutral",
+        "displayName": "Night Rule",
+        "tonalRamp": [
+          "#262627",
+          "#3e3e41",
+          "#57575b",
+          "#707076",
+          "#919197",
+          "#b1b1b4",
+          "#d3d3d4",
+          "#f2f2f2"
+        ],
+        "theme": "dark"
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "tonalRamp": [
+          "#292724",
+          "#45423a",
+          "#625d50",
+          "#807866",
+          "#a09988",
+          "#b9b6ac",
+          "#d7d5d1",
+          "#f3f3f2"
+        ],
+        "theme": "dark"
+      },
+      "chalk-soft": {
+        "role": "neutral",
+        "displayName": "Soft Chalk",
+        "tonalRamp": [
+          "#272725",
+          "#42413e",
+          "#5d5b56",
+          "#78756d",
+          "#99968f",
+          "#b5b4b0",
+          "#d5d4d2",
+          "#f3f2f2"
+        ],
+        "theme": "dark"
+      },
+      "night-pencil": {
+        "role": "primary",
+        "displayName": "Night Pencil",
+        "tonalRamp": [
+          "#101d3c",
+          "#132c6c",
+          "#103aa2",
+          "#0744df",
+          "#336af5",
+          "#7899ed",
+          "#b9c8ee",
+          "#ecf0f8"
+        ],
+        "theme": "dark"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero name; the contact headline uses the same voice at clamp(3rem, 8vw, 6rem), line-height 0.92."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings (h2)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project entry names."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Guide titles in ruled lists."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Hero and section introductions in full graphite."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, 52-60ch measure, text-wrap pretty."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Fact terms, dates, footer meta; sentence case, no tracking."
+      },
+      "hand": {
+        "displayName": "Hand",
+        "purpose": "Blue-pencil notes only, rotated -3deg."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Code blocks in guides, and the Logo wordmark (brand exception)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "rest",
+        "value": "0 1px 1px rgba(34, 35, 38, 0.08)",
+        "purpose": "Flat panels resting on the paper.",
+        "dark": "0 1px 1px rgba(0, 0, 0, 0.3)"
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 3px rgba(34, 35, 38, 0.1), 0 10px 22px -12px rgba(34, 35, 38, 0.3)",
+        "purpose": "Taped project sheets, primary button hover, mobile menu.",
+        "dark": "0 2px 3px rgba(0, 0, 0, 0.35), 0 12px 24px -12px rgba(0, 0, 0, 0.6)"
+      },
+      {
+        "name": "raised",
+        "value": "0 3px 4px rgba(34, 35, 38, 0.1), 0 22px 40px -18px rgba(34, 35, 38, 0.38)",
+        "purpose": "The hero portrait study.",
+        "dark": "0 3px 4px rgba(0, 0, 0, 0.35), 0 24px 44px -18px rgba(0, 0, 0, 0.7)"
+      },
+      {
+        "name": "tape",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.08)",
+        "purpose": "Contact shadow under tape strips."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one easing for state changes, reveals and pencil strokes."
+      },
+      {
+        "name": "dur-fast",
+        "value": "180ms",
+        "purpose": "Button and switch hover/press."
+      },
+      {
+        "name": "dur",
+        "value": "280ms",
+        "purpose": "Theme change, nav underline, ruled-row indent, menu open."
+      },
+      {
+        "name": "dur-slow",
+        "value": "700ms",
+        "purpose": "Reveal: settle from translateY(14px) and opacity 0, once, at 12% visibility."
+      },
+      {
+        "name": "pencil-draw",
+        "value": "stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1), delay 250ms + 220ms per stroke",
+        "purpose": "Notes, arrows and line drawings draw themselves on first view at 40% visibility. Disabled under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "480px",
+        "purpose": "Tool rows and footer stack."
+      },
+      {
+        "name": "switch-label",
+        "value": "520px",
+        "purpose": "Theme switch label becomes visually hidden."
+      },
+      {
+        "name": "nav",
+        "value": "720px",
+        "purpose": "Nav links fold into the menu button."
+      },
+      {
+        "name": "entry",
+        "value": "760px",
+        "purpose": "Project entries collapse to one column."
+      },
+      {
+        "name": "md",
+        "value": "860px",
+        "purpose": "Hero, guides and About grids collapse to one column."
+      },
+      {
+        "name": "binding",
+        "value": "1180px",
+        "purpose": "Full 34px spiral binding at and above; slim 16px binding below."
+      }
+    ],
+    "materials": [
+      {
+        "name": "paper-grain",
+        "value": "fixed SVG fractal noise overlay, opacity 0.35 multiply (dark 0.18 screen)",
+        "purpose": "Toned sketch paper texture over the whole page."
+      },
+      {
+        "name": "spiral-binding",
+        "value": "punched holes (paper-shade) with wire loops (rule-line-strong), 26px pitch, 18px below 1180px",
+        "purpose": "Left-edge binding on every viewport."
+      },
+      {
+        "name": "perforation",
+        "value": "radial-gradient dots 1.6px every 12px in rule-line-strong, inset clamp(20px, 5vw, 64px)",
+        "purpose": "Page break between sections."
+      },
+      {
+        "name": "tape",
+        "value": "rgba(236, 233, 222, 0.72) strip with dashed tape-edge ends; dark rgba(226, 223, 213, 0.82)",
+        "purpose": "Holds taped sheets onto the page."
+      },
+      {
+        "name": "hatch",
+        "value": "repeating-linear-gradient(-45deg, rgba(34, 35, 38, 0.22) 0 1px, transparent 1px 6px), masked heavier at edges",
+        "purpose": "Graphite shading on the portrait study."
+      },
+      {
+        "name": "pencil-soft",
+        "value": "rgba(26, 68, 160, 0.14)",
+        "purpose": "Selection highlight and text-button hover only."
+      }
+    ],
+    "legacyAliases": [
+      "--glass-bg",
+      "--glass-bg-strong",
+      "--glass-border",
+      "--glass-highlight",
+      "--glass-blur",
+      "--accent-primary",
+      "--accent-dark",
+      "--accent-darkest",
+      "--neutral-white",
+      "--neutral-light",
+      "--neutral-medium",
+      "--neutral-light-gray",
+      "--neutral-dark",
+      "--neutral-black",
+      "--olive-ink",
+      "--corinto-ink",
+      "--dot",
+      "--glow-2"
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid graphite action, the main call to action.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">See what I've shipped <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14\"/><path d=\"m19 12-7 7-7-7\"/></svg></a>",
+      "css": ".ds-btn-primary { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 12px 22px; border-radius: var(--radius); font-weight: 600; font-size: 1rem; line-height: 1; text-decoration: none; color: var(--on-ink); background: var(--ink); border: 2px solid var(--ink); transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); } .ds-btn-primary:hover { background: var(--ink-hover); border-color: var(--ink-hover); box-shadow: var(--shadow-md); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outlined Button",
+      "kind": "button",
+      "refersTo": "button-outlined",
+      "description": "A drawn pencil outline for the secondary action.",
+      "html": "<a class=\"ds-btn-outlined\" href=\"#\">Write to me</a>",
+      "css": ".ds-btn-outlined { font-family: var(--font-body); display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; border-radius: var(--radius); font-weight: 600; font-size: 1rem; line-height: 1; text-decoration: none; color: var(--text-primary); background: transparent; border: 2px solid var(--text-primary); transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); } .ds-btn-outlined:hover { color: var(--pencil); border-color: var(--pencil); } .ds-btn-outlined:active { transform: translateY(1px); } .ds-btn-outlined:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; }"
+    },
+    {
+      "name": "Switch",
+      "kind": "button",
+      "refersTo": "switch",
+      "description": "Labelled language and theme switches in the nav.",
+      "html": "<button class=\"ds-switch\" type=\"button\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41\"/></svg>Light</button>",
+      "css": ".ds-switch { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: transparent; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text-secondary); transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); } .ds-switch:hover { color: var(--text-primary); border-color: var(--accent); } .ds-switch:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Header links on the paper with a blue-pencil underline for hover and active.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link is-active\" href=\"#\">Projects</a><a class=\"ds-nav-link\" href=\"#\">Guides</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav { font-family: var(--font-body); display: flex; gap: 22px; align-items: center; padding: 14px 0; } .ds-nav-link { font-size: 15px; font-weight: 600; color: var(--text-secondary); text-decoration: none; transition: color var(--dur) var(--ease-out); } .ds-nav-link:hover, .ds-nav-link.is-active { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--pencil); text-decoration-thickness: 2px; text-underline-offset: 6px; } .ds-nav-link:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; }"
+    },
+    {
+      "name": "Pencil Link",
+      "kind": "custom",
+      "refersTo": "pencil-link",
+      "description": "In-content link: blue pencil, underlined, thickening on hover.",
+      "html": "<a class=\"ds-pencil-link\" href=\"#\">View the code<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
+      "css": ".ds-pencil-link { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 4px; min-height: 32px; font-weight: 600; color: var(--pencil); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; } .ds-pencil-link:hover { text-decoration-thickness: 3px; } .ds-pencil-link:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; }"
+    },
+    {
+      "name": "Taped Sheet",
+      "kind": "card",
+      "refersTo": "taped-sheet",
+      "description": "A lighter sheet taped onto the page, tilted, carrying a line drawing in daylight ink.",
+      "html": "<div class=\"ds-sheet\"><span class=\"ds-tape\"></span><svg viewBox=\"0 0 240 240\" class=\"ds-drawing\" aria-hidden=\"true\"><path d=\"M84 22 C82 90 86 160 82 220\"/><path d=\"M156 18 C158 86 154 156 158 222\"/><path d=\"M20 84 C90 80 160 88 222 82\"/><path d=\"M18 156 C88 160 158 152 224 158\"/><path d=\"M34 34 L66 68 M66 32 L36 70\"/><path d=\"M178 104 L208 136 M208 102 L180 138\"/></svg></div>",
+      "css": ".ds-sheet { position: relative; max-width: 300px; padding: clamp(20px, 3vw, 36px); background: var(--sheet); box-shadow: var(--shadow-md); transform: rotate(1.2deg); } .ds-tape { position: absolute; top: -12px; left: 18px; width: 104px; height: 28px; background: var(--tape); border-left: 1px dashed var(--tape-edge); border-right: 1px dashed var(--tape-edge); box-shadow: 0 1px 2px rgba(0,0,0,0.1); transform: rotate(-8deg); } .ds-drawing { display: block; width: 100%; } .ds-drawing path { fill: none; stroke: #222326; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; } .ds-drawing path:last-child { stroke: #1a44a0; stroke-width: 3; }"
+    },
+    {
+      "name": "Pencil Note",
+      "kind": "custom",
+      "refersTo": "pencil-note",
+      "description": "A few handwritten words in blue pencil with a drawn arrow pointing at what they annotate.",
+      "html": "<span class=\"ds-pencil-note\"><svg class=\"ds-pencil-note__arrow\" viewBox=\"0 0 90 70\" aria-hidden=\"true\"><path d=\"M84 6 C70 10 44 18 30 34 C22 43 16 52 12 62\"/><path d=\"M4 50 L12 63 L24 56\"/></svg><span>hi, that's me</span></span>",
+      "css": ".ds-pencil-note { display: inline-flex; align-items: flex-end; gap: 6px; font-family: var(--font-hand); font-size: clamp(1.15rem, 1.6vw, 1.4rem); line-height: 1.1; color: var(--pencil); transform: rotate(-3deg); } .ds-pencil-note__arrow { flex: none; width: 72px; height: auto; overflow: visible; } .ds-pencil-note__arrow path { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Paper Panel",
+      "kind": "card",
+      "refersTo": "paper-panel",
+      "description": "Flat panel resting on the paper, rows divided by hairlines.",
+      "html": "<div class=\"ds-panel\"><h3 class=\"ds-panel__title\">Toolbox</h3><div class=\"ds-panel__row\"><span class=\"ds-panel__term\">Web</span><span class=\"ds-panel__def\">React, Next.js, Astro</span></div><div class=\"ds-panel__row\"><span class=\"ds-panel__term\">Testing</span><span class=\"ds-panel__def\">Jest, Vitest, Testing Library</span></div></div>",
+      "css": ".ds-panel { font-family: var(--font-body); padding: clamp(24px, 3vw, 36px); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); } .ds-panel__title { margin: 0 0 8px; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.015em; color: var(--text-primary); } .ds-panel__row { display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); } .ds-panel__row:last-child { border-bottom: none; } .ds-panel__term { font-weight: 700; color: var(--text-primary); } .ds-panel__def { color: var(--text-secondary); line-height: 1.55; }"
+    },
+    {
+      "name": "Ruled List Row",
+      "kind": "custom",
+      "refersTo": "ruled-list",
+      "description": "Notebook-ruled guide row; hover indents and turns the title blue pencil.",
+      "html": "<ol class=\"ds-ruled\"><li><a href=\"#\"><time>March 4, 2025</time><span class=\"ds-ruled__title\">Terminal environment setup</span><span class=\"ds-ruled__desc\">A walkthrough so future-me doesn't have to figure it out twice.</span></a></li></ol>",
+      "css": ".ds-ruled { font-family: var(--font-body); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line-strong); } .ds-ruled li { border-bottom: 1px solid var(--line-strong); } .ds-ruled a { display: grid; gap: 6px; padding: 26px 8px 26px 0; color: inherit; text-decoration: none; transition: padding-left var(--dur) var(--ease-out); } .ds-ruled a:hover { padding-left: 12px; } .ds-ruled a:focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; } .ds-ruled time { font-size: 0.9rem; color: var(--text-secondary); } .ds-ruled__title { font-size: clamp(1.35rem, 2.2vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-primary); } .ds-ruled a:hover .ds-ruled__title { color: var(--pencil); } .ds-ruled__desc { max-width: 60ch; color: var(--text-secondary); line-height: 1.55; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sketchbook",
+    "overview": "Brandon draws when he isn't coding, so the site is his sketchbook. The page is toned grey sketch paper with a fine grain, a spiral binding runs down the left edge, and everything set in type is graphite. Work arrives as taped-in sheets carrying line drawings, and an animator's blue pencil annotates them: short handwritten notes with arrows that draw themselves as each spread comes into view. A person first, the work annotated in pencil.\n\nThe world is quiet and tactile rather than technical. Density is generous: big graphite headlines, long measures of plain prose, wide gutters, and sections separated by a perforated tear line instead of boxes. Colour is almost absent; the single blue pencil does every job colour has to do (notes, links, focus, hover), and its scarcity is what makes it read as a hand on the page.\n\nConfirmed rejection: the dark-glass developer portfolio, with its icon-card services grid, stat bars, logo marquee, and kicker labels over headings.",
+    "keyCharacteristics": [
+      "Toned grey paper ground with fixed SVG grain; dark theme is black sketchbook paper with white and light-blue pencil.",
+      "Spiral binding along the left edge on every viewport (slimmer below 1180px).",
+      "Taped-in sheets: lighter paper, slight rotation, two strips of translucent tape, a paper-lift shadow.",
+      "One grotesk (Schibsted Grotesk) for everything set; Kalam only for blue-pencil notes.",
+      "Blue pencil is the only colour.",
+      "Perforated page breaks between sections; ruled lines for lists.",
+      "Motion is pencil strokes drawing in and content settling once; nothing loops."
+    ],
+    "rules": [
+      {
+        "name": "The One Pencil Rule",
+        "body": "Blue pencil is the only colour on the page. It marks, annotates, links and focuses; it never fills a surface larger than a selection highlight. If a second hue seems necessary, use weight or graphite tone instead.",
+        "section": "colors"
+      },
+      {
+        "name": "The Daylight Sheet Rule",
+        "body": "Taped-in sheets stay toned grey in the dark theme (the sheet token resolves to toned paper), so drawings and notes on a sheet keep daylight ink: graphite strokes and the light-theme blue pencil, set as literal values, not theme variables.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hand Is for Notes Rule",
+        "body": "Kalam appears only in short blue-pencil notes of a few words, always in pencil colour, always slightly rotated, usually with a drawn arrow. Never in headings, buttons, navigation or body copy.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Mono Costume Rule",
+        "body": "Monospace is for code. Labels, dates, nav and metadata are set in the grotesk. The Logo wordmark (mono letters with bracket marks) is a fixed brand commitment and the sole exception.",
+        "section": "typography"
+      },
+      {
+        "name": "The Page Break Rule",
+        "body": "Sections are separated by perforation, never by cards, background bands or full-width borders.",
+        "section": "layout"
+      },
+      {
+        "name": "The Paper Lifts Rule",
+        "body": "Shadows describe paper resting on paper: short contact shadow plus a soft negative-spread fall. No coloured shadows, no glow, no blur panels, no hard offset blocks.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square Paper Rule",
+        "body": "Nothing is pill-shaped or softly rounded; anything over 4px radius is foreign to the world. Tilt a sheet before you round it.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** keep blue pencil as the only colour, used for notes, links, hover and focus.",
+      "**Do** put work on taped-in sheets (lighter paper, 1.2–1.6deg tilt, tape strips, Lift shadow) with line drawings in graphite and one blue-pencil stroke.",
+      "**Do** annotate with short Kalam notes and drawn arrows that draw themselves in once.",
+      "**Do** separate sections with the perforated page break and list items with ruled lines.",
+      "**Do** carry hierarchy with grotesk weight (800 / 700 / 600) and tight negative tracking at large sizes.",
+      "**Do** keep daylight ink (graphite, light-theme blue pencil) on sheets in the dark theme.",
+      "**Do** hold interactive targets at 44px and keep switches labelled."
+    ],
+    "donts": [
+      "**Don't** build the dark-glass developer portfolio: no glass or blur panels, no glow.",
+      "**Don't** use icon-card service grids, stat bars, logo marquees, or kicker labels above headings.",
+      "**Don't** set Kalam anywhere but short pencil notes.",
+      "**Don't** use monospace for labels, dates or navigation; mono is for code and the Logo only.",
+      "**Don't** round anything past 4px or make pills.",
+      "**Don't** introduce a second accent hue or coloured shadows.",
+      "**Don't** reference legacy aliases (`--glass-*`, `--accent-primary`, `--neutral-*`, `--olive-ink`, `--corinto-ink`) in new work."
+    ]
+  }
+}

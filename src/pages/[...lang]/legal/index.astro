@@ -1,8 +1,7 @@
 ---
 import LegalLayout from "@layouts/Legal.astro";
-import { ArrowUpRight } from "@lucide/astro";
 import { UiKey } from "@i18n/ui";
-import { LANG_CODES } from "@i18n/langs";
+import { LANG_CODES, languages, type Lang } from "@i18n/langs";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { getCollection } from "astro:content";
 import { email } from "@constants";
@@ -15,10 +14,19 @@ export const getStaticPaths = () => {
 };
 
 const allDocs = await getCollection("legal");
+const fmt = new Intl.DateTimeFormat(lang, {
+  dateStyle: "long",
+  timeZone: "UTC",
+});
 
 const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
   (appName) => {
-    const docs = allDocs.filter((d) => d.data.app === appName);
+    // This page's language first, then the rest.
+    const docs = allDocs
+      .filter((d) => d.data.app === appName)
+      .sort(
+        (a, b) => Number(b.data.lang === lang) - Number(a.data.lang === lang),
+      );
     const primary = docs[0];
     return {
       appName,
@@ -26,69 +34,55 @@ const apps = Array.from(new Set(allDocs.map((d) => d.data.app))).map(
       effectiveDate: primary.data.effectiveDate,
       docs: docs.map((doc) => ({
         title: doc.data.title,
-        lang: doc.data.lang,
+        lang: doc.data.lang as Lang,
         slug: doc.id.replace(/\/[^/]+$/, ""),
       })),
     };
   },
 );
-
-const appCount = String(apps.length).padStart(2, "0");
 ---
 
 <LegalLayout title={t(UiKey["title.legal"])}>
-  <header class="legal-hero">
-    <p class="eyebrow is-accent" data-reveal>
-      {t(UiKey["legal.eyebrow.documents"])} / {appCount}
-      {t(UiKey["legal.eyebrow.apps"])}
-    </p>
-    <h1 data-reveal style="--reveal-delay: 60ms">{t(UiKey["legal.title"])}</h1>
-    <p class="body-large" data-reveal style="--reveal-delay: 120ms">
-      {t(UiKey["legal.subtitle"])}
-    </p>
+  <header>
+    <h1 class="doc-title doc-title--index">{t(UiKey["legal.title"])}</h1>
+    <p class="doc-lede">{t(UiKey["legal.subtitle"])}</p>
   </header>
 
-  <div class="legal-grid">
+  <div class="legal-apps">
     {
-      apps.map((app, i) => (
-        <div
-          class="legal-card"
-          data-tilt="3"
-          data-reveal
-          style={`--reveal-delay: ${i * 70}ms`}
-        >
-          <div class="legal-card__head">
-            <h2>{app.appName}</h2>
-            <span class="legal-card__version">v{app.version}</span>
-          </div>
-          <div class="legal-card__body">
-            {app.effectiveDate && (
-              <div class="legal-card__meta">
-                <span>{t(UiKey["legal.effectiveDate"]).toUpperCase()}</span>
-                <span class="legal-card__meta-value">
-                  {app.effectiveDate.toLocaleDateString(lang, {
-                    dateStyle: "long",
-                  })}
-                </span>
+      apps.map((app) => (
+        <section class="legal-app" aria-labelledby={`app-${app.docs[0].slug}`}>
+          <div class="legal-app__head">
+            <h2 id={`app-${app.docs[0].slug}`}>{app.appName}</h2>
+            <dl class="legal-app__meta">
+              <div>
+                <dt>{t(UiKey["legal.version"])}</dt>
+                <dd>{app.version}</dd>
               </div>
-            )}
-            <div class="legal-card__divider" />
-            <div class="legal-card__links">
-              {app.docs.map((doc) => (
-                <a
-                  class="legal-card__link"
-                  href={`/${doc.lang}/legal/${doc.slug}`}
-                >
-                  <span>{doc.title}</span>
-                  <span class="legal-card__link-lang">
-                    {doc.lang.toUpperCase()}
-                    <ArrowUpRight size={14} />
-                  </span>
-                </a>
-              ))}
-            </div>
+              {app.effectiveDate && (
+                <div>
+                  <dt>{t(UiKey["legal.effectiveDate"])}</dt>
+                  <dd>{fmt.format(app.effectiveDate)}</dd>
+                </div>
+              )}
+            </dl>
           </div>
-        </div>
+          <ul class="ruled">
+            {app.docs.map((doc) => (
+              <li>
+                <a
+                  class="ruled-link legal-row"
+                  href={`/${doc.lang}/legal/${doc.slug}`}
+                  hreflang={doc.lang}
+                  lang={doc.lang}
+                >
+                  <span class="ruled-link__title">{doc.title}</span>
+                  <span class="ruled-link__meta">{languages[doc.lang]}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       ))
     }
   </div>
@@ -100,132 +94,64 @@ const appCount = String(apps.length).padStart(2, "0");
 </LegalLayout>
 
 <style>
-  .legal-hero {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 60ch;
-    margin-bottom: clamp(32px, 5vw, 56px);
-  }
-
-  .legal-grid {
+  .legal-apps {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    padding-bottom: 20px;
+    gap: clamp(48px, 7vw, 80px);
+    max-width: 960px;
+    margin-top: clamp(48px, 7vw, 88px);
   }
-
-  .legal-card {
-    position: relative;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    overflow: hidden;
-    transition: border-color var(--dur) var(--ease-out);
+  .legal-app {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(20px, 5vw, 64px);
+    align-items: start;
   }
-  .legal-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      320px circle at var(--mx, 50%) var(--my, 50%),
-      var(--accent-glow),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity var(--dur) var(--ease-out);
-    pointer-events: none;
+  .legal-app h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
   }
-  .legal-card:hover {
-    border-color: var(--accent);
+  .legal-app__meta {
+    display: grid;
+    gap: 4px;
+    margin: 12px 0 0;
+    font-size: 0.95rem;
+    font-variant-numeric: proportional-nums;
   }
-  .legal-card:hover::before {
-    opacity: 1;
-  }
-
-  .legal-card__head {
-    position: relative;
-    padding: 24px 26px;
-    border-bottom: 1px solid var(--line);
+  .legal-app__meta div {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
+    gap: 8px;
   }
-  .legal-card__head h2 {
+  .legal-app__meta dt {
+    color: var(--text-secondary);
+  }
+  .legal-app__meta dd {
     margin: 0;
-    font-size: 19px;
-    letter-spacing: -0.015em;
+    font-weight: 600;
   }
-  .legal-card__version {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    padding: 4px 8px;
+  .legal-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 16px;
+    padding-block: 20px;
   }
-
-  .legal-card__body {
-    position: relative;
-    padding: 22px 26px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  .legal-row .ruled-link__title {
+    font-size: 1.25rem;
   }
-  .legal-card__meta {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--text-secondary);
-  }
-  .legal-card__meta-value {
-    color: var(--text-primary);
-  }
-  .legal-card__divider {
-    height: 1px;
-    background: var(--line-soft);
-  }
-  .legal-card__links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .legal-card__link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14.5px;
-    color: var(--text-primary) !important;
-  }
-  .legal-card__link:hover {
-    color: var(--accent) !important;
-  }
-  .legal-card__link-lang {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-secondary);
-  }
-
   .legal-questions {
-    margin: 20px 0 96px;
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    line-height: 1.7;
-    color: var(--text-secondary);
     max-width: 60ch;
+    margin-top: clamp(64px, 9vw, 112px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line-strong);
+    color: var(--text-secondary);
   }
-
-  @media (max-width: 700px) {
-    .legal-grid {
+  .legal-questions a {
+    font-weight: 600;
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 760px) {
+    .legal-app {
       grid-template-columns: 1fr;
     }
   }

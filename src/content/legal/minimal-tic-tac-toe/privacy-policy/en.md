@@ -1,5 +1,5 @@
 ---
-title: "Política de Privacidad"
+title: "Privacy Policy"
 app: "Minimal Tic Tac Toe"
 type: "privacy-policy"
 lang: "en"

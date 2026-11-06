@@ -1,13 +1,27 @@
 ---
 import { Sun, Moon } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+const lightLabel = t(UiKey["theme.light"]);
+const darkLabel = t(UiKey["theme.dark"]);
+const switchLabel = t(UiKey["theme.switch"]);
 ---
 
-<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+<button
+  class="theme-toggle"
+  id="theme-toggle"
+  aria-label={switchLabel.replace("{state}", darkLabel)}
+  data-light={lightLabel}
+  data-dark={darkLabel}
+  data-switch={switchLabel}
+>
   <span class="icon-wrap">
-    <Moon class="icon moon" size={13} />
-    <Sun class="icon sun" size={13} />
+    <Moon class="icon moon" size={15} />
+    <Sun class="icon sun" size={15} />
   </span>
-  <span class="theme-toggle__label" id="theme-toggle-label">DARK</span>
+  <span class="theme-toggle__label" id="theme-toggle-label">{darkLabel}</span>
 </button>
 
 <style>
@@ -15,14 +29,14 @@ import { Sun, Moon } from "@lucide/astro";
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 6px 10px;
-    border: 1px solid var(--line);
+    min-height: 44px;
+    padding: 6px 12px;
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
     background: transparent;
     cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text-secondary);
     transition:
       color var(--dur-fast) var(--ease-out),
@@ -35,8 +49,8 @@ import { Sun, Moon } from "@lucide/astro";
 
   .icon-wrap {
     position: relative;
-    width: 13px;
-    height: 13px;
+    width: 15px;
+    height: 15px;
   }
   .icon {
     position: absolute;
@@ -62,6 +76,21 @@ import { Sun, Moon } from "@lucide/astro";
     transform: scale(0.5);
     opacity: 0;
   }
+  @media (max-width: 520px) {
+    .theme-toggle__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .theme-toggle {
+      width: 44px;
+      justify-content: center;
+      padding: 0;
+    }
+  }
 </style>
 
 <script>
@@ -72,8 +101,13 @@ import { Sun, Moon } from "@lucide/astro";
     if (!btn) return;
 
     const sync = () => {
-      if (label)
-        label.textContent = html.dataset.theme === "dark" ? "DARK" : "LIGHT";
+      const state =
+        html.dataset.theme === "dark" ? btn.dataset.dark : btn.dataset.light;
+      if (label) label.textContent = state ?? "";
+      btn.setAttribute(
+        "aria-label",
+        (btn.dataset.switch ?? "").replace("{state}", state ?? ""),
+      );
     };
     sync();
 

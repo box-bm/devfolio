@@ -2,7 +2,8 @@
 /**
  * Motion.astro
  * Global, dependency-free motion engine. Mounted once in Base.astro.
- *  - [data-reveal]            scroll-reveal (opacity/transform), optional [data-reveal="left|right|scale|blur"]
+ *  - [data-reveal]            settle-in on first view (content is visible without JS)
+ *  - [data-draw]              blue-pencil SVG strokes draw themselves when the note enters view
  *  - [data-tilt]              3D pointer tilt + reveal glow (sets --rx/--ry/--mx/--my)
  *  - [data-magnetic]          magnetic pull toward the pointer
  *  - [data-parallax="0.1"]    parallax translateY on scroll
@@ -39,6 +40,32 @@
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
     els.forEach((el) => io.observe(el));
+  }
+
+  function setupDraw() {
+    const notes = document.querySelectorAll<SVGSVGElement>("[data-draw]");
+    if (PREFERS_REDUCED() || !("IntersectionObserver" in window)) return;
+    notes.forEach((svg) => {
+      svg.querySelectorAll<SVGGeometryElement>("path").forEach((p, i) => {
+        const len = Math.ceil(p.getTotalLength());
+        p.style.strokeDasharray = `${len}`;
+        p.style.strokeDashoffset = `${len}`;
+        p.style.transition = `stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1) ${250 + i * 220}ms`;
+      });
+    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target
+            .querySelectorAll<SVGGeometryElement>("path")
+            .forEach((p) => (p.style.strokeDashoffset = "0"));
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.4 },
+    );
+    notes.forEach((n) => io.observe(n));
   }
 
   function setupTilt() {
@@ -149,6 +176,7 @@
 
   function init() {
     setupReveal();
+    setupDraw();
     setupTilt();
     setupMagnetic();
     setupActiveNav();

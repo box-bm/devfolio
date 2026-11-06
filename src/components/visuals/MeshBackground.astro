@@ -1,41 +1,73 @@
 ---
-/** Fixed blueprint backdrop: a soft warm glow over the near-dark/near-light
- *  base, plus a faint dot-grid field fading out toward the edges.
- *  Purely decorative — mounted once in Base.astro. */
+/** The sketchbook itself: the paper ground plus the spiral binding down the
+ *  left edge on wide screens. Purely decorative, mounted once in Base.astro.
+ *  (Paper grain lives on body::before in GlobalStyles.) */
 ---
 
-<div class="mesh" aria-hidden="true">
-  <div class="dot-field"></div>
+<div class="paper" aria-hidden="true">
+  <div class="binding"></div>
 </div>
 
 <style>
-  .mesh {
+  .paper {
     position: fixed;
     inset: 0;
     z-index: -1;
-    overflow: hidden;
     pointer-events: none;
-    background:
-      radial-gradient(
-        1100px 640px at 78% -10%,
-        var(--accent-glow),
-        transparent 64%
-      ),
-      radial-gradient(760px 460px at 2% 28%, var(--glow-2), transparent 62%),
-      var(--bg);
+    background: var(--bg);
   }
 
-  /* Fixed blueprint dot-grid field, faded toward the edges */
-  .dot-field {
+  /* Spiral binding: punched holes with a wire loop over each one */
+  .binding {
+    display: none;
     position: absolute;
-    inset: 0;
-    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size: 34px 34px;
-    -webkit-mask-image: radial-gradient(
-      circle at 50% 8%,
-      #000 10%,
-      transparent 68%
-    );
-    mask-image: radial-gradient(circle at 50% 8%, #000 10%, transparent 68%);
+    top: 0;
+    bottom: 0;
+    left: 14px;
+    width: 34px;
+    background:
+      radial-gradient(
+          circle at 22px 50%,
+          var(--bg-deep) 0 5px,
+          rgba(0, 0, 0, 0.28) 5px 6px,
+          transparent 6.5px
+        )
+        0 0 / 34px 26px repeat-y,
+      linear-gradient(
+          180deg,
+          transparent 0 8px,
+          var(--line-strong) 8px 11px,
+          transparent 11px
+        )
+        0 0 / 24px 26px repeat-y;
+  }
+
+  @media (min-width: 1180px) {
+    .binding {
+      display: block;
+    }
+  }
+  /* Smaller screens keep the sketchbook: a slim binding in the margin */
+  @media (max-width: 1179px) {
+    .binding {
+      display: block;
+      left: 0;
+      width: 16px;
+      background:
+        radial-gradient(
+            circle at 10px 50%,
+            var(--bg-deep) 0 3px,
+            rgba(0, 0, 0, 0.28) 3px 4px,
+            transparent 4.5px
+          )
+          0 0 / 16px 18px repeat-y,
+        linear-gradient(
+            180deg,
+            transparent 0 6px,
+            var(--line-strong) 6px 8px,
+            transparent 8px
+          )
+          0 0 / 10px 18px repeat-y;
+    }
   }
 </style>

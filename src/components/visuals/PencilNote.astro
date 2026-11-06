@@ -1,0 +1,90 @@
+---
+/**
+ * A short note written in blue pencil, with a hand-drawn arrow that draws
+ * itself when it enters view (Motion.astro, [data-draw]).
+ * `arrow` picks which way the arrow points from the words.
+ */
+interface Props {
+  arrow?: "down-left" | "down-right" | "left" | "up-left" | "none";
+  class?: string;
+}
+
+const { arrow = "down-left", class: className } = Astro.props;
+
+// Authored strokes: a loose curve plus a two-stroke arrowhead each.
+const arrows: Record<string, { viewBox: string; paths: string[] }> = {
+  "down-left": {
+    viewBox: "0 0 90 70",
+    paths: [
+      "M84 6 C70 10 44 18 30 34 C22 43 16 52 12 62",
+      "M4 50 L12 63 L24 56",
+    ],
+  },
+  "down-right": {
+    viewBox: "0 0 90 70",
+    paths: [
+      "M6 6 C20 10 46 18 60 34 C68 43 74 52 78 62",
+      "M66 56 L78 63 L86 50",
+    ],
+  },
+  left: {
+    viewBox: "0 0 96 40",
+    paths: ["M92 22 C70 14 44 12 10 20", "M20 8 L8 20 L22 30"],
+  },
+  "up-left": {
+    viewBox: "0 0 90 70",
+    paths: [
+      "M84 64 C66 60 42 50 28 34 C20 25 15 16 12 6",
+      "M4 18 L12 5 L24 14",
+    ],
+  },
+};
+const a = arrow === "none" ? null : arrows[arrow];
+---
+
+<span class:list={["pencil-note", `pencil-note--${arrow}`, className]}>
+  {
+    a && (
+      <svg
+        class="pencil-note__arrow"
+        viewBox={a.viewBox}
+        aria-hidden="true"
+        data-draw
+      >
+        {a.paths.map((d) => (
+          <path d={d} />
+        ))}
+      </svg>
+    )
+  }
+  <span class="pencil-note__words"><slot /></span>
+</span>
+
+<style>
+  .pencil-note {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 6px;
+    font-family: var(--font-hand);
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.1;
+    color: var(--pencil);
+    transform: rotate(-3deg);
+  }
+  .pencil-note--down-right {
+    flex-direction: row-reverse;
+  }
+  .pencil-note__arrow {
+    flex: none;
+    width: 72px;
+    height: auto;
+    overflow: visible;
+  }
+  .pencil-note__arrow path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counted Thread</title>
+<style>
+  :root { --cell: 12px; --ground:#1d2350; --warp:#2a3170; --thread:#f4efe6; --red:#c8332b; --gold:#f2a516; --green:#2f8f5b; --pink:#d23f86; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width:1440px; height:900px; overflow:hidden; background:
+    repeating-linear-gradient(90deg, var(--warp) 0 2px, transparent 2px var(--cell)), var(--ground);
+    color: var(--thread); font-family: "Familjen Grotesk", system-ui, sans-serif; }
+  .band { position:absolute; left:0; right:0; }
+  .nav { top:0; height:72px; background: repeating-linear-gradient(90deg, var(--red) 0 12px, #a92820 12px 24px);
+    display:flex; align-items:center; justify-content:space-between; padding:0 48px; font-size:15px; font-weight:600; }
+  .nav nav { display:flex; gap:32px; }
+  .selv { top:72px; height:12px; background: repeating-linear-gradient(90deg, var(--gold) 0 12px, var(--green) 12px 24px, var(--pink) 24px 36px); }
+  .portrait { position:absolute; left:96px; top:132px; width:576px; height:672px; display:grid;
+    grid-template-columns: repeat(48, 12px); grid-auto-rows: 14px; }
+  .portrait i { display:block; border-radius: 1px; }
+  .name { position:absolute; left:96px; top:520px; font-size:168px; line-height:.86; font-weight:800; letter-spacing:-.04em; mix-blend-mode: normal; }
+  .name span { display:block; color: var(--gold); }
+  .side { position:absolute; left:768px; top:156px; width:560px; }
+  .side h1 { font-size:44px; line-height:1.08; font-weight:700; letter-spacing:-.02em; }
+  .side p { margin-top:22px; font-size:19px; line-height:1.5; opacity:.86; max-width:46ch; }
+  .actions { display:flex; gap:14px; margin-top:34px; }
+  .btn { padding:16px 24px; font-size:16px; font-weight:700; background: var(--gold); color:#1d2350; }
+  .btn.alt { background: transparent; border:2px dashed var(--thread); color: var(--thread); }
+  .loom { position:absolute; left:0; right:0; bottom:0; height:96px; border-top: 4px solid var(--thread);
+    background: repeating-linear-gradient(90deg, var(--thread) 0 1px, transparent 1px var(--cell)); opacity:.5; }
+  .clock { position:absolute; left:768px; top:640px; font-size:15px; opacity:.8; }
+</style>
+</head>
+<body>
+  <div class="band nav"><strong>BoxDev</strong><nav><span>Work</span><span>Guides</span><span>About</span><span>Contact</span><span>EN · ES</span><span>Day / Night</span></nav></div>
+  <div class="band selv"></div>
+  <div class="portrait" id="p"></div>
+  <div class="name">Brandon<span>Manzo</span></div>
+  <div class="side">
+    <h1>Frontend &amp; mobile developer in Guatemala City. I write the test before the screen.</h1>
+    <p>Flutter apps on Google Play, Dart packages on pub.dev, and guides for the setups I had to figure out the hard way.</p>
+    <div class="actions"><span class="btn">See the work</span><span class="btn alt">Write to me</span></div>
+  </div>
+  <div class="clock">Guatemala City · 14:20 · usually replies within a day</div>
+  <div class="loom"></div>
+<script>
+  // woven-portrait placeholder: an oval head-and-shoulders silhouette in counted threads
+  const p = document.getElementById('p'); const cols = 48, rows = 48;
+  const pal = ['#2a3170','#c8332b','#f2a516','#f4efe6','#d23f86','#2f8f5b','#141938'];
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const dx = (x - 24) / 11, dy = (y - 17) / 14, head = dx*dx + dy*dy < 1;
+    const sh = y > 30 && Math.abs(x - 24) < 8 + (y - 30) * 1.1;
+    const i = document.createElement('i');
+    let c = pal[0];
+    if (head) c = (x + y) % 7 === 0 ? pal[2] : (y < 8 ? pal[6] : pal[3]);
+    else if (sh) c = (y % 6 < 2) ? pal[1] : ((x + y) % 4 === 0 ? pal[4] : pal[6]);
+    else if ((x * 3 + y) % 17 === 0) c = pal[5];
+    i.style.background = c; p.appendChild(i);
+  }
+</script>
+</body>
+</html>

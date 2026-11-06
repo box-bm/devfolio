@@ -1,9 +1,9 @@
 ---
 import Button from "@components/Button.astro";
-import ContactLinks from "@components/ContactLinks.astro";
+import PencilNote from "@components/visuals/PencilNote.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { UiKey } from "@i18n/ui";
-import { ArrowRight, Mail } from "@lucide/astro";
+import { ArrowDown } from "@lucide/astro";
 import { Image } from "astro:assets";
 import MeImage from "@images/me.jpeg";
 
@@ -11,188 +11,211 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="hero" class="hero">
+<section id="top" class="hero">
   <div class="container hero__grid">
-    <div class="hero__content">
-      <p class="eyebrow" data-reveal style="--reveal-delay: 60ms">
-        {t(UiKey["portfolio.hero.eyebrow"])}
-      </p>
-
-      <h1 class="hero__title" data-reveal style="--reveal-delay: 120ms">
-        {t(UiKey["portfolio.hero.title"])}
-        <span class="gradient-text">{t(UiKey["portfolio.hero.highlight"])}</span
+    <figure class="study">
+      <div class="study__sheet">
+        <Image
+          src={MeImage}
+          alt={t(UiKey["portfolio.hero.photoAlt"])}
+          class="study__img"
+          loading="eager"
+          widths={[400, 560, 800]}
+          sizes="(max-width: 860px) 80vw, 460px"
+        />
+        <span class="study__hatch" aria-hidden="true"></span>
+      </div>
+      <span class="tape tape--top" aria-hidden="true"></span>
+      <span class="tape tape--bottom" aria-hidden="true"></span>
+      <figcaption class="study__note">
+        <PencilNote arrow="down-left"
+          >{t(UiKey["portfolio.hero.note"])}</PencilNote
         >
-      </h1>
+      </figcaption>
+    </figure>
 
-      <p
-        class="body-large hero__caption"
-        data-reveal
-        style="--reveal-delay: 200ms"
-      >
-        {t(UiKey["portfolio.hero.caption"])}
-      </p>
+    <div class="hero__text">
+      <h1 class="hero__name">Brandon<br />Manzo</h1>
+      <p class="hero__lede">{t(UiKey["portfolio.hero.lede"])}</p>
 
-      <div class="hero__actions" data-reveal style="--reveal-delay: 280ms">
-        <Button href="#projects" target="_parent" magnetic>
+      <div class="hero__actions">
+        <Button href="#work" target="_self">
           {t(UiKey["portfolio.hero.viewWork"])}
-          <ArrowRight size={16} />
+          <ArrowDown size={18} />
         </Button>
-        <Button type="Outlined" href="#contact" target="_parent">
-          <Mail size={16} />
+        <Button type="Outlined" href="#contact" target="_self">
           {t(UiKey["portfolio.hero.getInTouch"])}
         </Button>
       </div>
 
-      <div class="hero__social" data-reveal style="--reveal-delay: 320ms">
-        <ContactLinks />
-      </div>
-
-      <div class="hero__roles" data-reveal style="--reveal-delay: 360ms">
-        <span class="role">{t(UiKey["portfolio.hero.role.frontend"])}</span>
-        <span class="role">{t(UiKey["portfolio.hero.role.mobile"])}</span>
-        <span class="role">{t(UiKey["portfolio.hero.role.testing"])}</span>
-      </div>
-    </div>
-
-    <div class="hero__visual" data-reveal="scale" style="--reveal-delay: 200ms">
-      <div class="hero__portrait">
-        <Image
-          src={MeImage}
-          alt="Brandon Manzo"
-          class="hero__portrait-img"
-          loading="eager"
-          widths={[360, 480, 640]}
-          sizes="(max-width: 900px) 70vw, 420px"
-        />
-        <span class="corner-marks corner-marks--two" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-        </span>
-      </div>
-    </div>
-
-    <div class="scroll-cue">
-      <span class="scroll-cue__line"></span>
-      <span>{t(UiKey["portfolio.hero.scroll"])}</span>
+      <p class="hero__clock">
+        {t(UiKey["portfolio.localTime"])}
+        <time data-gt-clock>--:--</time>
+      </p>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    padding-top: clamp(140px, 16vw, 176px);
-    padding-bottom: 118px;
+    padding-top: clamp(112px, 13vw, 156px);
+    padding-bottom: clamp(64px, 9vw, 112px);
   }
 
   .hero__grid {
-    position: relative;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    align-items: start;
-    gap: clamp(32px, 6vw, 64px);
+    grid-template-columns: minmax(0, 0.84fr) minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 104px);
+    align-items: center;
   }
 
-  .hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
+  /* ---- The taped-in portrait study ------------------------------- */
+  .study {
+    position: relative;
+    margin: 0;
+    max-width: 460px;
+    justify-self: end;
+    width: 100%;
+    transform: rotate(-1.6deg);
   }
-
-  .eyebrow {
-    margin: 0 0 14px;
+  .study__sheet {
+    position: relative;
+    padding: clamp(14px, 2vw, 22px);
+    background: var(--sheet);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
   }
-
-  .hero__title {
-    font-size: clamp(42px, 6.4vw, 84px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    text-wrap: balance;
-  }
-  .hero__title .gradient-text {
+  .study__sheet :global(.study__img) {
     display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 22%;
+    filter: grayscale(1) contrast(1.18) brightness(1.06);
+    mix-blend-mode: multiply;
+  }
+  /* graphite hatching, heavier toward the edges like a shaded study */
+  .study__hatch {
+    position: absolute;
+    inset: clamp(14px, 2vw, 22px);
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(34, 35, 38, 0.22) 0 1px,
+      transparent 1px 6px
+    );
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 40%,
+      transparent 55%,
+      #000 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 40%,
+      transparent 55%,
+      #000 100%
+    );
+    pointer-events: none;
   }
 
-  .hero__caption {
-    margin-top: 28px;
-    max-width: 52ch;
-    color: var(--text-secondary);
+  .tape {
+    position: absolute;
+    width: 116px;
+    height: 30px;
+    background: var(--tape);
+    border-left: 1px dashed var(--tape-edge);
+    border-right: 1px dashed var(--tape-edge);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  .tape--top {
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%) rotate(3deg);
+  }
+  .tape--bottom {
+    bottom: -12px;
+    right: -26px;
+    transform: rotate(-38deg);
   }
 
+  .study__note {
+    position: absolute;
+    top: -66px;
+    right: -84px;
+  }
+
+  /* ---- Words ----------------------------------------------------- */
+  .hero__name {
+    font-size: clamp(3.5rem, 9.4vw, 8.25rem);
+    font-weight: 800;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    color: var(--text-primary);
+  }
+  .hero__lede {
+    margin-top: clamp(22px, 3vw, 34px);
+    max-width: 34ch;
+    font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--text-primary);
+    text-wrap: pretty;
+  }
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 34px;
+    margin-top: clamp(28px, 3.6vw, 40px);
   }
-
-  .hero__social {
-    margin-top: 22px;
-  }
-
-  .hero__roles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 44px;
-  }
-  .role {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    padding: 5px 10px;
-  }
-
-  .hero__visual {
-    margin-top: 62px;
-  }
-  .hero__portrait {
-    position: relative;
-    max-width: 420px;
-    margin-inline: auto;
-  }
-  .hero__portrait :global(.hero__portrait-img) {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    filter: saturate(0.92);
-  }
-
-  .scroll-cue {
-    position: absolute;
-    left: -4px;
-    bottom: -80px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .scroll-cue__line {
-    width: 26px;
-    height: 1px;
-    background: var(--line);
-  }
-  .scroll-cue span:last-child {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+  .hero__clock {
+    margin-top: 28px;
+    font-size: 0.95rem;
     color: var(--text-secondary);
   }
+  .hero__clock time {
+    margin-left: 6px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+  }
 
-  @media (max-width: 900px) {
+  @media (max-width: 860px) {
     .hero__grid {
       grid-template-columns: 1fr;
-      gap: 40px;
     }
-    .hero__visual {
-      order: -1;
-      margin-top: 0;
+    .study {
+      justify-self: start;
+      max-width: min(200px, 52vw);
+      margin-top: 24px;
+      margin-bottom: 8px;
     }
-    .scroll-cue {
-      display: none;
+    .study__note {
+      top: 30%;
+      right: auto;
+      left: calc(100% + 8px);
     }
   }
 </style>
+
+<script>
+  // Guatemala City has no daylight saving time, so this is always UTC-6.
+  function startClock() {
+    const el = document.querySelector<HTMLTimeElement>("[data-gt-clock]");
+    if (!el) return;
+    const fmt = new Intl.DateTimeFormat(document.documentElement.lang || "en", {
+      timeZone: "America/Guatemala",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const tick = () => {
+      const now = new Date();
+      el.textContent = fmt.format(now);
+      el.dateTime = now.toISOString();
+    };
+    tick();
+    const id = window.setInterval(tick, 30_000);
+    document.addEventListener("astro:before-swap", () => clearInterval(id), {
+      once: true,
+    });
+  }
+  document.addEventListener("astro:page-load", startClock);
+</script>

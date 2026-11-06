@@ -2,25 +2,10 @@
 import Base from "@layouts/Website.astro";
 
 import HeroSection from "@components/sections/HeroSection.astro";
-import TechMarquee from "@components/sections/TechMarquee.astro";
-import AboutSection from "@components/sections/AboutSection.astro";
-import ServicesSection from "@components/sections/ServicesSection.astro";
-import SkillsSection from "@components/sections/SkillsSection.astro";
 import ProjectsSection from "@components/sections/ProjectsSection.astro";
+import GuidesSection from "@components/sections/GuidesSection.astro";
+import AboutSection from "@components/sections/AboutSection.astro";
 import ContactSection from "@components/sections/ContactSection.astro";
-
-// years of experience
-const startDate = new Date("2018-09-01");
-const today = new Date();
-
-let years = today.getFullYear() - startDate.getFullYear();
-if (
-  today.getMonth() < startDate.getMonth() ||
-  (today.getMonth() === startDate.getMonth() &&
-    today.getDate() < startDate.getDate())
-) {
-  years--;
-}
 
 export async function getStaticPaths() {
   return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
@@ -29,10 +14,8 @@ export async function getStaticPaths() {
 
 <Base title="Brandon Manzo — Frontend & Mobile Developer">
   <HeroSection />
-  <TechMarquee />
-  <AboutSection years={years} />
-  <ServicesSection />
-  <SkillsSection />
   <ProjectsSection />
+  <GuidesSection />
+  <AboutSection />
   <ContactSection />
 </Base>

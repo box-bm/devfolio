@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketchbook</title>
+<style>
+  :root { --paper:#d4d3cf; --graphite:#26272a; --blue:#1a44a0; }
+  * { box-sizing:border-box; margin:0; }
+  body { width:1440px; height:900px; overflow:hidden; background: var(--paper); color: var(--graphite);
+    font-family: "Schibsted Grotesk", system-ui, sans-serif; }
+  .spiral { position:absolute; top:0; bottom:0; left:56px; width:24px;
+    background: repeating-linear-gradient(180deg, transparent 0 18px, #7b7c80 18px 24px); }
+  .nav { position:absolute; top:36px; left:128px; right:64px; display:flex; justify-content:space-between; font-size:16px; font-weight:600; }
+  .nav div { display:flex; gap:28px; }
+  .sketch { position:absolute; left:128px; top:120px; width:620px; height:720px; border:2px solid var(--graphite);
+    background: repeating-linear-gradient(135deg, rgba(38,39,42,.18) 0 1px, transparent 1px 7px); }
+  .note { position:absolute; color: var(--blue); font-size:22px; font-style:italic; }
+  .n1 { left:760px; top:210px; } .n2 { left:780px; top:560px; }
+  .arrow { position:absolute; height:2px; background: var(--blue); transform-origin:left; }
+  h1 { position:absolute; left:820px; top:260px; width:540px; font-size:64px; line-height:1; letter-spacing:-.03em; font-weight:800; }
+  p.lede { position:absolute; left:820px; top:430px; width:500px; font-size:19px; line-height:1.5; }
+  .actions { position:absolute; left:820px; top:640px; display:flex; gap:16px; }
+  .btn { padding:16px 22px; border:2px solid var(--graphite); font-weight:700; font-size:16px; }
+  .btn.solid { background: var(--graphite); color: var(--paper); }
+</style>
+</head>
+<body>
+  <div class="spiral"></div>
+  <div class="nav"><strong>BoxDev</strong><div><span>Work</span><span>Guides</span><span>About</span><span>Contact</span><span>EN · ES</span></div></div>
+  <div class="sketch"></div>
+  <span class="note n1">me, mid-refactor</span>
+  <div class="arrow" style="left:740px;top:240px;width:60px;transform:rotate(160deg)"></div>
+  <h1>Brandon Manzo draws interfaces, then tests them.</h1>
+  <p class="lede">Frontend &amp; mobile developer in Guatemala City. Flutter apps, Dart packages and guides, sketched first and shipped with tests.</p>
+  <div class="actions"><span class="btn solid">Open the sketchbook</span><span class="btn">Write to me</span></div>
+  <span class="note n2">↓ three shipped things, annotated</span>
+</body>
+</html>

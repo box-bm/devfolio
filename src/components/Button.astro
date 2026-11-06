@@ -46,14 +46,13 @@ const {
     align-items: center;
     justify-content: center;
     gap: 9px;
-    padding: 13px 22px;
+    min-height: 44px;
+    padding: 12px 22px;
     border-radius: var(--radius);
-    font-weight: 500;
-    font-size: 0.9rem;
+    font-weight: 600;
+    font-size: 1rem;
     line-height: 1;
     cursor: pointer;
-    overflow: hidden;
-    isolation: isolate;
     transition:
       transform var(--dur-fast) var(--ease-out),
       box-shadow var(--dur-fast) var(--ease-out),
@@ -66,54 +65,31 @@ const {
     align-items: center;
     gap: 8px;
   }
-
-  /* shine sweep */
-  .btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      110deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.35) 50%,
-      transparent 70%
-    );
-    transform: translateX(-120%);
-    transition: transform 650ms var(--ease-out);
-  }
-  .btn:hover::before {
-    transform: translateX(120%);
-  }
-
   .btn:active {
-    transform: scale(0.96);
+    transform: translateY(1px);
   }
 
-  /* Default — flat sand fill */
+  /* Default: solid graphite */
   .btn-default {
-    color: var(--on-accent);
-    background: var(--olive, var(--accent));
-    border: 1px solid var(--olive, var(--accent));
+    color: var(--on-ink);
+    background: var(--ink);
+    border: 2px solid var(--ink);
   }
   .btn-default:hover {
-    background: var(--olive-hover, var(--accent-strong));
-    border-color: var(--olive-hover, var(--accent-strong));
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-accent);
+    background: var(--ink-hover);
+    border-color: var(--ink-hover);
+    box-shadow: var(--shadow-md);
   }
 
-  /* Outlined — acrylic hairline */
+  /* Outlined: a pencil line */
   .btn-outlined {
     color: var(--text-primary);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: transparent;
+    border: 2px solid var(--text-primary);
   }
   .btn-outlined:hover {
-    transform: translateY(-1px);
-    border-color: var(--accent);
+    color: var(--pencil);
+    border-color: var(--pencil);
   }
 
   /* Text */
@@ -125,25 +101,19 @@ const {
   .btn-text:hover {
     background: var(--accent-soft);
   }
-  .btn-text::before {
-    display: none;
-  }
 
-  /* Icon — hairline square */
+  /* Icon */
   .btn-icon {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
     padding: 0;
-    border-radius: var(--radius-sm);
     color: var(--text-secondary);
     background: transparent;
-    border: 1px solid var(--glass-border);
-  }
-  .btn-icon::before {
-    display: none;
+    border: 1px solid var(--line-strong);
   }
   .btn-icon:hover {
-    color: var(--text-primary);
-    border-color: var(--accent);
+    color: var(--pencil);
+    border-color: var(--pencil);
   }
 </style>

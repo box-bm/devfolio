@@ -8,9 +8,12 @@ import { ArrowLeft } from "@lucide/astro";
 
 interface Props {
   hideMenu?: boolean;
+  /** Old store-linked legal URLs carry the language at the end, so the
+   * language switch can't map them; they hide it. */
+  hideLanguage?: boolean;
 }
 
-const { hideMenu = false } = Astro.props;
+const { hideMenu = false, hideLanguage = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const base = lang === "en" ? "" : `/${lang}`;
@@ -22,10 +25,18 @@ const base = lang === "en" ? "" : `/${lang}`;
 
     {
       hideMenu ? (
-        <a class="back-link" href={`${base}/`}>
-          <ArrowLeft size={15} />
-          {t(UiKey["nav.backToPortfolio"])}
-        </a>
+        <div class="nav__end">
+          <a class="back-link" href={`${base}/`}>
+            <ArrowLeft size={16} />
+            <span class="back-link__text">
+              {t(UiKey["nav.backToPortfolio"])}
+            </span>
+          </a>
+          <div class="nav__right">
+            {!hideLanguage && <LanguagePicker />}
+            <ThemeToggle />
+          </div>
+        </div>
       ) : (
         <div class="nav__end">
           <div class="nav__links">
@@ -75,16 +86,14 @@ const base = lang === "en" ? "" : `/${lang}`;
       backdrop-filter var(--dur) var(--ease-out);
   }
   .site-header.scrolled {
-    background: var(--glass-bg);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    background: var(--bg);
     border-bottom-color: var(--line);
   }
 
   .nav {
-    max-width: 1200px;
+    max-width: 1180px;
     margin-inline: auto;
-    padding: 14px clamp(16px, 4vw, 28px);
+    padding: 14px clamp(20px, 5vw, 40px);
     display: flex;
     align-items: center;
     gap: 28px;
@@ -110,16 +119,33 @@ const base = lang === "en" ? "" : `/${lang}`;
   }
 
   .back-link {
-    flex: 1;
     display: inline-flex;
     align-items: center;
-    justify-content: flex-end;
     gap: 8px;
-    font-size: 13.5px;
-    color: var(--text-secondary);
+    min-height: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
   }
   .back-link:hover {
-    color: var(--text-primary);
+    color: var(--pencil);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  @media (max-width: 520px) {
+    /* keep the bar to one row: the arrow stays, its words go to AT only */
+    .back-link {
+      justify-content: center;
+      min-width: 44px;
+    }
+    .back-link__text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
   }
 
   /* Hamburger */
@@ -128,19 +154,19 @@ const base = lang === "en" ? "" : `/${lang}`;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--line);
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
     background: transparent;
     cursor: pointer;
   }
   .menu-btn span {
     display: block;
-    width: 14px;
-    height: 1px;
+    width: 18px;
+    height: 2px;
     margin-inline: auto;
-    background: var(--text-secondary);
+    background: var(--text-primary);
     transition:
       transform var(--dur) var(--ease-out),
       opacity var(--dur);
@@ -159,9 +185,8 @@ const base = lang === "en" ? "" : `/${lang}`;
     left: 0;
     right: 0;
     border-bottom: 1px solid var(--line);
-    background: var(--glass-bg-strong);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    background: var(--bg);
+    box-shadow: var(--shadow-md);
     padding: 8px clamp(16px, 4vw, 28px) 18px;
     opacity: 0;
     transform: translateY(-8px);
@@ -194,13 +219,18 @@ const base = lang === "en" ? "" : `/${lang}`;
 
 <style is:global>
   .header-link {
-    font-size: 13.5px;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--text-secondary);
     transition: color var(--dur) var(--ease-out);
   }
   .header-link:hover,
   .header-link.active {
     color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--pencil);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
   }
   .mobile-menu__links .header-link {
     padding: 10px 0;

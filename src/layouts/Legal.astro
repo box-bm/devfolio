@@ -1,49 +1,33 @@
 ---
+import Document from "@layouts/Document.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import Base from "@layouts/Base.astro";
-import Footer from "@components/Footer.astro";
-import Bradcrumb from "@components/BreadCrumb.astro";
-import Header from "@components/Header.astro";
 import { UiKey } from "@i18n/ui";
-import LegalStyles from "@styles/LegalStyles.astro";
-import MarkdownStyles from "@styles/MarkdownStyles.astro";
-import BuyMeACoffee from "@components/BuyMeACoffee.astro";
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+import type { Lang } from "@i18n/langs";
 
 interface Props {
   title?: string;
   document?: string;
+  /** The old store-linked routes put the language last in the URL. */
+  lang?: Lang;
 }
-const { title = t(UiKey["title.legal"]), document } = Astro.props;
-const breadcrumbItems = [
-  { label: t(UiKey["legal.title"]), href: `/${lang}/legal` },
-];
-if (document) {
-  breadcrumbItems.push({ label: document, href: "" });
-}
+
+const {
+  title: pageTitle,
+  document,
+  lang = getLangFromUrl(Astro.url),
+} = Astro.props;
+const t = useTranslations(lang);
+const title = pageTitle ?? t(UiKey["title.legal"]);
+const standalone = Astro.props.lang !== undefined;
+
+const crumbs: { label: string; href?: string }[] = document
+  ? [
+      { label: t(UiKey["legal.title"]), href: `/${lang}/legal` },
+      { label: document },
+    ]
+  : [{ label: t(UiKey["legal.title"]) }];
 ---
 
-<Base title={title} lang={lang}>
-  <LegalStyles />
-  <MarkdownStyles />
-  <Header hideMenu />
-  <main class="doc-main">
-    <div class="doc-breadcrumb">
-      <Bradcrumb items={breadcrumbItems} />
-    </div>
-    <div class="markdown-body">
-      <slot />
-    </div>
-  </main>
-  <Footer />
-  <BuyMeACoffee />
-  <style>
-    .doc-breadcrumb {
-      max-width: 72ch;
-      margin: 0 auto;
-      padding: 20px 16px 0;
-    }
-  </style>
-</Base>
+<Document title={title} lang={lang} crumbs={crumbs} hideLanguage={standalone}>
+  <slot />
+</Document>

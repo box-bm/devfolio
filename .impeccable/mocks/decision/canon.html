@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Category standard</title>
+<style>
+  * { box-sizing:border-box; margin:0; }
+  body { width:1440px; height:900px; overflow:hidden; background:#ffffff; color:#111827; font-family: system-ui, sans-serif; }
+  .nav { height:72px; display:flex; align-items:center; justify-content:space-between; padding:0 120px; border-bottom:1px solid #e5e7eb; font-size:15px; }
+  .nav div { display:flex; gap:28px; color:#4b5563; }
+  .hero { padding:120px 120px 0; display:grid; grid-template-columns: 1fr 360px; gap:80px; }
+  h1 { font-size:64px; line-height:1.05; letter-spacing:-.03em; font-weight:700; }
+  p { margin-top:24px; font-size:20px; line-height:1.55; color:#4b5563; max-width:54ch; }
+  .actions { margin-top:36px; display:flex; gap:12px; }
+  .btn { padding:14px 20px; border-radius:8px; background:#2563eb; color:#fff; font-weight:600; }
+  .btn.alt { background:#fff; color:#111827; border:1px solid #d1d5db; }
+  .photo { width:360px; height:440px; border-radius:16px; background:#e5e7eb; }
+</style>
+</head>
+<body>
+  <div class="nav"><strong>Brandon Manzo</strong><div><span>Work</span><span>Guides</span><span>About</span><span>Contact</span></div></div>
+  <div class="hero">
+    <div>
+      <h1>Frontend and mobile developer who ships tested products.</h1>
+      <p>Flutter apps on Google Play, Dart packages on pub.dev, and practical guides. Based in Guatemala City.</p>
+      <div class="actions"><span class="btn">View projects</span><span class="btn alt">Contact</span></div>
+    </div>
+    <div class="photo"></div>
+  </div>
+</body>
+</html>

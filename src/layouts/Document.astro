@@ -1,0 +1,194 @@
+---
+/**
+ * Shared shell for reading pages (guides and legal): same paper, header and
+ * footer as the home page, with the layout classes the pages compose.
+ */
+import Base from "@layouts/Base.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import BreadCrumb from "@components/BreadCrumb.astro";
+import MarkdownStyles from "@styles/MarkdownStyles.astro";
+import type { Lang } from "@i18n/langs";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+  type?: "website" | "article";
+  date?: Date;
+  updatedDate?: Date;
+  crumbs: { label: string; href?: string }[];
+  hideLanguage?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang,
+  type,
+  date,
+  updatedDate,
+  crumbs,
+  hideLanguage,
+} = Astro.props;
+---
+
+<Base
+  title={title}
+  description={description}
+  lang={lang}
+  type={type}
+  date={date}
+  updatedDate={updatedDate}
+>
+  <MarkdownStyles />
+  <Header hideMenu hideLanguage={hideLanguage} />
+  <main class="doc">
+    <div class="doc-crumbs">
+      <BreadCrumb items={crumbs} />
+    </div>
+    <slot />
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .doc {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: 104px clamp(20px, 5vw, 40px) clamp(72px, 10vw, 120px);
+  }
+  .doc-crumbs {
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+
+  /* ---------- Page head ---------- */
+  .doc-title {
+    max-width: 18ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 6.4vw, 5rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+  .doc-title--index {
+    font-size: clamp(3.25rem, 9vw, 6rem);
+  }
+  .doc-lede {
+    max-width: 52ch;
+    margin-top: 20px;
+    font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 32px;
+    margin: 28px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-strong);
+    font-size: 0.95rem;
+    font-variant-numeric: proportional-nums;
+  }
+  .doc-meta dl {
+    display: contents;
+  }
+  .doc-meta > span {
+    font-weight: 600;
+  }
+  .doc-meta div {
+    display: flex;
+    gap: 8px;
+  }
+  .doc-meta dt {
+    color: var(--text-secondary);
+  }
+  .doc-meta dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* ---------- Reading grid: text column + margin contents ---------- */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    margin-top: clamp(40px, 6vw, 72px);
+  }
+  @media (min-width: 1100px) {
+    .doc-grid {
+      grid-template-columns: minmax(0, 68ch) minmax(200px, 260px);
+      justify-content: space-between;
+      align-items: start;
+      gap: 72px;
+    }
+    .doc-grid > .contents {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .doc-grid > .markdown-body {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+  /* the body's first heading sits flush with the contents column */
+  .doc-grid > .markdown-body > h1:first-child + * {
+    margin-top: 0;
+  }
+
+  /* ---------- Ruled list rows (index pages) ---------- */
+  .ruled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+  }
+  .ruled > li {
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .ruled-link {
+    display: grid;
+    gap: 6px;
+    padding: 26px 8px 26px 0;
+    color: inherit;
+    transition: padding-left var(--dur) var(--ease-out);
+  }
+  .ruled-link:hover {
+    padding-left: 12px;
+  }
+  .ruled-link__meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-variant-numeric: proportional-nums;
+  }
+  .ruled-link__title {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+  .ruled-link:hover .ruled-link__title {
+    color: var(--pencil);
+  }
+  .ruled-link__desc {
+    max-width: 60ch;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ruled-link {
+      transition: none;
+    }
+    .ruled-link:hover {
+      padding-left: 0;
+    }
+  }
+</style>

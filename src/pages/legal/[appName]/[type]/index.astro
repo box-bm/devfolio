@@ -1,45 +1,20 @@
 ---
-import LegalLayout from "@layouts/Legal.astro";
+// Old language picker for one document; the English document is the
+// default, and it links to the legal index for the Spanish version.
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const policies = await getCollection("legal");
-
-  const langs = Array.from(new Set(policies.map((policy) => policy.data.lang)));
-
-  return policies.map((policy) => {
-    const { type } = policy.data;
-    const [appName] = policy.slug.split("/");
-    const normalizeAppName = appName.toLowerCase();
-
-    return {
-      params: {
-        appName: normalizeAppName,
-        type,
-      },
-      props: {
-        langs,
-        policy,
-        app: normalizeAppName,
-        type,
-      },
-    };
+  const seen = new Set<string>();
+  return policies.flatMap((policy) => {
+    const appName = policy.slug.split("/")[0].toLowerCase();
+    const key = `${appName}/${policy.data.type}`;
+    if (seen.has(key)) return [];
+    seen.add(key);
+    return [{ params: { appName, type: policy.data.type } }];
   });
 }
 
-const { langs, policy, app, type } = Astro.props;
+const { appName, type } = Astro.params;
+return Astro.redirect(`/en/legal/${appName}/${type}`);
 ---
-
-<LegalLayout title={`${policy.data.title} - ${app}`}>
-  <h1>Privacy Policy</h1>
-  <p>Select your language:</p>
-  <ul>
-    {
-      langs.map((lang) => (
-        <a href={lang}>
-          <li key={lang}>{lang}</li>
-        </a>
-      ))
-    }
-  </ul>
-</LegalLayout>

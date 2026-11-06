@@ -3,121 +3,75 @@ import type { UiDict } from "./ui";
 export const en: UiDict = {
   // NAVIGATION
   "nav.about": "About",
-  "nav.services": "What I do",
-  "nav.skills": "Stack",
   "nav.projects": "Projects",
   "nav.contact": "Contact",
   "nav.guides": "Guides",
   "nav.backToPortfolio": "Back to portfolio",
 
-  // HERO
-  "portfolio.hero.eyebrow": "Frontend & Mobile Engineer",
-  "portfolio.hero.title": "I build interfaces",
-  "portfolio.hero.highlight": "that feel alive.",
-  "portfolio.hero.caption":
-    "I'm Brandon — a frontend & mobile developer obsessed with motion, detail, and code that's actually tested. I turn ideas into fast, polished products that feel great to use.",
-  "portfolio.hero.viewWork": "View my work",
-  "portfolio.hero.getInTouch": "Get in touch",
-  "portfolio.hero.scroll": "Scroll to explore",
-  "portfolio.hero.role.frontend": "Frontend craft",
-  "portfolio.hero.role.mobile": "Mobile apps",
-  "portfolio.hero.role.testing": "Tested & reliable",
-
-  // MARQUEE
-  "portfolio.marquee.label": "Tools I reach for every day",
-
-  // ABOUT
-  "portfolio.about.eyebrow": "About me",
-  "portfolio.about.heading": "From pixel to production",
-  "portfolio.about.title": "About me",
-  "portfolio.about.description1": "I'm Brandon, a developer with ",
-  "portfolio.about.description2":
-    "years of experience shipping user-centered products. My heart is in the frontend and on mobile — crafting interfaces that are smooth, accessible, and a joy to use.",
-  "portfolio.about.description3":
-    "But I don't stop at the surface: I'm comfortable across the backend, and I genuinely love QA, automation, and testing. Solid tests are how I ship with confidence and sleep at night.",
-
-  // STATS
-  "portfolio.about.stats.years.label": "Years building software",
-  "portfolio.about.stats.projects.value": "7+",
-  "portfolio.about.stats.projects.label": "Shipped projects & apps",
-  "portfolio.about.stats.tech.value": "20+",
-  "portfolio.about.stats.tech.label": "Languages, frameworks & tools",
-  "portfolio.about.stats.tests.value": "100%",
-  "portfolio.about.stats.tests.label": "Commitment to testing",
-
-  // FUN FACT
-  "portfolio.about.funFact.title": "Fun fact",
-  "portfolio.about.funFact.description":
-    "When I'm away from the keyboard you'll find me drawing, playing video games, and chasing the spot where creativity meets clean software.",
-
-  // SERVICES
-  "portfolio.services.eyebrow": "What I do",
-  "portfolio.services.heading": "Skills that ship products",
-  "portfolio.services.description":
-    "A full-stack toolkit with a frontend-first soul. Here's where I bring the most value.",
-  "portfolio.services.frontend.title": "Frontend Development",
-  "portfolio.services.frontend.description":
-    "Accessible, performant and animated interfaces with React, Next.js and Astro. Pixel-perfect, responsive, and delightful in motion.",
-  "portfolio.services.mobile.title": "Mobile Development",
-  "portfolio.services.mobile.description":
-    "Native-feeling cross-platform apps with Flutter and React Native — from idea to the App Store and Google Play.",
-  "portfolio.services.backend.title": "Backend Development",
-  "portfolio.services.backend.description":
-    "Reliable APIs and services with Node and NestJS. Clean architecture, sensible data models, and endpoints that scale.",
-  "portfolio.services.qa.title": "QA & Automation",
-  "portfolio.services.qa.description":
-    "Automated pipelines and end-to-end coverage that catch bugs before users do — so every release ships with confidence.",
-  "portfolio.services.testing.title": "Testing",
-  "portfolio.services.testing.description":
-    "My favorite craft. Unit, integration and e2e tests with a TDD mindset. Code that's documented, trustworthy and safe to change.",
-  "portfolio.services.favorite": "Favorite",
-
-  // SKILLS
-  "portfolio.skills.eyebrow": "Stack",
-  "portfolio.skills.heading": "Technologies & tools",
-  "portfolio.skills.description":
-    "The toolbox I use to design, build, test and ship.",
-  "portfolio.about.skillsAndTech.title": "Skills and technologies",
-  "portfolio.about.skillsAndTech.frameworksAndLibraries":
-    "Frameworks & Libraries",
-  "portfolio.about.skillsAndTech.languages": "Languages",
-  "portfolio.about.skillsAndTech.testingAndQa": "Testing & QA",
-  "portfolio.about.skillsAndTech.tools": "Tools",
-  "portfolio.skills.frameworksDescription":
-    "Where most of my day happens — web and mobile.",
-  "portfolio.skills.languagesDescription":
-    "Typed where it counts, native where it helps.",
-  "portfolio.skills.testingDescription": "My favorite part of the job.",
-  "portfolio.skills.toolsDescription":
-    "Editor, devices, pipelines and design handoff.",
-
-  // PROJECTS
-  "portfolio.projects.eyebrow": "Selected work",
-  "portfolio.projects.title": "Projects",
+  // HOME PAGE
+  "portfolio.hero.lede":
+    "Frontend and mobile developer since 2018. I care about how an interface feels in the hand, and I don't trust it until it has tests.",
+  "portfolio.hero.note": "hi, that's me",
+  "portfolio.hero.photoAlt":
+    "Portrait of Brandon Manzo, taped into the sketchbook",
+  "portfolio.hero.viewWork": "See what I've shipped",
+  "portfolio.hero.getInTouch": "Write to me",
+  "portfolio.localTime": "Local time in Guatemala City",
+  "portfolio.projects.title": "Things I've shipped",
   "portfolio.projects.description":
-    "A few things I've built and shipped — straight from my GitHub.",
+    "Small, real and public. Each one has a store or registry page you can open right now.",
+  "portfolio.projects.note": "all live, go poke them",
+  "portfolio.projects.label.where": "Lives on",
+  "portfolio.projects.label.built": "Built with",
   "portfolio.projects.app1.title": "Minimal Tic Tac Toe",
   "portfolio.projects.app1.description":
-    "A clean, minimalist Tic Tac Toe game for Android — my dive into mobile development with Flutter, live on Google Play.",
+    "A minimalist tic-tac-toe game for Android. My first app on a store, and where I learned Flutter.",
+  "portfolio.projects.app1.built": "Dart and Flutter",
+  "portfolio.projects.validators.title": "DPI & NIT validators",
+  "portfolio.projects.validators.description":
+    "Two Dart packages that check Guatemalan ID numbers: the DPI (national identity document) and the NIT (tax number). Both are fully tested and published.",
+  "portfolio.projects.validators.built": "Dart, with unit tests",
   "portfolio.projects.app2.title": "DPI Validator",
-  "portfolio.projects.app2.description":
-    "A lightweight Dart package to validate Guatemalan DPI numbers, fully tested and published on pub.dev.",
   "portfolio.projects.app3.title": "NIT Validator",
-  "portfolio.projects.app3.description":
-    "A lightweight Dart package to validate Guatemalan NIT numbers, fully tested and published on pub.dev.",
-  "portfolio.projects.viewCode": "Code",
-  "portfolio.projects.viewProject": "View",
-  "portfolio.projects.viewAll": "View all projects",
-
-  // CONTACT
-  "portfolio.contact.eyebrow": "Contact",
-  "portfolio.contact.title": "Let's build something great",
+  "portfolio.projects.viewCode": "Source code",
+  "portfolio.projects.viewProject": "Open",
+  "portfolio.projects.viewAll": "More on GitHub",
+  "portfolio.guides.title": "Notes I wrote down",
+  "portfolio.guides.description":
+    "Walkthroughs for setups I had to figure out once, so you don't have to.",
+  "portfolio.guides.viewAll": "All guides",
+  "portfolio.about.heading": "How I work",
+  "portfolio.about.description1":
+    "Most of my time goes to frontend and mobile: React, Next.js and Astro on the web, Flutter and React Native on phones. When a product needs a backend, I build it with Node and NestJS.",
+  "portfolio.about.description2":
+    "Testing is the part of the job I enjoy most. Unit, integration and end-to-end tests are how I change code without fear and how I know a release is ready.",
+  "portfolio.about.description3":
+    "Away from the keyboard I draw and play video games.",
+  "portfolio.about.toolbox": "What I reach for",
+  "portfolio.about.toolbox.web": "Web",
+  "portfolio.about.toolbox.mobile": "Mobile",
+  "portfolio.about.toolbox.testing": "Testing",
+  "portfolio.about.toolbox.backend": "Backend",
+  "portfolio.about.toolbox.languages": "Languages",
+  "portfolio.about.toolbox.tools": "Tools",
+  "portfolio.contact.title": "Write to me",
   "portfolio.contact.description":
-    "Have a project, an idea, or just want to say hello? My inbox is always open.",
+    "A project, a question about one of the guides, or just hello. Email is the fastest way to reach me.",
   "portfolio.contact.sendEmail": "Send me an email",
-  "portfolio.contact.connectOnLinkedin": "Connect on LinkedIn",
-  "portfolio.contact.caption":
-    "I'm always open to new projects, collaborations, or simply saying hello.",
+  "portfolio.contact.elsewhere": "Also on",
+
+  "portfolio.projects.app1.note": "built in Flutter",
+  "portfolio.projects.validators.note": "tested before publishing",
+  "portfolio.about.testingNote": "my favourite part",
+  "footer.signoff": "thanks for stopping by",
+
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+  "theme.switch": "Theme: {state}. Switch theme",
+
+  "docs.contents": "On this page",
+  "guides.readingTime": "{n} min read",
+  "guides.next": "Next guide",
 
   // LEGAL
   "legal.privacy": "Privacy Policy",
@@ -143,10 +97,6 @@ export const en: UiDict = {
   "guides.contact.description":
     "Have a question or an idea in mind? Feel free to reach out.",
   "guides.contact.buyMeACoffee": "Buy me a coffee",
-  "guides.eyebrow.notes": "Notes",
-  "guides.eyebrow.entries": "entries",
-  "legal.eyebrow.documents": "Documents",
-  "legal.eyebrow.apps": "apps",
   "legal.questions": "Questions about any of these documents? Write to",
 
   // FOOTER
