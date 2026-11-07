@@ -55,7 +55,6 @@ const minutes = readingMinutes(post.body);
   <article class="post">
     <header>
       <h1 class="doc-title">{post.data.title}</h1>
-      {post.data.description && <p class="doc-lede">{post.data.description}</p>}
       <p class="post-byline">
         Brandon Manzo{" · "}
         <time datetime={post.data.date.toISOString()}>
