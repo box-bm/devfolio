@@ -25,7 +25,7 @@ This is a personal portfolio and developer website built with **Astro 5**, deplo
 
 The site supports **English (default) and Spanish**. Routing uses Astro's built-in i18n with `prefixDefaultLocale: false`, meaning English is served at `/` and Spanish at `/es/`.
 
-- `src/pages/[...lang]/` — localized pages (home, guides, legal listing)
+- `src/pages/[...lang]/` — localized pages (home, guides, blog, legal listing)
 - `src/pages/index.astro` — root redirect
 - `src/i18n/` — translation system:
   - `ui.ts` — `UiKey` enum is the single source of truth for all translation keys
@@ -35,17 +35,20 @@ The site supports **English (default) and Spanish**. Routing uses Astro's built-
 
 ### Content Collections
 
-Two Astro content collections defined in `src/content.config.ts`:
+Three Astro content collections defined in `src/content.config.ts`:
 
 **`legal`** — Legal documents (privacy policy, terms of service) per app and language. Files live at `src/content/legal/[appName]/[type]/[lang].md`. Required frontmatter: `title`, `app`, `type` (enum), `lang` (enum), `version` (semver string).
 
 **`guides`** — Technical blog posts/guides. Files at `src/content/guides/[slug].[lang].md`. Required frontmatter: `title`, `date`, `updatedDate`. The lang is derived from the filename suffix (e.g. `.en.md`, `.es.md`).
+
+**`blog`** — Personal opinion posts. Files at `src/content/blog/[slug].[lang].md`. Required frontmatter: `title`, `date`. Optional: `description`, `topic`, `updatedDate`. Set `draft: true` to exclude it. Every post needs both EN and ES files.
 
 ### Layouts
 
 - `Base.astro` — Root HTML shell with fonts, theme script, and SEO slot
 - `Website.astro` — Portfolio pages with header/footer
 - `Guides.astro` — Guide article layout
+- `Blog.astro` — Blog post layout
 - `Legal.astro` — Legal document layout
 
 ### Path Aliases
