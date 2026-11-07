@@ -6,6 +6,7 @@ export const en: UiDict = {
   "nav.projects": "Projects",
   "nav.contact": "Contact",
   "nav.guides": "Guides",
+  "nav.blog": "Blog",
   "nav.backToPortfolio": "Back to portfolio",
 
   // HOME PAGE
@@ -93,6 +94,19 @@ export const en: UiDict = {
     "Have a question or an idea in mind? Feel free to reach out.",
   "guides.contact.buyMeACoffee": "Buy me a coffee",
   "legal.questions": "Questions about any of these documents? Write to",
+
+  // BLOG
+  "title.blog": "Blog - BoxDev",
+  "blog.title": "Blog",
+  "blog.subtitle":
+    "Longer thoughts, opinions and things I'm still figuring out.",
+  "blog.empty": "Nothing here yet. Check back soon.",
+  "blog.newer": "Newer",
+  "blog.older": "Older",
+  "blog.reply.title": "Disagree? Tell me.",
+  "blog.reply.description":
+    "I'd rather hear a good argument than a quiet nod. Reply by email and I'll read it.",
+  "blog.reply.cta": "Reply by email",
 
   // FOOTER
   "footer.label": "Built with Astro",

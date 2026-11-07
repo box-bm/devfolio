@@ -6,6 +6,7 @@ export const es: UiDict = {
   "nav.projects": "Proyectos",
   "nav.contact": "Contacto",
   "nav.guides": "Guías",
+  "nav.blog": "Blog",
   "nav.backToPortfolio": "Volver al portafolio",
 
   // HOME PAGE
@@ -93,6 +94,19 @@ export const es: UiDict = {
   "guides.contact.description":
     "¿Tienes alguna pregunta o una idea en mente? No dudes en escribirme.",
   "legal.questions": "¿Preguntas sobre alguno de estos documentos? Escribe a",
+
+  // BLOG
+  "title.blog": "Blog - BoxDev",
+  "blog.title": "Blog",
+  "blog.subtitle":
+    "Pensamientos más largos, opiniones y cosas que todavía estoy entendiendo.",
+  "blog.empty": "Todavía no hay nada aquí. Vuelve pronto.",
+  "blog.newer": "Más reciente",
+  "blog.older": "Anterior",
+  "blog.reply.title": "¿No estás de acuerdo? Dímelo.",
+  "blog.reply.description":
+    "Prefiero un buen argumento a un asentimiento silencioso. Responde por correo y lo leeré.",
+  "blog.reply.cta": "Responder por correo",
 
   // FOOTER
   "footer.label": "Construido con Astro",

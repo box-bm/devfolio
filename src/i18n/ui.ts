@@ -4,6 +4,7 @@ export enum UiKey {
   "nav.projects" = "nav.projects",
   "nav.contact" = "nav.contact",
   "nav.guides" = "nav.guides",
+  "nav.blog" = "nav.blog",
   "nav.backToPortfolio" = "nav.backToPortfolio",
 
   // Portfolio (home page)
@@ -77,6 +78,17 @@ export enum UiKey {
   "guides.contact.description" = "guides.contact.description",
   "guides.contact.buyMeACoffee" = "guides.contact.buyMeACoffee",
   "legal.questions" = "legal.questions",
+
+  // Blog
+  "title.blog" = "title.blog",
+  "blog.title" = "blog.title",
+  "blog.subtitle" = "blog.subtitle",
+  "blog.empty" = "blog.empty",
+  "blog.newer" = "blog.newer",
+  "blog.older" = "blog.older",
+  "blog.reply.title" = "blog.reply.title",
+  "blog.reply.description" = "blog.reply.description",
+  "blog.reply.cta" = "blog.reply.cta",
 
   // Footer
   "footer.label" = "footer.label",
