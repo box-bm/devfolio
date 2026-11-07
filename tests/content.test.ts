@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import matter from "gray-matter";
 import { globSync } from "glob";
 import { readFileSync } from "fs";
-import { resolve } from "path";
+import { basename, resolve } from "path";
 
 const root = resolve(__dirname, "..");
 
@@ -77,6 +77,57 @@ describe("legal content frontmatter", () => {
       it("has required version field in semver format", () => {
         expect(data.version).toBeDefined();
         expect(data.version).toMatch(/^\d+\.\d+\.\d+$/);
+      });
+    });
+  });
+});
+
+describe("blog content", () => {
+  const blogFiles = globSync("src/content/blog/**/*.md", { cwd: root });
+  const names = blogFiles.map((file) => basename(file));
+
+  it("uses slug.lang.md file names without dots in the slug", () => {
+    const invalid = names.filter((n) => !/^[a-z0-9-]+\.(en|es)\.md$/.test(n));
+    expect(invalid, `invalid file names: ${invalid.join(", ")}`).toEqual([]);
+  });
+
+  it("has an en/es counterpart for every post", () => {
+    const missing = names
+      .map((n) =>
+        n.endsWith(".en.md")
+          ? n.replace(/\.en\.md$/, ".es.md")
+          : n.replace(/\.es\.md$/, ".en.md"),
+      )
+      .filter((other) => !names.includes(other));
+    expect(missing, `missing files: ${missing.join(", ")}`).toEqual([]);
+  });
+
+  blogFiles.forEach((file) => {
+    describe(file, () => {
+      const data = readFrontmatter(resolve(root, file));
+
+      it("has required title field", () => {
+        expect(typeof data.title).toBe("string");
+      });
+
+      it("has required date field", () => {
+        expect(data.date).toBeDefined();
+      });
+
+      it("has required draft field", () => {
+        expect(typeof data.draft).toBe("boolean");
+      });
+
+      it("has no tags field", () => {
+        expect(data).not.toHaveProperty("tags");
+      });
+
+      it("has correctly typed optional fields", () => {
+        if ("topic" in data) expect(typeof data.topic).toBe("string");
+        if ("description" in data)
+          expect(typeof data.description).toBe("string");
+        if ("updatedDate" in data)
+          expect(data.updatedDate).toBeInstanceOf(Date);
       });
     });
   });

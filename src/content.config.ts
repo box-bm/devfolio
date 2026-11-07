@@ -25,7 +25,21 @@ const guides = defineCollection({
   }),
 });
 
+// Posts are opinion pieces with one date and an optional topic label.
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    topic: z.string().optional(),
+    date: z.date(),
+    updatedDate: z.date().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   legal,
   guides,
+  blog,
 };
