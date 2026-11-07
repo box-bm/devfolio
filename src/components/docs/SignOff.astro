@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import MeImage from "@images/me.jpeg";
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+}
+
+const { id, title, description } = Astro.props;
+---
+
+<section class="sign-off" aria-labelledby={id}>
+  <figure class="sign-off__photo">
+    <span class="sign-off__tape" aria-hidden="true"></span>
+    <Image src={MeImage} alt="" width={240} loading="lazy" />
+  </figure>
+  <div class="sign-off__body">
+    <h2 id={id}>{title}</h2>
+    <p>{description}</p>
+    <div class="sign-off__actions">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* A taped-in portrait and a short note: the page is signed off */
+  .sign-off {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+    max-width: 860px;
+    margin-top: clamp(56px, 8vw, 96px);
+    padding: clamp(24px, 4vw, 40px);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+  .sign-off__photo {
+    position: relative;
+    width: clamp(112px, 16vw, 168px);
+    margin: 0;
+    padding: 8px 8px 22px;
+    background: var(--sheet);
+    box-shadow: var(--shadow-md);
+    transform: rotate(-2.5deg);
+  }
+  .sign-off__photo :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.08);
+    mix-blend-mode: multiply;
+  }
+  .sign-off__tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    z-index: 1;
+    width: 72px;
+    height: 24px;
+    background: var(--tape);
+    border-inline: 1px solid var(--tape-edge);
+    transform: translateX(-50%) rotate(3deg);
+  }
+  .sign-off h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+  .sign-off p {
+    max-width: 44ch;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+  .sign-off__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .sign-off {
+      grid-template-columns: 1fr;
+      justify-items: start;
+    }
+  }
+</style>
