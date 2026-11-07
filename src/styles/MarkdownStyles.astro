@@ -3,6 +3,8 @@
      Markdown content: guides and legal documents.
      Same paper, graphite and blue pencil as the rest of the
      sketchbook; set for long reading, so no handwriting here.
+     The one exception is .pencil-note, a margin note in the pencil
+     hand that blog posts write as <aside class="pencil-note">.
      ================================================ */
 
   .markdown-body {
@@ -26,6 +28,20 @@
   .doc-grid #tabla-de-contenidos,
   .doc-grid #tabla-de-contenidos + :is(ul, ol) {
     display: none;
+  }
+
+  /* ---------- Margin note (blog) ---------- */
+  .markdown-body .pencil-note {
+    margin: 0 0 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--pencil);
+    font-family: var(--font-hand);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    color: var(--pencil);
+  }
+  .markdown-body .pencil-note > :last-child {
+    margin-bottom: 0;
   }
 
   /* ---------- Headings ---------- */

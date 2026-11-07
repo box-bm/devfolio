@@ -1,0 +1,41 @@
+---
+import Document from "@layouts/Document.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { UiKey } from "@i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: "website" | "article";
+  post?: string;
+  date?: Date;
+  updatedDate?: Date;
+}
+const {
+  title = t(UiKey["title.blog"]),
+  description,
+  type,
+  post,
+  date,
+  updatedDate,
+} = Astro.props;
+
+const crumbs: { label: string; href?: string }[] = post
+  ? [{ label: t(UiKey["nav.blog"]), href: `/${lang}/blog` }, { label: post }]
+  : [{ label: t(UiKey["nav.blog"]) }];
+---
+
+<Document
+  title={title}
+  description={description}
+  lang={lang}
+  type={type}
+  date={date}
+  updatedDate={updatedDate}
+  crumbs={crumbs}
+>
+  <slot />
+</Document>
