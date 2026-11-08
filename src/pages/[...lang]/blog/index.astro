@@ -1,0 +1,66 @@
+---
+import BlogLayout from "@layouts/Blog.astro";
+import { UiKey } from "@i18n/ui";
+import { LANG_CODES } from "@i18n/langs";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { postDateFormat, postHref, readingMinutes } from "@utils/posts";
+import { getPosts } from "@utils/getPosts";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export const getStaticPaths = () => {
+  return LANG_CODES.map((lang) => ({ params: { lang } }));
+};
+
+const posts = await getPosts("blog", lang);
+const fmt = postDateFormat(lang);
+---
+
+<BlogLayout>
+  <header class="blog-head">
+    <h1 class="doc-title doc-title--index">{t(UiKey["blog.title"])}</h1>
+    <p class="doc-lede">{t(UiKey["blog.subtitle"])}</p>
+  </header>
+
+  {
+    posts.length === 0 ? (
+      <p class="blog-empty">{t(UiKey["blog.empty"])}</p>
+    ) : (
+      <ol class="ruled blog-list">
+        {posts.map((post) => (
+          <li data-reveal>
+            <a class="ruled-link" href={postHref("blog", post, lang)}>
+              <span class="ruled-link__meta">
+                <time datetime={post.data.date.toISOString()}>
+                  {fmt.format(post.data.date)}
+                </time>
+                {" · "}
+                {t(UiKey["guides.readingTime"], {
+                  n: readingMinutes(post.body),
+                })}
+                {post.data.topic && ` · ${post.data.topic}`}
+              </span>
+              <span class="ruled-link__title">{post.data.title}</span>
+              {post.data.description && (
+                <span class="ruled-link__desc">{post.data.description}</span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</BlogLayout>
+
+<style>
+  .blog-list {
+    max-width: 860px;
+    margin-top: clamp(48px, 7vw, 88px);
+  }
+  .blog-empty {
+    margin-top: 48px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+</style>

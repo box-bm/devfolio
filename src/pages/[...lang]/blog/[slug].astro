@@ -1,0 +1,162 @@
+---
+import BlogLayout from "@layouts/Blog.astro";
+import Button from "@components/Button.astro";
+import SignOff from "@components/docs/SignOff.astro";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { LANG_CODES } from "@i18n/langs";
+import { UiKey } from "@i18n/ui";
+import {
+  postDateFormat,
+  postHref,
+  postSlug,
+  readingMinutes,
+} from "@utils/posts";
+import { getPosts } from "@utils/getPosts";
+import { ArrowLeft, ArrowRight, Mail } from "@lucide/astro";
+import { email } from "@constants";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export async function getStaticPaths() {
+  return (
+    await Promise.all(
+      LANG_CODES.map(async (lang) => {
+        const posts = await getPosts("blog", lang);
+        return posts.map((post, i) => ({
+          params: { lang, slug: postSlug(post) },
+          // Newest first: newer is the previous entry, older the next. No wrap.
+          props: {
+            post,
+            newer: i > 0 ? posts[i - 1] : undefined,
+            older: i < posts.length - 1 ? posts[i + 1] : undefined,
+          },
+        }));
+      }),
+    )
+  ).flat();
+}
+
+const { post, newer, older } = Astro.props;
+const { Content } = await post.render();
+
+const fmt = postDateFormat(lang);
+const minutes = readingMinutes(post.body);
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  post={post.data.title}
+  date={post.data.date}
+  updatedDate={post.data.updatedDate}
+>
+  <article class="post">
+    <header>
+      <h1 class="doc-title">{post.data.title}</h1>
+      <p class="post-byline">
+        Brandon Manzo{" · "}
+        <time datetime={post.data.date.toISOString()}>
+          {fmt.format(post.data.date)}
+        </time>
+        {" · "}
+        {t(UiKey["guides.readingTime"], { n: minutes })}
+        {post.data.topic && ` · ${post.data.topic}`}
+      </p>
+    </header>
+
+    <div class="markdown-body">
+      <Content />
+    </div>
+  </article>
+
+  {
+    (newer || older) && (
+      <nav class="post-nav page-break" aria-label={t(UiKey["nav.blog"])}>
+        {newer && (
+          <a class="post-nav__link" href={postHref("blog", newer, lang)}>
+            <span class="post-nav__label">
+              <ArrowLeft size={18} aria-hidden="true" />
+              {t(UiKey["blog.newer"])}
+            </span>
+            <span class="post-nav__title">{newer.data.title}</span>
+          </a>
+        )}
+        {older && (
+          <a
+            class="post-nav__link post-nav__link--older"
+            href={postHref("blog", older, lang)}
+          >
+            <span class="post-nav__label">
+              {t(UiKey["blog.older"])}
+              <ArrowRight size={18} aria-hidden="true" />
+            </span>
+            <span class="post-nav__title">{older.data.title}</span>
+          </a>
+        )}
+      </nav>
+    )
+  }
+
+  <SignOff
+    id="blog-end-title"
+    title={t(UiKey["blog.reply.title"])}
+    description={t(UiKey["blog.reply.description"])}
+  >
+    <Button
+      href={`mailto:${email}?subject=${encodeURIComponent("Re: " + post.data.title)}`}
+      target="_self"
+    >
+      <Mail size={18} />
+      {t(UiKey["blog.reply.cta"])}
+    </Button>
+  </SignOff>
+</BlogLayout>
+
+<style>
+  .post-byline {
+    margin-top: 16px;
+    color: var(--text-secondary);
+  }
+  .post-nav {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+    margin-top: clamp(64px, 9vw, 112px);
+    padding-top: clamp(40px, 6vw, 64px);
+  }
+  .post-nav__link {
+    display: grid;
+    gap: 8px;
+    max-width: 30ch;
+    color: inherit;
+  }
+  .post-nav__link--older {
+    margin-left: auto;
+    text-align: right;
+  }
+  .post-nav__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .post-nav__link--older .post-nav__label {
+    justify-content: flex-end;
+  }
+  .post-nav__title {
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+  .post-nav__link:hover .post-nav__title {
+    color: var(--pencil);
+  }
+</style>
